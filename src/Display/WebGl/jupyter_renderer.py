@@ -49,18 +49,22 @@ from OCC.Extend.TopologyUtils import (TopologyExplorer, is_edge, is_wire, discre
 
 try:
     from OCC.Core.SMESH import SMESH_Mesh
+
     HAVE_SMESH = True
 except ImportError:
     HAVE_SMESH = False
+
 
 # default values
 
 def format_color(r, g, b):
     return '#%02x%02x%02x' % (r, g, b)
 
+
 default_shape_color = format_color(166, 166, 166)
 default_mesh_color = 'white'
 default_edge_color = format_color(0, 0, 0)
+
 
 def distance(v1, v2):
     return np.linalg.norm([x - y for x, y in zip(v1, v2)])
@@ -100,7 +104,7 @@ class Grid(Helpers):
     # https://stackoverflow.com/questions/4947682/intelligently-calculating-chart-tick-positions
     def _nice_number(self, value, round_=False):
         exponent = math.floor(math.log(value, 10))
-        fraction = value / 10**exponent
+        fraction = value / 10 ** exponent
 
         if round_:
             if fraction < 1.5:
@@ -121,7 +125,7 @@ class Grid(Helpers):
             else:
                 nice_fraction = 10.
 
-        return nice_fraction * 10**exponent
+        return nice_fraction * 10 ** exponent
 
     def nice_bounds(self, axis_start, axis_end, num_ticks=10):
         axis_width = axis_end - axis_start
@@ -151,6 +155,7 @@ class Axes(Helpers):
     Y is green
     Z is blue
     """
+
     def __init__(self, bb_center, length=1, width=3):
         super().__init__(bb_center)
 
@@ -228,7 +233,7 @@ class CustomMaterial(ShaderMaterial):
 class BoundingBox(object):
     def __init__(self, objects, tol=1e-5):
         self.tol = tol
-        
+
         bbox = reduce(self._opt, [self.bbox(obj) for obj in objects])
         self.xmin, self.xmax, self.ymin, self.ymax, self.zmin, self.zmax = bbox
         self.xsize = self.xmax - self.xmin
@@ -322,7 +327,6 @@ class JupyterRenderer(object):
 
         self._select_callbacks = []  # a list of all functions called after an object is selected
 
-
         def click(value):
             """ called whenever a shape  or edge is clicked
             """
@@ -348,7 +352,6 @@ class JupyterRenderer(object):
 
         self._picker.observe(click)
 
-
     def register_select_callback(self, callback):
         """ Adds a callback that will be called each time a shape is selected
         """
@@ -356,7 +359,6 @@ class JupyterRenderer(object):
             raise AssertionError("You must provide a callable to register the callback")
         else:
             self._select_callbacks.append(callback)
-
 
     def unregister_callback(self, callback):
         """ Remove a callback from the callback list
@@ -366,12 +368,10 @@ class JupyterRenderer(object):
         else:
             self._select_callbacks.remove(callback)
 
-
     def GetSelectedShape(self):
         """ Returns the selected shape
         """
         return self._current_shape_selection
-
 
     def DisplayMesh(self,
                     mesh,
@@ -387,14 +387,14 @@ class JupyterRenderer(object):
         face_iter = mesh_ds.facesIterator()
         # vertices positions are stored to a liste
         vertices_position = []
-        for _ in range(mesh_ds.NbFaces()-1):
+        for _ in range(mesh_ds.NbFaces() - 1):
             face = face_iter.next()
-            #print('Face %i, type %i' % (i, face.GetType()))
-            #print(dir(face))
+            # print('Face %i, type %i' % (i, face.GetType()))
+            # print(dir(face))
             # if face.GetType == 3 : triangle mesh, then 3 nodes
             for j in range(3):
                 node = face.GetNode(j)
-                #print('Coordinates of node %i:(%f,%f,%f)'%(i, node.X(), node.Y(), node.Z()))
+                # print('Coordinates of node %i:(%f,%f,%f)'%(i, node.X(), node.Y(), node.Z()))
                 vertices_position.append(node.X())
                 vertices_position.append(node.Y())
                 vertices_position.append(node.Z())
@@ -405,7 +405,7 @@ class JupyterRenderer(object):
         np_faces = np.arange(np_vertices.shape[0], dtype='uint32')
         # set geometry properties
         buffer_geometry_properties = {'position': BufferAttribute(np_vertices),
-                                      'index'   : BufferAttribute(np_faces)}
+                                      'index': BufferAttribute(np_faces)}
         # build a BufferGeometry instance
         mesh_geometry = BufferGeometry(attributes=buffer_geometry_properties)
 
@@ -436,7 +436,6 @@ class JupyterRenderer(object):
                           material=edges_material,
                           name=mesh_id)
 
-
         # a special display for the mesh
         camera_target = [0., 0., 0.]  # the point to look at
         camera_position = [0, 0., 100.]  # the camera initial position
@@ -459,7 +458,6 @@ class JupyterRenderer(object):
                             antialias=True)
 
         display(renderer)
-
 
     def DisplayShape(self,
                      shp,  # the TopoDS_Shape to be displayed
@@ -505,7 +503,6 @@ class JupyterRenderer(object):
         if update:
             self.Display()
 
-
     def AddCurveToScene(self, shp, color):
         """ shp is either a TopoDS_Wire or a TopodS_Edge.
         """
@@ -517,14 +514,13 @@ class JupyterRenderer(object):
         np_edge_indices = np.arange(np_edge_vertices.shape[0], dtype=np.uint32)
         edge_geometry = BufferGeometry(attributes={
             'position': BufferAttribute(np_edge_vertices),
-            'index'   : BufferAttribute(np_edge_indices)
+            'index': BufferAttribute(np_edge_indices)
         })
         edge_material = LineBasicMaterial(color=color, linewidth=1)
         edge_lines = Line(geometry=edge_geometry, material=edge_material)
 
         # Add geometries to pickable or non pickable objects
         self._displayed_pickable_objects.add(edge_lines)
-
 
     def AddShapeToScene(self,
                         shp,  # the TopoDS_Shape to be displayed
@@ -560,7 +556,7 @@ class JupyterRenderer(object):
 
         # set geometry properties
         buffer_geometry_properties = {'position': BufferAttribute(np_vertices),
-                                      'index'   : BufferAttribute(np_faces)}
+                                      'index': BufferAttribute(np_faces)}
         if self._compute_normals_mode == NORMAL.SERVER_SIDE:
             # get the normal list, converts to a numpy ndarray. This should not raise
             # any issue, since normals have been computed by the server, and are available
@@ -588,20 +584,20 @@ class JupyterRenderer(object):
                           material=shp_material,
                           name=mesh_id)
 
-
         # and to the dict of shapes, to have a mapping between meshes and shapes
         self._shapes[mesh_id] = shp
 
         # edge rendering, if set to True
         edge_lines = None
         if render_edges:
-            edges = list(map(lambda i_edge: [tess.GetEdgeVertex(i_edge, i_vert) for i_vert in range(tess.ObjEdgeGetVertexCount(i_edge))], range(tess.ObjGetEdgeCount())))
+            edges = list(map(lambda i_edge: [tess.GetEdgeVertex(i_edge, i_vert) for i_vert in
+                                             range(tess.ObjEdgeGetVertexCount(i_edge))], range(tess.ObjGetEdgeCount())))
             edges = list(filter(lambda edge: len(edge) == 2, edges))
             np_edge_vertices = np.array(edges, dtype=np.float32).reshape(-1, 3)
             np_edge_indices = np.arange(np_edge_vertices.shape[0], dtype=np.uint32)
             edge_geometry = BufferGeometry(attributes={
                 'position': BufferAttribute(np_edge_vertices),
-                'index'   : BufferAttribute(np_edge_indices)
+                'index': BufferAttribute(np_edge_indices)
             })
             edge_material = LineBasicMaterial(color=edge_color, linewidth=1)
             edge_lines = LineSegments(geometry=edge_geometry, material=edge_material)
@@ -643,7 +639,6 @@ class JupyterRenderer(object):
         self._current_selection_material = None
         self._renderer.scene = Scene(children=[])
 
-
     def Display(self):
         # Get the overall bounding box
         if self._shapes:
@@ -656,7 +651,6 @@ class JupyterRenderer(object):
         # Set up camera
         camera_target = self._bb.center
         camera_position = self._scale([1, 1, 1])
-
 
         self._camera = CombinedCamera(position=camera_position,
                                       width=self._size[0], height=self._size[1],
