@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 ##Copyright 2010-2019 Thomas Paviot (tpaviot@gmail.com)
-#6
+# 6
 ##This file is part of pythonOCC.
 ##
 ##pythonOCC is free software: you can redistribute it and/or modify
@@ -27,6 +27,7 @@ from OCC.Extend.TopologyUtils import TopologyExplorer
 
 torus_shp = BRepPrimAPI_MakeTorus(20., 10.).Shape()
 
+
 class TestWebGL(unittest.TestCase):
 
     def test_threejs_render_torus(self):
@@ -42,7 +43,7 @@ class TestWebGL(unittest.TestCase):
         """
         my_threejs_renderer = threejs_renderer.ThreejsRenderer()
         for i in range(10):
-            box_shp = BRepPrimAPI_MakeBox(random.random()*20, random.random()*20, random.random()*20).Shape()
+            box_shp = BRepPrimAPI_MakeBox(random.random() * 20, random.random() * 20, random.random() * 20).Shape()
             rnd_color = (random.random(), random.random(), random.random())
             dict_shape, dict_edge = my_threejs_renderer.DisplayShape(box_shp,
                                                                      export_edges=True,
@@ -55,7 +56,7 @@ class TestWebGL(unittest.TestCase):
         """ Test: threejs 10 random boxes
         """
         my_threejs_renderer = threejs_renderer.ThreejsRenderer()
-        #torus_shp = BRepPrimAPI_MakeTorus(20., 10.).Shape()
+        # torus_shp = BRepPrimAPI_MakeTorus(20., 10.).Shape()
         dict_shape, dict_edge = my_threejs_renderer.DisplayShape(torus_shp, mesh_quality=1.0)
         self.assertTrue(dict_shape)
         self.assertTrue(not dict_edge)
@@ -110,10 +111,12 @@ class TestWebGL(unittest.TestCase):
             self.assertTrue(not dict_shape)
             self.assertTrue(dict_edge)
 
+
 def suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TestWebGL))
     return suite
+
 
 if __name__ == "__main__":
     unittest.main()
