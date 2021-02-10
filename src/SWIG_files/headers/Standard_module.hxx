@@ -1,8 +1,5 @@
-#ifndef STANDARD_HXX
-#define STANDARD_HXX
-
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -18,6 +15,9 @@ GNU Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef STANDARD_HXX
+#define STANDARD_HXX
+
 
 #include<Standard.hxx>
 #include<Standard_AbortiveTransaction.hxx>
@@ -97,6 +97,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<Standard_UUID.hxx>
 #include<Standard_Underflow.hxx>
 #include<Standard_Version.hxx>
+#include<Standard_WarningDisableFunctionCast.hxx>
 #include<Standard_WarningsDisable.hxx>
 #include<Standard_WarningsRestore.hxx>
 #include<Standard_math.hxx>

@@ -1,8 +1,5 @@
-#ifndef TDATASTD_HXX
-#define TDATASTD_HXX
-
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -18,6 +15,9 @@ GNU Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef TDATASTD_HXX
+#define TDATASTD_HXX
+
 
 #include<TDataStd.hxx>
 #include<TDataStd_AsciiString.hxx>
@@ -46,6 +46,8 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<TDataStd_Expression.hxx>
 #include<TDataStd_ExtStringArray.hxx>
 #include<TDataStd_ExtStringList.hxx>
+#include<TDataStd_GenericEmpty.hxx>
+#include<TDataStd_GenericExtString.hxx>
 #include<TDataStd_HDataMapOfStringByte.hxx>
 #include<TDataStd_HDataMapOfStringHArray1OfInteger.hxx>
 #include<TDataStd_HDataMapOfStringHArray1OfReal.hxx>

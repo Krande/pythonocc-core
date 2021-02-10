@@ -1,4 +1,4 @@
-##Copyright (c) 2011-2018 Thomas Paviot (tpaviot@gmail.com)
+##Copyright (c) 2011-2020 Thomas Paviot (tpaviot@gmail.com)
 ##
 ##This file is part of pythonOCC.
 ##
@@ -16,14 +16,20 @@
 ##along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 
 cmake_minimum_required(VERSION 3.12)
+
+if (POLICY CMP0072)
+    cmake_policy(SET CMP0072 OLD)
+endif(POLICY CMP0072)
+
 project(PYTHONOCC)
 
 # set pythonOCC version
 set(PYTHONOCC_VERSION_MAJOR 7)
-set(PYTHONOCC_VERSION_MINOR 4)
+set(PYTHONOCC_VERSION_MINOR 5)
 set(PYTHONOCC_VERSION_PATCH 0)
+
 #  Empty for official releases, set to -dev, -rc1, etc for development releases
-set(PYTHONOCC_VERSION_DEVEL -rc1)
+set(PYTHONOCC_VERSION_DEVEL -dev)
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 
@@ -107,11 +113,10 @@ message(STATUS "Python library release: ${Python3_LIBRARY_RELEASE}")
 find_package(SWIG 3.0.11 REQUIRED)
 include(${SWIG_USE_FILE})
 set(SWIG_FILES_PATH src/SWIG_files/wrapper)
+set(CMAKE_SWIG_FLAGS ${CMAKE_SWIG_FLAGS} -fvirtual -py3)
 if(SWIG_HIDE_WARNINGS)
   message(STATUS "Disabled SWIG warnings")
-  set(CMAKE_SWIG_FLAGS ${CMAKE_SWIG_FLAGS} -O -w302,401,402,412,314,509,512,504,325,503,520,350,351,383,389,394,395,404 -py3)
-else()
-  set(CMAKE_SWIG_FLAGS ${CMAKE_SWIG_FLAGS} -py3)
+  set(CMAKE_SWIG_FLAGS ${CMAKE_SWIG_FLAGS} -w302,401,402,412,314,509,512,504,325,503,520,350,351,383,389,394,395,404)
 endif()
     
 ################################
@@ -133,12 +138,12 @@ if(DEFINED OCE_INCLUDE_PATH)
 # if OCE_INCLUDE_PATH is not passed at command line,
 # find OCE automatically
 else(OCE_INCLUDE_PATH)
-  find_package(OpenCASCADE 7.4.0 REQUIRED)
-  
-  include_directories(${OpenCASCADE_INCLUDE_DIR})
+  find_package(OpenCASCADE 7.5.0 REQUIRED)
   if(OpenCASCADE_FOUND)
-    message(STATUS "OpenCASCADE found.")
-    include_directories(${OCE_INCLUDE_DIRS})
+    message(STATUS "OpenCASCADE version found: " ${OpenCASCADE_MAJOR_VERSION} "." ${OpenCASCADE_MINOR_VERSION} "." ${OpenCASCADE_MAINTENANCE_VERSION})
+    message(STATUS "OpenCASCADE include directory: " ${OpenCASCADE_INCLUDE_DIR})
+    message(STATUS "OpenCASCADE binary directory: " ${OpenCASCADE_BINARY_DIR})
+    include_directories(${OpenCASCADE_INCLUDE_DIR})
   else(OpenCASCADE_FOUND)  # set default paths
     set(OCE_INCLUDE_PATH /usr/local/include/oce CACHE PATH "OCE include path")
     set(OCE_LIB_PATH /usr/local/lib CACHE PATH "OCE lib path")
@@ -146,6 +151,12 @@ else(OCE_INCLUDE_PATH)
     link_directories(${OCE_LIB_PATH})
   endif(OpenCASCADE_FOUND)
 endif(DEFINED OCE_INCLUDE_PATH)
+
+# After the OCC paths are properly set up,
+find_file(GP_PNT_HEADER_LOCATION "gp_Pnt.hxx" PATHS ${OpenCASCADE_INCLUDE_DIR} ${OCE_INCLUDE_PATH})
+if(${GP_PNT_HEADER_LOCATION} STREQUAL "GP_PNT_HEADER_LOCATION-NOTFOUND")
+    message(FATAL_ERROR "gp_Pnt.hxx can not be found.")
+endif()
 
 ##############################################
 # Installation directory                     #
@@ -156,22 +167,23 @@ if(DEFINED ENV{SP_DIR} AND WIN32)
   # prevent cmake to find correct paths of python3 on windows
   # this should be removed as soon as possible
   message(STATUS "conda-build running, using $ENV{SP_DIR} as install dir")
-  set(PYTHONOCC_INSTALL_DIRECTORY $ENV{SP_DIR}/OCC CACHE PATH "pythonOCC install directory")
+  set(PYTHONOCC_INSTALL_DIRECTORY $ENV{SP_DIR}/OCC CACHE PATH "pythonocc install directory")
 else(DEFINED ENV{SP_DIR} AND WIN32)
   execute_process(COMMAND ${Python3_EXECUTABLE} -c "from distutils.sysconfig import get_python_lib; import os;print(get_python_lib())" OUTPUT_VARIABLE python_lib OUTPUT_STRIP_TRAILING_WHITESPACE)
-  set(PYTHONOCC_INSTALL_DIRECTORY ${python_lib}/OCC CACHE PATH "pythonOCC install directory")
+  set(PYTHONOCC_INSTALL_DIRECTORY ${python_lib}/OCC CACHE PATH "pythonocc install directory")
 endif(DEFINED ENV{SP_DIR} AND WIN32)
-message(STATUS "pythonOCC modules will be installed to: ${PYTHONOCC_INSTALL_DIRECTORY}")
+message(STATUS "pythonocc modules will be installed to: ${PYTHONOCC_INSTALL_DIRECTORY}")
 
 #############################################
 # List of OCE shared libraries to link with #
 #############################################
-set(OCE_MODEL_LIBRARIES TKernel TKMath TKG2d TKG3d TKGeomBase TKBRep TKGeomAlgo
-                        TKTopAlgo TKPrim TKBO TKShHealing TKBool TKHLR TKFillet
-                        TKOffset TKFeat TKMesh TKXMesh)
+set(OCE_MODEL_LIBRARIES TKernel TKMath TKBRep TKG2d TKG3d TKGeomBase TKBO
+                        TKBool TKFeat TKFillet TKGeomAlgo TKHLR TKMesh TKOffset
+                        TKPrim TKShHealing TKTopAlgo TKXMesh)
 set(OCE_VISUALIZATION_LIBRARIES TKService TKV3d TKOpenGl TKMeshVS)
-set(OCE_DATAEXCHANGE_LIBRARIES TKXSBase TKSTEPBase TKSTEPAttr TKSTEP209 TKSTEP TKIGES
-                               TKXCAF TKXDEIGES TKXDESTEP TKSTL TKVRML TKXmlXCAF TKBinXCAF)
+set(OCE_DATAEXCHANGE_LIBRARIES TKBinXCAF TKIGES TKRWMesh TKSTEP TKSTEP209 TKSTEPAttr
+                               TKSTEPBase TKSTL TKVRML TKXCAF TKXDEIGES TKXDESTEP TKXSBase
+                               TKXmlXCAF)
 set(OCE_OCAF_LIBRARIES TKCDF TKLCAF TKCAF TKBinL TKXmlL TKBin TKXml TKStdL
                        TKStd TKTObj TKBinTObj TKXmlTObj TKVCAF)
 
@@ -195,7 +207,7 @@ endif(MINGW)
 # MACOSX_DEPLOYEMENT_TARGET
 # explicit link to libc++ for recent osx versions
 if(APPLE)
-  message(STATUS "Explicitely link to libc++ on modern osx versions")
+  message(STATUS "Explicitly link to libc++ on modern osx versions")
   add_definitions(-stdlib=libc++)
 endif(APPLE)
 
@@ -256,6 +268,19 @@ foreach(OCE_MODULE ${OCE_TOOLKIT_MODEL})
     swig_link_libraries(${OCE_MODULE} ${OCE_MODEL_LIBRARIES} Python3::Module)
 endforeach(OCE_MODULE)
 
+###############
+# Tessellator #
+###############
+execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory src/Tesselator)
+set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/src/Tesselator/Tesselator.i PROPERTIES CPLUSPLUS ON)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/Tesselator)
+set(TESSELATOR_SOURCE_FILES
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/Tesselator/Tesselator.i
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/Tesselator/ShapeTesselator.cpp)
+
+swig_add_library(Tesselator LANGUAGE python SOURCES ${TESSELATOR_SOURCE_FILES} TYPE MODULE)
+swig_link_libraries(Tesselator ${OCE_MODEL_LIBRARIES} Python3::Module)
+
 #################
 # Visualisation #
 #################
@@ -267,7 +292,7 @@ if(PYTHONOCC_WRAP_VISU)
       set(FILE ${SWIG_FILES_PATH}/${OCE_MODULE}.i)
       set_source_files_properties(${FILE} PROPERTIES CPLUSPLUS ON)
       swig_add_library (${OCE_MODULE} LANGUAGE python SOURCES ${FILE} TYPE MODULE)
-      swig_link_libraries(${OCE_MODULE} ${OCE_VISUALIZATION_LIBRARIES} Python3::Module)
+      swig_link_libraries(${OCE_MODULE} ${OCE_MODEL_LIBRARIES} ${OCE_VISUALIZATION_LIBRARIES} Python3::Module)
     endforeach(OCE_MODULE)
 
   # Build third part modules
@@ -277,11 +302,10 @@ if(PYTHONOCC_WRAP_VISU)
   include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/Visualization)
   set(VISUALIZATION_SOURCE_FILES
       ${CMAKE_CURRENT_SOURCE_DIR}/src/Visualization/Visualization.i
-      ${CMAKE_CURRENT_SOURCE_DIR}/src/Visualization/Display3d.cpp
-      ${CMAKE_CURRENT_SOURCE_DIR}/src/Visualization/Tesselator.cpp)
+      ${CMAKE_CURRENT_SOURCE_DIR}/src/Visualization/Display3d.cpp)
 
     swig_add_library(Visualization LANGUAGE python SOURCES ${VISUALIZATION_SOURCE_FILES} TYPE MODULE)
-    swig_link_libraries(Visualization  ${OCE_MODEL_LIBRARIES} ${OCE_VISUALIZATION_LIBRARIES} Python3::Module)
+    swig_link_libraries(Visualization ${OCE_MODEL_LIBRARIES} ${OCE_VISUALIZATION_LIBRARIES} Python3::Module)
 
   if(APPLE)
     # on OSX, always add /System/Library/Frameworks/Cocoa.framework, even
@@ -299,7 +323,7 @@ if(PYTHONOCC_WRAP_DATAEXCHANGE)
     set(FILE ${SWIG_FILES_PATH}/${OCE_MODULE}.i)
     set_source_files_properties(${FILE} PROPERTIES CPLUSPLUS ON)
     swig_add_library(${OCE_MODULE} LANGUAGE python SOURCES ${FILE} TYPE MODULE)
-    swig_link_libraries(${OCE_MODULE} ${OCE_DATAEXCHANGE_LIBRARIES} Python3::Module)
+    swig_link_libraries(${OCE_MODULE} ${OCE_MODEL_LIBRARIES} ${OCE_DATAEXCHANGE_LIBRARIES} Python3::Module)
   endforeach(OCE_MODULE)
 endif(PYTHONOCC_WRAP_DATAEXCHANGE)
 
@@ -311,7 +335,7 @@ if(PYTHONOCC_WRAP_OCAF)
     set(FILE ${SWIG_FILES_PATH}/${OCE_MODULE}.i)
     set_source_files_properties(${FILE} PROPERTIES CPLUSPLUS ON)
     swig_add_library(${OCE_MODULE} LANGUAGE python SOURCES ${FILE} TYPE MODULE)
-    swig_link_libraries(${OCE_MODULE}  ${OCE_OCAF_LIBRARIES} Python3::Module)
+    swig_link_libraries(${OCE_MODULE} ${OCE_MODEL_LIBRARIES} ${OCE_OCAF_LIBRARIES} Python3::Module)
   endforeach(OCE_MODULE)
 endif(PYTHONOCC_WRAP_OCAF)
 
@@ -353,30 +377,46 @@ set(BUILD_DIR ${CMAKE_BINARY_DIR}/${LIBRARY_OUTPUT_PATH})
 foreach(OCE_MODULE ${OCE_TOOLKIT_MODEL})
     install(FILES ${BUILD_DIR}/${OCE_MODULE}.py DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
     install(TARGETS _${OCE_MODULE} DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/SWIG_files/wrapper/${OCE_MODULE}.pyi DESTINATION 
+    ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
 endforeach(OCE_MODULE)
+
+# install tesselator
+install(FILES ${BUILD_DIR}/Tesselator.py DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
+install(TARGETS _Tesselator DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
+
 if(PYTHONOCC_WRAP_VISU)
 foreach(OCE_MODULE ${OCE_TOOLKIT_VISUALIZATION})
     install(FILES ${BUILD_DIR}/${OCE_MODULE}.py DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
     install(TARGETS _${OCE_MODULE} DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/SWIG_files/wrapper/${OCE_MODULE}.pyi DESTINATION 
+    ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
 endforeach(OCE_MODULE)
 endif(PYTHONOCC_WRAP_VISU)
+
 if(PYTHONOCC_WRAP_DATAEXCHANGE)
 foreach(OCE_MODULE ${OCE_TOOLKIT_DATAEXCHANGE})
     install(FILES ${BUILD_DIR}/${OCE_MODULE}.py DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
     install(TARGETS _${OCE_MODULE} DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/SWIG_files/wrapper/${OCE_MODULE}.pyi DESTINATION 
+    ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
 endforeach(OCE_MODULE)
 endif(PYTHONOCC_WRAP_DATAEXCHANGE)
+
 if(PYTHONOCC_WRAP_OCAF)
 foreach(OCE_MODULE ${OCE_TOOLKIT_OCAF})
+    # install the python interface file (python module)
     install(FILES ${BUILD_DIR}/${OCE_MODULE}.py DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
     install(TARGETS _${OCE_MODULE} DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/SWIG_files/wrapper/${OCE_MODULE}.pyi DESTINATION 
+    ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
 endforeach(OCE_MODULE)
 endif(PYTHONOCC_WRAP_OCAF)
 
 # install third part modules
 if(PYTHONOCC_WRAP_VISU)
-install(FILES ${BUILD_DIR}/Visualization.py DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
-install(TARGETS _Visualization DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
+    install(FILES ${BUILD_DIR}/Visualization.py DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
+    install(TARGETS _Visualization DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
 endif(PYTHONOCC_WRAP_VISU)
 
 # install addons
@@ -393,9 +433,13 @@ install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE DESTINATION ${PYTHONOCC_INSTAL
 # install AUTHORS file
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/AUTHORS DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY})
 
+# install Exception.py, __init__ and py.typed
 # install __init__.py file
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/cmake/__init__.py DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY})
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/cmake/__init__.py DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/PkgBase/__init__.py DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY})
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/PkgBase/__init__.py DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/PkgBase/Exception.py DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
+# following file is necessary to mypy to use .pyi stub files
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/PkgBase/py.typed DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY}/Core)
 
 # install Extend
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/Extend DESTINATION ${PYTHONOCC_INSTALL_DIRECTORY})

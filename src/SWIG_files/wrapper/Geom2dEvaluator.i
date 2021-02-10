@@ -1,5 +1,5 @@
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -56,8 +56,19 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_geom2devaluator.h
 %import gp.i
 %import Geom2d.i
 %import Geom2dAdaptor.i
+
+%pythoncode {
+from enum import IntEnum
+from OCC.Core.Exception import *
+};
+
 /* public enums */
 /* end public enums declaration */
+
+/* python proy classes for enums */
+%pythoncode {
+};
+/* end python proxy for enums */
 
 /* handles */
 %wrap_handle(Geom2dEvaluator_Curve)
@@ -70,6 +81,161 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_geom2devaluator.h
 /* typedefs */
 /* end typedefs declaration */
 
+/************************
+* class Geom2dEvaluator *
+************************/
+%rename(geom2devaluator) Geom2dEvaluator;
+class Geom2dEvaluator {
+	public:
+		/****************** CalculateD0 ******************/
+		/**** md5 signature: 63f751ea1921e17ebeec14db722cc24a ****/
+		%feature("compactdefaultargs") CalculateD0;
+		%feature("autodoc", "Recalculate d1 values of base curve into d0 value of offset curve.
+
+Parameters
+----------
+theValue: gp_Pnt2d
+theD1: gp_Vec2d
+theOffset: float
+
+Returns
+-------
+None
+") CalculateD0;
+		static void CalculateD0(gp_Pnt2d & theValue, const gp_Vec2d & theD1, const Standard_Real theOffset);
+
+		/****************** CalculateD1 ******************/
+		/**** md5 signature: a51f97f7d8b02ea6f8296d4e357a3a06 ****/
+		%feature("compactdefaultargs") CalculateD1;
+		%feature("autodoc", "Recalculate d2 values of base curve into d1 values of offset curve.
+
+Parameters
+----------
+theValue: gp_Pnt2d
+theD1: gp_Vec2d
+theD2: gp_Vec2d
+theOffset: float
+
+Returns
+-------
+None
+") CalculateD1;
+		static void CalculateD1(gp_Pnt2d & theValue, gp_Vec2d & theD1, const gp_Vec2d & theD2, const Standard_Real theOffset);
+
+		/****************** CalculateD2 ******************/
+		/**** md5 signature: 8d2505ddf222e59cb962a96f89da9b14 ****/
+		%feature("compactdefaultargs") CalculateD2;
+		%feature("autodoc", "Recalculate d3 values of base curve into d2 values of offset curve.
+
+Parameters
+----------
+theValue: gp_Pnt2d
+theD1: gp_Vec2d
+theD2: gp_Vec2d
+theD3: gp_Vec2d
+theIsDirChange: bool
+theOffset: float
+
+Returns
+-------
+None
+") CalculateD2;
+		static void CalculateD2(gp_Pnt2d & theValue, gp_Vec2d & theD1, gp_Vec2d & theD2, const gp_Vec2d & theD3, const Standard_Boolean theIsDirChange, const Standard_Real theOffset);
+
+		/****************** CalculateD3 ******************/
+		/**** md5 signature: 934e2058ec6d1116e1228678ef71f07b ****/
+		%feature("compactdefaultargs") CalculateD3;
+		%feature("autodoc", "Recalculate d3 values of base curve into d3 values of offset curve.
+
+Parameters
+----------
+theValue: gp_Pnt2d
+theD1: gp_Vec2d
+theD2: gp_Vec2d
+theD3: gp_Vec2d
+theD4: gp_Vec2d
+theIsDirChange: bool
+theOffset: float
+
+Returns
+-------
+None
+") CalculateD3;
+		static void CalculateD3(gp_Pnt2d & theValue, gp_Vec2d & theD1, gp_Vec2d & theD2, gp_Vec2d & theD3, const gp_Vec2d & theD4, const Standard_Boolean theIsDirChange, const Standard_Real theOffset);
+
+};
+
+
+%extend Geom2dEvaluator {
+	%pythoncode {
+	__repr__ = _dumps_object
+
+	@methodnotwrapped
+	def A(self):
+		pass
+
+	@methodnotwrapped
+	def d(self):
+		pass
+
+	@methodnotwrapped
+	def j(self):
+		pass
+
+	@methodnotwrapped
+	def u(self):
+		pass
+
+	@methodnotwrapped
+	def s(self):
+		pass
+
+	@methodnotwrapped
+	def t(self):
+		pass
+
+	@methodnotwrapped
+	def D(self):
+		pass
+
+	@methodnotwrapped
+	def e(self):
+		pass
+
+	@methodnotwrapped
+	def r(self):
+		pass
+
+	@methodnotwrapped
+	def i(self):
+		pass
+
+	@methodnotwrapped
+	def v(self):
+		pass
+
+	@methodnotwrapped
+	def a(self):
+		pass
+
+	@methodnotwrapped
+	def t(self):
+		pass
+
+	@methodnotwrapped
+	def i(self):
+		pass
+
+	@methodnotwrapped
+	def v(self):
+		pass
+
+	@methodnotwrapped
+	def e(self):
+		pass
+	}
+};
+
 /******************************
 * class Geom2dEvaluator_Curve *
 ******************************/
@@ -77,66 +243,90 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_geom2devaluator.h
 class Geom2dEvaluator_Curve : public Standard_Transient {
 	public:
 		/****************** D0 ******************/
+		/**** md5 signature: f734c09c90c10699f808ed83731f1241 ****/
 		%feature("compactdefaultargs") D0;
-		%feature("autodoc", "* Value of 2D curve
-	:param theU:
-	:type theU: float
-	:param theValue:
-	:type theValue: gp_Pnt2d
-	:rtype: None") D0;
-		void D0 (const Standard_Real theU,gp_Pnt2d & theValue);
+		%feature("autodoc", "Value of 2d curve.
+
+Parameters
+----------
+theU: float
+theValue: gp_Pnt2d
+
+Returns
+-------
+None
+") D0;
+		virtual void D0(const Standard_Real theU, gp_Pnt2d & theValue);
 
 		/****************** D1 ******************/
+		/**** md5 signature: 0a0121222e8914702b82d0e287c62ac4 ****/
 		%feature("compactdefaultargs") D1;
-		%feature("autodoc", "* Value and first derivatives of curve
-	:param theU:
-	:type theU: float
-	:param theValue:
-	:type theValue: gp_Pnt2d
-	:param theD1:
-	:type theD1: gp_Vec2d
-	:rtype: None") D1;
-		void D1 (const Standard_Real theU,gp_Pnt2d & theValue,gp_Vec2d & theD1);
+		%feature("autodoc", "Value and first derivatives of curve.
+
+Parameters
+----------
+theU: float
+theValue: gp_Pnt2d
+theD1: gp_Vec2d
+
+Returns
+-------
+None
+") D1;
+		virtual void D1(const Standard_Real theU, gp_Pnt2d & theValue, gp_Vec2d & theD1);
 
 		/****************** D2 ******************/
+		/**** md5 signature: 024ee3603a0f43a6bfe55da908e93c3a ****/
 		%feature("compactdefaultargs") D2;
-		%feature("autodoc", "* Value, first and second derivatives of curve
-	:param theU:
-	:type theU: float
-	:param theValue:
-	:type theValue: gp_Pnt2d
-	:param theD1:
-	:type theD1: gp_Vec2d
-	:param theD2:
-	:type theD2: gp_Vec2d
-	:rtype: None") D2;
-		void D2 (const Standard_Real theU,gp_Pnt2d & theValue,gp_Vec2d & theD1,gp_Vec2d & theD2);
+		%feature("autodoc", "Value, first and second derivatives of curve.
+
+Parameters
+----------
+theU: float
+theValue: gp_Pnt2d
+theD1: gp_Vec2d
+theD2: gp_Vec2d
+
+Returns
+-------
+None
+") D2;
+		virtual void D2(const Standard_Real theU, gp_Pnt2d & theValue, gp_Vec2d & theD1, gp_Vec2d & theD2);
 
 		/****************** D3 ******************/
+		/**** md5 signature: 54ff6e9c3edeee73a8cef1723abd22c3 ****/
 		%feature("compactdefaultargs") D3;
-		%feature("autodoc", "* Value, first, second and third derivatives of curve
-	:param theU:
-	:type theU: float
-	:param theValue:
-	:type theValue: gp_Pnt2d
-	:param theD1:
-	:type theD1: gp_Vec2d
-	:param theD2:
-	:type theD2: gp_Vec2d
-	:param theD3:
-	:type theD3: gp_Vec2d
-	:rtype: None") D3;
-		void D3 (const Standard_Real theU,gp_Pnt2d & theValue,gp_Vec2d & theD1,gp_Vec2d & theD2,gp_Vec2d & theD3);
+		%feature("autodoc", "Value, first, second and third derivatives of curve.
+
+Parameters
+----------
+theU: float
+theValue: gp_Pnt2d
+theD1: gp_Vec2d
+theD2: gp_Vec2d
+theD3: gp_Vec2d
+
+Returns
+-------
+None
+") D3;
+		virtual void D3(const Standard_Real theU, gp_Pnt2d & theValue, gp_Vec2d & theD1, gp_Vec2d & theD2, gp_Vec2d & theD3);
 
 		/****************** DN ******************/
+		/**** md5 signature: bb88732e1133b0b1613d0c311f12f1e9 ****/
 		%feature("compactdefaultargs") DN;
-		%feature("autodoc", "* Calculates N-th derivatives of curve, where N = theDerU. Raises if N < 1
-	:param theU:
-	:type theU: float
-	:param theDerU:
-	:type theDerU: int
-	:rtype: gp_Vec2d") DN;
-		gp_Vec2d DN (const Standard_Real theU,const Standard_Integer theDerU);
+		%feature("autodoc", "Calculates n-th derivatives of curve, where n = thederu. raises if n < 1.
+
+Parameters
+----------
+theU: float
+theDerU: int
+
+Returns
+-------
+gp_Vec2d
+") DN;
+		virtual gp_Vec2d DN(const Standard_Real theU, const Standard_Integer theDerU);
 
 };
 
@@ -154,95 +344,138 @@ class Geom2dEvaluator_Curve : public Standard_Transient {
 ************************************/
 class Geom2dEvaluator_OffsetCurve : public Geom2dEvaluator_Curve {
 	public:
+		/****************** Geom2dEvaluator_OffsetCurve ******************/
+		/**** md5 signature: 9010ab0c6bfda989192ffbe65a1ccbc5 ****/
+		%feature("compactdefaultargs") Geom2dEvaluator_OffsetCurve;
+		%feature("autodoc", "Initialize evaluator by curve.
+
+Parameters
+----------
+theBase: Geom2d_Curve
+theOffset: float
+
+Returns
+-------
+None
+") Geom2dEvaluator_OffsetCurve;
+		 Geom2dEvaluator_OffsetCurve(const opencascade::handle<Geom2d_Curve> & theBase, const Standard_Real theOffset);
+
+		/****************** Geom2dEvaluator_OffsetCurve ******************/
+		/**** md5 signature: 8ce815f243f2cfc044f385720d494d24 ****/
+		%feature("compactdefaultargs") Geom2dEvaluator_OffsetCurve;
+		%feature("autodoc", "Initialize evaluator by curve adaptor.
+
+Parameters
+----------
+theBase: Geom2dAdaptor_HCurve
+theOffset: float
+
+Returns
+-------
+None
+") Geom2dEvaluator_OffsetCurve;
+		 Geom2dEvaluator_OffsetCurve(const opencascade::handle<Geom2dAdaptor_HCurve> & theBase, const Standard_Real theOffset);
+
 		/****************** D0 ******************/
+		/**** md5 signature: 9cca4337d408090f3abc160255ae26e1 ****/
 		%feature("compactdefaultargs") D0;
-		%feature("autodoc", "* Value of curve
-	:param theU:
-	:type theU: float
-	:param theValue:
-	:type theValue: gp_Pnt2d
-	:rtype: None") D0;
-		void D0 (const Standard_Real theU,gp_Pnt2d & theValue);
+		%feature("autodoc", "Value of curve.
+
+Parameters
+----------
+theU: float
+theValue: gp_Pnt2d
+
+Returns
+-------
+None
+") D0;
+		void D0(const Standard_Real theU, gp_Pnt2d & theValue);
 
 		/****************** D1 ******************/
+		/**** md5 signature: 6ac52a63a28bf0019332b2304d1ad6e5 ****/
 		%feature("compactdefaultargs") D1;
-		%feature("autodoc", "* Value and first derivatives of curve
-	:param theU:
-	:type theU: float
-	:param theValue:
-	:type theValue: gp_Pnt2d
-	:param theD1:
-	:type theD1: gp_Vec2d
-	:rtype: None") D1;
-		void D1 (const Standard_Real theU,gp_Pnt2d & theValue,gp_Vec2d & theD1);
+		%feature("autodoc", "Value and first derivatives of curve.
+
+Parameters
+----------
+theU: float
+theValue: gp_Pnt2d
+theD1: gp_Vec2d
+
+Returns
+-------
+None
+") D1;
+		void D1(const Standard_Real theU, gp_Pnt2d & theValue, gp_Vec2d & theD1);
 
 		/****************** D2 ******************/
+		/**** md5 signature: b437a11394e67627b458e3613f899d98 ****/
 		%feature("compactdefaultargs") D2;
-		%feature("autodoc", "* Value, first and second derivatives of curve
-	:param theU:
-	:type theU: float
-	:param theValue:
-	:type theValue: gp_Pnt2d
-	:param theD1:
-	:type theD1: gp_Vec2d
-	:param theD2:
-	:type theD2: gp_Vec2d
-	:rtype: None") D2;
-		void D2 (const Standard_Real theU,gp_Pnt2d & theValue,gp_Vec2d & theD1,gp_Vec2d & theD2);
+		%feature("autodoc", "Value, first and second derivatives of curve.
+
+Parameters
+----------
+theU: float
+theValue: gp_Pnt2d
+theD1: gp_Vec2d
+theD2: gp_Vec2d
+
+Returns
+-------
+None
+") D2;
+		void D2(const Standard_Real theU, gp_Pnt2d & theValue, gp_Vec2d & theD1, gp_Vec2d & theD2);
 
 		/****************** D3 ******************/
+		/**** md5 signature: 7ec2bda0e7a7ada3241c38d8733ce22c ****/
 		%feature("compactdefaultargs") D3;
-		%feature("autodoc", "* Value, first, second and third derivatives of curve
-	:param theU:
-	:type theU: float
-	:param theValue:
-	:type theValue: gp_Pnt2d
-	:param theD1:
-	:type theD1: gp_Vec2d
-	:param theD2:
-	:type theD2: gp_Vec2d
-	:param theD3:
-	:type theD3: gp_Vec2d
-	:rtype: None") D3;
-		void D3 (const Standard_Real theU,gp_Pnt2d & theValue,gp_Vec2d & theD1,gp_Vec2d & theD2,gp_Vec2d & theD3);
+		%feature("autodoc", "Value, first, second and third derivatives of curve.
+
+Parameters
+----------
+theU: float
+theValue: gp_Pnt2d
+theD1: gp_Vec2d
+theD2: gp_Vec2d
+theD3: gp_Vec2d
+
+Returns
+-------
+None
+") D3;
+		void D3(const Standard_Real theU, gp_Pnt2d & theValue, gp_Vec2d & theD1, gp_Vec2d & theD2, gp_Vec2d & theD3);
 
 		/****************** DN ******************/
+		/**** md5 signature: 469c25b71ec08796bfed138071fc68cc ****/
 		%feature("compactdefaultargs") DN;
-		%feature("autodoc", "* Calculates N-th derivatives of curve, where N = theDeriv. Raises if N < 1
-	:param theU:
-	:type theU: float
-	:param theDeriv:
-	:type theDeriv: int
-	:rtype: gp_Vec2d") DN;
-		gp_Vec2d DN (const Standard_Real theU,const Standard_Integer theDeriv);
+		%feature("autodoc", "Calculates n-th derivatives of curve, where n = thederiv. raises if n < 1.
 
-		/****************** Geom2dEvaluator_OffsetCurve ******************/
-		%feature("compactdefaultargs") Geom2dEvaluator_OffsetCurve;
-		%feature("autodoc", "* Initialize evaluator by curve
-	:param theBase:
-	:type theBase: Geom2d_Curve
-	:param theOffset:
-	:type theOffset: float
-	:rtype: None") Geom2dEvaluator_OffsetCurve;
-		 Geom2dEvaluator_OffsetCurve (const opencascade::handle<Geom2d_Curve> & theBase,const Standard_Real theOffset);
+Parameters
+----------
+theU: float
+theDeriv: int
 
-		/****************** Geom2dEvaluator_OffsetCurve ******************/
-		%feature("compactdefaultargs") Geom2dEvaluator_OffsetCurve;
-		%feature("autodoc", "* Initialize evaluator by curve adaptor
-	:param theBase:
-	:type theBase: Geom2dAdaptor_HCurve
-	:param theOffset:
-	:type theOffset: float
-	:rtype: None") Geom2dEvaluator_OffsetCurve;
-		 Geom2dEvaluator_OffsetCurve (const opencascade::handle<Geom2dAdaptor_HCurve> & theBase,const Standard_Real theOffset);
+Returns
+-------
+gp_Vec2d
+") DN;
+		gp_Vec2d DN(const Standard_Real theU, const Standard_Integer theDeriv);
 
 		/****************** SetOffsetValue ******************/
+		/**** md5 signature: 548afc85f8e72630a916fe190a2fc526 ****/
 		%feature("compactdefaultargs") SetOffsetValue;
-		%feature("autodoc", "* Change the offset value
-	:param theOffset:
-	:type theOffset: float
-	:rtype: None") SetOffsetValue;
-		void SetOffsetValue (Standard_Real theOffset);
+		%feature("autodoc", "Change the offset value.
+
+Parameters
+----------
+theOffset: float
+
+Returns
+-------
+None
+") SetOffsetValue;
+		void SetOffsetValue(Standard_Real theOffset);
 
 };
 
@@ -258,3 +491,6 @@ class Geom2dEvaluator_OffsetCurve : public Geom2dEvaluator_Curve {
 /* harray1 classes */
 /* harray2 classes */
 /* hsequence classes */
+/* class aliases */
+%pythoncode {
+}

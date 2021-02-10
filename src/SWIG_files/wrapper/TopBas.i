@@ -1,5 +1,5 @@
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -51,20 +51,38 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_topbas.html"
 %import Standard.i
 %import NCollection.i
 %import TopAbs.i
+
+%pythoncode {
+from enum import IntEnum
+from OCC.Core.Exception import *
+};
+
 /* public enums */
 /* end public enums declaration */
+
+/* python proy classes for enums */
+%pythoncode {
+};
+/* end python proxy for enums */
 
 /* handles */
 /* end handles declaration */
 
 /* templates */
-%template(TopBas_ListOfTestInterference) NCollection_List <TopBas_TestInterference>;
 %template(TopBas_ListIteratorOfListOfTestInterference) NCollection_TListIterator<TopBas_TestInterference>;
+%template(TopBas_ListOfTestInterference) NCollection_List<TopBas_TestInterference>;
+
+%extend NCollection_List<TopBas_TestInterference> {
+    %pythoncode {
+    def __len__(self):
+        return self.Size()
+    }
+};
 /* end templates declaration */
 
 /* typedefs */
-typedef NCollection_List <TopBas_TestInterference> TopBas_ListOfTestInterference;
-typedef NCollection_List <TopBas_TestInterference>::Iterator TopBas_ListIteratorOfListOfTestInterference;
+typedef NCollection_List<TopBas_TestInterference>::Iterator TopBas_ListIteratorOfListOfTestInterference;
+typedef NCollection_List<TopBas_TestInterference> TopBas_ListOfTestInterference;
 /* end typedefs declaration */
 
 /********************************
@@ -72,29 +90,87 @@ typedef NCollection_List <TopBas_TestInterference>::Iterator TopBas_ListIterator
 ********************************/
 class TopBas_TestInterference {
 	public:
-		/****************** Boundary ******************/
-		%feature("compactdefaultargs") Boundary;
-		%feature("autodoc", ":param B:
-	:type B: int
-	:rtype: None") Boundary;
-		void Boundary (const Standard_Integer & B);
+		/****************** TopBas_TestInterference ******************/
+		/**** md5 signature: f64fbfc4cc1078a992596a2f293c8e91 ****/
+		%feature("compactdefaultargs") TopBas_TestInterference;
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+None
+") TopBas_TestInterference;
+		 TopBas_TestInterference();
+
+		/****************** TopBas_TestInterference ******************/
+		/**** md5 signature: 061045265274175b5f63816b64c27bda ****/
+		%feature("compactdefaultargs") TopBas_TestInterference;
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+Inters: float
+Bound: int
+Orient: TopAbs_Orientation
+Trans: TopAbs_Orientation
+BTrans: TopAbs_Orientation
+
+Returns
+-------
+None
+") TopBas_TestInterference;
+		 TopBas_TestInterference(const Standard_Real & Inters, const Standard_Integer & Bound, const TopAbs_Orientation Orient, const TopAbs_Orientation Trans, const TopAbs_Orientation BTrans);
 
 		/****************** Boundary ******************/
+		/**** md5 signature: ecae0f95113748e5b795787ee692f4c0 ****/
 		%feature("compactdefaultargs") Boundary;
-		%feature("autodoc", ":rtype: int") Boundary;
-		const Standard_Integer & Boundary ();
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+B: int
+
+Returns
+-------
+None
+") Boundary;
+		void Boundary(const Standard_Integer & B);
+
+		/****************** Boundary ******************/
+		/**** md5 signature: acc72cfdb7b0883700c27aa7017b6785 ****/
+		%feature("compactdefaultargs") Boundary;
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+int
+") Boundary;
+		const Standard_Integer & Boundary();
 
 		/****************** BoundaryTransition ******************/
+		/**** md5 signature: 91679118cf407fa213ebb9eb07832014 ****/
 		%feature("compactdefaultargs") BoundaryTransition;
-		%feature("autodoc", ":param BTr:
-	:type BTr: TopAbs_Orientation
-	:rtype: None") BoundaryTransition;
-		void BoundaryTransition (const TopAbs_Orientation BTr);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+BTr: TopAbs_Orientation
+
+Returns
+-------
+None
+") BoundaryTransition;
+		void BoundaryTransition(const TopAbs_Orientation BTr);
 
 		/****************** BoundaryTransition ******************/
+		/**** md5 signature: 74f690bd95102dfac559cd0dc3a25347 ****/
 		%feature("compactdefaultargs") BoundaryTransition;
-		%feature("autodoc", ":rtype: TopAbs_Orientation") BoundaryTransition;
-		TopAbs_Orientation BoundaryTransition ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+TopAbs_Orientation
+") BoundaryTransition;
+		TopAbs_Orientation BoundaryTransition();
 
 
         %feature("autodoc","1");
@@ -123,60 +199,82 @@ class TopBas_TestInterference {
             }
         };
 		/****************** Intersection ******************/
+		/**** md5 signature: c3dbdbf5d97cf229d568555db8710cff ****/
 		%feature("compactdefaultargs") Intersection;
-		%feature("autodoc", ":param I:
-	:type I: float
-	:rtype: None") Intersection;
-		void Intersection (const Standard_Real & I);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+I: float
+
+Returns
+-------
+None
+") Intersection;
+		void Intersection(const Standard_Real & I);
 
 		/****************** Intersection ******************/
+		/**** md5 signature: 7c98d12ea59d47ac6c13b08665a38692 ****/
 		%feature("compactdefaultargs") Intersection;
-		%feature("autodoc", ":rtype: float") Intersection;
-		const Standard_Real & Intersection ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+float
+") Intersection;
+		const Standard_Real & Intersection();
 
 		/****************** Orientation ******************/
+		/**** md5 signature: 21772d27fe13757c215d17da49a64c59 ****/
 		%feature("compactdefaultargs") Orientation;
-		%feature("autodoc", ":param O:
-	:type O: TopAbs_Orientation
-	:rtype: None") Orientation;
-		void Orientation (const TopAbs_Orientation O);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+O: TopAbs_Orientation
+
+Returns
+-------
+None
+") Orientation;
+		void Orientation(const TopAbs_Orientation O);
 
 		/****************** Orientation ******************/
+		/**** md5 signature: 328242fe19b1f80489d8169681ebc029 ****/
 		%feature("compactdefaultargs") Orientation;
-		%feature("autodoc", ":rtype: TopAbs_Orientation") Orientation;
-		TopAbs_Orientation Orientation ();
+		%feature("autodoc", "No available documentation.
 
-		/****************** TopBas_TestInterference ******************/
-		%feature("compactdefaultargs") TopBas_TestInterference;
-		%feature("autodoc", ":rtype: None") TopBas_TestInterference;
-		 TopBas_TestInterference ();
-
-		/****************** TopBas_TestInterference ******************/
-		%feature("compactdefaultargs") TopBas_TestInterference;
-		%feature("autodoc", ":param Inters:
-	:type Inters: float
-	:param Bound:
-	:type Bound: int
-	:param Orient:
-	:type Orient: TopAbs_Orientation
-	:param Trans:
-	:type Trans: TopAbs_Orientation
-	:param BTrans:
-	:type BTrans: TopAbs_Orientation
-	:rtype: None") TopBas_TestInterference;
-		 TopBas_TestInterference (const Standard_Real & Inters,const Standard_Integer & Bound,const TopAbs_Orientation Orient,const TopAbs_Orientation Trans,const TopAbs_Orientation BTrans);
+Returns
+-------
+TopAbs_Orientation
+") Orientation;
+		TopAbs_Orientation Orientation();
 
 		/****************** Transition ******************/
+		/**** md5 signature: bd64fa200b58d8f275e2f343a85da4ac ****/
 		%feature("compactdefaultargs") Transition;
-		%feature("autodoc", ":param Tr:
-	:type Tr: TopAbs_Orientation
-	:rtype: None") Transition;
-		void Transition (const TopAbs_Orientation Tr);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+Tr: TopAbs_Orientation
+
+Returns
+-------
+None
+") Transition;
+		void Transition(const TopAbs_Orientation Tr);
 
 		/****************** Transition ******************/
+		/**** md5 signature: 054591dc4fd0ee1810f89fdf4fe89b33 ****/
 		%feature("compactdefaultargs") Transition;
-		%feature("autodoc", ":rtype: TopAbs_Orientation") Transition;
-		TopAbs_Orientation Transition ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+TopAbs_Orientation
+") Transition;
+		TopAbs_Orientation Transition();
 
 };
 
@@ -190,3 +288,6 @@ class TopBas_TestInterference {
 /* harray1 classes */
 /* harray2 classes */
 /* hsequence classes */
+/* class aliases */
+%pythoncode {
+}

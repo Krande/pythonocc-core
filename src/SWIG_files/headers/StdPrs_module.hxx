@@ -1,8 +1,5 @@
-#ifndef STDPRS_HXX
-#define STDPRS_HXX
-
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -18,12 +15,18 @@ GNU Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef STDPRS_HXX
+#define STDPRS_HXX
 
+
+#include<StdPrs_BRepFont.hxx>
+#include<StdPrs_BRepTextBuilder.hxx>
 #include<StdPrs_BndBox.hxx>
 #include<StdPrs_Curve.hxx>
 #include<StdPrs_DeflectionCurve.hxx>
 #include<StdPrs_HLRPolyShape.hxx>
 #include<StdPrs_HLRShape.hxx>
+#include<StdPrs_HLRShapeI.hxx>
 #include<StdPrs_HLRToolShape.hxx>
 #include<StdPrs_Isolines.hxx>
 #include<StdPrs_Plane.hxx>
@@ -31,6 +34,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<StdPrs_PoleCurve.hxx>
 #include<StdPrs_ShadedShape.hxx>
 #include<StdPrs_ShadedSurface.hxx>
+#include<StdPrs_ShapeTool.hxx>
 #include<StdPrs_ToolPoint.hxx>
 #include<StdPrs_ToolRFace.hxx>
 #include<StdPrs_ToolTriangulatedShape.hxx>

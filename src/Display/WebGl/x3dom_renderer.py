@@ -21,7 +21,7 @@ import tempfile
 import uuid
 from xml.etree import ElementTree
 
-from OCC.Core.Visualization import Tesselator
+from OCC.Core.Tesselator import ShapeTesselator
 from OCC import VERSION as OCC_VERSION
 
 from OCC.Extend.TopologyUtils import is_edge, is_wire, discretize_edge, discretize_wire
@@ -241,7 +241,7 @@ class HTMLBody:
         x3dcontent += '<transform id="glbal_scene_rotation_Id" rotation="1 0 0 -1.57079632679">'
         for shp_uid in self._x3d_shapes:
             sys.stdout.write("\r%s meshing shapes... %i%%" % (next(self.spinning_cursor),
-                                                              int(cur_shp / nb_shape * 100)))
+                                                              round(cur_shp / nb_shape * 100)))
             sys.stdout.flush()
 
             x3dcontent += '\t\t\t<Inline onload="fitCamera()" mapDEFToID="true" url="%s.x3d"></Inline>\n' % shp_uid
@@ -278,17 +278,17 @@ class X3DExporter:
         self._mesh_quality = mesh_quality
         # the list of indexed face sets that compose the shape
         # if ever the map_faces_to_mesh option is enabled, this list
-        # maybe composed of dozains of IndexedFaceSet
+        # maybe composed of dozains of TriangleSet
         self._triangle_sets = []
         self._line_sets = []
         self._x3d_string = ""  # the string that contains the x3d description
 
     def compute(self):
-        shape_tesselator = Tesselator(self._shape)
+        shape_tesselator = ShapeTesselator(self._shape)
         shape_tesselator.Compute(compute_edges=self._export_edges,
                                  mesh_quality=self._mesh_quality,
                                  parallel=True)
-        self._triangle_sets.append(shape_tesselator.ExportShapeToX3DIndexedFaceSet())
+        self._triangle_sets.append(shape_tesselator.ExportShapeToX3DTriangleSet())
         # then process edges
         if self._export_edges:
             # get number of edges

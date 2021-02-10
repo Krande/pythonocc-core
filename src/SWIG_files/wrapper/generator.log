@@ -1,0 +1,39 @@
+[INFO ]  
+############################
+Running pythonocc-generator.
+############################
+git revision : 8af01a8
+
+operating system : Linux 64bit 4.15.0-122-generic
+
+occt version targeted : 7.5.0
+
+date : 2020-11-11 06:36:16.758212
+############################
+
+[INFO ]  ## Processing module STEPConstruct
+[WARNI]      [TypeHint] Skip type TCollection_AsciiString,opencascade::handle, because of trailing :
+[WARNI]      [TypeHint] Skip type gp_Pnt,opencascade::handle, because of trailing :
+[INFO ]  STEPConstruct
+[INFO ]  STEPConstruct_AP203Context
+[INFO ]  STEPConstruct_Assembly
+[INFO ]  STEPConstruct_ContextTool
+[INFO ]      [TypeHint] More than 1 constructor, @overload decorator needed.
+[INFO ]  STEPConstruct_Part
+[INFO ]  STEPConstruct_PointHasher
+[INFO ]  STEPConstruct_Tool
+[INFO ]      [TypeHint] More than 1 constructor, @overload decorator needed.
+[INFO ]  STEPConstruct_UnitContext
+[INFO ]  STEPConstruct_ExternRefs
+[INFO ]      [TypeHint] More than 1 constructor, @overload decorator needed.
+[INFO ]  STEPConstruct_Styles
+[INFO ]      [TypeHint] More than 1 constructor, @overload decorator needed.
+[INFO ]  STEPConstruct_ValidationProps
+[INFO ]      [TypeHint] More than 1 constructor, @overload decorator needed.
+[INFO ]  
+#################################################
+SWIG interface file generation completed in 0.09s
+#################################################
+
+[INFO ]  Number of classes: 11
+[INFO ]  Number of methods: 201

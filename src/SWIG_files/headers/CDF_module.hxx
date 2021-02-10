@@ -1,8 +1,5 @@
-#ifndef CDF_HXX
-#define CDF_HXX
-
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -18,8 +15,10 @@ GNU Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef CDF_HXX
+#define CDF_HXX
 
-#include<CDF.hxx>
+
 #include<CDF_Application.hxx>
 #include<CDF_Directory.hxx>
 #include<CDF_DirectoryIterator.hxx>
@@ -27,7 +26,6 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<CDF_MetaDataDriver.hxx>
 #include<CDF_MetaDataDriverError.hxx>
 #include<CDF_MetaDataDriverFactory.hxx>
-#include<CDF_Session.hxx>
 #include<CDF_Store.hxx>
 #include<CDF_StoreList.hxx>
 #include<CDF_StoreSetNameStatus.hxx>

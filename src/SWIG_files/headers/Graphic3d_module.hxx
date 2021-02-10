@@ -1,8 +1,5 @@
-#ifndef GRAPHIC3D_HXX
-#define GRAPHIC3D_HXX
-
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -18,6 +15,9 @@ GNU Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef GRAPHIC3D_HXX
+#define GRAPHIC3D_HXX
+
 
 #include<Graphic3d_AlphaMode.hxx>
 #include<Graphic3d_ArrayFlags.hxx>
@@ -98,6 +98,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<Graphic3d_NameOfTexture2D.hxx>
 #include<Graphic3d_NameOfTextureEnv.hxx>
 #include<Graphic3d_NameOfTexturePlane.hxx>
+#include<Graphic3d_PBRMaterial.hxx>
 #include<Graphic3d_PolygonOffset.hxx>
 #include<Graphic3d_PresentationAttributes.hxx>
 #include<Graphic3d_PriorityDefinitionError.hxx>
@@ -128,6 +129,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<Graphic3d_TextureParams.hxx>
 #include<Graphic3d_TextureRoot.hxx>
 #include<Graphic3d_TextureSet.hxx>
+#include<Graphic3d_TextureSetBits.hxx>
 #include<Graphic3d_TextureUnit.hxx>
 #include<Graphic3d_ToneMappingMethod.hxx>
 #include<Graphic3d_TransModeFlags.hxx>

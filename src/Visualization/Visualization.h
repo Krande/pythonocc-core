@@ -54,6 +54,7 @@ public:
 	Standard_EXPORT virtual ~Display3d();
 	Standard_EXPORT void Init(long window_handle);
   Standard_EXPORT void SetAnaglyphMode(int mode);
+  Standard_EXPORT void SetNbMsaaSample(int nb);
   Standard_EXPORT void ChangeRenderingParams(int Method,
                                              Standard_Integer        RaytracingDepth,
                                              Standard_Boolean        IsShadowEnabled,
@@ -69,12 +70,17 @@ public:
 	Standard_EXPORT Handle_V3d_Viewer& GetViewer() {return myV3dViewer;};
 	Standard_EXPORT Handle_AIS_InteractiveContext GetContext() {return myAISContext;};
 	Standard_EXPORT void Test();
+  Standard_EXPORT void GlInfo();
 
   Standard_EXPORT bool IsOffscreen();
   Standard_EXPORT bool InitOffscreen(int size_x, int size_y);
   Standard_EXPORT bool SetSize(int size_x, int size_y);
   Standard_EXPORT bool GetSize(int &size_x, int &size_y);
-  Standard_EXPORT bool GetImageData(const char* &data, size_t &size, const Graphic3d_BufferType& theBufferType = Graphic3d_BT_RGB);
+  Standard_EXPORT bool GetImageData(int width,
+                                    int height,
+                                    const char* &data,
+                                    size_t &size,
+                                    const Graphic3d_BufferType& theBufferType = Graphic3d_BT_RGB);
 
 protected:
    Handle_AIS_InteractiveContext myAISContext;

@@ -1,5 +1,5 @@
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -48,6 +48,7 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_xcafapp.html"
 #include<LDOM_module.hxx>
 #include<TDF_module.hxx>
 #include<Resource_module.hxx>
+#include<Message_module.hxx>
 #include<TColgp_module.hxx>
 #include<TColStd_module.hxx>
 #include<TCollection_module.hxx>
@@ -56,8 +57,19 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_xcafapp.html"
 %import Standard.i
 %import NCollection.i
 %import TDocStd.i
+
+%pythoncode {
+from enum import IntEnum
+from OCC.Core.Exception import *
+};
+
 /* public enums */
 /* end public enums declaration */
+
+/* python proy classes for enums */
+%pythoncode {
+};
+/* end python proxy for enums */
 
 /* handles */
 %wrap_handle(XCAFApp_Application)
@@ -75,25 +87,50 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_xcafapp.html"
 %nodefaultctor XCAFApp_Application;
 class XCAFApp_Application : public TDocStd_Application {
 	public:
+
+            %feature("autodoc", "1");
+            %extend{
+                std::string DumpJsonToString(int depth=-1) {
+                std::stringstream s;
+                self->DumpJson(s, depth);
+                return s.str();}
+            };
 		/****************** GetApplication ******************/
+		/**** md5 signature: 097aa584b7d888f94db50bb186c7ba88 ****/
 		%feature("compactdefaultargs") GetApplication;
-		%feature("autodoc", "* Initializes (for the first time) and returns the static object (XCAFApp_Application) This is the only valid method to get XCAFApp_Application object, and it should be called at least once before any actions with documents in order to init application
-	:rtype: opencascade::handle<XCAFApp_Application>") GetApplication;
-		static opencascade::handle<XCAFApp_Application> GetApplication ();
+		%feature("autodoc", "Initializes (for the first time) and returns the static object (xcafapp_application) this is the only valid method to get xcafapp_application object, and it should be called at least once before any actions with documents in order to init application.
+
+Returns
+-------
+opencascade::handle<XCAFApp_Application>
+") GetApplication;
+		static opencascade::handle<XCAFApp_Application> GetApplication();
 
 		/****************** InitDocument ******************/
+		/**** md5 signature: ba05c2f32b1b5c164fe28e112cc836ce ****/
 		%feature("compactdefaultargs") InitDocument;
-		%feature("autodoc", "* Set XCAFDoc_DocumentTool attribute
-	:param aDoc:
-	:type aDoc: TDocStd_Document
-	:rtype: void") InitDocument;
-		virtual void InitDocument (const opencascade::handle<TDocStd_Document> & aDoc);
+		%feature("autodoc", "Set xcafdoc_documenttool attribute.
+
+Parameters
+----------
+aDoc: TDocStd_Document
+
+Returns
+-------
+None
+") InitDocument;
+		virtual void InitDocument(const opencascade::handle<TDocStd_Document> & aDoc);
 
 		/****************** ResourcesName ******************/
+		/**** md5 signature: 96f8731792cfcab6c0cf55cdc1a09a9b ****/
 		%feature("compactdefaultargs") ResourcesName;
-		%feature("autodoc", "* methods from TDocStd_Application ================================
-	:rtype: char *") ResourcesName;
-		virtual const char * ResourcesName ();
+		%feature("autodoc", "Methods from tdocstd_application ================================.
+
+Returns
+-------
+char *
+") ResourcesName;
+		virtual const char * ResourcesName();
 
 };
 
@@ -109,3 +146,6 @@ class XCAFApp_Application : public TDocStd_Application {
 /* harray1 classes */
 /* harray2 classes */
 /* hsequence classes */
+/* class aliases */
+%pythoncode {
+}

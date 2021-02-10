@@ -1,8 +1,5 @@
-#ifndef BVH_HXX
-#define BVH_HXX
-
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -18,6 +15,9 @@ GNU Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef BVH_HXX
+#define BVH_HXX
+
 
 #include<BVH_BinaryTree.hxx>
 #include<BVH_BinnedBuilder.hxx>
@@ -41,6 +41,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<BVH_QueueBuilder.hxx>
 #include<BVH_QuickSorter.hxx>
 #include<BVH_RadixSorter.hxx>
+#include<BVH_Ray.hxx>
 #include<BVH_Set.hxx>
 #include<BVH_Sorter.hxx>
 #include<BVH_SpatialMedianBuilder.hxx>

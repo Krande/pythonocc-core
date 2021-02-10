@@ -1,5 +1,5 @@
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -66,8 +66,19 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_xbrepmesh.html"
 %import NCollection.i
 %import TopoDS.i
 %import BRepMesh.i
+
+%pythoncode {
+from enum import IntEnum
+from OCC.Core.Exception import *
+};
+
 /* public enums */
 /* end public enums declaration */
+
+/* python proy classes for enums */
+%pythoncode {
+};
+/* end python proxy for enums */
 
 /* handles */
 /* end handles declaration */
@@ -85,17 +96,22 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_xbrepmesh.html"
 class XBRepMesh {
 	public:
 		/****************** Discret ******************/
+		/**** md5 signature: 2d40e0c47db8d58631623439c9d30c12 ****/
 		%feature("compactdefaultargs") Discret;
-		%feature("autodoc", ":param theShape:
-	:type theShape: TopoDS_Shape
-	:param theDeflection:
-	:type theDeflection: float
-	:param theAngle:
-	:type theAngle: float
-	:param theAlgo:
-	:type theAlgo: BRepMesh_DiscretRoot *
-	:rtype: int") Discret;
-		static Standard_Integer Discret (const TopoDS_Shape & theShape,const Standard_Real theDeflection,const Standard_Real theAngle,BRepMesh_DiscretRoot * & theAlgo);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+theShape: TopoDS_Shape
+theDeflection: float
+theAngle: float
+theAlgo: BRepMesh_DiscretRoot *
+
+Returns
+-------
+int
+") Discret;
+		static Standard_Integer Discret(const TopoDS_Shape & theShape, const Standard_Real theDeflection, const Standard_Real theAngle, BRepMesh_DiscretRoot * & theAlgo);
 
 };
 
@@ -109,3 +125,6 @@ class XBRepMesh {
 /* harray1 classes */
 /* harray2 classes */
 /* hsequence classes */
+/* class aliases */
+%pythoncode {
+}

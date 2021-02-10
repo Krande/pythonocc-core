@@ -1,8 +1,5 @@
-#ifndef XMLMDATAXTD_HXX
-#define XMLMDATAXTD_HXX
-
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -18,18 +15,16 @@ GNU Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef XMLMDATAXTD_HXX
+#define XMLMDATAXTD_HXX
+
 
 #include<XmlMDataXtd.hxx>
-#include<XmlMDataXtd_AxisDriver.hxx>
 #include<XmlMDataXtd_ConstraintDriver.hxx>
 #include<XmlMDataXtd_GeometryDriver.hxx>
 #include<XmlMDataXtd_PatternStdDriver.hxx>
-#include<XmlMDataXtd_PlacementDriver.hxx>
-#include<XmlMDataXtd_PlaneDriver.hxx>
-#include<XmlMDataXtd_PointDriver.hxx>
 #include<XmlMDataXtd_PositionDriver.hxx>
 #include<XmlMDataXtd_PresentationDriver.hxx>
-#include<XmlMDataXtd_ShapeDriver.hxx>
 #include<XmlMDataXtd_TriangulationDriver.hxx>
 
 #endif // XMLMDATAXTD_HXX

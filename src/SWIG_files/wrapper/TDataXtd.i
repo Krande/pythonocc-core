@@ -1,5 +1,5 @@
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -42,9 +42,9 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_tdataxtd.html"
 #include<Standard_module.hxx>
 #include<NCollection_module.hxx>
 #include<TDF_module.hxx>
+#include<TDataStd_module.hxx>
 #include<gp_module.hxx>
 #include<TNaming_module.hxx>
-#include<TDataStd_module.hxx>
 #include<Quantity_module.hxx>
 #include<TopoDS_module.hxx>
 #include<Poly_module.hxx>
@@ -62,13 +62,19 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_tdataxtd.html"
 %import Standard.i
 %import NCollection.i
 %import TDF.i
+%import TDataStd.i
 %import gp.i
 %import TNaming.i
-%import TDataStd.i
 %import Quantity.i
 %import TopoDS.i
 %import Poly.i
 %import TShort.i
+
+%pythoncode {
+from enum import IntEnum
+from OCC.Core.Exception import *
+};
+
 /* public enums */
 enum TDataXtd_ConstraintEnum {
 	TDataXtd_RADIUS = 0,
@@ -112,6 +118,83 @@ enum TDataXtd_GeometryEnum {
 
 /* end public enums declaration */
 
+/* python proy classes for enums */
+%pythoncode {
+
+class TDataXtd_ConstraintEnum(IntEnum):
+	TDataXtd_RADIUS = 0
+	TDataXtd_DIAMETER = 1
+	TDataXtd_MINOR_RADIUS = 2
+	TDataXtd_MAJOR_RADIUS = 3
+	TDataXtd_TANGENT = 4
+	TDataXtd_PARALLEL = 5
+	TDataXtd_PERPENDICULAR = 6
+	TDataXtd_CONCENTRIC = 7
+	TDataXtd_COINCIDENT = 8
+	TDataXtd_DISTANCE = 9
+	TDataXtd_ANGLE = 10
+	TDataXtd_EQUAL_RADIUS = 11
+	TDataXtd_SYMMETRY = 12
+	TDataXtd_MIDPOINT = 13
+	TDataXtd_EQUAL_DISTANCE = 14
+	TDataXtd_FIX = 15
+	TDataXtd_RIGID = 16
+	TDataXtd_FROM = 17
+	TDataXtd_AXIS = 18
+	TDataXtd_MATE = 19
+	TDataXtd_ALIGN_FACES = 20
+	TDataXtd_ALIGN_AXES = 21
+	TDataXtd_AXES_ANGLE = 22
+	TDataXtd_FACES_ANGLE = 23
+	TDataXtd_ROUND = 24
+	TDataXtd_OFFSET = 25
+TDataXtd_RADIUS = TDataXtd_ConstraintEnum.TDataXtd_RADIUS
+TDataXtd_DIAMETER = TDataXtd_ConstraintEnum.TDataXtd_DIAMETER
+TDataXtd_MINOR_RADIUS = TDataXtd_ConstraintEnum.TDataXtd_MINOR_RADIUS
+TDataXtd_MAJOR_RADIUS = TDataXtd_ConstraintEnum.TDataXtd_MAJOR_RADIUS
+TDataXtd_TANGENT = TDataXtd_ConstraintEnum.TDataXtd_TANGENT
+TDataXtd_PARALLEL = TDataXtd_ConstraintEnum.TDataXtd_PARALLEL
+TDataXtd_PERPENDICULAR = TDataXtd_ConstraintEnum.TDataXtd_PERPENDICULAR
+TDataXtd_CONCENTRIC = TDataXtd_ConstraintEnum.TDataXtd_CONCENTRIC
+TDataXtd_COINCIDENT = TDataXtd_ConstraintEnum.TDataXtd_COINCIDENT
+TDataXtd_DISTANCE = TDataXtd_ConstraintEnum.TDataXtd_DISTANCE
+TDataXtd_ANGLE = TDataXtd_ConstraintEnum.TDataXtd_ANGLE
+TDataXtd_EQUAL_RADIUS = TDataXtd_ConstraintEnum.TDataXtd_EQUAL_RADIUS
+TDataXtd_SYMMETRY = TDataXtd_ConstraintEnum.TDataXtd_SYMMETRY
+TDataXtd_MIDPOINT = TDataXtd_ConstraintEnum.TDataXtd_MIDPOINT
+TDataXtd_EQUAL_DISTANCE = TDataXtd_ConstraintEnum.TDataXtd_EQUAL_DISTANCE
+TDataXtd_FIX = TDataXtd_ConstraintEnum.TDataXtd_FIX
+TDataXtd_RIGID = TDataXtd_ConstraintEnum.TDataXtd_RIGID
+TDataXtd_FROM = TDataXtd_ConstraintEnum.TDataXtd_FROM
+TDataXtd_AXIS = TDataXtd_ConstraintEnum.TDataXtd_AXIS
+TDataXtd_MATE = TDataXtd_ConstraintEnum.TDataXtd_MATE
+TDataXtd_ALIGN_FACES = TDataXtd_ConstraintEnum.TDataXtd_ALIGN_FACES
+TDataXtd_ALIGN_AXES = TDataXtd_ConstraintEnum.TDataXtd_ALIGN_AXES
+TDataXtd_AXES_ANGLE = TDataXtd_ConstraintEnum.TDataXtd_AXES_ANGLE
+TDataXtd_FACES_ANGLE = TDataXtd_ConstraintEnum.TDataXtd_FACES_ANGLE
+TDataXtd_ROUND = TDataXtd_ConstraintEnum.TDataXtd_ROUND
+TDataXtd_OFFSET = TDataXtd_ConstraintEnum.TDataXtd_OFFSET
+
+class TDataXtd_GeometryEnum(IntEnum):
+	TDataXtd_ANY_GEOM = 0
+	TDataXtd_POINT = 1
+	TDataXtd_LINE = 2
+	TDataXtd_CIRCLE = 3
+	TDataXtd_ELLIPSE = 4
+	TDataXtd_SPLINE = 5
+	TDataXtd_PLANE = 6
+	TDataXtd_CYLINDER = 7
+TDataXtd_ANY_GEOM = TDataXtd_GeometryEnum.TDataXtd_ANY_GEOM
+TDataXtd_POINT = TDataXtd_GeometryEnum.TDataXtd_POINT
+TDataXtd_LINE = TDataXtd_GeometryEnum.TDataXtd_LINE
+TDataXtd_CIRCLE = TDataXtd_GeometryEnum.TDataXtd_CIRCLE
+TDataXtd_ELLIPSE = TDataXtd_GeometryEnum.TDataXtd_ELLIPSE
+TDataXtd_SPLINE = TDataXtd_GeometryEnum.TDataXtd_SPLINE
+TDataXtd_PLANE = TDataXtd_GeometryEnum.TDataXtd_PLANE
+TDataXtd_CYLINDER = TDataXtd_GeometryEnum.TDataXtd_CYLINDER
+};
+/* end python proxy for enums */
+
 /* handles */
 %wrap_handle(TDataXtd_Axis)
 %wrap_handle(TDataXtd_Constraint)
@@ -129,9 +212,9 @@ enum TDataXtd_GeometryEnum {
 /* end handles declaration */
 
 /* templates */
-%template(TDataXtd_Array1OfTrsf) NCollection_Array1 <gp_Trsf>;
+%template(TDataXtd_Array1OfTrsf) NCollection_Array1<gp_Trsf>;
 
-%extend NCollection_Array1 <gp_Trsf> {
+%extend NCollection_Array1<gp_Trsf> {
     %pythoncode {
     def __getitem__(self, index):
         if index + self.Lower() > self.Upper():
@@ -167,7 +250,7 @@ enum TDataXtd_GeometryEnum {
 /* end templates declaration */
 
 /* typedefs */
-typedef NCollection_Array1 <gp_Trsf> TDataXtd_Array1OfTrsf;
+typedef NCollection_Array1<gp_Trsf> TDataXtd_Array1OfTrsf;
 /* end typedefs declaration */
 
 /*****************
@@ -177,32 +260,19 @@ typedef NCollection_Array1 <gp_Trsf> TDataXtd_Array1OfTrsf;
 class TDataXtd {
 	public:
 		/****************** IDList ******************/
+		/**** md5 signature: 97de0b35f4f6abc04a631c65d32bacc4 ****/
 		%feature("compactdefaultargs") IDList;
-		%feature("autodoc", "* Appends to <anIDList> the list of the attributes IDs of this package. CAUTION: <anIDList> is NOT cleared before use. Print of TDataExt enumeration =============================
-	:param anIDList:
-	:type anIDList: TDF_IDList
-	:rtype: void") IDList;
-		static void IDList (TDF_IDList & anIDList);
+		%feature("autodoc", "Appends to <anidlist> the list of the attributes ids of this package. caution: <anidlist> is not cleared before use. print of tdataext enumeration =============================.
 
-		/****************** Print ******************/
-		%feature("compactdefaultargs") Print;
-		%feature("autodoc", "* Prints the name of the geometry dimension <GEO> as a String on the Stream <S> and returns <S>.
-	:param GEO:
-	:type GEO: TDataXtd_GeometryEnum
-	:param S:
-	:type S: Standard_OStream
-	:rtype: Standard_OStream") Print;
-		static Standard_OStream & Print (const TDataXtd_GeometryEnum GEO,Standard_OStream & S);
+Parameters
+----------
+anIDList: TDF_IDList
 
-		/****************** Print ******************/
-		%feature("compactdefaultargs") Print;
-		%feature("autodoc", "* Prints the name of the constraint <CTR> as a String on the Stream <S> and returns <S>.
-	:param CTR:
-	:type CTR: TDataXtd_ConstraintEnum
-	:param S:
-	:type S: Standard_OStream
-	:rtype: Standard_OStream") Print;
-		static Standard_OStream & Print (const TDataXtd_ConstraintEnum CTR,Standard_OStream & S);
+Returns
+-------
+None
+") IDList;
+		static void IDList(TDF_IDList & anIDList);
 
 };
 
@@ -216,8 +286,19 @@ class TDataXtd {
 /**********************
 * class TDataXtd_Axis *
 **********************/
-class TDataXtd_Axis : public TDF_Attribute {
+class TDataXtd_Axis : public TDataStd_GenericEmpty {
 	public:
+		/****************** TDataXtd_Axis ******************/
+		/**** md5 signature: d37822b554190af63ff371da2e2d369d ****/
+		%feature("compactdefaultargs") TDataXtd_Axis;
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+None
+") TDataXtd_Axis;
+		 TDataXtd_Axis();
+
 
         %feature("autodoc", "1");
         %extend{
@@ -226,60 +307,58 @@ class TDataXtd_Axis : public TDF_Attribute {
             self->Dump(s);
             return s.str();}
         };
-        		/****************** GetID ******************/
+		/****************** GetID ******************/
+		/**** md5 signature: afe6002d90f641ca3ea8c9ae9f8fe97c ****/
 		%feature("compactdefaultargs") GetID;
-		%feature("autodoc", "* class methods ============= Returns the GUID for an axis.
-	:rtype: Standard_GUID") GetID;
-		static const Standard_GUID & GetID ();
+		%feature("autodoc", "Class methods ============= returns the guid for an axis.
+
+Returns
+-------
+Standard_GUID
+") GetID;
+		static const Standard_GUID & GetID();
 
 		/****************** ID ******************/
+		/**** md5 signature: 4697ce8a095fa6dcef0217708d19718f ****/
 		%feature("compactdefaultargs") ID;
-		%feature("autodoc", ":rtype: Standard_GUID") ID;
-		const Standard_GUID & ID ();
+		%feature("autodoc", "No available documentation.
 
-		/****************** NewEmpty ******************/
-		%feature("compactdefaultargs") NewEmpty;
-		%feature("autodoc", ":rtype: opencascade::handle<TDF_Attribute>") NewEmpty;
-		opencascade::handle<TDF_Attribute> NewEmpty ();
-
-		/****************** Paste ******************/
-		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", ":param into:
-	:type into: TDF_Attribute
-	:param RT:
-	:type RT: TDF_RelocationTable
-	:rtype: None") Paste;
-		void Paste (const opencascade::handle<TDF_Attribute> & into,const opencascade::handle<TDF_RelocationTable> & RT);
-
-		/****************** Restore ******************/
-		%feature("compactdefaultargs") Restore;
-		%feature("autodoc", ":param with:
-	:type with: TDF_Attribute
-	:rtype: None") Restore;
-		void Restore (const opencascade::handle<TDF_Attribute> & with);
+Returns
+-------
+Standard_GUID
+") ID;
+		const Standard_GUID & ID();
 
 		/****************** Set ******************/
+		/**** md5 signature: a57f6ee26f8dc80f8f292dc25a522351 ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Finds or creates an axis attribute defined by the label. In the case of a creation of an axis, a compatible named shape should already be associated with label. Exceptions Standard_NullObject if no compatible named shape is associated with the label.
-	:param label:
-	:type label: TDF_Label
-	:rtype: opencascade::handle<TDataXtd_Axis>") Set;
-		static opencascade::handle<TDataXtd_Axis> Set (const TDF_Label & label);
+		%feature("autodoc", "Finds or creates an axis attribute defined by the label. in the case of a creation of an axis, a compatible named shape should already be associated with label. exceptions standard_nullobject if no compatible named shape is associated with the label.
+
+Parameters
+----------
+label: TDF_Label
+
+Returns
+-------
+opencascade::handle<TDataXtd_Axis>
+") Set;
+		static opencascade::handle<TDataXtd_Axis> Set(const TDF_Label & label);
 
 		/****************** Set ******************/
+		/**** md5 signature: b8936a975096f254d7723165a974adbd ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Find, or create, an Axis attribute and set <P> as generated in the associated NamedShape. Axis methods ============
-	:param label:
-	:type label: TDF_Label
-	:param L:
-	:type L: gp_Lin
-	:rtype: opencascade::handle<TDataXtd_Axis>") Set;
-		static opencascade::handle<TDataXtd_Axis> Set (const TDF_Label & label,const gp_Lin & L);
+		%feature("autodoc", "Find, or create, an axis attribute and set <p> as generated in the associated namedshape. axis methods ============.
 
-		/****************** TDataXtd_Axis ******************/
-		%feature("compactdefaultargs") TDataXtd_Axis;
-		%feature("autodoc", ":rtype: None") TDataXtd_Axis;
-		 TDataXtd_Axis ();
+Parameters
+----------
+label: TDF_Label
+L: gp_Lin
+
+Returns
+-------
+opencascade::handle<TDataXtd_Axis>
+") Set;
+		static opencascade::handle<TDataXtd_Axis> Set(const TDF_Label & label, const gp_Lin & L);
 
 };
 
@@ -297,21 +376,43 @@ class TDataXtd_Axis : public TDF_Attribute {
 ****************************/
 class TDataXtd_Constraint : public TDF_Attribute {
 	public:
+		/****************** TDataXtd_Constraint ******************/
+		/**** md5 signature: ba09b721464df20354871d687eb36548 ****/
+		%feature("compactdefaultargs") TDataXtd_Constraint;
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+None
+") TDataXtd_Constraint;
+		 TDataXtd_Constraint();
+
 		/****************** ClearGeometries ******************/
+		/**** md5 signature: 0ae37dcba2df4c4e24c7aa924bf6a875 ****/
 		%feature("compactdefaultargs") ClearGeometries;
-		%feature("autodoc", "* Removes the geometries involved in the constraint or dimension from the array of topological attributes where they are stored.
-	:rtype: None") ClearGeometries;
-		void ClearGeometries ();
+		%feature("autodoc", "Removes the geometries involved in the constraint or dimension from the array of topological attributes where they are stored.
+
+Returns
+-------
+None
+") ClearGeometries;
+		void ClearGeometries();
 
 		/****************** CollectChildConstraints ******************/
+		/**** md5 signature: 07c7b27c8bb0fdd807e59992f4de6d32 ****/
 		%feature("compactdefaultargs") CollectChildConstraints;
-		%feature("autodoc", "* collects constraints on Childs for label <aLabel>
-	:param aLabel:
-	:type aLabel: TDF_Label
-	:param TheList:
-	:type TheList: TDF_LabelList
-	:rtype: void") CollectChildConstraints;
-		static void CollectChildConstraints (const TDF_Label & aLabel,TDF_LabelList & TheList);
+		%feature("autodoc", "Collects constraints on childs for label <alabel>.
+
+Parameters
+----------
+aLabel: TDF_Label
+TheList: TDF_LabelList
+
+Returns
+-------
+None
+") CollectChildConstraints;
+		static void CollectChildConstraints(const TDF_Label & aLabel, TDF_LabelList & TheList);
 
 
         %feature("autodoc", "1");
@@ -321,225 +422,389 @@ class TDataXtd_Constraint : public TDF_Attribute {
             self->Dump(s);
             return s.str();}
         };
-        		/****************** GetGeometry ******************/
+		/****************** GetGeometry ******************/
+		/**** md5 signature: 11769af2e389c68724cfcb5f085ee941 ****/
 		%feature("compactdefaultargs") GetGeometry;
-		%feature("autodoc", "* Returns the integer index Index used to access the array of the constraint or stored geometries of a dimension Index has a value between 1 and 4. methods to write constraint fields (use builder) ==================================
-	:param Index:
-	:type Index: int
-	:rtype: opencascade::handle<TNaming_NamedShape>") GetGeometry;
-		opencascade::handle<TNaming_NamedShape> GetGeometry (const Standard_Integer Index);
+		%feature("autodoc", "Returns the integer index index used to access the array of the constraint or stored geometries of a dimension index has a value between 1 and 4. methods to write constraint fields (use builder) ==================================.
+
+Parameters
+----------
+Index: int
+
+Returns
+-------
+opencascade::handle<TNaming_NamedShape>
+") GetGeometry;
+		opencascade::handle<TNaming_NamedShape> GetGeometry(const Standard_Integer Index);
 
 		/****************** GetID ******************/
+		/**** md5 signature: afe6002d90f641ca3ea8c9ae9f8fe97c ****/
 		%feature("compactdefaultargs") GetID;
-		%feature("autodoc", "* Returns the GUID for constraints.
-	:rtype: Standard_GUID") GetID;
-		static const Standard_GUID & GetID ();
+		%feature("autodoc", "Returns the guid for constraints.
+
+Returns
+-------
+Standard_GUID
+") GetID;
+		static const Standard_GUID & GetID();
 
 		/****************** GetPlane ******************/
+		/**** md5 signature: 53b6eb87993d5db144ed04f77438f057 ****/
 		%feature("compactdefaultargs") GetPlane;
-		%feature("autodoc", "* Returns the topological attribute of the plane used for planar - i.e., 2D - constraints. This plane is attached to another label. If the constraint is not planar, in other words, 3D, this function will return a null handle.
-	:rtype: opencascade::handle<TNaming_NamedShape>") GetPlane;
-		const opencascade::handle<TNaming_NamedShape> & GetPlane ();
+		%feature("autodoc", "Returns the topological attribute of the plane used for planar - i.e., 2d - constraints. this plane is attached to another label. if the constraint is not planar, in other words, 3d, this function will return a null handle.
+
+Returns
+-------
+opencascade::handle<TNaming_NamedShape>
+") GetPlane;
+		const opencascade::handle<TNaming_NamedShape> & GetPlane();
 
 		/****************** GetType ******************/
+		/**** md5 signature: 7479148dd7d1d3e76ebd03c19ed9ea13 ****/
 		%feature("compactdefaultargs") GetType;
-		%feature("autodoc", "* Returns the type of constraint. This will be an element of the TDataXtd_ConstraintEnum enumeration.
-	:rtype: TDataXtd_ConstraintEnum") GetType;
-		TDataXtd_ConstraintEnum GetType ();
+		%feature("autodoc", "Returns the type of constraint. this will be an element of the tdataxtd_constraintenum enumeration.
+
+Returns
+-------
+TDataXtd_ConstraintEnum
+") GetType;
+		TDataXtd_ConstraintEnum GetType();
 
 		/****************** GetValue ******************/
+		/**** md5 signature: 41a61cf36b4a49e99c838ac9f7c300e4 ****/
 		%feature("compactdefaultargs") GetValue;
-		%feature("autodoc", "* Returns the value of a dimension. This value is a reference to a TDataStd_Real attribute. If the attribute is not a dimension, this value will be 0. Use IsDimension to test this condition.
-	:rtype: opencascade::handle<TDataStd_Real>") GetValue;
-		const opencascade::handle<TDataStd_Real> & GetValue ();
+		%feature("autodoc", "Returns the value of a dimension. this value is a reference to a tdatastd_real attribute. if the attribute is not a dimension, this value will be 0. use isdimension to test this condition.
+
+Returns
+-------
+opencascade::handle<TDataStd_Real>
+") GetValue;
+		const opencascade::handle<TDataStd_Real> & GetValue();
 
 		/****************** ID ******************/
+		/**** md5 signature: 4697ce8a095fa6dcef0217708d19718f ****/
 		%feature("compactdefaultargs") ID;
-		%feature("autodoc", ":rtype: Standard_GUID") ID;
-		const Standard_GUID & ID ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+Standard_GUID
+") ID;
+		const Standard_GUID & ID();
 
 		/****************** Inverted ******************/
+		/**** md5 signature: 028a39ec2b8dc2c380306522212d3935 ****/
 		%feature("compactdefaultargs") Inverted;
-		%feature("autodoc", ":param status:
-	:type status: bool
-	:rtype: None") Inverted;
-		void Inverted (const Standard_Boolean status);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+status: bool
+
+Returns
+-------
+None
+") Inverted;
+		void Inverted(const Standard_Boolean status);
 
 		/****************** Inverted ******************/
+		/**** md5 signature: dcbb88049134fcba1d00a24f941e901d ****/
 		%feature("compactdefaultargs") Inverted;
-		%feature("autodoc", ":rtype: bool") Inverted;
-		Standard_Boolean Inverted ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+bool
+") Inverted;
+		Standard_Boolean Inverted();
 
 		/****************** IsDimension ******************/
+		/**** md5 signature: ceba0536be3febc9c1b26338e2d92d79 ****/
 		%feature("compactdefaultargs") IsDimension;
-		%feature("autodoc", "* Returns true if this constraint attribute is a dimension, and therefore has a value.
-	:rtype: bool") IsDimension;
-		Standard_Boolean IsDimension ();
+		%feature("autodoc", "Returns true if this constraint attribute is a dimension, and therefore has a value.
+
+Returns
+-------
+bool
+") IsDimension;
+		Standard_Boolean IsDimension();
 
 		/****************** IsPlanar ******************/
+		/**** md5 signature: c4cb6ad82acdd7a7d12e9af1bea21482 ****/
 		%feature("compactdefaultargs") IsPlanar;
-		%feature("autodoc", "* Returns true if this constraint attribute is two-dimensional.
-	:rtype: bool") IsPlanar;
-		Standard_Boolean IsPlanar ();
+		%feature("autodoc", "Returns true if this constraint attribute is two-dimensional.
+
+Returns
+-------
+bool
+") IsPlanar;
+		Standard_Boolean IsPlanar();
 
 		/****************** NbGeometries ******************/
+		/**** md5 signature: a13234cb29e36dbe43a1363db56d5ecf ****/
 		%feature("compactdefaultargs") NbGeometries;
-		%feature("autodoc", "* Returns the number of geometry attributes in this constraint attribute. This number will be between 1 and 4.
-	:rtype: int") NbGeometries;
-		Standard_Integer NbGeometries ();
+		%feature("autodoc", "Returns the number of geometry attributes in this constraint attribute. this number will be between 1 and 4.
+
+Returns
+-------
+int
+") NbGeometries;
+		Standard_Integer NbGeometries();
 
 		/****************** NewEmpty ******************/
+		/**** md5 signature: c6d13c9ecc64c6c803b6e119e8216934 ****/
 		%feature("compactdefaultargs") NewEmpty;
-		%feature("autodoc", ":rtype: opencascade::handle<TDF_Attribute>") NewEmpty;
-		opencascade::handle<TDF_Attribute> NewEmpty ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+opencascade::handle<TDF_Attribute>
+") NewEmpty;
+		opencascade::handle<TDF_Attribute> NewEmpty();
 
 		/****************** Paste ******************/
+		/**** md5 signature: a6ff306a759c68a191c0262635db980f ****/
 		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", ":param Into:
-	:type Into: TDF_Attribute
-	:param RT:
-	:type RT: TDF_RelocationTable
-	:rtype: None") Paste;
-		void Paste (const opencascade::handle<TDF_Attribute> & Into,const opencascade::handle<TDF_RelocationTable> & RT);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+Into: TDF_Attribute
+RT: TDF_RelocationTable
+
+Returns
+-------
+None
+") Paste;
+		void Paste(const opencascade::handle<TDF_Attribute> & Into, const opencascade::handle<TDF_RelocationTable> & RT);
 
 		/****************** References ******************/
+		/**** md5 signature: f171ce811dbfb205236d26e3cbf15450 ****/
 		%feature("compactdefaultargs") References;
-		%feature("autodoc", ":param DS:
-	:type DS: TDF_DataSet
-	:rtype: void") References;
-		virtual void References (const opencascade::handle<TDF_DataSet> & DS);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+DS: TDF_DataSet
+
+Returns
+-------
+None
+") References;
+		virtual void References(const opencascade::handle<TDF_DataSet> & DS);
 
 		/****************** Restore ******************/
+		/**** md5 signature: ddeae219d389a1d89eecb3e23c73522a ****/
 		%feature("compactdefaultargs") Restore;
-		%feature("autodoc", ":param With:
-	:type With: TDF_Attribute
-	:rtype: None") Restore;
-		void Restore (const opencascade::handle<TDF_Attribute> & With);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+With: TDF_Attribute
+
+Returns
+-------
+None
+") Restore;
+		void Restore(const opencascade::handle<TDF_Attribute> & With);
 
 		/****************** Reversed ******************/
+		/**** md5 signature: 97515e41b97b33f8a427c966867570b6 ****/
 		%feature("compactdefaultargs") Reversed;
-		%feature("autodoc", ":param status:
-	:type status: bool
-	:rtype: None") Reversed;
-		void Reversed (const Standard_Boolean status);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+status: bool
+
+Returns
+-------
+None
+") Reversed;
+		void Reversed(const Standard_Boolean status);
 
 		/****************** Reversed ******************/
+		/**** md5 signature: 9c23a22dddad6f7f4c70acdb99e6a2e9 ****/
 		%feature("compactdefaultargs") Reversed;
-		%feature("autodoc", ":rtype: bool") Reversed;
-		Standard_Boolean Reversed ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+bool
+") Reversed;
+		Standard_Boolean Reversed();
 
 		/****************** Set ******************/
+		/**** md5 signature: 82231007e5e6a0bf4c6231f0f9ded144 ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Finds or creates the 2D constraint attribute defined by the planar topological attribute plane and the label label. Constraint methods ==================
-	:param label:
-	:type label: TDF_Label
-	:rtype: opencascade::handle<TDataXtd_Constraint>") Set;
-		static opencascade::handle<TDataXtd_Constraint> Set (const TDF_Label & label);
+		%feature("autodoc", "Finds or creates the 2d constraint attribute defined by the planar topological attribute plane and the label label. constraint methods ==================.
+
+Parameters
+----------
+label: TDF_Label
+
+Returns
+-------
+opencascade::handle<TDataXtd_Constraint>
+") Set;
+		static opencascade::handle<TDataXtd_Constraint> Set(const TDF_Label & label);
 
 		/****************** Set ******************/
+		/**** md5 signature: 0bde4eb175da61ec14f6955f49e6b484 ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Finds or creates the constraint attribute defined by the topological attribute G1 and the constraint type type.
-	:param type:
-	:type type: TDataXtd_ConstraintEnum
-	:param G1:
-	:type G1: TNaming_NamedShape
-	:rtype: None") Set;
-		void Set (const TDataXtd_ConstraintEnum type,const opencascade::handle<TNaming_NamedShape> & G1);
+		%feature("autodoc", "Finds or creates the constraint attribute defined by the topological attribute g1 and the constraint type type.
+
+Parameters
+----------
+type: TDataXtd_ConstraintEnum
+G1: TNaming_NamedShape
+
+Returns
+-------
+None
+") Set;
+		void Set(const TDataXtd_ConstraintEnum type, const opencascade::handle<TNaming_NamedShape> & G1);
 
 		/****************** Set ******************/
+		/**** md5 signature: af7801346e43167cb8716edd62f36854 ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Finds or creates the constraint attribute defined by the topological attributes G1 and G2, and by the constraint type type.
-	:param type:
-	:type type: TDataXtd_ConstraintEnum
-	:param G1:
-	:type G1: TNaming_NamedShape
-	:param G2:
-	:type G2: TNaming_NamedShape
-	:rtype: None") Set;
-		void Set (const TDataXtd_ConstraintEnum type,const opencascade::handle<TNaming_NamedShape> & G1,const opencascade::handle<TNaming_NamedShape> & G2);
+		%feature("autodoc", "Finds or creates the constraint attribute defined by the topological attributes g1 and g2, and by the constraint type type.
+
+Parameters
+----------
+type: TDataXtd_ConstraintEnum
+G1: TNaming_NamedShape
+G2: TNaming_NamedShape
+
+Returns
+-------
+None
+") Set;
+		void Set(const TDataXtd_ConstraintEnum type, const opencascade::handle<TNaming_NamedShape> & G1, const opencascade::handle<TNaming_NamedShape> & G2);
 
 		/****************** Set ******************/
+		/**** md5 signature: 601a8919cd1a7bceedd4fcb704092bb0 ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Finds or creates the constraint attribute defined by the topological attributes G1, G2 and G3, and by the constraint type type.
-	:param type:
-	:type type: TDataXtd_ConstraintEnum
-	:param G1:
-	:type G1: TNaming_NamedShape
-	:param G2:
-	:type G2: TNaming_NamedShape
-	:param G3:
-	:type G3: TNaming_NamedShape
-	:rtype: None") Set;
-		void Set (const TDataXtd_ConstraintEnum type,const opencascade::handle<TNaming_NamedShape> & G1,const opencascade::handle<TNaming_NamedShape> & G2,const opencascade::handle<TNaming_NamedShape> & G3);
+		%feature("autodoc", "Finds or creates the constraint attribute defined by the topological attributes g1, g2 and g3, and by the constraint type type.
+
+Parameters
+----------
+type: TDataXtd_ConstraintEnum
+G1: TNaming_NamedShape
+G2: TNaming_NamedShape
+G3: TNaming_NamedShape
+
+Returns
+-------
+None
+") Set;
+		void Set(const TDataXtd_ConstraintEnum type, const opencascade::handle<TNaming_NamedShape> & G1, const opencascade::handle<TNaming_NamedShape> & G2, const opencascade::handle<TNaming_NamedShape> & G3);
 
 		/****************** Set ******************/
+		/**** md5 signature: 18cb4b5af28a3cfc7ad2f2ec428dab2f ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Finds or creates the constraint attribute defined by the topological attributes G1, G2, G3 and G4, and by the constraint type type. methods to read constraint fields =================================
-	:param type:
-	:type type: TDataXtd_ConstraintEnum
-	:param G1:
-	:type G1: TNaming_NamedShape
-	:param G2:
-	:type G2: TNaming_NamedShape
-	:param G3:
-	:type G3: TNaming_NamedShape
-	:param G4:
-	:type G4: TNaming_NamedShape
-	:rtype: None") Set;
-		void Set (const TDataXtd_ConstraintEnum type,const opencascade::handle<TNaming_NamedShape> & G1,const opencascade::handle<TNaming_NamedShape> & G2,const opencascade::handle<TNaming_NamedShape> & G3,const opencascade::handle<TNaming_NamedShape> & G4);
+		%feature("autodoc", "Finds or creates the constraint attribute defined by the topological attributes g1, g2, g3 and g4, and by the constraint type type. methods to read constraint fields =================================.
+
+Parameters
+----------
+type: TDataXtd_ConstraintEnum
+G1: TNaming_NamedShape
+G2: TNaming_NamedShape
+G3: TNaming_NamedShape
+G4: TNaming_NamedShape
+
+Returns
+-------
+None
+") Set;
+		void Set(const TDataXtd_ConstraintEnum type, const opencascade::handle<TNaming_NamedShape> & G1, const opencascade::handle<TNaming_NamedShape> & G2, const opencascade::handle<TNaming_NamedShape> & G3, const opencascade::handle<TNaming_NamedShape> & G4);
 
 		/****************** SetGeometry ******************/
+		/**** md5 signature: b50d93fb0400c4e3f8d6f2f32eccb3ef ****/
 		%feature("compactdefaultargs") SetGeometry;
-		%feature("autodoc", "* Finds or creates the underlying geometry of the constraint defined by the topological attribute G and the integer index Index.
-	:param Index:
-	:type Index: int
-	:param G:
-	:type G: TNaming_NamedShape
-	:rtype: None") SetGeometry;
-		void SetGeometry (const Standard_Integer Index,const opencascade::handle<TNaming_NamedShape> & G);
+		%feature("autodoc", "Finds or creates the underlying geometry of the constraint defined by the topological attribute g and the integer index index.
+
+Parameters
+----------
+Index: int
+G: TNaming_NamedShape
+
+Returns
+-------
+None
+") SetGeometry;
+		void SetGeometry(const Standard_Integer Index, const opencascade::handle<TNaming_NamedShape> & G);
 
 		/****************** SetPlane ******************/
+		/**** md5 signature: 474c1717fb20f690b7b49c4b1afd120e ****/
 		%feature("compactdefaultargs") SetPlane;
-		%feature("autodoc", "* Finds or creates the plane of the 2D constraint attribute, defined by the planar topological attribute plane.
-	:param plane:
-	:type plane: TNaming_NamedShape
-	:rtype: None") SetPlane;
-		void SetPlane (const opencascade::handle<TNaming_NamedShape> & plane);
+		%feature("autodoc", "Finds or creates the plane of the 2d constraint attribute, defined by the planar topological attribute plane.
+
+Parameters
+----------
+plane: TNaming_NamedShape
+
+Returns
+-------
+None
+") SetPlane;
+		void SetPlane(const opencascade::handle<TNaming_NamedShape> & plane);
 
 		/****************** SetType ******************/
+		/**** md5 signature: f302c9b8d4d1e774ccd77d8548c8bd92 ****/
 		%feature("compactdefaultargs") SetType;
-		%feature("autodoc", "* Finds or creates the type of constraint CTR.
-	:param CTR:
-	:type CTR: TDataXtd_ConstraintEnum
-	:rtype: None") SetType;
-		void SetType (const TDataXtd_ConstraintEnum CTR);
+		%feature("autodoc", "Finds or creates the type of constraint ctr.
+
+Parameters
+----------
+CTR: TDataXtd_ConstraintEnum
+
+Returns
+-------
+None
+") SetType;
+		void SetType(const TDataXtd_ConstraintEnum CTR);
 
 		/****************** SetValue ******************/
+		/**** md5 signature: dab0d141cbfbc53ad648529624364956 ****/
 		%feature("compactdefaultargs") SetValue;
-		%feature("autodoc", "* Finds or creates the real number value V of the dimension constraint attribute.
-	:param V:
-	:type V: TDataStd_Real
-	:rtype: None") SetValue;
-		void SetValue (const opencascade::handle<TDataStd_Real> & V);
+		%feature("autodoc", "Finds or creates the real number value v of the dimension constraint attribute.
 
-		/****************** TDataXtd_Constraint ******************/
-		%feature("compactdefaultargs") TDataXtd_Constraint;
-		%feature("autodoc", ":rtype: None") TDataXtd_Constraint;
-		 TDataXtd_Constraint ();
+Parameters
+----------
+V: TDataStd_Real
 
-		/****************** Verified ******************/
-		%feature("compactdefaultargs") Verified;
-		%feature("autodoc", "* Returns true if this constraint attribute is valid. By default, true is returned. When the value of a dimension is changed or when a geometry is moved, false is returned until the solver sets it back to true.
-	:rtype: bool") Verified;
-		Standard_Boolean Verified ();
+Returns
+-------
+None
+") SetValue;
+		void SetValue(const opencascade::handle<TDataStd_Real> & V);
 
 		/****************** Verified ******************/
+		/**** md5 signature: 04dfe0820fb92025a78356897d0723b1 ****/
 		%feature("compactdefaultargs") Verified;
-		%feature("autodoc", "* Returns true if this constraint attribute defined by status is valid. By default, true is returned. When the value of a dimension is changed or when a geometry is moved, false is returned until the solver sets it back to true. If status is false, Verified is set to false.
-	:param status:
-	:type status: bool
-	:rtype: None") Verified;
-		void Verified (const Standard_Boolean status);
+		%feature("autodoc", "Returns true if this constraint attribute is valid. by default, true is returned. when the value of a dimension is changed or when a geometry is moved, false is returned until the solver sets it back to true.
+
+Returns
+-------
+bool
+") Verified;
+		Standard_Boolean Verified();
+
+		/****************** Verified ******************/
+		/**** md5 signature: 6a2719dcf9be895809d8b31c3b24364f ****/
+		%feature("compactdefaultargs") Verified;
+		%feature("autodoc", "Returns true if this constraint attribute defined by status is valid. by default, true is returned. when the value of a dimension is changed or when a geometry is moved, false is returned until the solver sets it back to true. if status is false, verified is set to false.
+
+Parameters
+----------
+status: bool
+
+Returns
+-------
+None
+") Verified;
+		void Verified(const Standard_Boolean status);
 
 };
 
@@ -557,65 +822,112 @@ class TDataXtd_Constraint : public TDF_Attribute {
 **************************/
 class TDataXtd_Geometry : public TDF_Attribute {
 	public:
-		/****************** Axis ******************/
-		%feature("compactdefaultargs") Axis;
-		%feature("autodoc", "* Returns the axis attribute defined by the label L and the axis G.
-	:param L:
-	:type L: TDF_Label
-	:param G:
-	:type G: gp_Ax1
-	:rtype: bool") Axis;
-		static Standard_Boolean Axis (const TDF_Label & L,gp_Ax1 & G);
+		/****************** TDataXtd_Geometry ******************/
+		/**** md5 signature: b8974b13707ba244045c3d0306541bbd ****/
+		%feature("compactdefaultargs") TDataXtd_Geometry;
+		%feature("autodoc", "This and the next methods are used to retrieve underlying geometry of the namedshape, even if noone geometry attribute is associated . if not found or not compliant geometry return false.
+
+Returns
+-------
+None
+") TDataXtd_Geometry;
+		 TDataXtd_Geometry();
 
 		/****************** Axis ******************/
+		/**** md5 signature: 03db28fb6ba0e7b3f564c3338430f360 ****/
 		%feature("compactdefaultargs") Axis;
-		%feature("autodoc", "* Returns the axis attribute defined by the topological attribute S and the axis G.
-	:param S:
-	:type S: TNaming_NamedShape
-	:param G:
-	:type G: gp_Ax1
-	:rtype: bool") Axis;
-		static Standard_Boolean Axis (const opencascade::handle<TNaming_NamedShape> & S,gp_Ax1 & G);
+		%feature("autodoc", "Returns the axis attribute defined by the label l and the axis g.
+
+Parameters
+----------
+L: TDF_Label
+G: gp_Ax1
+
+Returns
+-------
+bool
+") Axis;
+		static Standard_Boolean Axis(const TDF_Label & L, gp_Ax1 & G);
+
+		/****************** Axis ******************/
+		/**** md5 signature: 4d3d95e974783bd649a8505590b6dd36 ****/
+		%feature("compactdefaultargs") Axis;
+		%feature("autodoc", "Returns the axis attribute defined by the topological attribute s and the axis g.
+
+Parameters
+----------
+S: TNaming_NamedShape
+G: gp_Ax1
+
+Returns
+-------
+bool
+") Axis;
+		static Standard_Boolean Axis(const opencascade::handle<TNaming_NamedShape> & S, gp_Ax1 & G);
 
 		/****************** Circle ******************/
+		/**** md5 signature: 248bf5b6e0014427fd072c884f1794cf ****/
 		%feature("compactdefaultargs") Circle;
-		%feature("autodoc", "* Returns the circle attribute defined by the label L and the circle G.
-	:param L:
-	:type L: TDF_Label
-	:param G:
-	:type G: gp_Circ
-	:rtype: bool") Circle;
-		static Standard_Boolean Circle (const TDF_Label & L,gp_Circ & G);
+		%feature("autodoc", "Returns the circle attribute defined by the label l and the circle g.
+
+Parameters
+----------
+L: TDF_Label
+G: gp_Circ
+
+Returns
+-------
+bool
+") Circle;
+		static Standard_Boolean Circle(const TDF_Label & L, gp_Circ & G);
 
 		/****************** Circle ******************/
+		/**** md5 signature: d40b90920f2b01233f78593d73449e81 ****/
 		%feature("compactdefaultargs") Circle;
-		%feature("autodoc", "* Returns the circle attribute defined by the topological attribute S and the circle G.
-	:param S:
-	:type S: TNaming_NamedShape
-	:param G:
-	:type G: gp_Circ
-	:rtype: bool") Circle;
-		static Standard_Boolean Circle (const opencascade::handle<TNaming_NamedShape> & S,gp_Circ & G);
+		%feature("autodoc", "Returns the circle attribute defined by the topological attribute s and the circle g.
+
+Parameters
+----------
+S: TNaming_NamedShape
+G: gp_Circ
+
+Returns
+-------
+bool
+") Circle;
+		static Standard_Boolean Circle(const opencascade::handle<TNaming_NamedShape> & S, gp_Circ & G);
 
 		/****************** Cylinder ******************/
+		/**** md5 signature: ada7f324025ac3ee1384f6a4ad043c5b ****/
 		%feature("compactdefaultargs") Cylinder;
-		%feature("autodoc", "* Returns the cylinder attribute defined by the label L and the cylinder G.
-	:param L:
-	:type L: TDF_Label
-	:param G:
-	:type G: gp_Cylinder
-	:rtype: bool") Cylinder;
-		static Standard_Boolean Cylinder (const TDF_Label & L,gp_Cylinder & G);
+		%feature("autodoc", "Returns the cylinder attribute defined by the label l and the cylinder g.
+
+Parameters
+----------
+L: TDF_Label
+G: gp_Cylinder
+
+Returns
+-------
+bool
+") Cylinder;
+		static Standard_Boolean Cylinder(const TDF_Label & L, gp_Cylinder & G);
 
 		/****************** Cylinder ******************/
+		/**** md5 signature: eddf731ed6cc5d97ebb3af9355e9ef9f ****/
 		%feature("compactdefaultargs") Cylinder;
-		%feature("autodoc", "* Returns the cylinder attribute defined by the topological attribute S and the cylinder G.
-	:param S:
-	:type S: TNaming_NamedShape
-	:param G:
-	:type G: gp_Cylinder
-	:rtype: bool") Cylinder;
-		static Standard_Boolean Cylinder (const opencascade::handle<TNaming_NamedShape> & S,gp_Cylinder & G);
+		%feature("autodoc", "Returns the cylinder attribute defined by the topological attribute s and the cylinder g.
+
+Parameters
+----------
+S: TNaming_NamedShape
+G: gp_Cylinder
+
+Returns
+-------
+bool
+") Cylinder;
+		static Standard_Boolean Cylinder(const opencascade::handle<TNaming_NamedShape> & S, gp_Cylinder & G);
 
 
         %feature("autodoc", "1");
@@ -625,161 +937,268 @@ class TDataXtd_Geometry : public TDF_Attribute {
             self->Dump(s);
             return s.str();}
         };
-        		/****************** Ellipse ******************/
+		/****************** Ellipse ******************/
+		/**** md5 signature: 8f6f76d68f97a2ead65bf6d14c1f45c2 ****/
 		%feature("compactdefaultargs") Ellipse;
-		%feature("autodoc", "* Returns the ellipse attribute defined by the label L and the ellipse G.
-	:param L:
-	:type L: TDF_Label
-	:param G:
-	:type G: gp_Elips
-	:rtype: bool") Ellipse;
-		static Standard_Boolean Ellipse (const TDF_Label & L,gp_Elips & G);
+		%feature("autodoc", "Returns the ellipse attribute defined by the label l and the ellipse g.
+
+Parameters
+----------
+L: TDF_Label
+G: gp_Elips
+
+Returns
+-------
+bool
+") Ellipse;
+		static Standard_Boolean Ellipse(const TDF_Label & L, gp_Elips & G);
 
 		/****************** Ellipse ******************/
+		/**** md5 signature: cd28adb6f18bacb8121456db406fdf03 ****/
 		%feature("compactdefaultargs") Ellipse;
-		%feature("autodoc", "* Returns the ellipse attribute defined by the topological attribute S and the ellipse G.
-	:param S:
-	:type S: TNaming_NamedShape
-	:param G:
-	:type G: gp_Elips
-	:rtype: bool") Ellipse;
-		static Standard_Boolean Ellipse (const opencascade::handle<TNaming_NamedShape> & S,gp_Elips & G);
+		%feature("autodoc", "Returns the ellipse attribute defined by the topological attribute s and the ellipse g.
+
+Parameters
+----------
+S: TNaming_NamedShape
+G: gp_Elips
+
+Returns
+-------
+bool
+") Ellipse;
+		static Standard_Boolean Ellipse(const opencascade::handle<TNaming_NamedShape> & S, gp_Elips & G);
 
 		/****************** GetID ******************/
+		/**** md5 signature: afe6002d90f641ca3ea8c9ae9f8fe97c ****/
 		%feature("compactdefaultargs") GetID;
-		%feature("autodoc", "* Returns the GUID for geometry attributes.
-	:rtype: Standard_GUID") GetID;
-		static const Standard_GUID & GetID ();
+		%feature("autodoc", "Returns the guid for geometry attributes.
+
+Returns
+-------
+Standard_GUID
+") GetID;
+		static const Standard_GUID & GetID();
 
 		/****************** GetType ******************/
+		/**** md5 signature: cefb60883c8f1681f34961b1dc86ce83 ****/
 		%feature("compactdefaultargs") GetType;
-		%feature("autodoc", "* Returns the type of geometric construction.
-	:rtype: TDataXtd_GeometryEnum") GetType;
-		TDataXtd_GeometryEnum GetType ();
+		%feature("autodoc", "Returns the type of geometric construction.
+
+Returns
+-------
+TDataXtd_GeometryEnum
+") GetType;
+		TDataXtd_GeometryEnum GetType();
 
 		/****************** ID ******************/
+		/**** md5 signature: 4697ce8a095fa6dcef0217708d19718f ****/
 		%feature("compactdefaultargs") ID;
-		%feature("autodoc", ":rtype: Standard_GUID") ID;
-		const Standard_GUID & ID ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+Standard_GUID
+") ID;
+		const Standard_GUID & ID();
 
 		/****************** Line ******************/
+		/**** md5 signature: f52c96dfa0302cf65b15eecee49becc3 ****/
 		%feature("compactdefaultargs") Line;
-		%feature("autodoc", "* Returns the line attribute defined by the label L and the line G.
-	:param L:
-	:type L: TDF_Label
-	:param G:
-	:type G: gp_Lin
-	:rtype: bool") Line;
-		static Standard_Boolean Line (const TDF_Label & L,gp_Lin & G);
+		%feature("autodoc", "Returns the line attribute defined by the label l and the line g.
+
+Parameters
+----------
+L: TDF_Label
+G: gp_Lin
+
+Returns
+-------
+bool
+") Line;
+		static Standard_Boolean Line(const TDF_Label & L, gp_Lin & G);
 
 		/****************** Line ******************/
+		/**** md5 signature: 6f3102f44149a948d45818b064b81344 ****/
 		%feature("compactdefaultargs") Line;
-		%feature("autodoc", "* Returns the line attribute defined by the topological attribute S and the line G.
-	:param S:
-	:type S: TNaming_NamedShape
-	:param G:
-	:type G: gp_Lin
-	:rtype: bool") Line;
-		static Standard_Boolean Line (const opencascade::handle<TNaming_NamedShape> & S,gp_Lin & G);
+		%feature("autodoc", "Returns the line attribute defined by the topological attribute s and the line g.
+
+Parameters
+----------
+S: TNaming_NamedShape
+G: gp_Lin
+
+Returns
+-------
+bool
+") Line;
+		static Standard_Boolean Line(const opencascade::handle<TNaming_NamedShape> & S, gp_Lin & G);
 
 		/****************** NewEmpty ******************/
+		/**** md5 signature: c6d13c9ecc64c6c803b6e119e8216934 ****/
 		%feature("compactdefaultargs") NewEmpty;
-		%feature("autodoc", ":rtype: opencascade::handle<TDF_Attribute>") NewEmpty;
-		opencascade::handle<TDF_Attribute> NewEmpty ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+opencascade::handle<TDF_Attribute>
+") NewEmpty;
+		opencascade::handle<TDF_Attribute> NewEmpty();
 
 		/****************** Paste ******************/
+		/**** md5 signature: a6ff306a759c68a191c0262635db980f ****/
 		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", ":param into:
-	:type into: TDF_Attribute
-	:param RT:
-	:type RT: TDF_RelocationTable
-	:rtype: None") Paste;
-		void Paste (const opencascade::handle<TDF_Attribute> & into,const opencascade::handle<TDF_RelocationTable> & RT);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+into: TDF_Attribute
+RT: TDF_RelocationTable
+
+Returns
+-------
+None
+") Paste;
+		void Paste(const opencascade::handle<TDF_Attribute> & into, const opencascade::handle<TDF_RelocationTable> & RT);
 
 		/****************** Plane ******************/
+		/**** md5 signature: aa166596ae5f9f678edb7f098fe3ce91 ****/
 		%feature("compactdefaultargs") Plane;
-		%feature("autodoc", "* Returns the plane attribute defined by the label L and the plane G.
-	:param L:
-	:type L: TDF_Label
-	:param G:
-	:type G: gp_Pln
-	:rtype: bool") Plane;
-		static Standard_Boolean Plane (const TDF_Label & L,gp_Pln & G);
+		%feature("autodoc", "Returns the plane attribute defined by the label l and the plane g.
+
+Parameters
+----------
+L: TDF_Label
+G: gp_Pln
+
+Returns
+-------
+bool
+") Plane;
+		static Standard_Boolean Plane(const TDF_Label & L, gp_Pln & G);
 
 		/****************** Plane ******************/
+		/**** md5 signature: 826f0176ed0f1eae441ff1b22beb9a66 ****/
 		%feature("compactdefaultargs") Plane;
-		%feature("autodoc", "* Returns the plane attribute defined by the topological attribute S and the plane G.
-	:param S:
-	:type S: TNaming_NamedShape
-	:param G:
-	:type G: gp_Pln
-	:rtype: bool") Plane;
-		static Standard_Boolean Plane (const opencascade::handle<TNaming_NamedShape> & S,gp_Pln & G);
+		%feature("autodoc", "Returns the plane attribute defined by the topological attribute s and the plane g.
+
+Parameters
+----------
+S: TNaming_NamedShape
+G: gp_Pln
+
+Returns
+-------
+bool
+") Plane;
+		static Standard_Boolean Plane(const opencascade::handle<TNaming_NamedShape> & S, gp_Pln & G);
 
 		/****************** Point ******************/
+		/**** md5 signature: d8520245bbcc61ec401cec3d031fc2f4 ****/
 		%feature("compactdefaultargs") Point;
-		%feature("autodoc", "* Returns the point attribute defined by the label L and the point G.
-	:param L:
-	:type L: TDF_Label
-	:param G:
-	:type G: gp_Pnt
-	:rtype: bool") Point;
-		static Standard_Boolean Point (const TDF_Label & L,gp_Pnt & G);
+		%feature("autodoc", "Returns the point attribute defined by the label l and the point g.
+
+Parameters
+----------
+L: TDF_Label
+G: gp_Pnt
+
+Returns
+-------
+bool
+") Point;
+		static Standard_Boolean Point(const TDF_Label & L, gp_Pnt & G);
 
 		/****************** Point ******************/
+		/**** md5 signature: ee32b7e57a772bb1399bb4b79da9d466 ****/
 		%feature("compactdefaultargs") Point;
-		%feature("autodoc", "* Returns the point attribute defined by the topological attribute S and the point G.
-	:param S:
-	:type S: TNaming_NamedShape
-	:param G:
-	:type G: gp_Pnt
-	:rtype: bool") Point;
-		static Standard_Boolean Point (const opencascade::handle<TNaming_NamedShape> & S,gp_Pnt & G);
+		%feature("autodoc", "Returns the point attribute defined by the topological attribute s and the point g.
+
+Parameters
+----------
+S: TNaming_NamedShape
+G: gp_Pnt
+
+Returns
+-------
+bool
+") Point;
+		static Standard_Boolean Point(const opencascade::handle<TNaming_NamedShape> & S, gp_Pnt & G);
 
 		/****************** Restore ******************/
+		/**** md5 signature: ddeae219d389a1d89eecb3e23c73522a ****/
 		%feature("compactdefaultargs") Restore;
-		%feature("autodoc", ":param with:
-	:type with: TDF_Attribute
-	:rtype: None") Restore;
-		void Restore (const opencascade::handle<TDF_Attribute> & with);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+with: TDF_Attribute
+
+Returns
+-------
+None
+") Restore;
+		void Restore(const opencascade::handle<TDF_Attribute> & with);
 
 		/****************** Set ******************/
+		/**** md5 signature: 65116b6d58e86dec95b155571880c5e2 ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* API class methods ================= Finds, or creates, a Geometry attribute defined by the label label. The default type of geometry is the value ANY_GEOM of the enumeration TDataXtd_GeometryEnum. To specify another value of this enumeration, use the function SetType.
-	:param label:
-	:type label: TDF_Label
-	:rtype: opencascade::handle<TDataXtd_Geometry>") Set;
-		static opencascade::handle<TDataXtd_Geometry> Set (const TDF_Label & label);
+		%feature("autodoc", "Api class methods ================= finds, or creates, a geometry attribute defined by the label label. the default type of geometry is the value any_geom of the enumeration tdataxtd_geometryenum. to specify another value of this enumeration, use the function settype.
+
+Parameters
+----------
+label: TDF_Label
+
+Returns
+-------
+opencascade::handle<TDataXtd_Geometry>
+") Set;
+		static opencascade::handle<TDataXtd_Geometry> Set(const TDF_Label & label);
 
 		/****************** SetType ******************/
+		/**** md5 signature: 1bd4e987f8e6ed02dff61f37899e3c74 ****/
 		%feature("compactdefaultargs") SetType;
-		%feature("autodoc", "* Returns the type of geometric construction T of this attribute. T will be a value of the enumeration TDataXtd_GeometryEnum.
-	:param T:
-	:type T: TDataXtd_GeometryEnum
-	:rtype: None") SetType;
-		void SetType (const TDataXtd_GeometryEnum T);
+		%feature("autodoc", "Returns the type of geometric construction t of this attribute. t will be a value of the enumeration tdataxtd_geometryenum.
 
-		/****************** TDataXtd_Geometry ******************/
-		%feature("compactdefaultargs") TDataXtd_Geometry;
-		%feature("autodoc", "* This and the next methods are used to retrieve underlying geometry of the NamedShape, even if noone Geometry Attribute is associated . if not found or not compliant geometry return False.
-	:rtype: None") TDataXtd_Geometry;
-		 TDataXtd_Geometry ();
+Parameters
+----------
+T: TDataXtd_GeometryEnum
 
-		/****************** Type ******************/
-		%feature("compactdefaultargs") Type;
-		%feature("autodoc", "* Returns the label L used to define the type of geometric construction for the geometry attribute.
-	:param L:
-	:type L: TDF_Label
-	:rtype: TDataXtd_GeometryEnum") Type;
-		static TDataXtd_GeometryEnum Type (const TDF_Label & L);
+Returns
+-------
+None
+") SetType;
+		void SetType(const TDataXtd_GeometryEnum T);
 
 		/****************** Type ******************/
+		/**** md5 signature: ac0513ea4e97eb2fec5e5f46b0a56398 ****/
 		%feature("compactdefaultargs") Type;
-		%feature("autodoc", "* Returns the topological attribute S used to define the type of geometric construction for the geometry attribute.
-	:param S:
-	:type S: TNaming_NamedShape
-	:rtype: TDataXtd_GeometryEnum") Type;
-		static TDataXtd_GeometryEnum Type (const opencascade::handle<TNaming_NamedShape> & S);
+		%feature("autodoc", "Returns the label l used to define the type of geometric construction for the geometry attribute.
+
+Parameters
+----------
+L: TDF_Label
+
+Returns
+-------
+TDataXtd_GeometryEnum
+") Type;
+		static TDataXtd_GeometryEnum Type(const TDF_Label & L);
+
+		/****************** Type ******************/
+		/**** md5 signature: d1bad04b8ee22ab5e9f1cb61ed815447 ****/
+		%feature("compactdefaultargs") Type;
+		%feature("autodoc", "Returns the topological attribute s used to define the type of geometric construction for the geometry attribute.
+
+Parameters
+----------
+S: TNaming_NamedShape
+
+Returns
+-------
+TDataXtd_GeometryEnum
+") Type;
+		static TDataXtd_GeometryEnum Type(const opencascade::handle<TNaming_NamedShape> & S);
 
 };
 
@@ -799,35 +1218,63 @@ class TDataXtd_Geometry : public TDF_Attribute {
 class TDataXtd_Pattern : public TDF_Attribute {
 	public:
 		/****************** ComputeTrsfs ******************/
+		/**** md5 signature: c5454a8fa108eca814397ba8ff0982c2 ****/
 		%feature("compactdefaultargs") ComputeTrsfs;
-		%feature("autodoc", "* Give the transformations
-	:param Trsfs:
-	:type Trsfs: TDataXtd_Array1OfTrsf
-	:rtype: void") ComputeTrsfs;
-		virtual void ComputeTrsfs (TDataXtd_Array1OfTrsf & Trsfs);
+		%feature("autodoc", "Give the transformations.
+
+Parameters
+----------
+Trsfs: TDataXtd_Array1OfTrsf
+
+Returns
+-------
+None
+") ComputeTrsfs;
+		virtual void ComputeTrsfs(TDataXtd_Array1OfTrsf & Trsfs);
 
 		/****************** GetID ******************/
+		/**** md5 signature: afe6002d90f641ca3ea8c9ae9f8fe97c ****/
 		%feature("compactdefaultargs") GetID;
-		%feature("autodoc", ":rtype: Standard_GUID") GetID;
-		static const Standard_GUID & GetID ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+Standard_GUID
+") GetID;
+		static const Standard_GUID & GetID();
 
 		/****************** ID ******************/
+		/**** md5 signature: 4697ce8a095fa6dcef0217708d19718f ****/
 		%feature("compactdefaultargs") ID;
-		%feature("autodoc", "* Returns the ID of the attribute.
-	:rtype: Standard_GUID") ID;
-		const Standard_GUID & ID ();
+		%feature("autodoc", "Returns the id of the attribute.
+
+Returns
+-------
+Standard_GUID
+") ID;
+		const Standard_GUID & ID();
 
 		/****************** NbTrsfs ******************/
+		/**** md5 signature: a121b2599d6d720d51398ae0115f4a2b ****/
 		%feature("compactdefaultargs") NbTrsfs;
-		%feature("autodoc", "* Give the number of transformation
-	:rtype: int") NbTrsfs;
-		virtual Standard_Integer NbTrsfs ();
+		%feature("autodoc", "Give the number of transformation.
+
+Returns
+-------
+int
+") NbTrsfs;
+		virtual Standard_Integer NbTrsfs();
 
 		/****************** PatternID ******************/
+		/**** md5 signature: c7631383b69a6428ee1765b5abfe7cbf ****/
 		%feature("compactdefaultargs") PatternID;
-		%feature("autodoc", "* Returns the ID of the attribute.
-	:rtype: Standard_GUID") PatternID;
-		virtual const Standard_GUID & PatternID ();
+		%feature("autodoc", "Returns the id of the attribute.
+
+Returns
+-------
+Standard_GUID
+") PatternID;
+		virtual const Standard_GUID & PatternID();
 
 };
 
@@ -843,8 +1290,19 @@ class TDataXtd_Pattern : public TDF_Attribute {
 /***************************
 * class TDataXtd_Placement *
 ***************************/
-class TDataXtd_Placement : public TDF_Attribute {
+class TDataXtd_Placement : public TDataStd_GenericEmpty {
 	public:
+		/****************** TDataXtd_Placement ******************/
+		/**** md5 signature: 6c8f7f528efec08bb8589703e1543072 ****/
+		%feature("compactdefaultargs") TDataXtd_Placement;
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+None
+") TDataXtd_Placement;
+		 TDataXtd_Placement();
+
 
         %feature("autodoc", "1");
         %extend{
@@ -853,50 +1311,42 @@ class TDataXtd_Placement : public TDF_Attribute {
             self->Dump(s);
             return s.str();}
         };
-        		/****************** GetID ******************/
+		/****************** GetID ******************/
+		/**** md5 signature: afe6002d90f641ca3ea8c9ae9f8fe97c ****/
 		%feature("compactdefaultargs") GetID;
-		%feature("autodoc", "* class methods =============
-	:rtype: Standard_GUID") GetID;
-		static const Standard_GUID & GetID ();
+		%feature("autodoc", "Class methods =============.
+
+Returns
+-------
+Standard_GUID
+") GetID;
+		static const Standard_GUID & GetID();
 
 		/****************** ID ******************/
+		/**** md5 signature: 4697ce8a095fa6dcef0217708d19718f ****/
 		%feature("compactdefaultargs") ID;
-		%feature("autodoc", ":rtype: Standard_GUID") ID;
-		const Standard_GUID & ID ();
+		%feature("autodoc", "No available documentation.
 
-		/****************** NewEmpty ******************/
-		%feature("compactdefaultargs") NewEmpty;
-		%feature("autodoc", ":rtype: opencascade::handle<TDF_Attribute>") NewEmpty;
-		opencascade::handle<TDF_Attribute> NewEmpty ();
-
-		/****************** Paste ******************/
-		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", ":param Into:
-	:type Into: TDF_Attribute
-	:param RT:
-	:type RT: TDF_RelocationTable
-	:rtype: None") Paste;
-		void Paste (const opencascade::handle<TDF_Attribute> & Into,const opencascade::handle<TDF_RelocationTable> & RT);
-
-		/****************** Restore ******************/
-		%feature("compactdefaultargs") Restore;
-		%feature("autodoc", ":param With:
-	:type With: TDF_Attribute
-	:rtype: None") Restore;
-		void Restore (const opencascade::handle<TDF_Attribute> & With);
+Returns
+-------
+Standard_GUID
+") ID;
+		const Standard_GUID & ID();
 
 		/****************** Set ******************/
+		/**** md5 signature: 00ad14199476dd8efb4e6fb1cb87dcd7 ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Find, or create, an Placement attribute. the Placement attribute is returned. Placement methods =================
-	:param label:
-	:type label: TDF_Label
-	:rtype: opencascade::handle<TDataXtd_Placement>") Set;
-		static opencascade::handle<TDataXtd_Placement> Set (const TDF_Label & label);
+		%feature("autodoc", "Find, or create, an placement attribute. the placement attribute is returned. placement methods =================.
 
-		/****************** TDataXtd_Placement ******************/
-		%feature("compactdefaultargs") TDataXtd_Placement;
-		%feature("autodoc", ":rtype: None") TDataXtd_Placement;
-		 TDataXtd_Placement ();
+Parameters
+----------
+label: TDF_Label
+
+Returns
+-------
+opencascade::handle<TDataXtd_Placement>
+") Set;
+		static opencascade::handle<TDataXtd_Placement> Set(const TDF_Label & label);
 
 };
 
@@ -912,8 +1362,19 @@ class TDataXtd_Placement : public TDF_Attribute {
 /***********************
 * class TDataXtd_Plane *
 ***********************/
-class TDataXtd_Plane : public TDF_Attribute {
+class TDataXtd_Plane : public TDataStd_GenericEmpty {
 	public:
+		/****************** TDataXtd_Plane ******************/
+		/**** md5 signature: 9f77a08999233941b32c343f160d4529 ****/
+		%feature("compactdefaultargs") TDataXtd_Plane;
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+None
+") TDataXtd_Plane;
+		 TDataXtd_Plane();
+
 
         %feature("autodoc", "1");
         %extend{
@@ -922,60 +1383,58 @@ class TDataXtd_Plane : public TDF_Attribute {
             self->Dump(s);
             return s.str();}
         };
-        		/****************** GetID ******************/
+		/****************** GetID ******************/
+		/**** md5 signature: afe6002d90f641ca3ea8c9ae9f8fe97c ****/
 		%feature("compactdefaultargs") GetID;
-		%feature("autodoc", "* class methods ============= //! Returns the GUID for plane attributes.
-	:rtype: Standard_GUID") GetID;
-		static const Standard_GUID & GetID ();
+		%feature("autodoc", "Class methods ============= //! returns the guid for plane attributes.
+
+Returns
+-------
+Standard_GUID
+") GetID;
+		static const Standard_GUID & GetID();
 
 		/****************** ID ******************/
+		/**** md5 signature: 4697ce8a095fa6dcef0217708d19718f ****/
 		%feature("compactdefaultargs") ID;
-		%feature("autodoc", ":rtype: Standard_GUID") ID;
-		const Standard_GUID & ID ();
+		%feature("autodoc", "No available documentation.
 
-		/****************** NewEmpty ******************/
-		%feature("compactdefaultargs") NewEmpty;
-		%feature("autodoc", ":rtype: opencascade::handle<TDF_Attribute>") NewEmpty;
-		opencascade::handle<TDF_Attribute> NewEmpty ();
-
-		/****************** Paste ******************/
-		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", ":param Into:
-	:type Into: TDF_Attribute
-	:param RT:
-	:type RT: TDF_RelocationTable
-	:rtype: None") Paste;
-		void Paste (const opencascade::handle<TDF_Attribute> & Into,const opencascade::handle<TDF_RelocationTable> & RT);
-
-		/****************** Restore ******************/
-		%feature("compactdefaultargs") Restore;
-		%feature("autodoc", ":param With:
-	:type With: TDF_Attribute
-	:rtype: None") Restore;
-		void Restore (const opencascade::handle<TDF_Attribute> & With);
+Returns
+-------
+Standard_GUID
+") ID;
+		const Standard_GUID & ID();
 
 		/****************** Set ******************/
+		/**** md5 signature: 8970a215afd1ef102a4adb9489b2403e ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Finds or creates the plane attribute defined by the label label. Warning If you are creating the attribute with this syntax, a planar face should already be associated with label.
-	:param label:
-	:type label: TDF_Label
-	:rtype: opencascade::handle<TDataXtd_Plane>") Set;
-		static opencascade::handle<TDataXtd_Plane> Set (const TDF_Label & label);
+		%feature("autodoc", "Finds or creates the plane attribute defined by the label label. warning if you are creating the attribute with this syntax, a planar face should already be associated with label.
+
+Parameters
+----------
+label: TDF_Label
+
+Returns
+-------
+opencascade::handle<TDataXtd_Plane>
+") Set;
+		static opencascade::handle<TDataXtd_Plane> Set(const TDF_Label & label);
 
 		/****************** Set ******************/
+		/**** md5 signature: 748cce90c51abf21cfb91789090907fc ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Finds, or creates, a Plane attribute and sets <P> as generated the associated NamedShape. Plane methods =============
-	:param label:
-	:type label: TDF_Label
-	:param P:
-	:type P: gp_Pln
-	:rtype: opencascade::handle<TDataXtd_Plane>") Set;
-		static opencascade::handle<TDataXtd_Plane> Set (const TDF_Label & label,const gp_Pln & P);
+		%feature("autodoc", "Finds, or creates, a plane attribute and sets <p> as generated the associated namedshape. plane methods =============.
 
-		/****************** TDataXtd_Plane ******************/
-		%feature("compactdefaultargs") TDataXtd_Plane;
-		%feature("autodoc", ":rtype: None") TDataXtd_Plane;
-		 TDataXtd_Plane ();
+Parameters
+----------
+label: TDF_Label
+P: gp_Pln
+
+Returns
+-------
+opencascade::handle<TDataXtd_Plane>
+") Set;
+		static opencascade::handle<TDataXtd_Plane> Set(const TDF_Label & label, const gp_Pln & P);
 
 };
 
@@ -991,8 +1450,19 @@ class TDataXtd_Plane : public TDF_Attribute {
 /***********************
 * class TDataXtd_Point *
 ***********************/
-class TDataXtd_Point : public TDF_Attribute {
+class TDataXtd_Point : public TDataStd_GenericEmpty {
 	public:
+		/****************** TDataXtd_Point ******************/
+		/**** md5 signature: 1b0958f86dad9ecd88e14351ed0b3f5d ****/
+		%feature("compactdefaultargs") TDataXtd_Point;
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+None
+") TDataXtd_Point;
+		 TDataXtd_Point();
+
 
         %feature("autodoc", "1");
         %extend{
@@ -1001,60 +1471,58 @@ class TDataXtd_Point : public TDF_Attribute {
             self->Dump(s);
             return s.str();}
         };
-        		/****************** GetID ******************/
+		/****************** GetID ******************/
+		/**** md5 signature: afe6002d90f641ca3ea8c9ae9f8fe97c ****/
 		%feature("compactdefaultargs") GetID;
-		%feature("autodoc", "* class methods ============= //! Returns the GUID for point attributes.
-	:rtype: Standard_GUID") GetID;
-		static const Standard_GUID & GetID ();
+		%feature("autodoc", "Class methods ============= //! returns the guid for point attributes.
+
+Returns
+-------
+Standard_GUID
+") GetID;
+		static const Standard_GUID & GetID();
 
 		/****************** ID ******************/
+		/**** md5 signature: 4697ce8a095fa6dcef0217708d19718f ****/
 		%feature("compactdefaultargs") ID;
-		%feature("autodoc", ":rtype: Standard_GUID") ID;
-		const Standard_GUID & ID ();
+		%feature("autodoc", "No available documentation.
 
-		/****************** NewEmpty ******************/
-		%feature("compactdefaultargs") NewEmpty;
-		%feature("autodoc", ":rtype: opencascade::handle<TDF_Attribute>") NewEmpty;
-		opencascade::handle<TDF_Attribute> NewEmpty ();
-
-		/****************** Paste ******************/
-		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", ":param Into:
-	:type Into: TDF_Attribute
-	:param RT:
-	:type RT: TDF_RelocationTable
-	:rtype: None") Paste;
-		void Paste (const opencascade::handle<TDF_Attribute> & Into,const opencascade::handle<TDF_RelocationTable> & RT);
-
-		/****************** Restore ******************/
-		%feature("compactdefaultargs") Restore;
-		%feature("autodoc", ":param With:
-	:type With: TDF_Attribute
-	:rtype: None") Restore;
-		void Restore (const opencascade::handle<TDF_Attribute> & With);
+Returns
+-------
+Standard_GUID
+") ID;
+		const Standard_GUID & ID();
 
 		/****************** Set ******************/
+		/**** md5 signature: 636d613604a73ff47bd5beab7e7e6975 ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Sets the label Label as a point attribute. If no object is found, a point attribute is created.
-	:param label:
-	:type label: TDF_Label
-	:rtype: opencascade::handle<TDataXtd_Point>") Set;
-		static opencascade::handle<TDataXtd_Point> Set (const TDF_Label & label);
+		%feature("autodoc", "Sets the label label as a point attribute. if no object is found, a point attribute is created.
+
+Parameters
+----------
+label: TDF_Label
+
+Returns
+-------
+opencascade::handle<TDataXtd_Point>
+") Set;
+		static opencascade::handle<TDataXtd_Point> Set(const TDF_Label & label);
 
 		/****************** Set ******************/
+		/**** md5 signature: f2f12dc39c6780134b5acd9d12a01987 ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Sets the label Label as a point attribute containing the point P. If no object is found, a point attribute is created. Point methods =============
-	:param label:
-	:type label: TDF_Label
-	:param P:
-	:type P: gp_Pnt
-	:rtype: opencascade::handle<TDataXtd_Point>") Set;
-		static opencascade::handle<TDataXtd_Point> Set (const TDF_Label & label,const gp_Pnt & P);
+		%feature("autodoc", "Sets the label label as a point attribute containing the point p. if no object is found, a point attribute is created. point methods =============.
 
-		/****************** TDataXtd_Point ******************/
-		%feature("compactdefaultargs") TDataXtd_Point;
-		%feature("autodoc", ":rtype: None") TDataXtd_Point;
-		 TDataXtd_Point ();
+Parameters
+----------
+label: TDF_Label
+P: gp_Pnt
+
+Returns
+-------
+opencascade::handle<TDataXtd_Point>
+") Set;
+		static opencascade::handle<TDataXtd_Point> Set(const TDF_Label & label, const gp_Pnt & P);
 
 };
 
@@ -1072,86 +1540,153 @@ class TDataXtd_Point : public TDF_Attribute {
 **************************/
 class TDataXtd_Position : public TDF_Attribute {
 	public:
+		/****************** TDataXtd_Position ******************/
+		/**** md5 signature: b0a53799e1b5fbd66b3bb4616b2af5ca ****/
+		%feature("compactdefaultargs") TDataXtd_Position;
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+None
+") TDataXtd_Position;
+		 TDataXtd_Position();
+
 		/****************** Get ******************/
+		/**** md5 signature: e58c12592e7db5eae33b2b87d2b4f6cc ****/
 		%feature("compactdefaultargs") Get;
-		%feature("autodoc", "* Search label <aLabel) for the TDataXtd_Position attribute and get its position if found returns True
-	:param aLabel:
-	:type aLabel: TDF_Label
-	:param aPos:
-	:type aPos: gp_Pnt
-	:rtype: bool") Get;
-		static Standard_Boolean Get (const TDF_Label & aLabel,gp_Pnt & aPos);
+		%feature("autodoc", "Search label <alabel) for the tdataxtd_position attribute and get its position if found returns true.
+
+Parameters
+----------
+aLabel: TDF_Label
+aPos: gp_Pnt
+
+Returns
+-------
+bool
+") Get;
+		static Standard_Boolean Get(const TDF_Label & aLabel, gp_Pnt & aPos);
 
 		/****************** GetID ******************/
+		/**** md5 signature: afe6002d90f641ca3ea8c9ae9f8fe97c ****/
 		%feature("compactdefaultargs") GetID;
-		%feature("autodoc", "* Returns the ID of the attribute.
-	:rtype: Standard_GUID") GetID;
-		static const Standard_GUID & GetID ();
+		%feature("autodoc", "Returns the id of the attribute.
+
+Returns
+-------
+Standard_GUID
+") GetID;
+		static const Standard_GUID & GetID();
 
 		/****************** GetPosition ******************/
+		/**** md5 signature: 4006515e473ac2973320f8ab9aa40167 ****/
 		%feature("compactdefaultargs") GetPosition;
-		%feature("autodoc", ":rtype: gp_Pnt") GetPosition;
-		const gp_Pnt  GetPosition ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+gp_Pnt
+") GetPosition;
+		const gp_Pnt GetPosition();
 
 		/****************** ID ******************/
+		/**** md5 signature: 4697ce8a095fa6dcef0217708d19718f ****/
 		%feature("compactdefaultargs") ID;
-		%feature("autodoc", "* Returns the ID of the attribute.
-	:rtype: Standard_GUID") ID;
-		const Standard_GUID & ID ();
+		%feature("autodoc", "Returns the id of the attribute.
+
+Returns
+-------
+Standard_GUID
+") ID;
+		const Standard_GUID & ID();
 
 		/****************** NewEmpty ******************/
+		/**** md5 signature: 8be17a4d2a4deeee198571712e76805e ****/
 		%feature("compactdefaultargs") NewEmpty;
-		%feature("autodoc", "* Returns an new empty attribute from the good end type. It is used by the copy algorithm.
-	:rtype: opencascade::handle<TDF_Attribute>") NewEmpty;
-		virtual opencascade::handle<TDF_Attribute> NewEmpty ();
+		%feature("autodoc", "Returns an new empty attribute from the good end type. it is used by the copy algorithm.
+
+Returns
+-------
+opencascade::handle<TDF_Attribute>
+") NewEmpty;
+		virtual opencascade::handle<TDF_Attribute> NewEmpty();
 
 		/****************** Paste ******************/
+		/**** md5 signature: 53b4ec32bedd752fc0ccd186074f75ef ****/
 		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", "* This method is different from the 'Copy' one, because it is used when copying an attribute from a source structure into a target structure. This method pastes the current attribute to the label corresponding to the insertor. The pasted attribute may be a brand new one or a new version of the previous one.
-	:param intoAttribute:
-	:type intoAttribute: TDF_Attribute
-	:param aRelocTationable:
-	:type aRelocTationable: TDF_RelocationTable
-	:rtype: void") Paste;
-		virtual void Paste (const opencascade::handle<TDF_Attribute> & intoAttribute,const opencascade::handle<TDF_RelocationTable> & aRelocTationable);
+		%feature("autodoc", "This method is different from the 'copy' one, because it is used when copying an attribute from a source structure into a target structure. this method pastes the current attribute to the label corresponding to the insertor. the pasted attribute may be a brand new one or a new version of the previous one.
+
+Parameters
+----------
+intoAttribute: TDF_Attribute
+aRelocTationable: TDF_RelocationTable
+
+Returns
+-------
+None
+") Paste;
+		virtual void Paste(const opencascade::handle<TDF_Attribute> & intoAttribute, const opencascade::handle<TDF_RelocationTable> & aRelocTationable);
 
 		/****************** Restore ******************/
+		/**** md5 signature: c280e51bf6f4f3b5011b0c3698dfb001 ****/
 		%feature("compactdefaultargs") Restore;
-		%feature("autodoc", "* Restores the contents from <anAttribute> into this one. It is used when aborting a transaction.
-	:param anAttribute:
-	:type anAttribute: TDF_Attribute
-	:rtype: void") Restore;
-		virtual void Restore (const opencascade::handle<TDF_Attribute> & anAttribute);
+		%feature("autodoc", "Restores the contents from <anattribute> into this one. it is used when aborting a transaction.
+
+Parameters
+----------
+anAttribute: TDF_Attribute
+
+Returns
+-------
+None
+") Restore;
+		virtual void Restore(const opencascade::handle<TDF_Attribute> & anAttribute);
 
 		/****************** Set ******************/
+		/**** md5 signature: e0564f75f82af7c65f1d9b89f8e1232a ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Create if not found the TDataXtd_Position attribute set its position to <aPos>
-	:param aLabel:
-	:type aLabel: TDF_Label
-	:param aPos:
-	:type aPos: gp_Pnt
-	:rtype: void") Set;
-		static void Set (const TDF_Label & aLabel,const gp_Pnt & aPos);
+		%feature("autodoc", "Create if not found the tdataxtd_position attribute set its position to <apos>.
+
+Parameters
+----------
+aLabel: TDF_Label
+aPos: gp_Pnt
+
+Returns
+-------
+None
+") Set;
+		static void Set(const TDF_Label & aLabel, const gp_Pnt & aPos);
 
 		/****************** Set ******************/
+		/**** md5 signature: 5d2dd421fff031c4cc2c46a6fc935a8c ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Find an existing, or create an empty, Position. the Position attribute is returned.
-	:param aLabel:
-	:type aLabel: TDF_Label
-	:rtype: opencascade::handle<TDataXtd_Position>") Set;
-		static opencascade::handle<TDataXtd_Position> Set (const TDF_Label & aLabel);
+		%feature("autodoc", "Find an existing, or create an empty, position. the position attribute is returned.
+
+Parameters
+----------
+aLabel: TDF_Label
+
+Returns
+-------
+opencascade::handle<TDataXtd_Position>
+") Set;
+		static opencascade::handle<TDataXtd_Position> Set(const TDF_Label & aLabel);
 
 		/****************** SetPosition ******************/
+		/**** md5 signature: 832a8f3118de3b8c302b0ee3ce94b787 ****/
 		%feature("compactdefaultargs") SetPosition;
-		%feature("autodoc", ":param aPos:
-	:type aPos: gp_Pnt
-	:rtype: None") SetPosition;
-		void SetPosition (const gp_Pnt & aPos);
+		%feature("autodoc", "No available documentation.
 
-		/****************** TDataXtd_Position ******************/
-		%feature("compactdefaultargs") TDataXtd_Position;
-		%feature("autodoc", ":rtype: None") TDataXtd_Position;
-		 TDataXtd_Position ();
+Parameters
+----------
+aPos: gp_Pnt
+
+Returns
+-------
+None
+") SetPosition;
+		void SetPosition(const gp_Pnt & aPos);
 
 };
 
@@ -1169,248 +1704,527 @@ class TDataXtd_Position : public TDF_Attribute {
 ******************************/
 class TDataXtd_Presentation : public TDF_Attribute {
 	public:
+		/****************** TDataXtd_Presentation ******************/
+		/**** md5 signature: 100517e7455655aa1566718b13ab74d5 ****/
+		%feature("compactdefaultargs") TDataXtd_Presentation;
+		%feature("autodoc", "Empty constructor.
+
+Returns
+-------
+None
+") TDataXtd_Presentation;
+		 TDataXtd_Presentation();
+
 		/****************** AddSelectionMode ******************/
+		/**** md5 signature: 2f3915cde2340bc54ca93c55af007d81 ****/
 		%feature("compactdefaultargs") AddSelectionMode;
-		%feature("autodoc", ":param theSelectionMode:
-	:type theSelectionMode: int
-	:param theTransaction: default value is Standard_True
-	:type theTransaction: bool
-	:rtype: None") AddSelectionMode;
-		void AddSelectionMode (const Standard_Integer theSelectionMode,const Standard_Boolean theTransaction = Standard_True);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+theSelectionMode: int
+theTransaction: bool,optional
+	default value is Standard_True
+
+Returns
+-------
+None
+") AddSelectionMode;
+		void AddSelectionMode(const Standard_Integer theSelectionMode, const Standard_Boolean theTransaction = Standard_True);
 
 		/****************** BackupCopy ******************/
+		/**** md5 signature: be67c343943ad438128f575f7f5feaa1 ****/
 		%feature("compactdefaultargs") BackupCopy;
-		%feature("autodoc", ":rtype: opencascade::handle<TDF_Attribute>") BackupCopy;
-		opencascade::handle<TDF_Attribute> BackupCopy ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+opencascade::handle<TDF_Attribute>
+") BackupCopy;
+		opencascade::handle<TDF_Attribute> BackupCopy();
 
 		/****************** Color ******************/
+		/**** md5 signature: 2e6350e3294b0d2b2e58bb8ded204984 ****/
 		%feature("compactdefaultargs") Color;
-		%feature("autodoc", ":rtype: Quantity_NameOfColor") Color;
-		Quantity_NameOfColor Color ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+Quantity_NameOfColor
+") Color;
+		Quantity_NameOfColor Color();
 
 		/****************** GetDriverGUID ******************/
+		/**** md5 signature: 8cfb8f91ff622f4361276ad127a77d5c ****/
 		%feature("compactdefaultargs") GetDriverGUID;
-		%feature("autodoc", "* //!@name Access to data Returns the GUID of the driver managing display of associated AIS object
-	:rtype: Standard_GUID") GetDriverGUID;
-		Standard_GUID GetDriverGUID ();
+		%feature("autodoc", "Returns the guid of the driver managing display of associated ais object.
+
+Returns
+-------
+Standard_GUID
+") GetDriverGUID;
+		Standard_GUID GetDriverGUID();
 
 		/****************** GetID ******************/
+		/**** md5 signature: afe6002d90f641ca3ea8c9ae9f8fe97c ****/
 		%feature("compactdefaultargs") GetID;
-		%feature("autodoc", "* Returns the ID of the attribute.
-	:rtype: Standard_GUID") GetID;
-		static const Standard_GUID & GetID ();
+		%feature("autodoc", "Returns the id of the attribute.
+
+Returns
+-------
+Standard_GUID
+") GetID;
+		static const Standard_GUID & GetID();
 
 		/****************** GetNbSelectionModes ******************/
+		/**** md5 signature: eb4c6588e6d12a452658a67633c2de5c ****/
 		%feature("compactdefaultargs") GetNbSelectionModes;
-		%feature("autodoc", "* Returns the number of selection modes of the attribute. It starts with 1 .. GetNbSelectionModes().
-	:rtype: int") GetNbSelectionModes;
-		Standard_Integer GetNbSelectionModes ();
+		%feature("autodoc", "Returns the number of selection modes of the attribute. it starts with 1 .. getnbselectionmodes().
+
+Returns
+-------
+int
+") GetNbSelectionModes;
+		Standard_Integer GetNbSelectionModes();
 
 		/****************** HasOwnColor ******************/
+		/**** md5 signature: 85391f94ad8ed41de9ce9852009b8711 ****/
 		%feature("compactdefaultargs") HasOwnColor;
-		%feature("autodoc", ":rtype: bool") HasOwnColor;
-		Standard_Boolean HasOwnColor ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+bool
+") HasOwnColor;
+		Standard_Boolean HasOwnColor();
 
 		/****************** HasOwnMaterial ******************/
+		/**** md5 signature: 8effeb2715386f4facabb7e016d6f914 ****/
 		%feature("compactdefaultargs") HasOwnMaterial;
-		%feature("autodoc", ":rtype: bool") HasOwnMaterial;
-		Standard_Boolean HasOwnMaterial ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+bool
+") HasOwnMaterial;
+		Standard_Boolean HasOwnMaterial();
 
 		/****************** HasOwnMode ******************/
+		/**** md5 signature: db54ff723646ecb3cccdfb673c54283e ****/
 		%feature("compactdefaultargs") HasOwnMode;
-		%feature("autodoc", ":rtype: bool") HasOwnMode;
-		Standard_Boolean HasOwnMode ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+bool
+") HasOwnMode;
+		Standard_Boolean HasOwnMode();
 
 		/****************** HasOwnSelectionMode ******************/
+		/**** md5 signature: ca04b4e9e4c94e4c0b6ce42053c9e30a ****/
 		%feature("compactdefaultargs") HasOwnSelectionMode;
-		%feature("autodoc", ":rtype: bool") HasOwnSelectionMode;
-		Standard_Boolean HasOwnSelectionMode ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+bool
+") HasOwnSelectionMode;
+		Standard_Boolean HasOwnSelectionMode();
 
 		/****************** HasOwnTransparency ******************/
+		/**** md5 signature: 518151389a72b3ced0d8dc79dc662dca ****/
 		%feature("compactdefaultargs") HasOwnTransparency;
-		%feature("autodoc", ":rtype: bool") HasOwnTransparency;
-		Standard_Boolean HasOwnTransparency ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+bool
+") HasOwnTransparency;
+		Standard_Boolean HasOwnTransparency();
 
 		/****************** HasOwnWidth ******************/
+		/**** md5 signature: 76ebaa4394d15efba17d3ac7ce584080 ****/
 		%feature("compactdefaultargs") HasOwnWidth;
-		%feature("autodoc", ":rtype: bool") HasOwnWidth;
-		Standard_Boolean HasOwnWidth ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+bool
+") HasOwnWidth;
+		Standard_Boolean HasOwnWidth();
 
 		/****************** ID ******************/
+		/**** md5 signature: 4697ce8a095fa6dcef0217708d19718f ****/
 		%feature("compactdefaultargs") ID;
-		%feature("autodoc", "* Returns the ID of the attribute.
-	:rtype: Standard_GUID") ID;
-		const Standard_GUID & ID ();
+		%feature("autodoc", "Returns the id of the attribute.
+
+Returns
+-------
+Standard_GUID
+") ID;
+		const Standard_GUID & ID();
 
 		/****************** IsDisplayed ******************/
+		/**** md5 signature: 04882eded547dac4e4f59f67e903fed8 ****/
 		%feature("compactdefaultargs") IsDisplayed;
-		%feature("autodoc", ":rtype: bool") IsDisplayed;
-		Standard_Boolean IsDisplayed ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+bool
+") IsDisplayed;
+		Standard_Boolean IsDisplayed();
 
 		/****************** MaterialIndex ******************/
+		/**** md5 signature: 7f09321d0051e340f7605b34099ebb08 ****/
 		%feature("compactdefaultargs") MaterialIndex;
-		%feature("autodoc", ":rtype: int") MaterialIndex;
-		Standard_Integer MaterialIndex ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+int
+") MaterialIndex;
+		Standard_Integer MaterialIndex();
 
 		/****************** Mode ******************/
+		/**** md5 signature: d1320a8f2b0a14003883efd9407c24ac ****/
 		%feature("compactdefaultargs") Mode;
-		%feature("autodoc", ":rtype: int") Mode;
-		Standard_Integer Mode ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+int
+") Mode;
+		Standard_Integer Mode();
 
 		/****************** NewEmpty ******************/
+		/**** md5 signature: 8be17a4d2a4deeee198571712e76805e ****/
 		%feature("compactdefaultargs") NewEmpty;
-		%feature("autodoc", "* Returns an new empty attribute from the good end type. It is used by the copy algorithm.
-	:rtype: opencascade::handle<TDF_Attribute>") NewEmpty;
-		virtual opencascade::handle<TDF_Attribute> NewEmpty ();
+		%feature("autodoc", "Returns an new empty attribute from the good end type. it is used by the copy algorithm.
+
+Returns
+-------
+opencascade::handle<TDF_Attribute>
+") NewEmpty;
+		virtual opencascade::handle<TDF_Attribute> NewEmpty();
 
 		/****************** Paste ******************/
+		/**** md5 signature: 53b4ec32bedd752fc0ccd186074f75ef ****/
 		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", "* This method is different from the 'Copy' one, because it is used when copying an attribute from a source structure into a target structure. This method pastes the current attribute to the label corresponding to the insertor. The pasted attribute may be a brand new one or a new version of the previous one.
-	:param intoAttribute:
-	:type intoAttribute: TDF_Attribute
-	:param aRelocTationable:
-	:type aRelocTationable: TDF_RelocationTable
-	:rtype: void") Paste;
-		virtual void Paste (const opencascade::handle<TDF_Attribute> & intoAttribute,const opencascade::handle<TDF_RelocationTable> & aRelocTationable);
+		%feature("autodoc", "This method is different from the 'copy' one, because it is used when copying an attribute from a source structure into a target structure. this method pastes the current attribute to the label corresponding to the insertor. the pasted attribute may be a brand new one or a new version of the previous one.
+
+Parameters
+----------
+intoAttribute: TDF_Attribute
+aRelocTationable: TDF_RelocationTable
+
+Returns
+-------
+None
+") Paste;
+		virtual void Paste(const opencascade::handle<TDF_Attribute> & intoAttribute, const opencascade::handle<TDF_RelocationTable> & aRelocTationable);
 
 		/****************** Restore ******************/
+		/**** md5 signature: c280e51bf6f4f3b5011b0c3698dfb001 ****/
 		%feature("compactdefaultargs") Restore;
-		%feature("autodoc", "* Restores the contents from <anAttribute> into this one. It is used when aborting a transaction.
-	:param anAttribute:
-	:type anAttribute: TDF_Attribute
-	:rtype: void") Restore;
-		virtual void Restore (const opencascade::handle<TDF_Attribute> & anAttribute);
+		%feature("autodoc", "Restores the contents from <anattribute> into this one. it is used when aborting a transaction.
+
+Parameters
+----------
+anAttribute: TDF_Attribute
+
+Returns
+-------
+None
+") Restore;
+		virtual void Restore(const opencascade::handle<TDF_Attribute> & anAttribute);
 
 		/****************** SelectionMode ******************/
+		/**** md5 signature: eaeec5c5007ba0b6cda5dcd31d7352bb ****/
 		%feature("compactdefaultargs") SelectionMode;
-		%feature("autodoc", ":param index: default value is 1
-	:type index: int
-	:rtype: int") SelectionMode;
-		Standard_Integer SelectionMode (const int index = 1);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+index: int,optional
+	default value is 1
+
+Returns
+-------
+int
+") SelectionMode;
+		Standard_Integer SelectionMode(const int index = 1);
 
 		/****************** Set ******************/
+		/**** md5 signature: faa847644e3df3b0b51472eefd2c53fe ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Create if not found the TDataXtd_Presentation attribute and set its driver GUID
-	:param theLabel:
-	:type theLabel: TDF_Label
-	:param theDriverId:
-	:type theDriverId: Standard_GUID
-	:rtype: opencascade::handle<TDataXtd_Presentation>") Set;
-		static opencascade::handle<TDataXtd_Presentation> Set (const TDF_Label & theLabel,const Standard_GUID & theDriverId);
+		%feature("autodoc", "Create if not found the tdataxtd_presentation attribute and set its driver guid.
+
+Parameters
+----------
+theLabel: TDF_Label
+theDriverId: Standard_GUID
+
+Returns
+-------
+opencascade::handle<TDataXtd_Presentation>
+") Set;
+		static opencascade::handle<TDataXtd_Presentation> Set(const TDF_Label & theLabel, const Standard_GUID & theDriverId);
 
 		/****************** SetColor ******************/
+		/**** md5 signature: 83d3f4dd42be87fa7f7487635f8d52bb ****/
 		%feature("compactdefaultargs") SetColor;
-		%feature("autodoc", ":param theColor:
-	:type theColor: Quantity_NameOfColor
-	:rtype: None") SetColor;
-		void SetColor (const Quantity_NameOfColor theColor);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+theColor: Quantity_NameOfColor
+
+Returns
+-------
+None
+") SetColor;
+		void SetColor(const Quantity_NameOfColor theColor);
 
 		/****************** SetDisplayed ******************/
+		/**** md5 signature: 8aea42092ccc7172bb08a47879bf623c ****/
 		%feature("compactdefaultargs") SetDisplayed;
-		%feature("autodoc", ":param theIsDisplayed:
-	:type theIsDisplayed: bool
-	:rtype: None") SetDisplayed;
-		void SetDisplayed (const Standard_Boolean theIsDisplayed);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+theIsDisplayed: bool
+
+Returns
+-------
+None
+") SetDisplayed;
+		void SetDisplayed(const Standard_Boolean theIsDisplayed);
 
 		/****************** SetDriverGUID ******************/
+		/**** md5 signature: 1c4d545a092206ef51a3bd728b9e3342 ****/
 		%feature("compactdefaultargs") SetDriverGUID;
-		%feature("autodoc", "* Sets the GUID of the driver managing display of associated AIS object
-	:param theGUID:
-	:type theGUID: Standard_GUID
-	:rtype: None") SetDriverGUID;
-		void SetDriverGUID (const Standard_GUID & theGUID);
+		%feature("autodoc", "Sets the guid of the driver managing display of associated ais object.
+
+Parameters
+----------
+theGUID: Standard_GUID
+
+Returns
+-------
+None
+") SetDriverGUID;
+		void SetDriverGUID(const Standard_GUID & theGUID);
 
 		/****************** SetMaterialIndex ******************/
+		/**** md5 signature: dcbff4c6466e0b24368d052895e358dd ****/
 		%feature("compactdefaultargs") SetMaterialIndex;
-		%feature("autodoc", ":param theMaterialIndex:
-	:type theMaterialIndex: int
-	:rtype: None") SetMaterialIndex;
-		void SetMaterialIndex (const Standard_Integer theMaterialIndex);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+theMaterialIndex: int
+
+Returns
+-------
+None
+") SetMaterialIndex;
+		void SetMaterialIndex(const Standard_Integer theMaterialIndex);
 
 		/****************** SetMode ******************/
+		/**** md5 signature: fca52190dcdc18b7bad2a81829b4e979 ****/
 		%feature("compactdefaultargs") SetMode;
-		%feature("autodoc", ":param theMode:
-	:type theMode: int
-	:rtype: None") SetMode;
-		void SetMode (const Standard_Integer theMode);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+theMode: int
+
+Returns
+-------
+None
+") SetMode;
+		void SetMode(const Standard_Integer theMode);
 
 		/****************** SetSelectionMode ******************/
+		/**** md5 signature: 96f14deb237436f152baf69a8590e0a7 ****/
 		%feature("compactdefaultargs") SetSelectionMode;
-		%feature("autodoc", "* Sets selection mode. If 'theTransaction' flag is OFF, modification of the attribute doesn't influence the transaction mechanism (the attribute doesn't participate in undo/redo because of this modification). Certainly, if any other data of the attribute is modified (display mode, color, ...), the attribute will be included into undo/redo.
-	:param theSelectionMode:
-	:type theSelectionMode: int
-	:param theTransaction: default value is Standard_True
-	:type theTransaction: bool
-	:rtype: None") SetSelectionMode;
-		void SetSelectionMode (const Standard_Integer theSelectionMode,const Standard_Boolean theTransaction = Standard_True);
+		%feature("autodoc", "Sets selection mode. if 'thetransaction' flag is off, modification of the attribute doesn't influence the transaction mechanism (the attribute doesn't participate in undo/redo because of this modification). certainly, if any other data of the attribute is modified (display mode, color, ...), the attribute will be included into undo/redo.
+
+Parameters
+----------
+theSelectionMode: int
+theTransaction: bool,optional
+	default value is Standard_True
+
+Returns
+-------
+None
+") SetSelectionMode;
+		void SetSelectionMode(const Standard_Integer theSelectionMode, const Standard_Boolean theTransaction = Standard_True);
 
 		/****************** SetTransparency ******************/
+		/**** md5 signature: e9c4cf884db0f83417459b5ca9783c51 ****/
 		%feature("compactdefaultargs") SetTransparency;
-		%feature("autodoc", ":param theValue:
-	:type theValue: float
-	:rtype: None") SetTransparency;
-		void SetTransparency (const Standard_Real theValue);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+theValue: float
+
+Returns
+-------
+None
+") SetTransparency;
+		void SetTransparency(const Standard_Real theValue);
 
 		/****************** SetWidth ******************/
+		/**** md5 signature: 6f3db9da77eb657791447ad521f2bf74 ****/
 		%feature("compactdefaultargs") SetWidth;
-		%feature("autodoc", ":param theWidth:
-	:type theWidth: float
-	:rtype: None") SetWidth;
-		void SetWidth (const Standard_Real theWidth);
+		%feature("autodoc", "No available documentation.
 
-		/****************** TDataXtd_Presentation ******************/
-		%feature("compactdefaultargs") TDataXtd_Presentation;
-		%feature("autodoc", "* //!@name Attribute mechanics Empty constructor
-	:rtype: None") TDataXtd_Presentation;
-		 TDataXtd_Presentation ();
+Parameters
+----------
+theWidth: float
+
+Returns
+-------
+None
+") SetWidth;
+		void SetWidth(const Standard_Real theWidth);
 
 		/****************** Transparency ******************/
+		/**** md5 signature: 395111f5ce5a38f6b8d6009c7b6b1222 ****/
 		%feature("compactdefaultargs") Transparency;
-		%feature("autodoc", ":rtype: float") Transparency;
-		Standard_Real Transparency ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+float
+") Transparency;
+		Standard_Real Transparency();
 
 		/****************** Unset ******************/
+		/**** md5 signature: 3db95e6f5d9c4de74c387f4047f8beea ****/
 		%feature("compactdefaultargs") Unset;
-		%feature("autodoc", "* Remove attribute of this type from the label
-	:param theLabel:
-	:type theLabel: TDF_Label
-	:rtype: void") Unset;
-		static void Unset (const TDF_Label & theLabel);
+		%feature("autodoc", "Remove attribute of this type from the label.
+
+Parameters
+----------
+theLabel: TDF_Label
+
+Returns
+-------
+None
+") Unset;
+		static void Unset(const TDF_Label & theLabel);
 
 		/****************** UnsetColor ******************/
+		/**** md5 signature: 188f0bfeebabf5f6612a608155ee828e ****/
 		%feature("compactdefaultargs") UnsetColor;
-		%feature("autodoc", ":rtype: None") UnsetColor;
-		void UnsetColor ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+None
+") UnsetColor;
+		void UnsetColor();
 
 		/****************** UnsetMaterial ******************/
+		/**** md5 signature: c0ec6ffc2a0f74e3dfd084bbc939e3b7 ****/
 		%feature("compactdefaultargs") UnsetMaterial;
-		%feature("autodoc", ":rtype: None") UnsetMaterial;
-		void UnsetMaterial ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+None
+") UnsetMaterial;
+		void UnsetMaterial();
 
 		/****************** UnsetMode ******************/
+		/**** md5 signature: 1969d25bd6e2040bca56b4e996ca574d ****/
 		%feature("compactdefaultargs") UnsetMode;
-		%feature("autodoc", ":rtype: None") UnsetMode;
-		void UnsetMode ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+None
+") UnsetMode;
+		void UnsetMode();
 
 		/****************** UnsetSelectionMode ******************/
+		/**** md5 signature: 89ddc27e00f0154704c54c8a8362ad8a ****/
 		%feature("compactdefaultargs") UnsetSelectionMode;
-		%feature("autodoc", ":rtype: None") UnsetSelectionMode;
-		void UnsetSelectionMode ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+None
+") UnsetSelectionMode;
+		void UnsetSelectionMode();
 
 		/****************** UnsetTransparency ******************/
+		/**** md5 signature: c02684ffb7b785f45f8ce50a07ea682d ****/
 		%feature("compactdefaultargs") UnsetTransparency;
-		%feature("autodoc", ":rtype: None") UnsetTransparency;
-		void UnsetTransparency ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+None
+") UnsetTransparency;
+		void UnsetTransparency();
 
 		/****************** UnsetWidth ******************/
+		/**** md5 signature: 18cdd810cf848c52cf981cc677405046 ****/
 		%feature("compactdefaultargs") UnsetWidth;
-		%feature("autodoc", ":rtype: None") UnsetWidth;
-		void UnsetWidth ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+None
+") UnsetWidth;
+		void UnsetWidth();
 
 		/****************** Width ******************/
+		/**** md5 signature: e40fe8cb5cdcf41ad2ab06ede13e859b ****/
 		%feature("compactdefaultargs") Width;
-		%feature("autodoc", ":rtype: float") Width;
-		Standard_Real Width ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+float
+") Width;
+		Standard_Real Width();
+
+		/****************** getColorNameFromOldEnum ******************/
+		/**** md5 signature: ab68ddac1b40714d4433bd7b78a9cab8 ****/
+		%feature("compactdefaultargs") getColorNameFromOldEnum;
+		%feature("autodoc", "Convert values of old quantity_nameofcolor to new enumeration for reading old documents after #0030969 (coding rules - refactor quantity_color.cxx color table definition).
+
+Parameters
+----------
+theOld: int
+
+Returns
+-------
+Quantity_NameOfColor
+") getColorNameFromOldEnum;
+		static Quantity_NameOfColor getColorNameFromOldEnum(Standard_Integer theOld);
+
+		/****************** getOldColorNameFromNewEnum ******************/
+		/**** md5 signature: 1fedd82c4dd7e3ca0773863813c046d6 ****/
+		%feature("compactdefaultargs") getOldColorNameFromNewEnum;
+		%feature("autodoc", "Convert quantity_nameofcolor to old enumeration value for writing documents in compatible format.
+
+Parameters
+----------
+theNew: Quantity_NameOfColor
+
+Returns
+-------
+int
+") getOldColorNameFromNewEnum;
+		static Standard_Integer getOldColorNameFromNewEnum(Quantity_NameOfColor theNew);
 
 };
 
@@ -1426,8 +2240,19 @@ class TDataXtd_Presentation : public TDF_Attribute {
 /***********************
 * class TDataXtd_Shape *
 ***********************/
-class TDataXtd_Shape : public TDF_Attribute {
+class TDataXtd_Shape : public TDataStd_GenericEmpty {
 	public:
+		/****************** TDataXtd_Shape ******************/
+		/**** md5 signature: 829556aaab1cefa67a3c7754214d6f9e ****/
+		%feature("compactdefaultargs") TDataXtd_Shape;
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+None
+") TDataXtd_Shape;
+		 TDataXtd_Shape();
+
 
         %feature("autodoc", "1");
         %extend{
@@ -1436,85 +2261,104 @@ class TDataXtd_Shape : public TDF_Attribute {
             self->Dump(s);
             return s.str();}
         };
-        		/****************** Find ******************/
+		/****************** Find ******************/
+		/**** md5 signature: b7eef569fb5abc3a63bf9482c967edfd ****/
 		%feature("compactdefaultargs") Find;
-		%feature("autodoc", "* class methods ============= try to retrieve a Shape attribute at <current> label or in fathers label of <current>. Returns True if found and set <S>.
-	:param current:
-	:type current: TDF_Label
-	:param S:
-	:type S: TDataXtd_Shape
-	:rtype: bool") Find;
-		static Standard_Boolean Find (const TDF_Label & current,opencascade::handle<TDataXtd_Shape> & S);
+		%feature("autodoc", "Class methods ============= try to retrieve a shape attribute at <current> label or in fathers label of <current>. returns true if found and set <s>.
+
+Parameters
+----------
+current: TDF_Label
+S: TDataXtd_Shape
+
+Returns
+-------
+bool
+") Find;
+		static Standard_Boolean Find(const TDF_Label & current, opencascade::handle<TDataXtd_Shape> & S);
 
 		/****************** Get ******************/
+		/**** md5 signature: 5d0e313c77f1091d6d9b4306d7aa333d ****/
 		%feature("compactdefaultargs") Get;
-		%feature("autodoc", "* the Shape from associated NamedShape attribute is returned.
-	:param label:
-	:type label: TDF_Label
-	:rtype: TopoDS_Shape") Get;
-		static TopoDS_Shape Get (const TDF_Label & label);
+		%feature("autodoc", "The shape from associated namedshape attribute is returned.
+
+Parameters
+----------
+label: TDF_Label
+
+Returns
+-------
+TopoDS_Shape
+") Get;
+		static TopoDS_Shape Get(const TDF_Label & label);
 
 		/****************** GetID ******************/
+		/**** md5 signature: afe6002d90f641ca3ea8c9ae9f8fe97c ****/
 		%feature("compactdefaultargs") GetID;
-		%feature("autodoc", "* Shape methods ============
-	:rtype: Standard_GUID") GetID;
-		static const Standard_GUID & GetID ();
+		%feature("autodoc", "Shape methods ============.
+
+Returns
+-------
+Standard_GUID
+") GetID;
+		static const Standard_GUID & GetID();
 
 		/****************** ID ******************/
+		/**** md5 signature: 4697ce8a095fa6dcef0217708d19718f ****/
 		%feature("compactdefaultargs") ID;
-		%feature("autodoc", ":rtype: Standard_GUID") ID;
-		const Standard_GUID & ID ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+Standard_GUID
+") ID;
+		const Standard_GUID & ID();
 
 		/****************** New ******************/
+		/**** md5 signature: aa830d8126113f57cc04852fa074dd7c ****/
 		%feature("compactdefaultargs") New;
-		%feature("autodoc", "* Find, or create, a Shape attribute. the Shape attribute is returned. Raises if <label> has attribute.
-	:param label:
-	:type label: TDF_Label
-	:rtype: opencascade::handle<TDataXtd_Shape>") New;
-		static opencascade::handle<TDataXtd_Shape> New (const TDF_Label & label);
+		%feature("autodoc", "Find, or create, a shape attribute. the shape attribute is returned. raises if <label> has attribute.
 
-		/****************** NewEmpty ******************/
-		%feature("compactdefaultargs") NewEmpty;
-		%feature("autodoc", ":rtype: opencascade::handle<TDF_Attribute>") NewEmpty;
-		opencascade::handle<TDF_Attribute> NewEmpty ();
+Parameters
+----------
+label: TDF_Label
 
-		/****************** Paste ******************/
-		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", ":param into:
-	:type into: TDF_Attribute
-	:param RT:
-	:type RT: TDF_RelocationTable
-	:rtype: None") Paste;
-		void Paste (const opencascade::handle<TDF_Attribute> & into,const opencascade::handle<TDF_RelocationTable> & RT);
+Returns
+-------
+opencascade::handle<TDataXtd_Shape>
+") New;
+		static opencascade::handle<TDataXtd_Shape> New(const TDF_Label & label);
 
 		/****************** References ******************/
+		/**** md5 signature: f171ce811dbfb205236d26e3cbf15450 ****/
 		%feature("compactdefaultargs") References;
-		%feature("autodoc", ":param DS:
-	:type DS: TDF_DataSet
-	:rtype: void") References;
-		virtual void References (const opencascade::handle<TDF_DataSet> & DS);
+		%feature("autodoc", "No available documentation.
 
-		/****************** Restore ******************/
-		%feature("compactdefaultargs") Restore;
-		%feature("autodoc", ":param with:
-	:type with: TDF_Attribute
-	:rtype: None") Restore;
-		void Restore (const opencascade::handle<TDF_Attribute> & with);
+Parameters
+----------
+DS: TDF_DataSet
+
+Returns
+-------
+None
+") References;
+		virtual void References(const opencascade::handle<TDF_DataSet> & DS);
 
 		/****************** Set ******************/
+		/**** md5 signature: 5c799b31c146f9513e3b35b06552f58b ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Create or update associated NamedShape attribute. the Shape attribute is returned.
-	:param label:
-	:type label: TDF_Label
-	:param shape:
-	:type shape: TopoDS_Shape
-	:rtype: opencascade::handle<TDataXtd_Shape>") Set;
-		static opencascade::handle<TDataXtd_Shape> Set (const TDF_Label & label,const TopoDS_Shape & shape);
+		%feature("autodoc", "Create or update associated namedshape attribute. the shape attribute is returned.
 
-		/****************** TDataXtd_Shape ******************/
-		%feature("compactdefaultargs") TDataXtd_Shape;
-		%feature("autodoc", ":rtype: None") TDataXtd_Shape;
-		 TDataXtd_Shape ();
+Parameters
+----------
+label: TDF_Label
+shape: TopoDS_Shape
+
+Returns
+-------
+opencascade::handle<TDataXtd_Shape>
+") Set;
+		static opencascade::handle<TDataXtd_Shape> Set(const TDF_Label & label, const TopoDS_Shape & shape);
 
 };
 
@@ -1532,19 +2376,42 @@ class TDataXtd_Shape : public TDF_Attribute {
 *******************************/
 class TDataXtd_Triangulation : public TDF_Attribute {
 	public:
-		/****************** Deflection ******************/
-		%feature("compactdefaultargs") Deflection;
-		%feature("autodoc", "* Poly_Triangulation methods The methods are 'covered' by this attribute to prevent direct modification of the mesh. There is no performance problem to call Poly_Triangulation method through this attribute. The most of the methods are considered as 'inline' by the compiler in release mode. Returns the deflection of this triangulation.
-	:rtype: float") Deflection;
-		Standard_Real Deflection ();
+		/****************** TDataXtd_Triangulation ******************/
+		/**** md5 signature: bee09c6a8c6d388acb27df035eccdb53 ****/
+		%feature("compactdefaultargs") TDataXtd_Triangulation;
+		%feature("autodoc", "A constructor. don't use it directly, use please the static method set(), which returns the attribute attached to a label.
+
+Returns
+-------
+None
+") TDataXtd_Triangulation;
+		 TDataXtd_Triangulation();
 
 		/****************** Deflection ******************/
+		/**** md5 signature: cc0b59ab46f82f52f9a9398cfae7702b ****/
 		%feature("compactdefaultargs") Deflection;
-		%feature("autodoc", "* Sets the deflection of this triangulation to theDeflection. See more on deflection in Polygon2D
-	:param theDeflection:
-	:type theDeflection: float
-	:rtype: None") Deflection;
-		void Deflection (const Standard_Real theDeflection);
+		%feature("autodoc", "Returns the deflection of this triangulation.
+
+Returns
+-------
+float
+") Deflection;
+		Standard_Real Deflection();
+
+		/****************** Deflection ******************/
+		/**** md5 signature: e3314129dc278c4d2782072a6d9cb7bb ****/
+		%feature("compactdefaultargs") Deflection;
+		%feature("autodoc", "Sets the deflection of this triangulation to thedeflection. see more on deflection in polygon2d.
+
+Parameters
+----------
+theDeflection: float
+
+Returns
+-------
+None
+") Deflection;
+		void Deflection(const Standard_Real theDeflection);
 
 
         %feature("autodoc", "1");
@@ -1554,186 +2421,320 @@ class TDataXtd_Triangulation : public TDF_Attribute {
             self->Dump(s);
             return s.str();}
         };
-        		/****************** Get ******************/
+		/****************** Get ******************/
+		/**** md5 signature: 1b44a31d5fb6444cba54e6b97ce6cc73 ****/
 		%feature("compactdefaultargs") Get;
-		%feature("autodoc", "* Returns the underlying triangulation.
-	:rtype: opencascade::handle<Poly_Triangulation>") Get;
-		const opencascade::handle<Poly_Triangulation> & Get ();
+		%feature("autodoc", "Returns the underlying triangulation.
+
+Returns
+-------
+opencascade::handle<Poly_Triangulation>
+") Get;
+		const opencascade::handle<Poly_Triangulation> & Get();
 
 		/****************** GetID ******************/
+		/**** md5 signature: afe6002d90f641ca3ea8c9ae9f8fe97c ****/
 		%feature("compactdefaultargs") GetID;
-		%feature("autodoc", "* Static methods Returns the ID of the triangulation attribute.
-	:rtype: Standard_GUID") GetID;
-		static const Standard_GUID & GetID ();
+		%feature("autodoc", "Returns the id of the triangulation attribute.
+
+Returns
+-------
+Standard_GUID
+") GetID;
+		static const Standard_GUID & GetID();
 
 		/****************** HasNormals ******************/
+		/**** md5 signature: 181f2084bd118d7033834a50e616fde5 ****/
 		%feature("compactdefaultargs") HasNormals;
-		%feature("autodoc", "* Returns Standard_True if nodal normals are defined.
-	:rtype: bool") HasNormals;
-		Standard_Boolean HasNormals ();
+		%feature("autodoc", "Returns standard_true if nodal normals are defined.
+
+Returns
+-------
+bool
+") HasNormals;
+		Standard_Boolean HasNormals();
 
 		/****************** HasUVNodes ******************/
+		/**** md5 signature: 737532dee6e8cd1688ace4b8cd5ea181 ****/
 		%feature("compactdefaultargs") HasUVNodes;
-		%feature("autodoc", "* returns Standard_True if 2D nodes are associated with 3D nodes for this triangulation.
-	:rtype: bool") HasUVNodes;
-		Standard_Boolean HasUVNodes ();
+		%feature("autodoc", "Returns standard_true if 2d nodes are associated with 3d nodes for this triangulation.
+
+Returns
+-------
+bool
+") HasUVNodes;
+		Standard_Boolean HasUVNodes();
 
 		/****************** ID ******************/
+		/**** md5 signature: 4697ce8a095fa6dcef0217708d19718f ****/
 		%feature("compactdefaultargs") ID;
-		%feature("autodoc", "* Inherited attribute methods
-	:rtype: Standard_GUID") ID;
-		const Standard_GUID & ID ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+Standard_GUID
+") ID;
+		const Standard_GUID & ID();
 
 		/****************** NbNodes ******************/
+		/**** md5 signature: b2716f774ff961df1fa7782a7d1f28be ****/
 		%feature("compactdefaultargs") NbNodes;
-		%feature("autodoc", "* returns the number of nodes for this triangulation.
-	:rtype: int") NbNodes;
-		Standard_Integer NbNodes ();
+		%feature("autodoc", "Returns the number of nodes for this triangulation.
+
+Returns
+-------
+int
+") NbNodes;
+		Standard_Integer NbNodes();
 
 		/****************** NbTriangles ******************/
+		/**** md5 signature: c1e2294db77a16b75e32923c5461b457 ****/
 		%feature("compactdefaultargs") NbTriangles;
-		%feature("autodoc", "* returns the number of triangles for this triangulation.
-	:rtype: int") NbTriangles;
-		Standard_Integer NbTriangles ();
+		%feature("autodoc", "Returns the number of triangles for this triangulation.
+
+Returns
+-------
+int
+") NbTriangles;
+		Standard_Integer NbTriangles();
 
 		/****************** NewEmpty ******************/
+		/**** md5 signature: c6d13c9ecc64c6c803b6e119e8216934 ****/
 		%feature("compactdefaultargs") NewEmpty;
-		%feature("autodoc", ":rtype: opencascade::handle<TDF_Attribute>") NewEmpty;
-		opencascade::handle<TDF_Attribute> NewEmpty ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+opencascade::handle<TDF_Attribute>
+") NewEmpty;
+		opencascade::handle<TDF_Attribute> NewEmpty();
 
 		/****************** Node ******************/
+		/**** md5 signature: 86df678a3d98d54374f5f531a65a2fc7 ****/
 		%feature("compactdefaultargs") Node;
-		%feature("autodoc", "* returns node at the given index. Raises Standard_OutOfRange exception if theIndex is less than 1 or greater than NbNodes.
-	:param theIndex:
-	:type theIndex: int
-	:rtype: gp_Pnt") Node;
-		const gp_Pnt  Node (const Standard_Integer theIndex);
+		%feature("autodoc", "Returns node at the given index. raises standard_outofrange exception if theindex is less than 1 or greater than nbnodes.
+
+Parameters
+----------
+theIndex: int
+
+Returns
+-------
+gp_Pnt
+") Node;
+		const gp_Pnt Node(const Standard_Integer theIndex);
 
 		/****************** Normal ******************/
+		/**** md5 signature: c855feb3fd1089162515e7a137983bb4 ****/
 		%feature("compactdefaultargs") Normal;
-		%feature("autodoc", "* returns normal at the given index. Raises Standard_OutOfRange exception.
-	:param theIndex:
-	:type theIndex: int
-	:rtype: gp_Dir") Normal;
-		const gp_Dir Normal (const Standard_Integer theIndex);
+		%feature("autodoc", "Returns normal at the given index. raises standard_outofrange exception.
+
+Parameters
+----------
+theIndex: int
+
+Returns
+-------
+gp_Dir
+") Normal;
+		const gp_Dir Normal(const Standard_Integer theIndex);
 
 		/****************** Paste ******************/
+		/**** md5 signature: a6ff306a759c68a191c0262635db980f ****/
 		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", ":param Into:
-	:type Into: TDF_Attribute
-	:param RT:
-	:type RT: TDF_RelocationTable
-	:rtype: None") Paste;
-		void Paste (const opencascade::handle<TDF_Attribute> & Into,const opencascade::handle<TDF_RelocationTable> & RT);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+Into: TDF_Attribute
+RT: TDF_RelocationTable
+
+Returns
+-------
+None
+") Paste;
+		void Paste(const opencascade::handle<TDF_Attribute> & Into, const opencascade::handle<TDF_RelocationTable> & RT);
 
 		/****************** RemoveUVNodes ******************/
+		/**** md5 signature: 40045c3c77e535165bfc8c8523acf1d5 ****/
 		%feature("compactdefaultargs") RemoveUVNodes;
-		%feature("autodoc", "* Deallocates the UV nodes.
-	:rtype: None") RemoveUVNodes;
-		void RemoveUVNodes ();
+		%feature("autodoc", "Deallocates the uv nodes.
+
+Returns
+-------
+None
+") RemoveUVNodes;
+		void RemoveUVNodes();
 
 		/****************** Restore ******************/
+		/**** md5 signature: e1457e927b6cb3b622a5f3603feeee39 ****/
 		%feature("compactdefaultargs") Restore;
-		%feature("autodoc", ":param theAttribute:
-	:type theAttribute: TDF_Attribute
-	:rtype: None") Restore;
-		void Restore (const opencascade::handle<TDF_Attribute> & theAttribute);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+theAttribute: TDF_Attribute
+
+Returns
+-------
+None
+") Restore;
+		void Restore(const opencascade::handle<TDF_Attribute> & theAttribute);
 
 		/****************** Set ******************/
+		/**** md5 signature: 38170ebeace0c77f7aa7773082559515 ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Finds or creates a triangulation attribute.
-	:param theLabel:
-	:type theLabel: TDF_Label
-	:rtype: opencascade::handle<TDataXtd_Triangulation>") Set;
-		static opencascade::handle<TDataXtd_Triangulation> Set (const TDF_Label & theLabel);
+		%feature("autodoc", "Finds or creates a triangulation attribute.
+
+Parameters
+----------
+theLabel: TDF_Label
+
+Returns
+-------
+opencascade::handle<TDataXtd_Triangulation>
+") Set;
+		static opencascade::handle<TDataXtd_Triangulation> Set(const TDF_Label & theLabel);
 
 		/****************** Set ******************/
+		/**** md5 signature: 62d5ab7c92e4f03ff1be0a4498c72c68 ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Finds or creates a triangulation attribute. Initializes the attribute by a Poly_Triangulation object.
-	:param theLabel:
-	:type theLabel: TDF_Label
-	:param theTriangulation:
-	:type theTriangulation: Poly_Triangulation
-	:rtype: opencascade::handle<TDataXtd_Triangulation>") Set;
-		static opencascade::handle<TDataXtd_Triangulation> Set (const TDF_Label & theLabel,const opencascade::handle<Poly_Triangulation> & theTriangulation);
+		%feature("autodoc", "Finds or creates a triangulation attribute. initializes the attribute by a poly_triangulation object.
+
+Parameters
+----------
+theLabel: TDF_Label
+theTriangulation: Poly_Triangulation
+
+Returns
+-------
+opencascade::handle<TDataXtd_Triangulation>
+") Set;
+		static opencascade::handle<TDataXtd_Triangulation> Set(const TDF_Label & theLabel, const opencascade::handle<Poly_Triangulation> & theTriangulation);
 
 		/****************** Set ******************/
+		/**** md5 signature: 0d8f3fd57d28f7f381ea2452e55ff30a ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Sets the triangulation.
-	:param theTriangulation:
-	:type theTriangulation: Poly_Triangulation
-	:rtype: None") Set;
-		void Set (const opencascade::handle<Poly_Triangulation> & theTriangulation);
+		%feature("autodoc", "Sets the triangulation.
+
+Parameters
+----------
+theTriangulation: Poly_Triangulation
+
+Returns
+-------
+None
+") Set;
+		void Set(const opencascade::handle<Poly_Triangulation> & theTriangulation);
 
 		/****************** SetNode ******************/
+		/**** md5 signature: c9bc54dc6c0b2f4a71030b502a3e2b92 ****/
 		%feature("compactdefaultargs") SetNode;
-		%feature("autodoc", "* The method differs from Poly_Triangulation! Sets a node at the given index. Raises Standard_OutOfRange exception if theIndex is less than 1 or greater than NbNodes.
-	:param theIndex:
-	:type theIndex: int
-	:param theNode:
-	:type theNode: gp_Pnt
-	:rtype: None") SetNode;
-		void SetNode (const Standard_Integer theIndex,const gp_Pnt & theNode);
+		%feature("autodoc", "The method differs from poly_triangulation! sets a node at the given index. raises standard_outofrange exception if theindex is less than 1 or greater than nbnodes.
+
+Parameters
+----------
+theIndex: int
+theNode: gp_Pnt
+
+Returns
+-------
+None
+") SetNode;
+		void SetNode(const Standard_Integer theIndex, const gp_Pnt & theNode);
 
 		/****************** SetNormal ******************/
+		/**** md5 signature: 16090a2b1fc1f76d31b9afd2a0c42cc1 ****/
 		%feature("compactdefaultargs") SetNormal;
-		%feature("autodoc", "* Changes normal at the given index. Raises Standard_OutOfRange exception.
-	:param theIndex:
-	:type theIndex: int
-	:param theNormal:
-	:type theNormal: gp_Dir
-	:rtype: None") SetNormal;
-		void SetNormal (const Standard_Integer theIndex,const gp_Dir & theNormal);
+		%feature("autodoc", "Changes normal at the given index. raises standard_outofrange exception.
+
+Parameters
+----------
+theIndex: int
+theNormal: gp_Dir
+
+Returns
+-------
+None
+") SetNormal;
+		void SetNormal(const Standard_Integer theIndex, const gp_Dir & theNormal);
 
 		/****************** SetNormals ******************/
+		/**** md5 signature: 7c3a3b618d135482bdaa83f0ced5edb7 ****/
 		%feature("compactdefaultargs") SetNormals;
-		%feature("autodoc", "* Sets the table of node normals. Raises exception if length of theNormals != 3 * NbNodes
-	:param theNormals:
-	:type theNormals: TShort_HArray1OfShortReal
-	:rtype: None") SetNormals;
-		void SetNormals (const opencascade::handle<TShort_HArray1OfShortReal> & theNormals);
+		%feature("autodoc", "Sets the table of node normals. raises exception if length of thenormals != 3 * nbnodes.
+
+Parameters
+----------
+theNormals: TShort_HArray1OfShortReal
+
+Returns
+-------
+None
+") SetNormals;
+		void SetNormals(const opencascade::handle<TShort_HArray1OfShortReal> & theNormals);
 
 		/****************** SetTriangle ******************/
+		/**** md5 signature: 4802341912a18dadbd9ddb25cc7c33be ****/
 		%feature("compactdefaultargs") SetTriangle;
-		%feature("autodoc", "* The method differs from Poly_Triangulation! Sets a triangle at the given index. Raises Standard_OutOfRange exception if theIndex is less than 1 or greater than NbTriangles.
-	:param theIndex:
-	:type theIndex: int
-	:param theTriangle:
-	:type theTriangle: Poly_Triangle
-	:rtype: None") SetTriangle;
-		void SetTriangle (const Standard_Integer theIndex,const Poly_Triangle & theTriangle);
+		%feature("autodoc", "The method differs from poly_triangulation! sets a triangle at the given index. raises standard_outofrange exception if theindex is less than 1 or greater than nbtriangles.
+
+Parameters
+----------
+theIndex: int
+theTriangle: Poly_Triangle
+
+Returns
+-------
+None
+") SetTriangle;
+		void SetTriangle(const Standard_Integer theIndex, const Poly_Triangle & theTriangle);
 
 		/****************** SetUVNode ******************/
+		/**** md5 signature: 7c1d13161b5be4ef9c47f833c3a1c108 ****/
 		%feature("compactdefaultargs") SetUVNode;
-		%feature("autodoc", "* The method differs from Poly_Triangulation! Sets a UVNode at the given index. Raises Standard_OutOfRange exception if theIndex is less than 1 or greater than NbNodes.
-	:param theIndex:
-	:type theIndex: int
-	:param theUVNode:
-	:type theUVNode: gp_Pnt2d
-	:rtype: None") SetUVNode;
-		void SetUVNode (const Standard_Integer theIndex,const gp_Pnt2d & theUVNode);
+		%feature("autodoc", "The method differs from poly_triangulation! sets a uvnode at the given index. raises standard_outofrange exception if theindex is less than 1 or greater than nbnodes.
 
-		/****************** TDataXtd_Triangulation ******************/
-		%feature("compactdefaultargs") TDataXtd_Triangulation;
-		%feature("autodoc", "* Object methods A constructor. Don't use it directly, use please the static method Set(), which returns the attribute attached to a label.
-	:rtype: None") TDataXtd_Triangulation;
-		 TDataXtd_Triangulation ();
+Parameters
+----------
+theIndex: int
+theUVNode: gp_Pnt2d
+
+Returns
+-------
+None
+") SetUVNode;
+		void SetUVNode(const Standard_Integer theIndex, const gp_Pnt2d & theUVNode);
 
 		/****************** Triangle ******************/
+		/**** md5 signature: 4b478dad3ef750a602442807b17fca5a ****/
 		%feature("compactdefaultargs") Triangle;
-		%feature("autodoc", "* returns triangle at the given index. Raises Standard_OutOfRange exception if theIndex is less than 1 or greater than NbTriangles.
-	:param theIndex:
-	:type theIndex: int
-	:rtype: Poly_Triangle") Triangle;
-		const Poly_Triangle & Triangle (const Standard_Integer theIndex);
+		%feature("autodoc", "Returns triangle at the given index. raises standard_outofrange exception if theindex is less than 1 or greater than nbtriangles.
+
+Parameters
+----------
+theIndex: int
+
+Returns
+-------
+Poly_Triangle
+") Triangle;
+		const Poly_Triangle & Triangle(const Standard_Integer theIndex);
 
 		/****************** UVNode ******************/
+		/**** md5 signature: 45592da925c13e10349c0f573d7d2cd6 ****/
 		%feature("compactdefaultargs") UVNode;
-		%feature("autodoc", "* returns UVNode at the given index. Raises Standard_OutOfRange exception if theIndex is less than 1 or greater than NbNodes.
-	:param theIndex:
-	:type theIndex: int
-	:rtype: gp_Pnt2d") UVNode;
-		const gp_Pnt2d  UVNode (const Standard_Integer theIndex);
+		%feature("autodoc", "Returns uvnode at the given index. raises standard_outofrange exception if theindex is less than 1 or greater than nbnodes.
+
+Parameters
+----------
+theIndex: int
+
+Returns
+-------
+gp_Pnt2d
+") UVNode;
+		const gp_Pnt2d UVNode(const Standard_Integer theIndex);
 
 };
 
@@ -1751,60 +2752,135 @@ class TDataXtd_Triangulation : public TDF_Attribute {
 ****************************/
 class TDataXtd_PatternStd : public TDataXtd_Pattern {
 	public:
-		/****************** Axis1 ******************/
-		%feature("compactdefaultargs") Axis1;
-		%feature("autodoc", ":param Axis1:
-	:type Axis1: TNaming_NamedShape
-	:rtype: None") Axis1;
-		void Axis1 (const opencascade::handle<TNaming_NamedShape> & Axis1);
+		/****************** TDataXtd_PatternStd ******************/
+		/**** md5 signature: eb30c537e69ff60395048253a153587a ****/
+		%feature("compactdefaultargs") TDataXtd_PatternStd;
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+None
+") TDataXtd_PatternStd;
+		 TDataXtd_PatternStd();
 
 		/****************** Axis1 ******************/
+		/**** md5 signature: 86b0ae449d54b8f0ab860a15db5375d2 ****/
 		%feature("compactdefaultargs") Axis1;
-		%feature("autodoc", ":rtype: opencascade::handle<TNaming_NamedShape>") Axis1;
-		opencascade::handle<TNaming_NamedShape> Axis1 ();
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+Axis1: TNaming_NamedShape
+
+Returns
+-------
+None
+") Axis1;
+		void Axis1(const opencascade::handle<TNaming_NamedShape> & Axis1);
+
+		/****************** Axis1 ******************/
+		/**** md5 signature: b6f25709522c1266a9b53c97fa979e07 ****/
+		%feature("compactdefaultargs") Axis1;
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+opencascade::handle<TNaming_NamedShape>
+") Axis1;
+		opencascade::handle<TNaming_NamedShape> Axis1();
 
 		/****************** Axis1Reversed ******************/
+		/**** md5 signature: 0d87df094f654b46fedbf1afc325bc74 ****/
 		%feature("compactdefaultargs") Axis1Reversed;
-		%feature("autodoc", ":param Axis1Reversed:
-	:type Axis1Reversed: bool
-	:rtype: None") Axis1Reversed;
-		void Axis1Reversed (const Standard_Boolean Axis1Reversed);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+Axis1Reversed: bool
+
+Returns
+-------
+None
+") Axis1Reversed;
+		void Axis1Reversed(const Standard_Boolean Axis1Reversed);
 
 		/****************** Axis1Reversed ******************/
+		/**** md5 signature: 748890eb3a523fc88b7545480645036e ****/
 		%feature("compactdefaultargs") Axis1Reversed;
-		%feature("autodoc", ":rtype: bool") Axis1Reversed;
-		Standard_Boolean Axis1Reversed ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+bool
+") Axis1Reversed;
+		Standard_Boolean Axis1Reversed();
 
 		/****************** Axis2 ******************/
+		/**** md5 signature: b14f0654201cbdbf84ba0dcc3c23d506 ****/
 		%feature("compactdefaultargs") Axis2;
-		%feature("autodoc", ":param Axis2:
-	:type Axis2: TNaming_NamedShape
-	:rtype: None") Axis2;
-		void Axis2 (const opencascade::handle<TNaming_NamedShape> & Axis2);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+Axis2: TNaming_NamedShape
+
+Returns
+-------
+None
+") Axis2;
+		void Axis2(const opencascade::handle<TNaming_NamedShape> & Axis2);
 
 		/****************** Axis2 ******************/
+		/**** md5 signature: ada3a430ef271e1853c684d660603ea2 ****/
 		%feature("compactdefaultargs") Axis2;
-		%feature("autodoc", ":rtype: opencascade::handle<TNaming_NamedShape>") Axis2;
-		opencascade::handle<TNaming_NamedShape> Axis2 ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+opencascade::handle<TNaming_NamedShape>
+") Axis2;
+		opencascade::handle<TNaming_NamedShape> Axis2();
 
 		/****************** Axis2Reversed ******************/
+		/**** md5 signature: c3bd7a3b18ffe8c9d8e584da7d2ed095 ****/
 		%feature("compactdefaultargs") Axis2Reversed;
-		%feature("autodoc", ":param Axis2Reversed:
-	:type Axis2Reversed: bool
-	:rtype: None") Axis2Reversed;
-		void Axis2Reversed (const Standard_Boolean Axis2Reversed);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+Axis2Reversed: bool
+
+Returns
+-------
+None
+") Axis2Reversed;
+		void Axis2Reversed(const Standard_Boolean Axis2Reversed);
 
 		/****************** Axis2Reversed ******************/
+		/**** md5 signature: 6c76dd6edff17470f3a999274b5d8e48 ****/
 		%feature("compactdefaultargs") Axis2Reversed;
-		%feature("autodoc", ":rtype: bool") Axis2Reversed;
-		Standard_Boolean Axis2Reversed ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+bool
+") Axis2Reversed;
+		Standard_Boolean Axis2Reversed();
 
 		/****************** ComputeTrsfs ******************/
+		/**** md5 signature: 9f3293cc73b6d3d9a8645a4ee62f7d09 ****/
 		%feature("compactdefaultargs") ComputeTrsfs;
-		%feature("autodoc", ":param Trsfs:
-	:type Trsfs: TDataXtd_Array1OfTrsf
-	:rtype: None") ComputeTrsfs;
-		void ComputeTrsfs (TDataXtd_Array1OfTrsf & Trsfs);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+Trsfs: TDataXtd_Array1OfTrsf
+
+Returns
+-------
+None
+") ComputeTrsfs;
+		void ComputeTrsfs(TDataXtd_Array1OfTrsf & Trsfs);
 
 
         %feature("autodoc", "1");
@@ -1814,133 +2890,266 @@ class TDataXtd_PatternStd : public TDataXtd_Pattern {
             self->Dump(s);
             return s.str();}
         };
-        		/****************** GetPatternID ******************/
+		/****************** GetPatternID ******************/
+		/**** md5 signature: 96f86031c210757be1a52536bbd3cdef ****/
 		%feature("compactdefaultargs") GetPatternID;
-		%feature("autodoc", ":rtype: Standard_GUID") GetPatternID;
-		static const Standard_GUID & GetPatternID ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+Standard_GUID
+") GetPatternID;
+		static const Standard_GUID & GetPatternID();
 
 		/****************** Mirror ******************/
+		/**** md5 signature: dfe173a0381b15a3a26666bafb592d2a ****/
 		%feature("compactdefaultargs") Mirror;
-		%feature("autodoc", ":param plane:
-	:type plane: TNaming_NamedShape
-	:rtype: None") Mirror;
-		void Mirror (const opencascade::handle<TNaming_NamedShape> & plane);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+plane: TNaming_NamedShape
+
+Returns
+-------
+None
+") Mirror;
+		void Mirror(const opencascade::handle<TNaming_NamedShape> & plane);
 
 		/****************** Mirror ******************/
+		/**** md5 signature: 7be6bc4c00d33b0635b6f77cbe35e4cf ****/
 		%feature("compactdefaultargs") Mirror;
-		%feature("autodoc", ":rtype: opencascade::handle<TNaming_NamedShape>") Mirror;
-		opencascade::handle<TNaming_NamedShape> Mirror ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+opencascade::handle<TNaming_NamedShape>
+") Mirror;
+		opencascade::handle<TNaming_NamedShape> Mirror();
 
 		/****************** NbInstances1 ******************/
+		/**** md5 signature: eee4073fdd0f341872ef213e40213079 ****/
 		%feature("compactdefaultargs") NbInstances1;
-		%feature("autodoc", ":param NbInstances1:
-	:type NbInstances1: TDataStd_Integer
-	:rtype: None") NbInstances1;
-		void NbInstances1 (const opencascade::handle<TDataStd_Integer> & NbInstances1);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+NbInstances1: TDataStd_Integer
+
+Returns
+-------
+None
+") NbInstances1;
+		void NbInstances1(const opencascade::handle<TDataStd_Integer> & NbInstances1);
 
 		/****************** NbInstances1 ******************/
+		/**** md5 signature: 1addafbf2c9a7ee0c7b4a0dc81dba46c ****/
 		%feature("compactdefaultargs") NbInstances1;
-		%feature("autodoc", ":rtype: opencascade::handle<TDataStd_Integer>") NbInstances1;
-		opencascade::handle<TDataStd_Integer> NbInstances1 ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+opencascade::handle<TDataStd_Integer>
+") NbInstances1;
+		opencascade::handle<TDataStd_Integer> NbInstances1();
 
 		/****************** NbInstances2 ******************/
+		/**** md5 signature: bb49fd9282bc75ed9533fecc21420c13 ****/
 		%feature("compactdefaultargs") NbInstances2;
-		%feature("autodoc", ":param NbInstances2:
-	:type NbInstances2: TDataStd_Integer
-	:rtype: None") NbInstances2;
-		void NbInstances2 (const opencascade::handle<TDataStd_Integer> & NbInstances2);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+NbInstances2: TDataStd_Integer
+
+Returns
+-------
+None
+") NbInstances2;
+		void NbInstances2(const opencascade::handle<TDataStd_Integer> & NbInstances2);
 
 		/****************** NbInstances2 ******************/
+		/**** md5 signature: 1eb48d908653588cb7f018a65e4492f4 ****/
 		%feature("compactdefaultargs") NbInstances2;
-		%feature("autodoc", ":rtype: opencascade::handle<TDataStd_Integer>") NbInstances2;
-		opencascade::handle<TDataStd_Integer> NbInstances2 ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+opencascade::handle<TDataStd_Integer>
+") NbInstances2;
+		opencascade::handle<TDataStd_Integer> NbInstances2();
 
 		/****************** NbTrsfs ******************/
+		/**** md5 signature: aa9aab239a001e0a5472a94a5cafa31b ****/
 		%feature("compactdefaultargs") NbTrsfs;
-		%feature("autodoc", ":rtype: int") NbTrsfs;
-		Standard_Integer NbTrsfs ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+int
+") NbTrsfs;
+		Standard_Integer NbTrsfs();
 
 		/****************** NewEmpty ******************/
+		/**** md5 signature: c6d13c9ecc64c6c803b6e119e8216934 ****/
 		%feature("compactdefaultargs") NewEmpty;
-		%feature("autodoc", ":rtype: opencascade::handle<TDF_Attribute>") NewEmpty;
-		opencascade::handle<TDF_Attribute> NewEmpty ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+opencascade::handle<TDF_Attribute>
+") NewEmpty;
+		opencascade::handle<TDF_Attribute> NewEmpty();
 
 		/****************** Paste ******************/
+		/**** md5 signature: a6ff306a759c68a191c0262635db980f ****/
 		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", ":param Into:
-	:type Into: TDF_Attribute
-	:param RT:
-	:type RT: TDF_RelocationTable
-	:rtype: None") Paste;
-		void Paste (const opencascade::handle<TDF_Attribute> & Into,const opencascade::handle<TDF_RelocationTable> & RT);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+Into: TDF_Attribute
+RT: TDF_RelocationTable
+
+Returns
+-------
+None
+") Paste;
+		void Paste(const opencascade::handle<TDF_Attribute> & Into, const opencascade::handle<TDF_RelocationTable> & RT);
 
 		/****************** PatternID ******************/
+		/**** md5 signature: af593b6d99715444618a7949758e157b ****/
 		%feature("compactdefaultargs") PatternID;
-		%feature("autodoc", ":rtype: Standard_GUID") PatternID;
-		const Standard_GUID & PatternID ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+Standard_GUID
+") PatternID;
+		const Standard_GUID & PatternID();
 
 		/****************** References ******************/
+		/**** md5 signature: 3f614360a69c957f8600d26b49bc71b2 ****/
 		%feature("compactdefaultargs") References;
-		%feature("autodoc", ":param aDataSet:
-	:type aDataSet: TDF_DataSet
-	:rtype: void") References;
-		virtual void References (const opencascade::handle<TDF_DataSet> & aDataSet);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+aDataSet: TDF_DataSet
+
+Returns
+-------
+None
+") References;
+		virtual void References(const opencascade::handle<TDF_DataSet> & aDataSet);
 
 		/****************** Restore ******************/
+		/**** md5 signature: ddeae219d389a1d89eecb3e23c73522a ****/
 		%feature("compactdefaultargs") Restore;
-		%feature("autodoc", ":param With:
-	:type With: TDF_Attribute
-	:rtype: None") Restore;
-		void Restore (const opencascade::handle<TDF_Attribute> & With);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+With: TDF_Attribute
+
+Returns
+-------
+None
+") Restore;
+		void Restore(const opencascade::handle<TDF_Attribute> & With);
 
 		/****************** Set ******************/
+		/**** md5 signature: 12adfa3e6ad76d1031da88bc941655c9 ****/
 		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "* Find, or create, a PatternStd attribute
-	:param label:
-	:type label: TDF_Label
-	:rtype: opencascade::handle<TDataXtd_PatternStd>") Set;
-		static opencascade::handle<TDataXtd_PatternStd> Set (const TDF_Label & label);
+		%feature("autodoc", "Find, or create, a patternstd attribute.
+
+Parameters
+----------
+label: TDF_Label
+
+Returns
+-------
+opencascade::handle<TDataXtd_PatternStd>
+") Set;
+		static opencascade::handle<TDataXtd_PatternStd> Set(const TDF_Label & label);
 
 		/****************** Signature ******************/
+		/**** md5 signature: 1533ffd9fb8eca2dfdc85e12e5ea67c9 ****/
 		%feature("compactdefaultargs") Signature;
-		%feature("autodoc", ":param signature:
-	:type signature: int
-	:rtype: None") Signature;
-		void Signature (const Standard_Integer signature);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+signature: int
+
+Returns
+-------
+None
+") Signature;
+		void Signature(const Standard_Integer signature);
 
 		/****************** Signature ******************/
+		/**** md5 signature: bf7e7ab4d72ba06a0010abbc8f149662 ****/
 		%feature("compactdefaultargs") Signature;
-		%feature("autodoc", ":rtype: int") Signature;
-		Standard_Integer Signature ();
+		%feature("autodoc", "No available documentation.
 
-		/****************** TDataXtd_PatternStd ******************/
-		%feature("compactdefaultargs") TDataXtd_PatternStd;
-		%feature("autodoc", ":rtype: None") TDataXtd_PatternStd;
-		 TDataXtd_PatternStd ();
-
-		/****************** Value1 ******************/
-		%feature("compactdefaultargs") Value1;
-		%feature("autodoc", ":param value:
-	:type value: TDataStd_Real
-	:rtype: None") Value1;
-		void Value1 (const opencascade::handle<TDataStd_Real> & value);
+Returns
+-------
+int
+") Signature;
+		Standard_Integer Signature();
 
 		/****************** Value1 ******************/
+		/**** md5 signature: 4acecac6e805777b7b937b7b95f3395c ****/
 		%feature("compactdefaultargs") Value1;
-		%feature("autodoc", ":rtype: opencascade::handle<TDataStd_Real>") Value1;
-		opencascade::handle<TDataStd_Real> Value1 ();
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+value: TDataStd_Real
+
+Returns
+-------
+None
+") Value1;
+		void Value1(const opencascade::handle<TDataStd_Real> & value);
+
+		/****************** Value1 ******************/
+		/**** md5 signature: c2f282c383543d02d730129fae284540 ****/
+		%feature("compactdefaultargs") Value1;
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+opencascade::handle<TDataStd_Real>
+") Value1;
+		opencascade::handle<TDataStd_Real> Value1();
 
 		/****************** Value2 ******************/
+		/**** md5 signature: 101264a48022e7e4d35a4c641f5e9290 ****/
 		%feature("compactdefaultargs") Value2;
-		%feature("autodoc", ":param value:
-	:type value: TDataStd_Real
-	:rtype: None") Value2;
-		void Value2 (const opencascade::handle<TDataStd_Real> & value);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+value: TDataStd_Real
+
+Returns
+-------
+None
+") Value2;
+		void Value2(const opencascade::handle<TDataStd_Real> & value);
 
 		/****************** Value2 ******************/
+		/**** md5 signature: 41ef20cadcfcb3a3313e86bbdde9fbc2 ****/
 		%feature("compactdefaultargs") Value2;
-		%feature("autodoc", ":rtype: opencascade::handle<TDataStd_Real>") Value2;
-		opencascade::handle<TDataStd_Real> Value2 ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+opencascade::handle<TDataStd_Real>
+") Value2;
+		opencascade::handle<TDataStd_Real> Value2();
 
 };
 
@@ -1954,16 +3163,19 @@ class TDataXtd_PatternStd : public TDataXtd_Pattern {
 };
 
 /* harray1 classes */
-class TDataXtd_HArray1OfTrsf : public  TDataXtd_Array1OfTrsf, public Standard_Transient {
+
+class TDataXtd_HArray1OfTrsf : public TDataXtd_Array1OfTrsf, public Standard_Transient {
   public:
     TDataXtd_HArray1OfTrsf(const Standard_Integer theLower, const Standard_Integer theUpper);
-    TDataXtd_HArray1OfTrsf(const Standard_Integer theLower, const Standard_Integer theUpper, const  TDataXtd_Array1OfTrsf::value_type& theValue);
-    TDataXtd_HArray1OfTrsf(const  TDataXtd_Array1OfTrsf& theOther);
-    const  TDataXtd_Array1OfTrsf& Array1();
-     TDataXtd_Array1OfTrsf& ChangeArray1();
+    TDataXtd_HArray1OfTrsf(const Standard_Integer theLower, const Standard_Integer theUpper, const TDataXtd_Array1OfTrsf::value_type& theValue);
+    TDataXtd_HArray1OfTrsf(const TDataXtd_Array1OfTrsf& theOther);
+    const TDataXtd_Array1OfTrsf& Array1();
+    TDataXtd_Array1OfTrsf& ChangeArray1();
 };
 %make_alias(TDataXtd_HArray1OfTrsf)
 
-
 /* harray2 classes */
 /* hsequence classes */
+/* class aliases */
+%pythoncode {
+}

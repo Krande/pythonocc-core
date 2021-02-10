@@ -22,13 +22,13 @@ import uuid
 import json
 
 from OCC.Core.gp import gp_Vec
-from OCC.Core.Visualization import Tesselator
+from OCC.Core.Tesselator import ShapeTesselator
 from OCC import VERSION as OCC_VERSION
 
 from OCC.Extend.TopologyUtils import is_edge, is_wire, discretize_edge, discretize_wire
 from OCC.Display.WebGl.simple_server import start_server
 
-THREEJS_RELEASE = "r112"
+THREEJS_RELEASE = "r113"
 
 def spinning_cursor():
     while True:
@@ -444,7 +444,7 @@ class ThreejsRenderer:
         shape_uuid = uuid.uuid4().hex
         shape_hash = "shp%s" % shape_uuid
         # tesselate
-        tess = Tesselator(shape)
+        tess = ShapeTesselator(shape)
         tess.Compute(compute_edges=export_edges,
                      mesh_quality=mesh_quality,
                      parallel=True)

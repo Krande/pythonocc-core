@@ -1,5 +1,5 @@
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -66,8 +66,19 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_brepintcurvesurfa
 %import gp.i
 %import IntCurveSurface.i
 %import TopAbs.i
+
+%pythoncode {
+from enum import IntEnum
+from OCC.Core.Exception import *
+};
+
 /* public enums */
 /* end public enums declaration */
+
+/* python proy classes for enums */
+%pythoncode {
+};
+/* end python proxy for enums */
 
 /* handles */
 /* end handles declaration */
@@ -84,112 +95,190 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_brepintcurvesurfa
 class BRepIntCurveSurface_Inter {
 	public:
 		/****************** BRepIntCurveSurface_Inter ******************/
+		/**** md5 signature: b746fb1d3b88cfc1c23fbf7d63f720ba ****/
 		%feature("compactdefaultargs") BRepIntCurveSurface_Inter;
-		%feature("autodoc", "* Empty constructor;
-	:rtype: None") BRepIntCurveSurface_Inter;
-		 BRepIntCurveSurface_Inter ();
+		%feature("autodoc", "Empty constructor;.
+
+Returns
+-------
+None
+") BRepIntCurveSurface_Inter;
+		 BRepIntCurveSurface_Inter();
 
 		/****************** Face ******************/
+		/**** md5 signature: 91e216ebeb76e55c73eb9e179241a6ff ****/
 		%feature("compactdefaultargs") Face;
-		%feature("autodoc", "* returns the current face.
-	:rtype: TopoDS_Face") Face;
-		const TopoDS_Face  Face ();
+		%feature("autodoc", "Returns the current face.
+
+Returns
+-------
+TopoDS_Face
+") Face;
+		const TopoDS_Face Face();
 
 		/****************** Init ******************/
+		/**** md5 signature: 07985eba3bf85498690ed01b37f51fca ****/
 		%feature("compactdefaultargs") Init;
-		%feature("autodoc", "* Load the Shape, the curve and initialize the tolerance used for the classification.
-	:param theShape:
-	:type theShape: TopoDS_Shape
-	:param theCurve:
-	:type theCurve: GeomAdaptor_Curve
-	:param theTol:
-	:type theTol: float
-	:rtype: None") Init;
-		void Init (const TopoDS_Shape & theShape,const GeomAdaptor_Curve & theCurve,const Standard_Real theTol);
+		%feature("autodoc", "Load the shape, the curve and initialize the tolerance used for the classification.
+
+Parameters
+----------
+theShape: TopoDS_Shape
+theCurve: GeomAdaptor_Curve
+theTol: float
+
+Returns
+-------
+None
+") Init;
+		void Init(const TopoDS_Shape & theShape, const GeomAdaptor_Curve & theCurve, const Standard_Real theTol);
 
 		/****************** Init ******************/
+		/**** md5 signature: 3b1e312f54bb7607e78407ff166c1205 ****/
 		%feature("compactdefaultargs") Init;
-		%feature("autodoc", "* Load the Shape, the curve and initialize the tolerance used for the classification.
-	:param theShape:
-	:type theShape: TopoDS_Shape
-	:param theLine:
-	:type theLine: gp_Lin
-	:param theTol:
-	:type theTol: float
-	:rtype: None") Init;
-		void Init (const TopoDS_Shape & theShape,const gp_Lin & theLine,const Standard_Real theTol);
+		%feature("autodoc", "Load the shape, the curve and initialize the tolerance used for the classification.
+
+Parameters
+----------
+theShape: TopoDS_Shape
+theLine: gp_Lin
+theTol: float
+
+Returns
+-------
+None
+") Init;
+		void Init(const TopoDS_Shape & theShape, const gp_Lin & theLine, const Standard_Real theTol);
 
 		/****************** Init ******************/
+		/**** md5 signature: 520ca4890c4d0b4a44c85c9b44d9905c ****/
 		%feature("compactdefaultargs") Init;
-		%feature("autodoc", "* Method to find intersections of specified curve with loaded shape.
-	:param theCurve:
-	:type theCurve: GeomAdaptor_Curve
-	:rtype: None") Init;
-		void Init (const GeomAdaptor_Curve & theCurve);
+		%feature("autodoc", "Method to find intersections of specified curve with loaded shape.
+
+Parameters
+----------
+theCurve: GeomAdaptor_Curve
+
+Returns
+-------
+None
+") Init;
+		void Init(const GeomAdaptor_Curve & theCurve);
 
 		/****************** Load ******************/
+		/**** md5 signature: a747fed191518a6d90101ad47bb98e22 ****/
 		%feature("compactdefaultargs") Load;
-		%feature("autodoc", "* Load the Shape, and initialize the tolerance used for the classification.
-	:param theShape:
-	:type theShape: TopoDS_Shape
-	:param theTol:
-	:type theTol: float
-	:rtype: None") Load;
-		void Load (const TopoDS_Shape & theShape,const Standard_Real theTol);
+		%feature("autodoc", "Load the shape, and initialize the tolerance used for the classification.
+
+Parameters
+----------
+theShape: TopoDS_Shape
+theTol: float
+
+Returns
+-------
+None
+") Load;
+		void Load(const TopoDS_Shape & theShape, const Standard_Real theTol);
 
 		/****************** More ******************/
+		/**** md5 signature: 6f6e915c9a3dca758c059d9e8af02dff ****/
 		%feature("compactdefaultargs") More;
-		%feature("autodoc", "* returns True if there is a current face.
-	:rtype: bool") More;
-		Standard_Boolean More ();
+		%feature("autodoc", "Returns true if there is a current face.
+
+Returns
+-------
+bool
+") More;
+		Standard_Boolean More();
 
 		/****************** Next ******************/
+		/**** md5 signature: f35c0df5f1d7c877986db18081404532 ****/
 		%feature("compactdefaultargs") Next;
-		%feature("autodoc", "* Sets the next intersection point to check.
-	:rtype: None") Next;
-		void Next ();
+		%feature("autodoc", "Sets the next intersection point to check.
+
+Returns
+-------
+None
+") Next;
+		void Next();
 
 		/****************** Pnt ******************/
+		/**** md5 signature: c0bafeed50f4eebb5964e2bf8520bf90 ****/
 		%feature("compactdefaultargs") Pnt;
-		%feature("autodoc", "* returns the current geometric Point
-	:rtype: gp_Pnt") Pnt;
-		const gp_Pnt  Pnt ();
+		%feature("autodoc", "Returns the current geometric point.
+
+Returns
+-------
+gp_Pnt
+") Pnt;
+		const gp_Pnt Pnt();
 
 		/****************** Point ******************/
+		/**** md5 signature: 39b389cfd53f7848e2a79affac9ccd3b ****/
 		%feature("compactdefaultargs") Point;
-		%feature("autodoc", "* returns the current Intersection point.
-	:rtype: IntCurveSurface_IntersectionPoint") Point;
-		IntCurveSurface_IntersectionPoint Point ();
+		%feature("autodoc", "Returns the current intersection point.
+
+Returns
+-------
+IntCurveSurface_IntersectionPoint
+") Point;
+		IntCurveSurface_IntersectionPoint Point();
 
 		/****************** State ******************/
+		/**** md5 signature: 927c83b1efdec797adb47eb058eddaa0 ****/
 		%feature("compactdefaultargs") State;
-		%feature("autodoc", "* returns the current state (IN or ON)
-	:rtype: TopAbs_State") State;
-		TopAbs_State State ();
+		%feature("autodoc", "Returns the current state (in or on).
+
+Returns
+-------
+TopAbs_State
+") State;
+		TopAbs_State State();
 
 		/****************** Transition ******************/
+		/**** md5 signature: bd528dc9c78a60a5b26409b8cf4f3afe ****/
 		%feature("compactdefaultargs") Transition;
-		%feature("autodoc", "* returns the transition of the line on the surface (IN or OUT or UNKNOWN)
-	:rtype: IntCurveSurface_TransitionOnCurve") Transition;
-		IntCurveSurface_TransitionOnCurve Transition ();
+		%feature("autodoc", "Returns the transition of the line on the surface (in or out or unknown).
+
+Returns
+-------
+IntCurveSurface_TransitionOnCurve
+") Transition;
+		IntCurveSurface_TransitionOnCurve Transition();
 
 		/****************** U ******************/
+		/**** md5 signature: dd41b21b6ce05c48c2d8d002663816e1 ****/
 		%feature("compactdefaultargs") U;
-		%feature("autodoc", "* returns the U parameter of the current point on the current face.
-	:rtype: float") U;
-		Standard_Real U ();
+		%feature("autodoc", "Returns the u parameter of the current point on the current face.
+
+Returns
+-------
+float
+") U;
+		Standard_Real U();
 
 		/****************** V ******************/
+		/**** md5 signature: a561db1f9ebb0e926d3862b2e88ce187 ****/
 		%feature("compactdefaultargs") V;
-		%feature("autodoc", "* returns the V parameter of the current point on the current face.
-	:rtype: float") V;
-		Standard_Real V ();
+		%feature("autodoc", "Returns the v parameter of the current point on the current face.
+
+Returns
+-------
+float
+") V;
+		Standard_Real V();
 
 		/****************** W ******************/
+		/**** md5 signature: dde24677dd63b48ccacea2fe8006eed7 ****/
 		%feature("compactdefaultargs") W;
-		%feature("autodoc", "* returns the parameter of the current point on the curve.
-	:rtype: float") W;
-		Standard_Real W ();
+		%feature("autodoc", "Returns the parameter of the current point on the curve.
+
+Returns
+-------
+float
+") W;
+		Standard_Real W();
 
 };
 
@@ -203,3 +292,6 @@ class BRepIntCurveSurface_Inter {
 /* harray1 classes */
 /* harray2 classes */
 /* hsequence classes */
+/* class aliases */
+%pythoncode {
+}

@@ -1,8 +1,5 @@
-#ifndef XCAFDOC_HXX
-#define XCAFDOC_HXX
-
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -18,6 +15,9 @@ GNU Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef XCAFDOC_HXX
+#define XCAFDOC_HXX
+
 
 #include<XCAFDoc.hxx>
 #include<XCAFDoc_Area.hxx>
@@ -53,6 +53,10 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<XCAFDoc_ShapeTool.hxx>
 #include<XCAFDoc_View.hxx>
 #include<XCAFDoc_ViewTool.hxx>
+#include<XCAFDoc_VisMaterial.hxx>
+#include<XCAFDoc_VisMaterialCommon.hxx>
+#include<XCAFDoc_VisMaterialPBR.hxx>
+#include<XCAFDoc_VisMaterialTool.hxx>
 #include<XCAFDoc_Volume.hxx>
 
 #endif // XCAFDOC_HXX

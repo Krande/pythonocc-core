@@ -1,8 +1,5 @@
-#ifndef IMESHTOOLS_HXX
-#define IMESHTOOLS_HXX
-
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -18,11 +15,15 @@ GNU Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef IMESHTOOLS_HXX
+#define IMESHTOOLS_HXX
+
 
 #include<IMeshTools_Context.hxx>
 #include<IMeshTools_CurveTessellator.hxx>
 #include<IMeshTools_MeshAlgo.hxx>
 #include<IMeshTools_MeshAlgoFactory.hxx>
+#include<IMeshTools_MeshAlgoType.hxx>
 #include<IMeshTools_MeshBuilder.hxx>
 #include<IMeshTools_ModelAlgo.hxx>
 #include<IMeshTools_ModelBuilder.hxx>

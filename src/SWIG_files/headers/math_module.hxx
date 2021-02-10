@@ -1,8 +1,5 @@
-#ifndef MATH_HXX
-#define MATH_HXX
-
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -18,6 +15,9 @@ GNU Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef MATH_HXX
+#define MATH_HXX
+
 
 #include<math.hxx>
 #include<math_Array1OfValueAndWeight.hxx>
@@ -46,7 +46,6 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<math_Gauss.hxx>
 #include<math_GaussLeastSquare.hxx>
 #include<math_GaussMultipleIntegration.hxx>
-#include<math_GaussPoints.hxx>
 #include<math_GaussSetIntegration.hxx>
 #include<math_GaussSingleIntegration.hxx>
 #include<math_GlobOptMin.hxx>

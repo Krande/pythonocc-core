@@ -1,5 +1,5 @@
 /*
-Copyright 2008-2019 Thomas Paviot (tpaviot@gmail.com)
+Copyright 2008-2020 Thomas Paviot (tpaviot@gmail.com)
 
 This file is part of pythonOCC.
 pythonOCC is free software: you can redistribute it and/or modify
@@ -60,27 +60,39 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_binmdf.html"
 %import TDF.i
 %import BinObjMgt.i
 %import TCollection.i
+
+%pythoncode {
+from enum import IntEnum
+from OCC.Core.Exception import *
+};
+
 /* public enums */
 /* end public enums declaration */
+
+/* python proy classes for enums */
+%pythoncode {
+};
+/* end python proxy for enums */
 
 /* handles */
 %wrap_handle(BinMDF_ADriver)
 %wrap_handle(BinMDF_ADriverTable)
+%wrap_handle(BinMDF_DerivedDriver)
 %wrap_handle(BinMDF_ReferenceDriver)
 %wrap_handle(BinMDF_TagSourceDriver)
 /* end handles declaration */
 
 /* templates */
-%template(BinMDF_TypeIdMap) NCollection_DoubleMap <opencascade::handle <Standard_Type>, Standard_Integer , TColStd_MapTransientHasher , TColStd_MapIntegerHasher>;
-%template(BinMDF_TypeADriverMap) NCollection_DataMap <opencascade::handle <Standard_Type>, opencascade::handle <BinMDF_ADriver>, TColStd_MapTransientHasher>;
+%template(BinMDF_TypeADriverMap) NCollection_DataMap<opencascade::handle<Standard_Type>,opencascade::handle<BinMDF_ADriver>,TColStd_MapTransientHasher>;
+%template(BinMDF_TypeIdMap) NCollection_DoubleMap<opencascade::handle<Standard_Type>,Standard_Integer,TColStd_MapTransientHasher,TColStd_MapIntegerHasher>;
 /* end templates declaration */
 
 /* typedefs */
-typedef NCollection_DoubleMap <opencascade::handle <Standard_Type>, Standard_Integer , TColStd_MapTransientHasher , TColStd_MapIntegerHasher> BinMDF_TypeIdMap;
-typedef NCollection_DoubleMap <opencascade::handle <Standard_Type>, Standard_Integer , TColStd_MapTransientHasher , TColStd_MapIntegerHasher>::Iterator BinMDF_DoubleMapIteratorOfTypeIdMap;
-typedef NCollection_DataMap <opencascade::handle <Standard_Type>, opencascade::handle <BinMDF_ADriver>, TColStd_MapTransientHasher> BinMDF_TypeADriverMap;
-typedef NCollection_DataMap <opencascade::handle <Standard_Type>, opencascade::handle <BinMDF_ADriver>, TColStd_MapTransientHasher>::Iterator BinMDF_DataMapIteratorOfTypeADriverMap;
+typedef NCollection_DataMap<opencascade::handle<Standard_Type>, opencascade::handle<BinMDF_ADriver>, TColStd_MapTransientHasher>::Iterator BinMDF_DataMapIteratorOfTypeADriverMap;
+typedef NCollection_DoubleMap<opencascade::handle<Standard_Type>, Standard_Integer, TColStd_MapTransientHasher, TColStd_MapIntegerHasher>::Iterator BinMDF_DoubleMapIteratorOfTypeIdMap;
 typedef TColStd_DataMapOfAsciiStringInteger BinMDF_StringIdMap;
+typedef NCollection_DataMap<opencascade::handle<Standard_Type>, opencascade::handle<BinMDF_ADriver>, TColStd_MapTransientHasher> BinMDF_TypeADriverMap;
+typedef NCollection_DoubleMap<opencascade::handle<Standard_Type>, Standard_Integer, TColStd_MapTransientHasher, TColStd_MapIntegerHasher> BinMDF_TypeIdMap;
 /* end typedefs declaration */
 
 /***************
@@ -90,14 +102,20 @@ typedef TColStd_DataMapOfAsciiStringInteger BinMDF_StringIdMap;
 class BinMDF {
 	public:
 		/****************** AddDrivers ******************/
+		/**** md5 signature: 9b16e0c464e556dc0dccd242954afcdf ****/
 		%feature("compactdefaultargs") AddDrivers;
-		%feature("autodoc", "* Adds the attribute storage drivers to <aDriverTable>.
-	:param aDriverTable:
-	:type aDriverTable: BinMDF_ADriverTable
-	:param aMsgDrv:
-	:type aMsgDrv: Message_Messenger
-	:rtype: void") AddDrivers;
-		static void AddDrivers (const opencascade::handle<BinMDF_ADriverTable> & aDriverTable,const opencascade::handle<Message_Messenger> & aMsgDrv);
+		%feature("autodoc", "Adds the attribute storage drivers to <adrivertable>.
+
+Parameters
+----------
+aDriverTable: BinMDF_ADriverTable
+aMsgDrv: Message_Messenger
+
+Returns
+-------
+None
+") AddDrivers;
+		static void AddDrivers(const opencascade::handle<BinMDF_ADriverTable> & aDriverTable, const opencascade::handle<Message_Messenger> & aMsgDrv);
 
 };
 
@@ -114,47 +132,83 @@ class BinMDF {
 %nodefaultctor BinMDF_ADriver;
 class BinMDF_ADriver : public Standard_Transient {
 	public:
+		/****************** MessageDriver ******************/
+		/**** md5 signature: a2961f713aaae0ef5d0be03881abc817 ****/
+		%feature("compactdefaultargs") MessageDriver;
+		%feature("autodoc", "Returns the current message driver of this driver.
+
+Returns
+-------
+opencascade::handle<Message_Messenger>
+") MessageDriver;
+		const opencascade::handle<Message_Messenger> & MessageDriver();
+
 		/****************** NewEmpty ******************/
+		/**** md5 signature: 537251aec6cd2736ac1f1abe6868dc70 ****/
 		%feature("compactdefaultargs") NewEmpty;
-		%feature("autodoc", "* Creates a new attribute from TDF.
-	:rtype: opencascade::handle<TDF_Attribute>") NewEmpty;
-		virtual opencascade::handle<TDF_Attribute> NewEmpty ();
+		%feature("autodoc", "Creates a new attribute from tdf.
+
+Returns
+-------
+opencascade::handle<TDF_Attribute>
+") NewEmpty;
+		virtual opencascade::handle<TDF_Attribute> NewEmpty();
 
 		/****************** Paste ******************/
+		/**** md5 signature: dc52286c6599841f40e4bb4abe81b8f2 ****/
 		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", "* Translate the contents of <aSource> and put it into <aTarget>, using the relocation table <aRelocTable> to keep the sharings.
-	:param aSource:
-	:type aSource: BinObjMgt_Persistent
-	:param aTarget:
-	:type aTarget: TDF_Attribute
-	:param aRelocTable:
-	:type aRelocTable: BinObjMgt_RRelocationTable
-	:rtype: bool") Paste;
-		virtual Standard_Boolean Paste (const BinObjMgt_Persistent & aSource,const opencascade::handle<TDF_Attribute> & aTarget,BinObjMgt_RRelocationTable & aRelocTable);
+		%feature("autodoc", "Translate the contents of <asource> and put it into <atarget>, using the relocation table <areloctable> to keep the sharings.
+
+Parameters
+----------
+aSource: BinObjMgt_Persistent
+aTarget: TDF_Attribute
+aRelocTable: BinObjMgt_RRelocationTable
+
+Returns
+-------
+bool
+") Paste;
+		virtual Standard_Boolean Paste(const BinObjMgt_Persistent & aSource, const opencascade::handle<TDF_Attribute> & aTarget, BinObjMgt_RRelocationTable & aRelocTable);
 
 		/****************** Paste ******************/
+		/**** md5 signature: 1c4ffe71c04d38a5ec160acbf17fa51f ****/
 		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", "* Translate the contents of <aSource> and put it into <aTarget>, using the relocation table <aRelocTable> to keep the sharings.
-	:param aSource:
-	:type aSource: TDF_Attribute
-	:param aTarget:
-	:type aTarget: BinObjMgt_Persistent
-	:param aRelocTable:
-	:type aRelocTable: BinObjMgt_SRelocationTable
-	:rtype: void") Paste;
-		virtual void Paste (const opencascade::handle<TDF_Attribute> & aSource,BinObjMgt_Persistent & aTarget,BinObjMgt_SRelocationTable & aRelocTable);
+		%feature("autodoc", "Translate the contents of <asource> and put it into <atarget>, using the relocation table <areloctable> to keep the sharings.
+
+Parameters
+----------
+aSource: TDF_Attribute
+aTarget: BinObjMgt_Persistent
+aRelocTable: BinObjMgt_SRelocationTable
+
+Returns
+-------
+None
+") Paste;
+		virtual void Paste(const opencascade::handle<TDF_Attribute> & aSource, BinObjMgt_Persistent & aTarget, BinObjMgt_SRelocationTable & aRelocTable);
 
 		/****************** SourceType ******************/
+		/**** md5 signature: b701df1c50a5570aedd2a6108c7e2344 ****/
 		%feature("compactdefaultargs") SourceType;
-		%feature("autodoc", "* Returns the type of source object, inheriting from Attribute from TDF.
-	:rtype: opencascade::handle<Standard_Type>") SourceType;
-		const opencascade::handle<Standard_Type> & SourceType ();
+		%feature("autodoc", "Returns the type of source object, inheriting from attribute from tdf.
+
+Returns
+-------
+opencascade::handle<Standard_Type>
+") SourceType;
+		virtual const opencascade::handle<Standard_Type> & SourceType();
 
 		/****************** TypeName ******************/
+		/**** md5 signature: 191a1aa753fb8d39d56bcfd7505ea0e7 ****/
 		%feature("compactdefaultargs") TypeName;
-		%feature("autodoc", "* Returns the type name of the attribute object
-	:rtype: TCollection_AsciiString") TypeName;
-		const TCollection_AsciiString & TypeName ();
+		%feature("autodoc", "Returns the type name of the attribute object.
+
+Returns
+-------
+TCollection_AsciiString
+") TypeName;
+		const TCollection_AsciiString & TypeName();
 
 };
 
@@ -172,53 +226,122 @@ class BinMDF_ADriver : public Standard_Transient {
 ****************************/
 class BinMDF_ADriverTable : public Standard_Transient {
 	public:
-		/****************** AddDriver ******************/
-		%feature("compactdefaultargs") AddDriver;
-		%feature("autodoc", "* Adds a translation driver <theDriver>.
-	:param theDriver:
-	:type theDriver: BinMDF_ADriver
-	:rtype: None") AddDriver;
-		void AddDriver (const opencascade::handle<BinMDF_ADriver> & theDriver);
-
-		/****************** AssignIds ******************/
-		%feature("compactdefaultargs") AssignIds;
-		%feature("autodoc", "* Assigns the IDs to the drivers of the given Types. It uses indices in the map as IDs. Useful in storage procedure.
-	:param theTypes:
-	:type theTypes: TColStd_IndexedMapOfTransient
-	:rtype: None") AssignIds;
-		void AssignIds (const TColStd_IndexedMapOfTransient & theTypes);
-
-		/****************** AssignIds ******************/
-		%feature("compactdefaultargs") AssignIds;
-		%feature("autodoc", "* Assigns the IDs to the drivers of the given Type Names; It uses indices in the sequence as IDs. Useful in retrieval procedure.
-	:param theTypeNames:
-	:type theTypeNames: TColStd_SequenceOfAsciiString
-	:rtype: None") AssignIds;
-		void AssignIds (const TColStd_SequenceOfAsciiString & theTypeNames);
-
 		/****************** BinMDF_ADriverTable ******************/
+		/**** md5 signature: 708f7239ec8de4f8ee5349a3633a9833 ****/
 		%feature("compactdefaultargs") BinMDF_ADriverTable;
-		%feature("autodoc", "* Constructor
-	:rtype: None") BinMDF_ADriverTable;
-		 BinMDF_ADriverTable ();
+		%feature("autodoc", "Constructor.
+
+Returns
+-------
+None
+") BinMDF_ADriverTable;
+		 BinMDF_ADriverTable();
+
+		/****************** AddDerivedDriver ******************/
+		/**** md5 signature: d785bc7c368abacc51e9bcd52083ce5c ****/
+		%feature("compactdefaultargs") AddDerivedDriver;
+		%feature("autodoc", "Adds a translation driver for the derived attribute. the base driver must be already added. @param theinstance is newly created attribute, detached from any label.
+
+Parameters
+----------
+theInstance: TDF_Attribute
+
+Returns
+-------
+None
+") AddDerivedDriver;
+		void AddDerivedDriver(const opencascade::handle<TDF_Attribute> & theInstance);
+
+		/****************** AddDerivedDriver ******************/
+		/**** md5 signature: c08557200bb111bac7324de5048e9e2d ****/
+		%feature("compactdefaultargs") AddDerivedDriver;
+		%feature("autodoc", "Adds a translation driver for the derived attribute. the base driver must be already added. @param thederivedtype is registered attribute type using implement_derived_attribute macro.
+
+Parameters
+----------
+theDerivedType: char *
+
+Returns
+-------
+opencascade::handle<Standard_Type>
+") AddDerivedDriver;
+		const opencascade::handle<Standard_Type> & AddDerivedDriver(const char * theDerivedType);
+
+		/****************** AddDriver ******************/
+		/**** md5 signature: b535a4822476bdd281f04ff4cdbaa916 ****/
+		%feature("compactdefaultargs") AddDriver;
+		%feature("autodoc", "Adds a translation driver <thedriver>.
+
+Parameters
+----------
+theDriver: BinMDF_ADriver
+
+Returns
+-------
+None
+") AddDriver;
+		void AddDriver(const opencascade::handle<BinMDF_ADriver> & theDriver);
+
+		/****************** AssignIds ******************/
+		/**** md5 signature: fdb45c5b6ad6a92c237fc9cc5b5155a5 ****/
+		%feature("compactdefaultargs") AssignIds;
+		%feature("autodoc", "Assigns the ids to the drivers of the given types. it uses indices in the map as ids. useful in storage procedure.
+
+Parameters
+----------
+theTypes: TColStd_IndexedMapOfTransient
+
+Returns
+-------
+None
+") AssignIds;
+		void AssignIds(const TColStd_IndexedMapOfTransient & theTypes);
+
+		/****************** AssignIds ******************/
+		/**** md5 signature: 152071a03ba941c15bd9ea23f8a6c564 ****/
+		%feature("compactdefaultargs") AssignIds;
+		%feature("autodoc", "Assigns the ids to the drivers of the given type names; it uses indices in the sequence as ids. useful in retrieval procedure.
+
+Parameters
+----------
+theTypeNames: TColStd_SequenceOfAsciiString
+
+Returns
+-------
+None
+") AssignIds;
+		void AssignIds(const TColStd_SequenceOfAsciiString & theTypeNames);
 
 		/****************** GetDriver ******************/
+		/**** md5 signature: ecb31de6ad1797d5b75ad695a4fc66d2 ****/
 		%feature("compactdefaultargs") GetDriver;
-		%feature("autodoc", "* Gets a driver <theDriver> according to <theType>. Returns Type ID if the driver was assigned an ID; 0 otherwise.
-	:param theType:
-	:type theType: Standard_Type
-	:param theDriver:
-	:type theDriver: BinMDF_ADriver
-	:rtype: int") GetDriver;
-		Standard_Integer GetDriver (const opencascade::handle<Standard_Type> & theType,opencascade::handle<BinMDF_ADriver> & theDriver);
+		%feature("autodoc", "Gets a driver <thedriver> according to <thetype>. returns type id if the driver was assigned an id; 0 otherwise.
+
+Parameters
+----------
+theType: Standard_Type
+theDriver: BinMDF_ADriver
+
+Returns
+-------
+int
+") GetDriver;
+		Standard_Integer GetDriver(const opencascade::handle<Standard_Type> & theType, opencascade::handle<BinMDF_ADriver> & theDriver);
 
 		/****************** GetDriver ******************/
+		/**** md5 signature: fe72078ff43a559946a9375193758316 ****/
 		%feature("compactdefaultargs") GetDriver;
-		%feature("autodoc", "* Returns a driver according to <theTypeId>. Returns null handle if a driver is not found
-	:param theTypeId:
-	:type theTypeId: int
-	:rtype: opencascade::handle<BinMDF_ADriver>") GetDriver;
-		opencascade::handle<BinMDF_ADriver> GetDriver (const Standard_Integer theTypeId);
+		%feature("autodoc", "Returns a driver according to <thetypeid>. returns null handle if a driver is not found.
+
+Parameters
+----------
+theTypeId: int
+
+Returns
+-------
+opencascade::handle<BinMDF_ADriver>
+") GetDriver;
+		opencascade::handle<BinMDF_ADriver> GetDriver(const Standard_Integer theTypeId);
 
 };
 
@@ -231,44 +354,147 @@ class BinMDF_ADriverTable : public Standard_Transient {
 	}
 };
 
+/*****************************
+* class BinMDF_DerivedDriver *
+*****************************/
+class BinMDF_DerivedDriver : public BinMDF_ADriver {
+	public:
+		/****************** BinMDF_DerivedDriver ******************/
+		/**** md5 signature: 577f5e9f1d04d82bf9ec7dbed2fcf96c ****/
+		%feature("compactdefaultargs") BinMDF_DerivedDriver;
+		%feature("autodoc", "Creates a derivative persistence driver for thederivative attribute by reusage of thebasedriver @param thederivative an instance of the attribute, just created, detached from any label @param thebasedriver a driver of the base attribute, called by paste methods.
+
+Parameters
+----------
+theDerivative: TDF_Attribute
+theBaseDriver: BinMDF_ADriver
+
+Returns
+-------
+None
+") BinMDF_DerivedDriver;
+		 BinMDF_DerivedDriver(const opencascade::handle<TDF_Attribute> & theDerivative, const opencascade::handle<BinMDF_ADriver> & theBaseDriver);
+
+		/****************** NewEmpty ******************/
+		/**** md5 signature: 9fd03ebf4c88d0fd3efd748ca3107174 ****/
+		%feature("compactdefaultargs") NewEmpty;
+		%feature("autodoc", "Creates a new instance of the derivative attribute.
+
+Returns
+-------
+opencascade::handle<TDF_Attribute>
+") NewEmpty;
+		virtual opencascade::handle<TDF_Attribute> NewEmpty();
+
+		/****************** Paste ******************/
+		/**** md5 signature: 94d718490cdbfada5fccaa9591bd47ee ****/
+		%feature("compactdefaultargs") Paste;
+		%feature("autodoc", "Reuses the base driver to read the base fields.
+
+Parameters
+----------
+theSource: BinObjMgt_Persistent
+theTarget: TDF_Attribute
+theRelocTable: BinObjMgt_RRelocationTable
+
+Returns
+-------
+bool
+") Paste;
+		virtual Standard_Boolean Paste(const BinObjMgt_Persistent & theSource, const opencascade::handle<TDF_Attribute> & theTarget, BinObjMgt_RRelocationTable & theRelocTable);
+
+		/****************** Paste ******************/
+		/**** md5 signature: 0c0cb5d03ba18d9ed340ec21f9be4994 ****/
+		%feature("compactdefaultargs") Paste;
+		%feature("autodoc", "Reuses the base driver to store the base fields.
+
+Parameters
+----------
+theSource: TDF_Attribute
+theTarget: BinObjMgt_Persistent
+theRelocTable: BinObjMgt_SRelocationTable
+
+Returns
+-------
+None
+") Paste;
+		virtual void Paste(const opencascade::handle<TDF_Attribute> & theSource, BinObjMgt_Persistent & theTarget, BinObjMgt_SRelocationTable & theRelocTable);
+
+};
+
+
+%make_alias(BinMDF_DerivedDriver)
+
+%extend BinMDF_DerivedDriver {
+	%pythoncode {
+	__repr__ = _dumps_object
+	}
+};
+
 /*******************************
 * class BinMDF_ReferenceDriver *
 *******************************/
 class BinMDF_ReferenceDriver : public BinMDF_ADriver {
 	public:
 		/****************** BinMDF_ReferenceDriver ******************/
+		/**** md5 signature: 990a6786e7b4b68ec20bccf69c3d344a ****/
 		%feature("compactdefaultargs") BinMDF_ReferenceDriver;
-		%feature("autodoc", ":param theMessageDriver:
-	:type theMessageDriver: Message_Messenger
-	:rtype: None") BinMDF_ReferenceDriver;
-		 BinMDF_ReferenceDriver (const opencascade::handle<Message_Messenger> & theMessageDriver);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+theMessageDriver: Message_Messenger
+
+Returns
+-------
+None
+") BinMDF_ReferenceDriver;
+		 BinMDF_ReferenceDriver(const opencascade::handle<Message_Messenger> & theMessageDriver);
 
 		/****************** NewEmpty ******************/
+		/**** md5 signature: 8be17a4d2a4deeee198571712e76805e ****/
 		%feature("compactdefaultargs") NewEmpty;
-		%feature("autodoc", ":rtype: opencascade::handle<TDF_Attribute>") NewEmpty;
-		virtual opencascade::handle<TDF_Attribute> NewEmpty ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+opencascade::handle<TDF_Attribute>
+") NewEmpty;
+		virtual opencascade::handle<TDF_Attribute> NewEmpty();
 
 		/****************** Paste ******************/
+		/**** md5 signature: 37851bb93a225f90250afe4fb5e61e60 ****/
 		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", ":param Source:
-	:type Source: BinObjMgt_Persistent
-	:param Target:
-	:type Target: TDF_Attribute
-	:param RelocTable:
-	:type RelocTable: BinObjMgt_RRelocationTable
-	:rtype: bool") Paste;
-		virtual Standard_Boolean Paste (const BinObjMgt_Persistent & Source,const opencascade::handle<TDF_Attribute> & Target,BinObjMgt_RRelocationTable & RelocTable);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+Source: BinObjMgt_Persistent
+Target: TDF_Attribute
+RelocTable: BinObjMgt_RRelocationTable
+
+Returns
+-------
+bool
+") Paste;
+		virtual Standard_Boolean Paste(const BinObjMgt_Persistent & Source, const opencascade::handle<TDF_Attribute> & Target, BinObjMgt_RRelocationTable & RelocTable);
 
 		/****************** Paste ******************/
+		/**** md5 signature: da6a0a35498ea18a652c6a19d6364015 ****/
 		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", ":param Source:
-	:type Source: TDF_Attribute
-	:param Target:
-	:type Target: BinObjMgt_Persistent
-	:param RelocTable:
-	:type RelocTable: BinObjMgt_SRelocationTable
-	:rtype: void") Paste;
-		virtual void Paste (const opencascade::handle<TDF_Attribute> & Source,BinObjMgt_Persistent & Target,BinObjMgt_SRelocationTable & RelocTable);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+Source: TDF_Attribute
+Target: BinObjMgt_Persistent
+RelocTable: BinObjMgt_SRelocationTable
+
+Returns
+-------
+None
+") Paste;
+		virtual void Paste(const opencascade::handle<TDF_Attribute> & Source, BinObjMgt_Persistent & Target, BinObjMgt_SRelocationTable & RelocTable);
 
 };
 
@@ -287,38 +513,64 @@ class BinMDF_ReferenceDriver : public BinMDF_ADriver {
 class BinMDF_TagSourceDriver : public BinMDF_ADriver {
 	public:
 		/****************** BinMDF_TagSourceDriver ******************/
+		/**** md5 signature: acbec121f684354773d49a7bad54d867 ****/
 		%feature("compactdefaultargs") BinMDF_TagSourceDriver;
-		%feature("autodoc", ":param theMessageDriver:
-	:type theMessageDriver: Message_Messenger
-	:rtype: None") BinMDF_TagSourceDriver;
-		 BinMDF_TagSourceDriver (const opencascade::handle<Message_Messenger> & theMessageDriver);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+theMessageDriver: Message_Messenger
+
+Returns
+-------
+None
+") BinMDF_TagSourceDriver;
+		 BinMDF_TagSourceDriver(const opencascade::handle<Message_Messenger> & theMessageDriver);
 
 		/****************** NewEmpty ******************/
+		/**** md5 signature: c6d13c9ecc64c6c803b6e119e8216934 ****/
 		%feature("compactdefaultargs") NewEmpty;
-		%feature("autodoc", ":rtype: opencascade::handle<TDF_Attribute>") NewEmpty;
-		opencascade::handle<TDF_Attribute> NewEmpty ();
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+opencascade::handle<TDF_Attribute>
+") NewEmpty;
+		opencascade::handle<TDF_Attribute> NewEmpty();
 
 		/****************** Paste ******************/
+		/**** md5 signature: 3bca84cbb3164ee155cf7623ceb16244 ****/
 		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", ":param Source:
-	:type Source: BinObjMgt_Persistent
-	:param Target:
-	:type Target: TDF_Attribute
-	:param RelocTable:
-	:type RelocTable: BinObjMgt_RRelocationTable
-	:rtype: bool") Paste;
-		Standard_Boolean Paste (const BinObjMgt_Persistent & Source,const opencascade::handle<TDF_Attribute> & Target,BinObjMgt_RRelocationTable & RelocTable);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+Source: BinObjMgt_Persistent
+Target: TDF_Attribute
+RelocTable: BinObjMgt_RRelocationTable
+
+Returns
+-------
+bool
+") Paste;
+		Standard_Boolean Paste(const BinObjMgt_Persistent & Source, const opencascade::handle<TDF_Attribute> & Target, BinObjMgt_RRelocationTable & RelocTable);
 
 		/****************** Paste ******************/
+		/**** md5 signature: 67b435110398ae49c79b33db64bbe228 ****/
 		%feature("compactdefaultargs") Paste;
-		%feature("autodoc", ":param Source:
-	:type Source: TDF_Attribute
-	:param Target:
-	:type Target: BinObjMgt_Persistent
-	:param RelocTable:
-	:type RelocTable: BinObjMgt_SRelocationTable
-	:rtype: None") Paste;
-		void Paste (const opencascade::handle<TDF_Attribute> & Source,BinObjMgt_Persistent & Target,BinObjMgt_SRelocationTable & RelocTable);
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+Source: TDF_Attribute
+Target: BinObjMgt_Persistent
+RelocTable: BinObjMgt_SRelocationTable
+
+Returns
+-------
+None
+") Paste;
+		void Paste(const opencascade::handle<TDF_Attribute> & Source, BinObjMgt_Persistent & Target, BinObjMgt_SRelocationTable & RelocTable);
 
 };
 
@@ -334,3 +586,7 @@ class BinMDF_TagSourceDriver : public BinMDF_ADriver {
 /* harray1 classes */
 /* harray2 classes */
 /* hsequence classes */
+/* class aliases */
+%pythoncode {
+BinMDF_StringIdMap=OCC.Core.TColStd.TColStd_DataMapOfAsciiStringInteger
+}

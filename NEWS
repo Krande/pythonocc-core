@@ -1,4 +1,53 @@
 ==========================
+Version 7.4.1 - November 2020
+
+This release requires opencascade 7.4.0 or 7.4.0p1
+
+* display: fix antialiasing in SimpleGui
+
+* wrapper : refactored exception catcher reduce code duplication
+
+* webgl : added a flask web server for ThreeJs
+
+* wrapper : added stub .pyi files for type hints (e.g. mypy, PyCharm etc.)
+
+* wrapper : small optimizations in Tesselator
+
+* wrapper : added missing classes XCAFDoc_DimTolTool, BRepClass_FaceClassifier, Standard_Type,
+Standard_Failure, Prs3d_Point, Units_Quantity_, Units_Dimension
+
+* wrapper : added support for class aliases defined as typedefs (e.g. BRepOffsetAPI_Sewing)
+
+* wrapper : fix support for occt7.4.0p1
+
+* wrapper : changed GetImageData to take width and height parameters
+
+* misc cleanup, typos, small fixes all over the code base
+
+==========================
+Version 7.4.0 - February 2020
+
+This release requires opencascade 7.4.0
+
+* jupyter : improved webgl display, added utility functions (abb, oobb, mass computation etc.), fixed edges display wrong line type (dash)
+
+* display : added PySide2 to the backend list
+
+* DataExchange : fixes step loader when more than one root
+
+* DataExchange : added SVG exporter (possibility to render svg in jupyter)
+
+* wrapper : fixed for Standard_Integer parameters returned by reference
+
+* wrapper : improved wrapper for NCollection_DataMap
+
+* wrapper : removed unnecessary %nodefaultctor swig directive, that prevent using default constructor for many classes
+
+* demos : many fixes, improvements, and new examples
+
+* lgtm and codacy quality fixes
+
+==========================
 Version 7.4.0rc1 - December 2019
 
 This release requires opencascade 7.4.0
@@ -9,12 +58,11 @@ This release requires opencascade 7.4.0
 
 * wrapper : added GetLabelName method to TDF_Label class to fix step part names
 
-* display : tesselator computes mesh if not already done
+* display : tessellator computes mesh if not already done
 
 * webgl : html and js fixes in x3dom and threejs renderers, simple_server uses flask if available
 
 * minor lgtm fixes
-
 
 ==========================
 Version 7.4.0beta2 - December 2019
@@ -79,7 +127,7 @@ each example, in rst format
 
 * gui : fix SimpleGui position at startup, wx fixes
 
-* ci/cd : upload each successfull travis or appveyor built to anaconda cloud,
+* ci/cd : upload each successful travis or appveyor built to anaconda cloud,
 tagged using the branch name
 
 ==========================
@@ -217,7 +265,7 @@ parallel_slicer, topology_glue
 
 * PyQt5 support
 
-* Improvements and fixes to the Tesselator class:
+* Improvements and fixes to the Tessellator class:
 Computation of edges, Interface to Vertices, Normals, and Triangles
 
 * minor portability fixes/improvements.
@@ -273,7 +321,7 @@ This release requires oce-0.16.0
 
 * added x3dom renderer and x3d export feature
 
-* improved project quality (travis-ci, pylint check, pep8 compliancy,
+* improved project quality (travis-ci, pylint check, pep8 compliance,
   removed old and/or untested code)
 
 * sphinx based documentation, both for api documentation and getting started

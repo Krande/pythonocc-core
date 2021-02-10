@@ -21,6 +21,8 @@ from OCC.Core.TopoDS import TopoDS_Shape
 from OCC.Core.BRepMesh import BRepMesh_IncrementalMesh
 from OCC.Core.StlAPI import stlapi_Read, StlAPI_Writer
 from OCC.Core.BRep import BRep_Builder
+from OCC.Core.gp import gp_Pnt, gp_Dir, gp_Pnt2d
+from OCC.Core.Bnd import Bnd_Box2d
 from OCC.Core.TopoDS import TopoDS_Compound
 from OCC.Core.IGESControl import IGESControl_Reader, IGESControl_Writer
 from OCC.Core.STEPControl import STEPControl_Reader, STEPControl_Writer, STEPControl_AsIs
@@ -30,24 +32,30 @@ from OCC.Core.TDocStd import TDocStd_Document
 from OCC.Core.XCAFDoc import (XCAFDoc_DocumentTool_ShapeTool,
                               XCAFDoc_DocumentTool_ColorTool)
 from OCC.Core.STEPCAFControl import STEPCAFControl_Reader
-from OCC.Core.TDF import TDF_LabelSequence, TDF_Label, TDF_Tool
-from OCC.Core.TDataStd import TDataStd_Name, TDataStd_Name_GetID
-from OCC.Core.TCollection import TCollection_ExtendedString, TCollection_AsciiString
+from OCC.Core.TDF import TDF_LabelSequence, TDF_Label
+from OCC.Core.TCollection import TCollection_ExtendedString
 from OCC.Core.Quantity import Quantity_Color, Quantity_TOC_RGB
 from OCC.Core.TopLoc import TopLoc_Location
 from OCC.Core.BRepBuilderAPI import BRepBuilderAPI_Transform
 
-from OCC.Extend.TopologyUtils import TopologyExplorer
+from OCC.Extend.TopologyUtils import (discretize_edge, get_sorted_hlr_edges,
+                                      list_of_shapes_to_compound)
+
+try:
+    import svgwrite
+    HAVE_SVGWRITE = True
+except ImportError:
+    HAVE_SVGWRITE = False
 
 ##########################
 # Step import and export #
 ##########################
-def read_step_file(filename, return_as_shapes=False, verbosity=True):
+def read_step_file(filename, as_compound=True, verbosity=True):
     """ read the STEP file and returns a compound
     filename: the file path
-    return_as_shapes: optional, False by default. If True returns a list of shapes,
-                      else returns a single compound
     verbosity: optional, False by default.
+    as_compound: True by default. If there are more than one shape at root,
+    gather all shapes into one compound. Otherwise returns a list of shapes.
     """
     if not os.path.isfile(filename):
         raise FileNotFoundError("%s not found." % filename)
@@ -60,33 +68,45 @@ def read_step_file(filename, return_as_shapes=False, verbosity=True):
             failsonly = False
             step_reader.PrintCheckLoad(failsonly, IFSelect_ItemsByEntity)
             step_reader.PrintCheckTransfer(failsonly, IFSelect_ItemsByEntity)
-        transfer_result = step_reader.TransferRoot(1)
+        transfer_result = step_reader.TransferRoots()
         if not transfer_result:
             raise AssertionError("Transfer failed.")
         _nbs = step_reader.NbShapes()
-        if _nbs != 1:
-            raise AssertionError("Number of shapes is not one.")
-        shape_to_return = step_reader.Shape(1)  # a compound
-        if shape_to_return.IsNull():
-            raise AssertionError("Shape is null.")
+        if _nbs == 0:
+            raise AssertionError("No shape to transfer.")
+        elif _nbs == 1:  # most cases
+            return step_reader.Shape(1)
+        elif _nbs > 1:
+            print("Number of shapes:", _nbs)
+            shps = []
+            # loop over root shapes
+            for k in range(1, _nbs + 1):
+                new_shp = step_reader.Shape(k)
+                if not new_shp.IsNull():
+                    shps.append(new_shp)
+            if as_compound:
+                compound, result = list_of_shapes_to_compound(shps)
+                if not result:
+                    print("Warning: all shapes were not added to the compound")
+                return compound
+            else:
+                print("Warning, returns a list of shapes.")
+                return shps
     else:
         raise AssertionError("Error: can't read file.")
-    if return_as_shapes:
-        shape_to_return = TopologyExplorer(shape_to_return).solids()
-
-    return shape_to_return
+    return None
 
 
 def write_step_file(a_shape, filename, application_protocol="AP203"):
     """ exports a shape to a STEP file
     a_shape: the topods_shape to export (a compound, a solid etc.)
     filename: the filename
-    application protocol: "AP203" or "AP214"
+    application protocol: "AP203" or "AP214IS" or "AP242DIS"
     """
     # a few checks
     if a_shape.IsNull():
         raise AssertionError("Shape %s is null." % a_shape)
-    if application_protocol not in ["AP203", "AP214IS"]:
+    if application_protocol not in ["AP203", "AP214IS", "AP242DIS"]:
         raise AssertionError("application_protocol must be either AP203 or AP214IS. You passed %s." % application_protocol)
     if os.path.isfile(filename):
         print("Warning: %s file already exists and will be replaced" % filename)
@@ -99,9 +119,9 @@ def write_step_file(a_shape, filename, application_protocol="AP203"):
     status = step_writer.Write(filename)
 
     if not status == IFSelect_RetDone:
-        raise AssertionError("Error while writing shape to STEP file.")
+        raise IOError("Error while writing shape to STEP file.")
     if not os.path.isfile(filename):
-        raise AssertionError("File %s was not saved to filesystem." % filename)
+        raise IOError("File %s was not saved to filesystem." % filename)
 
 
 def read_step_file_with_names_colors(filename):
@@ -237,7 +257,7 @@ def read_step_file_with_names_colors(filename):
                 if (color_tool.GetColor(lab, 0, c) or
                         color_tool.GetColor(lab, 1, c) or
                         color_tool.GetColor(lab, 2, c)):
-                    
+
                     color_tool.SetInstanceColor(shape, 0, c)
                     color_tool.SetInstanceColor(shape, 1, c)
                     color_tool.SetInstanceColor(shape, 2, c)
@@ -373,7 +393,7 @@ def read_iges_file(filename, return_as_shapes=False, verbosity=False, visible_on
             iges_reader.PrintCheckTransfer(failsonly, IFSelect_ItemsByEntity)
         iges_reader.TransferRoots()
         nbr = iges_reader.NbRootsForTransfer()
-        for n in range(1, nbr+1):
+        for _ in range(1, nbr+1):
             nbs = iges_reader.NbShapes()
             if nbs == 0:
                 print("At least one shape in IGES cannot be transfered")
@@ -422,27 +442,105 @@ def write_iges_file(a_shape, filename):
     if not os.path.isfile(filename):
         raise IOError("File not written to disk.")
 
-if __name__ == "__main__":
-    from OCC.Core.BRepPrimAPI import BRepPrimAPI_MakeSphere
-    sphere_shape = BRepPrimAPI_MakeSphere(30.).Shape()
-    write_step_file(sphere_shape, "s_203.stp", application_protocol="AP203")
-    write_step_file(sphere_shape, "s_214.stp", application_protocol="AP214IS")
-    read_step_file("s_203.stp")
-    read_step_file("s_214.stp")
-    read_step_file("s_214.stp", return_as_shapes=True)
-    write_stl_file(sphere_shape, "s_stl_ascii.stl")
-    write_stl_file(sphere_shape, "s_stl_binary.stl", mode="binary")
-    read_stl_file("s_stl_ascii.stl")
-    read_stl_file("s_stl_binary.stl")
-    # improve the precision by a factor 2
-    write_stl_file(sphere_shape, "s_stl_precise_ascii.stl", linear_deflection=0.1, angular_deflection=0.2)
-    read_stl_file("s_stl_precise_ascii.stl")
-    # iges test
-    write_iges_file(sphere_shape, "s_iges.igs")
-    # write IGES with special character
-    write_iges_file(sphere_shape, "sphère.igs")
-    read_iges_file("sphère.igs")
-    read_iges_file("s_iges.igs")
-    read_iges_file("s_iges.igs", return_as_shapes=True)
-    # test step with colors
-    read_step_file_with_names_colors("s_214.stp")
+
+##############
+# SVG export #
+##############
+def edge_to_svg_polyline(topods_edge, tol=0.1, unit="mm"):
+    """ Returns a svgwrite.Path for the edge, and the 2d bounding box
+    """
+    unit_factor = 1  # by default
+
+    if unit == "mm":
+        unit_factor = 1
+    elif unit == "m":
+        unit_factor = 1e3
+
+    points_3d = discretize_edge(topods_edge, tol)
+    points_2d = []
+    box2d = Bnd_Box2d()
+
+    for point in points_3d:
+        # we tak only the first 2 coordinates (x and y, leave z)
+        x_p = - point[0] * unit_factor
+        y_p = point[1] * unit_factor
+        box2d.Add(gp_Pnt2d(x_p, y_p))
+        points_2d.append((x_p, y_p))
+
+    return svgwrite.shapes.Polyline(points_2d, fill="none"), box2d
+
+def export_shape_to_svg(shape, filename=None,
+                        width=800, height=600, margin_left=10,
+                        margin_top=30, export_hidden_edges=True,
+                        location=gp_Pnt(0, 0, 0), direction=gp_Dir(1, 1, 1),
+                        color="black",
+                        line_width="1px",
+                        unit="mm"):
+    """ export a single shape to an svg file and/or string.
+    shape: the TopoDS_Shape to export
+    filename (optional): if provided, save to an svg file
+    width, height (optional): integers, specify the canva size in pixels
+    margin_left, margin_top (optional): integers, in pixel
+    export_hidden_edges (optional): whether or not draw hidden edges using a dashed line
+    location (optional): a gp_Pnt, the lookat
+    direction (optional): to set up the projector direction
+    color (optional), "default to "black".
+    line_width (optional, default to 1): an integer
+    """
+    if shape.IsNull():
+        raise AssertionError("shape is Null")
+
+    if not HAVE_SVGWRITE:
+        print("svg exporter not available because the svgwrite package is not installed.")
+        print("please use '$ conda install -c conda-forge svgwrite'")
+        return False
+
+    # find all edges
+    visible_edges, hidden_edges = get_sorted_hlr_edges(shape, position=location, direction=direction, export_hidden_edges=export_hidden_edges)
+
+    # compute polylines for all edges
+    # we compute a global 2d bounding box as well, to be able to compute
+    # the scale factor and translation vector to apply to all 2d edges so that
+    # they fit the svg canva
+    global_2d_bounding_box = Bnd_Box2d()
+
+    polylines = []
+    for visible_edge in visible_edges:
+        visible_svg_line, visible_edge_box2d = edge_to_svg_polyline(visible_edge, 0.1, unit)
+        polylines.append(visible_svg_line)
+        global_2d_bounding_box.Add(visible_edge_box2d)
+    if export_hidden_edges:
+        for hidden_edge in hidden_edges:
+            hidden_svg_line, hidden_edge_box2d = edge_to_svg_polyline(hidden_edge, 0.1, unit)
+            # hidden lines are dashed style
+            hidden_svg_line.dasharray([5, 5])
+            polylines.append(hidden_svg_line)
+            global_2d_bounding_box.Add(hidden_edge_box2d)
+
+    # translate and scale polylines
+
+    # first compute shape translation and scale according to size/margins
+    x_min, y_min, x_max, y_max = global_2d_bounding_box.Get()
+    bb2d_width = x_max - x_min
+    bb2d_height = y_max - y_min
+
+    # build the svg drawing
+    dwg = svgwrite.Drawing(filename, (width, height), debug=True)
+    # adjust the view box so that the lines fit then svg canvas
+    dwg.viewbox(x_min - margin_left, y_min - margin_top,
+                bb2d_width + 2 * margin_left, bb2d_height + 2 * margin_top)
+
+    for polyline in polylines:
+        # apply color and style
+        polyline.stroke(color, width=line_width, linecap="round")
+        # then adds the polyline to the svg canva
+        dwg.add(polyline)
+
+    # export to string or file according to the user choice
+    if filename is not None:
+        dwg.save()
+        if not os.path.isfile(filename):
+            raise AssertionError("svg export failed")
+        print("Shape successfully exported to %s" % filename)
+        return True
+    return dwg.tostring()
