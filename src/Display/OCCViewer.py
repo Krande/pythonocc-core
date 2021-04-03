@@ -52,8 +52,8 @@ from OCC.Core.Graphic3d import (Graphic3d_NOM_NEON_GNC, Graphic3d_NOT_ENV_CLOUDS
                                 Graphic3d_RenderingParams,
                                 Graphic3d_MaterialAspect,
                                 Graphic3d_TOSM_FRAGMENT,
-                                Graphic3d_Structure
-                                )
+                                Graphic3d_Structure,
+                                Graphic3d_GraduatedTrihedron)
 from OCC.Core.Aspect import (Aspect_TOTP_RIGHT_LOWER, Aspect_FM_STRETCH,
                              Aspect_FM_NONE)
 
@@ -202,9 +202,6 @@ class Viewer3d(Display3d):
         # necessary for text rendering
         self._struc_mgr = self.Context.MainPrsMgr().StructureManager()
 
-        # by default, enable antialisaing
-        self.EnableAntiAliasing()
-
         # turn self._inited flag to True
         self._inited = True
 
@@ -327,7 +324,8 @@ class Viewer3d(Display3d):
         self.View.Dump(image_filename)
 
     def display_graduated_trihedron(self):
-        self.View.GraduatedTrihedronDisplay()
+        a_trihedron_data = Graphic3d_GraduatedTrihedron()
+        self.View.GraduatedTrihedronDisplay(a_trihedron_data)
 
     def display_triedron(self):
         """ Show a black triedron in lower right corner
