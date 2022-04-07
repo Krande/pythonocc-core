@@ -1,11 +1,11 @@
-{% set version = "7.5.3" %}
+{% set version = "7.6.1" %}
 
 package:
   name: pythonocc-core
   version: {{ version }}
 
 source:
-  path: ../..
+  git_url: https://github.com/tpaviot/pythonocc-core.git
 
 
 build:
@@ -24,13 +24,13 @@ requirements:
     - swig >=3.0.11
 
   host:
-    - python {{ python }}
-    - occt ==7.5.3
+    - python
+    - occt =={{ version }}
     - numpy >=1.17
 
   run:
-    - occt ==7.5.3
     - python
+    - occt =={{ version }}
     - six
     - numpy >=1.17
 
@@ -39,11 +39,11 @@ test:
     - OCC
     - OCC.Core.BRepPrimAPI
   requires:
-    - pyqt >=5
+#    - pyqt >=5
     - mypy
     - svgwrite
-    - wxpython >=4
-    - pyside2 >=5
+#    - wxpython >=4
+#    - pyside2 >=5
 
 about:
   home: https://github.com/tpaviot/pythonocc-core
