@@ -6,6 +6,7 @@ on:
       - src/**
       - ci/**
       - .github/workflows/ci-daily-build.yml
+      - CMakeLists.txt
     branches:
       - master
 jobs:
