@@ -22,7 +22,7 @@ project(PYTHONOCC)
 # set pythonOCC version
 set(PYTHONOCC_VERSION_MAJOR 7)
 set(PYTHONOCC_VERSION_MINOR 5)
-set(PYTHONOCC_VERSION_PATCH 3)
+set(PYTHONOCC_VERSION_PATCH 2)
 
 #  Empty for official releases, set to -dev, -rc1, etc for development releases
 set(PYTHONOCC_VERSION_DEVEL )
@@ -148,7 +148,7 @@ if(DEFINED OCE_INCLUDE_PATH)
 # if OCE_INCLUDE_PATH is not passed at command line,
 # find OCE automatically
 else(OCE_INCLUDE_PATH)
-  find_package(OpenCASCADE 7.6.1 REQUIRED)
+  find_package(OpenCASCADE ${PYTHONOCC_VERSION_MAJOR}.${PYTHONOCC_VERSION_MINOR}.${PYTHONOCC_VERSION_PATCH} REQUIRED)
   if(OpenCASCADE_FOUND)
     message(STATUS "OpenCASCADE version found: " ${OpenCASCADE_MAJOR_VERSION} "." ${OpenCASCADE_MINOR_VERSION} "." ${OpenCASCADE_MAINTENANCE_VERSION})
     message(STATUS "OpenCASCADE include directory: " ${OpenCASCADE_INCLUDE_DIR})
