@@ -77,7 +77,6 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<Extrema_HArray2OfPOnCurv.hxx>
 #include<Extrema_HArray2OfPOnCurv2d.hxx>
 #include<Extrema_HArray2OfPOnSurf.hxx>
-#include<Extrema_HArray2OfPOnSurfParams.hxx>
 #include<Extrema_HUBTreeOfSphere.hxx>
 #include<Extrema_LocECC.hxx>
 #include<Extrema_LocECC2d.hxx>

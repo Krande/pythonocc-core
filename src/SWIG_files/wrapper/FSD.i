@@ -89,10 +89,6 @@ typedef std::fstream FSD_FStream;
 /* python proxy for excluded classes */
 %pythoncode {
 @classnotwrapped
-class FSD_Base64Decoder:
-	pass
-
-@classnotwrapped
 class FSD_File:
 	pass
 

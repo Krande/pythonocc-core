@@ -55,38 +55,15 @@ from enum import IntEnum
 from OCC.Core.Exception import *
 };
 
-/* public enums */
-enum TCollection_Side {
-	TCollection_Left = 0,
-	TCollection_Right = 1,
-};
-
-/* end public enums declaration */
-
-/* python proy classes for enums */
-%pythoncode {
-
-class TCollection_Side(IntEnum):
-	TCollection_Left = 0
-	TCollection_Right = 1
-TCollection_Left = TCollection_Side.TCollection_Left
-TCollection_Right = TCollection_Side.TCollection_Right
-};
-/* end python proxy for enums */
-
 /* handles */
 %wrap_handle(TCollection_HAsciiString)
 %wrap_handle(TCollection_HExtendedString)
-%wrap_handle(TCollection_MapNode)
-%wrap_handle(TCollection_SeqNode)
 /* end handles declaration */
 
 /* templates */
 /* end templates declaration */
 
 /* typedefs */
-typedef TCollection_MapNode * TCollection_MapNodePtr;
-typedef TCollection_SeqNode * TCollection_SeqNodePtr;
 /* end typedefs declaration */
 
 /********************
@@ -4020,106 +3997,3 @@ Standard_ExtCharacter
 	__repr__ = _dumps_object
 	}
 };
-
-/****************************
-* class TCollection_MapNode *
-****************************/
-class TCollection_MapNode : public Standard_Transient {
-	public:
-		/****************** TCollection_MapNode ******************/
-		/**** md5 signature: 8ef7c4db0c33b6cca1484b228821b316 ****/
-		%feature("compactdefaultargs") TCollection_MapNode;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-n: TCollection_MapNodePtr
-
-Returns
--------
-None
-") TCollection_MapNode;
-		 TCollection_MapNode(const TCollection_MapNodePtr & n);
-
-		/****************** Next ******************/
-		/**** md5 signature: 004eb29eeedb7cd2aa82c1dd61c2d193 ****/
-		%feature("compactdefaultargs") Next;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-TCollection_MapNodePtr
-") Next;
-		TCollection_MapNodePtr & Next();
-
-};
-
-
-%make_alias(TCollection_MapNode)
-
-%extend TCollection_MapNode {
-	%pythoncode {
-	__repr__ = _dumps_object
-	}
-};
-
-/****************************
-* class TCollection_SeqNode *
-****************************/
-class TCollection_SeqNode : public Standard_Transient {
-	public:
-		/****************** TCollection_SeqNode ******************/
-		/**** md5 signature: ca459acccb03ff254b9fad899af111e8 ****/
-		%feature("compactdefaultargs") TCollection_SeqNode;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-n: TCollection_SeqNodePtr
-p: TCollection_SeqNodePtr
-
-Returns
--------
-None
-") TCollection_SeqNode;
-		 TCollection_SeqNode(const TCollection_SeqNodePtr & n, const TCollection_SeqNodePtr & p);
-
-		/****************** Next ******************/
-		/**** md5 signature: 23248815da0e6934b1f8d60aecd98900 ****/
-		%feature("compactdefaultargs") Next;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-TCollection_SeqNodePtr
-") Next;
-		TCollection_SeqNodePtr & Next();
-
-		/****************** Previous ******************/
-		/**** md5 signature: 31e9b8d85f3792b214edbd0ecd1021c6 ****/
-		%feature("compactdefaultargs") Previous;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-TCollection_SeqNodePtr
-") Previous;
-		TCollection_SeqNodePtr & Previous();
-
-};
-
-
-%make_alias(TCollection_SeqNode)
-
-%extend TCollection_SeqNode {
-	%pythoncode {
-	__repr__ = _dumps_object
-	}
-};
-
-/* harray1 classes */
-/* harray2 classes */
-/* hsequence classes */
-/* class aliases */
-%pythoncode {
-}
