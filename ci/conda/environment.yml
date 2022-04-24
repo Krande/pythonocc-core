@@ -1,4 +1,4 @@
-name: conda-build
+name: condabuild
 channels:
   - conda-forge
 dependencies:
@@ -6,9 +6,10 @@ dependencies:
   - conda-verify
   - anaconda-client
   - ninja
-  - doxygen
-  - ripgrep
-  - pip
-  - pip:
-      - --extra-index-url https://lief.s3-website.fr-par.scw.cloud/latest
-      - lief==0.13.0.dev0
+  - libarchive
+#  - doxygen
+#  - ripgrep
+#  - pip
+#  - pip:
+#      - --extra-index-url https://lief.s3-website.fr-par.scw.cloud/latest
+#      - lief==0.13.0.dev0

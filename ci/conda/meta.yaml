@@ -5,7 +5,7 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/tpaviot/pythonocc-core.git
+  path: ../../
 
 
 build:
