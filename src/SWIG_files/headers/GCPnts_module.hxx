@@ -26,6 +26,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<GCPnts_DistFunction2d.hxx>
 #include<GCPnts_QuasiUniformAbscissa.hxx>
 #include<GCPnts_QuasiUniformDeflection.hxx>
+#include<GCPnts_TCurveTypes.hxx>
 #include<GCPnts_TangentialDeflection.hxx>
 #include<GCPnts_UniformAbscissa.hxx>
 #include<GCPnts_UniformDeflection.hxx>

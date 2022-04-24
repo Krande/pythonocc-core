@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define STEPBASICDOCSTRING
 "StepBasic module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_stepbasic.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_stepbasic.html"
 %enddef
 %module (package="OCC.Core", docstring=STEPBASICDOCSTRING) StepBasic
 
@@ -71,16 +71,29 @@ from OCC.Core.Exception import *
 };
 
 /* public enums */
-enum StepBasic_Source {
-	StepBasic_sMade = 0,
-	StepBasic_sBought = 1,
-	StepBasic_sNotKnown = 2,
-};
-
 enum StepBasic_AheadOrBehind {
 	StepBasic_aobAhead = 0,
 	StepBasic_aobExact = 1,
 	StepBasic_aobBehind = 2,
+};
+
+enum StepBasic_SiPrefix {
+	StepBasic_spExa = 0,
+	StepBasic_spPeta = 1,
+	StepBasic_spTera = 2,
+	StepBasic_spGiga = 3,
+	StepBasic_spMega = 4,
+	StepBasic_spKilo = 5,
+	StepBasic_spHecto = 6,
+	StepBasic_spDeca = 7,
+	StepBasic_spDeci = 8,
+	StepBasic_spCenti = 9,
+	StepBasic_spMilli = 10,
+	StepBasic_spMicro = 11,
+	StepBasic_spNano = 12,
+	StepBasic_spPico = 13,
+	StepBasic_spFemto = 14,
+	StepBasic_spAtto = 15,
 };
 
 enum StepBasic_SiUnitName {
@@ -114,37 +127,16 @@ enum StepBasic_SiUnitName {
 	StepBasic_sunSievert = 27,
 };
 
-enum StepBasic_SiPrefix {
-	StepBasic_spExa = 0,
-	StepBasic_spPeta = 1,
-	StepBasic_spTera = 2,
-	StepBasic_spGiga = 3,
-	StepBasic_spMega = 4,
-	StepBasic_spKilo = 5,
-	StepBasic_spHecto = 6,
-	StepBasic_spDeca = 7,
-	StepBasic_spDeci = 8,
-	StepBasic_spCenti = 9,
-	StepBasic_spMilli = 10,
-	StepBasic_spMicro = 11,
-	StepBasic_spNano = 12,
-	StepBasic_spPico = 13,
-	StepBasic_spFemto = 14,
-	StepBasic_spAtto = 15,
+enum StepBasic_Source {
+	StepBasic_sMade = 0,
+	StepBasic_sBought = 1,
+	StepBasic_sNotKnown = 2,
 };
 
 /* end public enums declaration */
 
 /* python proy classes for enums */
 %pythoncode {
-
-class StepBasic_Source(IntEnum):
-	StepBasic_sMade = 0
-	StepBasic_sBought = 1
-	StepBasic_sNotKnown = 2
-StepBasic_sMade = StepBasic_Source.StepBasic_sMade
-StepBasic_sBought = StepBasic_Source.StepBasic_sBought
-StepBasic_sNotKnown = StepBasic_Source.StepBasic_sNotKnown
 
 class StepBasic_AheadOrBehind(IntEnum):
 	StepBasic_aobAhead = 0
@@ -153,6 +145,40 @@ class StepBasic_AheadOrBehind(IntEnum):
 StepBasic_aobAhead = StepBasic_AheadOrBehind.StepBasic_aobAhead
 StepBasic_aobExact = StepBasic_AheadOrBehind.StepBasic_aobExact
 StepBasic_aobBehind = StepBasic_AheadOrBehind.StepBasic_aobBehind
+
+class StepBasic_SiPrefix(IntEnum):
+	StepBasic_spExa = 0
+	StepBasic_spPeta = 1
+	StepBasic_spTera = 2
+	StepBasic_spGiga = 3
+	StepBasic_spMega = 4
+	StepBasic_spKilo = 5
+	StepBasic_spHecto = 6
+	StepBasic_spDeca = 7
+	StepBasic_spDeci = 8
+	StepBasic_spCenti = 9
+	StepBasic_spMilli = 10
+	StepBasic_spMicro = 11
+	StepBasic_spNano = 12
+	StepBasic_spPico = 13
+	StepBasic_spFemto = 14
+	StepBasic_spAtto = 15
+StepBasic_spExa = StepBasic_SiPrefix.StepBasic_spExa
+StepBasic_spPeta = StepBasic_SiPrefix.StepBasic_spPeta
+StepBasic_spTera = StepBasic_SiPrefix.StepBasic_spTera
+StepBasic_spGiga = StepBasic_SiPrefix.StepBasic_spGiga
+StepBasic_spMega = StepBasic_SiPrefix.StepBasic_spMega
+StepBasic_spKilo = StepBasic_SiPrefix.StepBasic_spKilo
+StepBasic_spHecto = StepBasic_SiPrefix.StepBasic_spHecto
+StepBasic_spDeca = StepBasic_SiPrefix.StepBasic_spDeca
+StepBasic_spDeci = StepBasic_SiPrefix.StepBasic_spDeci
+StepBasic_spCenti = StepBasic_SiPrefix.StepBasic_spCenti
+StepBasic_spMilli = StepBasic_SiPrefix.StepBasic_spMilli
+StepBasic_spMicro = StepBasic_SiPrefix.StepBasic_spMicro
+StepBasic_spNano = StepBasic_SiPrefix.StepBasic_spNano
+StepBasic_spPico = StepBasic_SiPrefix.StepBasic_spPico
+StepBasic_spFemto = StepBasic_SiPrefix.StepBasic_spFemto
+StepBasic_spAtto = StepBasic_SiPrefix.StepBasic_spAtto
 
 class StepBasic_SiUnitName(IntEnum):
 	StepBasic_sunMetre = 0
@@ -212,39 +238,13 @@ StepBasic_sunBecquerel = StepBasic_SiUnitName.StepBasic_sunBecquerel
 StepBasic_sunGray = StepBasic_SiUnitName.StepBasic_sunGray
 StepBasic_sunSievert = StepBasic_SiUnitName.StepBasic_sunSievert
 
-class StepBasic_SiPrefix(IntEnum):
-	StepBasic_spExa = 0
-	StepBasic_spPeta = 1
-	StepBasic_spTera = 2
-	StepBasic_spGiga = 3
-	StepBasic_spMega = 4
-	StepBasic_spKilo = 5
-	StepBasic_spHecto = 6
-	StepBasic_spDeca = 7
-	StepBasic_spDeci = 8
-	StepBasic_spCenti = 9
-	StepBasic_spMilli = 10
-	StepBasic_spMicro = 11
-	StepBasic_spNano = 12
-	StepBasic_spPico = 13
-	StepBasic_spFemto = 14
-	StepBasic_spAtto = 15
-StepBasic_spExa = StepBasic_SiPrefix.StepBasic_spExa
-StepBasic_spPeta = StepBasic_SiPrefix.StepBasic_spPeta
-StepBasic_spTera = StepBasic_SiPrefix.StepBasic_spTera
-StepBasic_spGiga = StepBasic_SiPrefix.StepBasic_spGiga
-StepBasic_spMega = StepBasic_SiPrefix.StepBasic_spMega
-StepBasic_spKilo = StepBasic_SiPrefix.StepBasic_spKilo
-StepBasic_spHecto = StepBasic_SiPrefix.StepBasic_spHecto
-StepBasic_spDeca = StepBasic_SiPrefix.StepBasic_spDeca
-StepBasic_spDeci = StepBasic_SiPrefix.StepBasic_spDeci
-StepBasic_spCenti = StepBasic_SiPrefix.StepBasic_spCenti
-StepBasic_spMilli = StepBasic_SiPrefix.StepBasic_spMilli
-StepBasic_spMicro = StepBasic_SiPrefix.StepBasic_spMicro
-StepBasic_spNano = StepBasic_SiPrefix.StepBasic_spNano
-StepBasic_spPico = StepBasic_SiPrefix.StepBasic_spPico
-StepBasic_spFemto = StepBasic_SiPrefix.StepBasic_spFemto
-StepBasic_spAtto = StepBasic_SiPrefix.StepBasic_spAtto
+class StepBasic_Source(IntEnum):
+	StepBasic_sMade = 0
+	StepBasic_sBought = 1
+	StepBasic_sNotKnown = 2
+StepBasic_sMade = StepBasic_Source.StepBasic_sMade
+StepBasic_sBought = StepBasic_Source.StepBasic_sBought
+StepBasic_sNotKnown = StepBasic_Source.StepBasic_sNotKnown
 };
 /* end python proxy for enums */
 
@@ -383,16 +383,16 @@ StepBasic_spAtto = StepBasic_SiPrefix.StepBasic_spAtto
 %wrap_handle(StepBasic_SiUnitAndThermodynamicTemperatureUnit)
 %wrap_handle(StepBasic_SiUnitAndTimeUnit)
 %wrap_handle(StepBasic_SiUnitAndVolumeUnit)
-%wrap_handle(StepBasic_HArray1OfOrganization)
-%wrap_handle(StepBasic_HArray1OfProductDefinition)
-%wrap_handle(StepBasic_HArray1OfDerivedUnitElement)
-%wrap_handle(StepBasic_HArray1OfPerson)
-%wrap_handle(StepBasic_HArray1OfUncertaintyMeasureWithUnit)
 %wrap_handle(StepBasic_HArray1OfApproval)
-%wrap_handle(StepBasic_HArray1OfNamedUnit)
-%wrap_handle(StepBasic_HArray1OfProductContext)
+%wrap_handle(StepBasic_HArray1OfDerivedUnitElement)
 %wrap_handle(StepBasic_HArray1OfDocument)
+%wrap_handle(StepBasic_HArray1OfNamedUnit)
+%wrap_handle(StepBasic_HArray1OfOrganization)
+%wrap_handle(StepBasic_HArray1OfPerson)
 %wrap_handle(StepBasic_HArray1OfProduct)
+%wrap_handle(StepBasic_HArray1OfProductContext)
+%wrap_handle(StepBasic_HArray1OfProductDefinition)
+%wrap_handle(StepBasic_HArray1OfUncertaintyMeasureWithUnit)
 /* end handles declaration */
 
 /* templates */
@@ -13972,26 +13972,15 @@ opencascade::handle<StepBasic_VolumeUnit>
 
 /* harray1 classes */
 
-class StepBasic_HArray1OfOrganization : public StepBasic_Array1OfOrganization, public Standard_Transient {
+class StepBasic_HArray1OfApproval : public StepBasic_Array1OfApproval, public Standard_Transient {
   public:
-    StepBasic_HArray1OfOrganization(const Standard_Integer theLower, const Standard_Integer theUpper);
-    StepBasic_HArray1OfOrganization(const Standard_Integer theLower, const Standard_Integer theUpper, const StepBasic_Array1OfOrganization::value_type& theValue);
-    StepBasic_HArray1OfOrganization(const StepBasic_Array1OfOrganization& theOther);
-    const StepBasic_Array1OfOrganization& Array1();
-    StepBasic_Array1OfOrganization& ChangeArray1();
+    StepBasic_HArray1OfApproval(const Standard_Integer theLower, const Standard_Integer theUpper);
+    StepBasic_HArray1OfApproval(const Standard_Integer theLower, const Standard_Integer theUpper, const StepBasic_Array1OfApproval::value_type& theValue);
+    StepBasic_HArray1OfApproval(const StepBasic_Array1OfApproval& theOther);
+    const StepBasic_Array1OfApproval& Array1();
+    StepBasic_Array1OfApproval& ChangeArray1();
 };
-%make_alias(StepBasic_HArray1OfOrganization)
-
-
-class StepBasic_HArray1OfProductDefinition : public StepBasic_Array1OfProductDefinition, public Standard_Transient {
-  public:
-    StepBasic_HArray1OfProductDefinition(const Standard_Integer theLower, const Standard_Integer theUpper);
-    StepBasic_HArray1OfProductDefinition(const Standard_Integer theLower, const Standard_Integer theUpper, const StepBasic_Array1OfProductDefinition::value_type& theValue);
-    StepBasic_HArray1OfProductDefinition(const StepBasic_Array1OfProductDefinition& theOther);
-    const StepBasic_Array1OfProductDefinition& Array1();
-    StepBasic_Array1OfProductDefinition& ChangeArray1();
-};
-%make_alias(StepBasic_HArray1OfProductDefinition)
+%make_alias(StepBasic_HArray1OfApproval)
 
 
 class StepBasic_HArray1OfDerivedUnitElement : public StepBasic_Array1OfDerivedUnitElement, public Standard_Transient {
@@ -14005,37 +13994,15 @@ class StepBasic_HArray1OfDerivedUnitElement : public StepBasic_Array1OfDerivedUn
 %make_alias(StepBasic_HArray1OfDerivedUnitElement)
 
 
-class StepBasic_HArray1OfPerson : public StepBasic_Array1OfPerson, public Standard_Transient {
+class StepBasic_HArray1OfDocument : public StepBasic_Array1OfDocument, public Standard_Transient {
   public:
-    StepBasic_HArray1OfPerson(const Standard_Integer theLower, const Standard_Integer theUpper);
-    StepBasic_HArray1OfPerson(const Standard_Integer theLower, const Standard_Integer theUpper, const StepBasic_Array1OfPerson::value_type& theValue);
-    StepBasic_HArray1OfPerson(const StepBasic_Array1OfPerson& theOther);
-    const StepBasic_Array1OfPerson& Array1();
-    StepBasic_Array1OfPerson& ChangeArray1();
+    StepBasic_HArray1OfDocument(const Standard_Integer theLower, const Standard_Integer theUpper);
+    StepBasic_HArray1OfDocument(const Standard_Integer theLower, const Standard_Integer theUpper, const StepBasic_Array1OfDocument::value_type& theValue);
+    StepBasic_HArray1OfDocument(const StepBasic_Array1OfDocument& theOther);
+    const StepBasic_Array1OfDocument& Array1();
+    StepBasic_Array1OfDocument& ChangeArray1();
 };
-%make_alias(StepBasic_HArray1OfPerson)
-
-
-class StepBasic_HArray1OfUncertaintyMeasureWithUnit : public StepBasic_Array1OfUncertaintyMeasureWithUnit, public Standard_Transient {
-  public:
-    StepBasic_HArray1OfUncertaintyMeasureWithUnit(const Standard_Integer theLower, const Standard_Integer theUpper);
-    StepBasic_HArray1OfUncertaintyMeasureWithUnit(const Standard_Integer theLower, const Standard_Integer theUpper, const StepBasic_Array1OfUncertaintyMeasureWithUnit::value_type& theValue);
-    StepBasic_HArray1OfUncertaintyMeasureWithUnit(const StepBasic_Array1OfUncertaintyMeasureWithUnit& theOther);
-    const StepBasic_Array1OfUncertaintyMeasureWithUnit& Array1();
-    StepBasic_Array1OfUncertaintyMeasureWithUnit& ChangeArray1();
-};
-%make_alias(StepBasic_HArray1OfUncertaintyMeasureWithUnit)
-
-
-class StepBasic_HArray1OfApproval : public StepBasic_Array1OfApproval, public Standard_Transient {
-  public:
-    StepBasic_HArray1OfApproval(const Standard_Integer theLower, const Standard_Integer theUpper);
-    StepBasic_HArray1OfApproval(const Standard_Integer theLower, const Standard_Integer theUpper, const StepBasic_Array1OfApproval::value_type& theValue);
-    StepBasic_HArray1OfApproval(const StepBasic_Array1OfApproval& theOther);
-    const StepBasic_Array1OfApproval& Array1();
-    StepBasic_Array1OfApproval& ChangeArray1();
-};
-%make_alias(StepBasic_HArray1OfApproval)
+%make_alias(StepBasic_HArray1OfDocument)
 
 
 class StepBasic_HArray1OfNamedUnit : public StepBasic_Array1OfNamedUnit, public Standard_Transient {
@@ -14049,26 +14016,26 @@ class StepBasic_HArray1OfNamedUnit : public StepBasic_Array1OfNamedUnit, public 
 %make_alias(StepBasic_HArray1OfNamedUnit)
 
 
-class StepBasic_HArray1OfProductContext : public StepBasic_Array1OfProductContext, public Standard_Transient {
+class StepBasic_HArray1OfOrganization : public StepBasic_Array1OfOrganization, public Standard_Transient {
   public:
-    StepBasic_HArray1OfProductContext(const Standard_Integer theLower, const Standard_Integer theUpper);
-    StepBasic_HArray1OfProductContext(const Standard_Integer theLower, const Standard_Integer theUpper, const StepBasic_Array1OfProductContext::value_type& theValue);
-    StepBasic_HArray1OfProductContext(const StepBasic_Array1OfProductContext& theOther);
-    const StepBasic_Array1OfProductContext& Array1();
-    StepBasic_Array1OfProductContext& ChangeArray1();
+    StepBasic_HArray1OfOrganization(const Standard_Integer theLower, const Standard_Integer theUpper);
+    StepBasic_HArray1OfOrganization(const Standard_Integer theLower, const Standard_Integer theUpper, const StepBasic_Array1OfOrganization::value_type& theValue);
+    StepBasic_HArray1OfOrganization(const StepBasic_Array1OfOrganization& theOther);
+    const StepBasic_Array1OfOrganization& Array1();
+    StepBasic_Array1OfOrganization& ChangeArray1();
 };
-%make_alias(StepBasic_HArray1OfProductContext)
+%make_alias(StepBasic_HArray1OfOrganization)
 
 
-class StepBasic_HArray1OfDocument : public StepBasic_Array1OfDocument, public Standard_Transient {
+class StepBasic_HArray1OfPerson : public StepBasic_Array1OfPerson, public Standard_Transient {
   public:
-    StepBasic_HArray1OfDocument(const Standard_Integer theLower, const Standard_Integer theUpper);
-    StepBasic_HArray1OfDocument(const Standard_Integer theLower, const Standard_Integer theUpper, const StepBasic_Array1OfDocument::value_type& theValue);
-    StepBasic_HArray1OfDocument(const StepBasic_Array1OfDocument& theOther);
-    const StepBasic_Array1OfDocument& Array1();
-    StepBasic_Array1OfDocument& ChangeArray1();
+    StepBasic_HArray1OfPerson(const Standard_Integer theLower, const Standard_Integer theUpper);
+    StepBasic_HArray1OfPerson(const Standard_Integer theLower, const Standard_Integer theUpper, const StepBasic_Array1OfPerson::value_type& theValue);
+    StepBasic_HArray1OfPerson(const StepBasic_Array1OfPerson& theOther);
+    const StepBasic_Array1OfPerson& Array1();
+    StepBasic_Array1OfPerson& ChangeArray1();
 };
-%make_alias(StepBasic_HArray1OfDocument)
+%make_alias(StepBasic_HArray1OfPerson)
 
 
 class StepBasic_HArray1OfProduct : public StepBasic_Array1OfProduct, public Standard_Transient {
@@ -14080,6 +14047,39 @@ class StepBasic_HArray1OfProduct : public StepBasic_Array1OfProduct, public Stan
     StepBasic_Array1OfProduct& ChangeArray1();
 };
 %make_alias(StepBasic_HArray1OfProduct)
+
+
+class StepBasic_HArray1OfProductContext : public StepBasic_Array1OfProductContext, public Standard_Transient {
+  public:
+    StepBasic_HArray1OfProductContext(const Standard_Integer theLower, const Standard_Integer theUpper);
+    StepBasic_HArray1OfProductContext(const Standard_Integer theLower, const Standard_Integer theUpper, const StepBasic_Array1OfProductContext::value_type& theValue);
+    StepBasic_HArray1OfProductContext(const StepBasic_Array1OfProductContext& theOther);
+    const StepBasic_Array1OfProductContext& Array1();
+    StepBasic_Array1OfProductContext& ChangeArray1();
+};
+%make_alias(StepBasic_HArray1OfProductContext)
+
+
+class StepBasic_HArray1OfProductDefinition : public StepBasic_Array1OfProductDefinition, public Standard_Transient {
+  public:
+    StepBasic_HArray1OfProductDefinition(const Standard_Integer theLower, const Standard_Integer theUpper);
+    StepBasic_HArray1OfProductDefinition(const Standard_Integer theLower, const Standard_Integer theUpper, const StepBasic_Array1OfProductDefinition::value_type& theValue);
+    StepBasic_HArray1OfProductDefinition(const StepBasic_Array1OfProductDefinition& theOther);
+    const StepBasic_Array1OfProductDefinition& Array1();
+    StepBasic_Array1OfProductDefinition& ChangeArray1();
+};
+%make_alias(StepBasic_HArray1OfProductDefinition)
+
+
+class StepBasic_HArray1OfUncertaintyMeasureWithUnit : public StepBasic_Array1OfUncertaintyMeasureWithUnit, public Standard_Transient {
+  public:
+    StepBasic_HArray1OfUncertaintyMeasureWithUnit(const Standard_Integer theLower, const Standard_Integer theUpper);
+    StepBasic_HArray1OfUncertaintyMeasureWithUnit(const Standard_Integer theLower, const Standard_Integer theUpper, const StepBasic_Array1OfUncertaintyMeasureWithUnit::value_type& theValue);
+    StepBasic_HArray1OfUncertaintyMeasureWithUnit(const StepBasic_Array1OfUncertaintyMeasureWithUnit& theOther);
+    const StepBasic_Array1OfUncertaintyMeasureWithUnit& Array1();
+    StepBasic_Array1OfUncertaintyMeasureWithUnit& ChangeArray1();
+};
+%make_alias(StepBasic_HArray1OfUncertaintyMeasureWithUnit)
 
 /* harray2 classes */
 /* hsequence classes */

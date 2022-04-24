@@ -86,6 +86,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<RWStepGeom_RWReparametrisedCompositeCurveSegment.hxx>
 #include<RWStepGeom_RWSeamCurve.hxx>
 #include<RWStepGeom_RWSphericalSurface.hxx>
+#include<RWStepGeom_RWSuParameters.hxx>
 #include<RWStepGeom_RWSurface.hxx>
 #include<RWStepGeom_RWSurfaceCurve.hxx>
 #include<RWStepGeom_RWSurfaceCurveAndBoundedCurve.hxx>

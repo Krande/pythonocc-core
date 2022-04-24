@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define XMLMNAMINGDOCSTRING
 "XmlMNaming module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_xmlmnaming.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_xmlmnaming.html"
 %enddef
 %module (package="OCC.Core", docstring=XMLMNAMINGDOCSTRING) XmlMNaming
 
@@ -47,6 +47,7 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_xmlmnaming.html"
 #include<TopTools_module.hxx>
 #include<TDF_module.hxx>
 #include<XmlObjMgt_module.hxx>
+#include<TDocStd_module.hxx>
 #include<TopAbs_module.hxx>
 #include<TopoDS_module.hxx>
 #include<Message_module.hxx>
@@ -64,6 +65,7 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_xmlmnaming.html"
 %import TopTools.i
 %import TDF.i
 %import XmlObjMgt.i
+%import TDocStd.i
 %import TopAbs.i
 %import TopoDS.i
 
@@ -227,13 +229,14 @@ None
 		void ReadShapeSection(const XmlObjMgt_Element & anElement, const Message_ProgressRange & theRange = Message_ProgressRange());
 
 		/****************** WriteShapeSection ******************/
-		/**** md5 signature: 369a490310d07df73743dbe50728e246 ****/
+		/**** md5 signature: 69a365d33444b456e6642133619c034f ****/
 		%feature("compactdefaultargs") WriteShapeSection;
 		%feature("autodoc", "Output the shapes into dom element.
 
 Parameters
 ----------
 anElement: XmlObjMgt_Element
+theStorageFormatVersion: TDocStd_FormatVersion
 theRange: Message_ProgressRange,optional
 	default value is Message_ProgressRange()
 
@@ -241,7 +244,7 @@ Returns
 -------
 None
 ") WriteShapeSection;
-		void WriteShapeSection(XmlObjMgt_Element & anElement, const Message_ProgressRange & theRange = Message_ProgressRange());
+		void WriteShapeSection(XmlObjMgt_Element & anElement, TDocStd_FormatVersion theStorageFormatVersion, const Message_ProgressRange & theRange = Message_ProgressRange());
 
 };
 

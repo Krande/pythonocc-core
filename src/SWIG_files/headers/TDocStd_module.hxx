@@ -26,6 +26,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<TDocStd_Context.hxx>
 #include<TDocStd_DataMapIteratorOfLabelIDMapDataMap.hxx>
 #include<TDocStd_Document.hxx>
+#include<TDocStd_FormatVersion.hxx>
 #include<TDocStd_LabelIDMapDataMap.hxx>
 #include<TDocStd_Modified.hxx>
 #include<TDocStd_MultiTransactionManager.hxx>

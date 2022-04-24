@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define STEPAP242DOCSTRING
 "StepAP242 module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_stepap242.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_stepap242.html"
 %enddef
 %module (package="OCC.Core", docstring=STEPAP242DOCSTRING) StepAP242
 
@@ -554,7 +554,7 @@ None
 		/****************** UsedRepresentation ******************/
 		/**** md5 signature: 31fb83363cd632dfd92cd10a687caef9 ****/
 		%feature("compactdefaultargs") UsedRepresentation;
-		%feature("autodoc", "Retuns field usedrepresentation.
+		%feature("autodoc", "Returns field usedrepresentation.
 
 Returns
 -------

@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define CSLIBDOCSTRING
 "CSLib module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_cslib.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_cslib.html"
 %enddef
 %module (package="OCC.Core", docstring=CSLIBDOCSTRING) CSLib
 
@@ -65,6 +65,16 @@ from OCC.Core.Exception import *
 };
 
 /* public enums */
+enum CSLib_DerivativeStatus {
+	CSLib_Done = 0,
+	CSLib_D1uIsNull = 1,
+	CSLib_D1vIsNull = 2,
+	CSLib_D1IsNull = 3,
+	CSLib_D1uD1vRatioIsNull = 4,
+	CSLib_D1vD1uRatioIsNull = 5,
+	CSLib_D1uIsParallelD1v = 6,
+};
+
 enum CSLib_NormalStatus {
 	CSLib_Singular = 0,
 	CSLib_Defined = 1,
@@ -77,20 +87,26 @@ enum CSLib_NormalStatus {
 	CSLib_D1NuIsParallelD1Nv = 8,
 };
 
-enum CSLib_DerivativeStatus {
-	CSLib_Done = 0,
-	CSLib_D1uIsNull = 1,
-	CSLib_D1vIsNull = 2,
-	CSLib_D1IsNull = 3,
-	CSLib_D1uD1vRatioIsNull = 4,
-	CSLib_D1vD1uRatioIsNull = 5,
-	CSLib_D1uIsParallelD1v = 6,
-};
-
 /* end public enums declaration */
 
 /* python proy classes for enums */
 %pythoncode {
+
+class CSLib_DerivativeStatus(IntEnum):
+	CSLib_Done = 0
+	CSLib_D1uIsNull = 1
+	CSLib_D1vIsNull = 2
+	CSLib_D1IsNull = 3
+	CSLib_D1uD1vRatioIsNull = 4
+	CSLib_D1vD1uRatioIsNull = 5
+	CSLib_D1uIsParallelD1v = 6
+CSLib_Done = CSLib_DerivativeStatus.CSLib_Done
+CSLib_D1uIsNull = CSLib_DerivativeStatus.CSLib_D1uIsNull
+CSLib_D1vIsNull = CSLib_DerivativeStatus.CSLib_D1vIsNull
+CSLib_D1IsNull = CSLib_DerivativeStatus.CSLib_D1IsNull
+CSLib_D1uD1vRatioIsNull = CSLib_DerivativeStatus.CSLib_D1uD1vRatioIsNull
+CSLib_D1vD1uRatioIsNull = CSLib_DerivativeStatus.CSLib_D1vD1uRatioIsNull
+CSLib_D1uIsParallelD1v = CSLib_DerivativeStatus.CSLib_D1uIsParallelD1v
 
 class CSLib_NormalStatus(IntEnum):
 	CSLib_Singular = 0
@@ -111,22 +127,6 @@ CSLib_D1NIsNull = CSLib_NormalStatus.CSLib_D1NIsNull
 CSLib_D1NuNvRatioIsNull = CSLib_NormalStatus.CSLib_D1NuNvRatioIsNull
 CSLib_D1NvNuRatioIsNull = CSLib_NormalStatus.CSLib_D1NvNuRatioIsNull
 CSLib_D1NuIsParallelD1Nv = CSLib_NormalStatus.CSLib_D1NuIsParallelD1Nv
-
-class CSLib_DerivativeStatus(IntEnum):
-	CSLib_Done = 0
-	CSLib_D1uIsNull = 1
-	CSLib_D1vIsNull = 2
-	CSLib_D1IsNull = 3
-	CSLib_D1uD1vRatioIsNull = 4
-	CSLib_D1vD1uRatioIsNull = 5
-	CSLib_D1uIsParallelD1v = 6
-CSLib_Done = CSLib_DerivativeStatus.CSLib_Done
-CSLib_D1uIsNull = CSLib_DerivativeStatus.CSLib_D1uIsNull
-CSLib_D1vIsNull = CSLib_DerivativeStatus.CSLib_D1vIsNull
-CSLib_D1IsNull = CSLib_DerivativeStatus.CSLib_D1IsNull
-CSLib_D1uD1vRatioIsNull = CSLib_DerivativeStatus.CSLib_D1uD1vRatioIsNull
-CSLib_D1vD1uRatioIsNull = CSLib_DerivativeStatus.CSLib_D1vD1uRatioIsNull
-CSLib_D1uIsParallelD1v = CSLib_DerivativeStatus.CSLib_D1uIsParallelD1v
 };
 /* end python proxy for enums */
 
@@ -222,7 +222,7 @@ theStatus: CSLib_DerivativeStatus
 		/****************** Normal ******************/
 		/**** md5 signature: c6f714a72df04467bcde57a861427ba8 ****/
 		%feature("compactdefaultargs") Normal;
-		%feature("autodoc", "If there is a singularity on the surface the previous method cannot compute the local normal. this method computes an approched normal direction of a surface. it does a limited development and needs the second derivatives on the surface as input data. it computes the normal as follow : n(u, v) = d1u ^ d1v n(u0+du,v0+dv) = n0 + dn/du(u0,v0) * du + dn/dv(u0,v0) * dv + eps with eps->0 so we can have the equivalence n ~ dn/du + dn/dv. dnu = ||dn/du|| and dnv = ||dn/dv|| //! . if dnu isnull (dnu <= resolution from gp) the answer done = true the normal direction is given by dn/dv . if dnv isnull (dnv <= resolution from gp) the answer done = true the normal direction is given by dn/du . if the two directions dn/du and dn/dv are parallel done = true the normal direction is given either by dn/du or dn/dv. to check that the two directions are colinear the sinus of the angle between these directions is computed and compared with sintol. . if dnu/dnv or dnv/dnu is lower or equal than real epsilon done = false, the normal is undefined . if dnu isnull and dnv is null done = false, there is an indetermination and we should do a limited developpement at order 2 (it means that we cannot omit eps). . if dnu is not null and dnv is not null done = false, there are an infinity of normals at the considered point on the surface.
+		%feature("autodoc", "If there is a singularity on the surface the previous method cannot compute the local normal. this method computes an approached normal direction of a surface. it does a limited development and needs the second derivatives on the surface as input data. it computes the normal as follow : n(u, v) = d1u ^ d1v n(u0+du,v0+dv) = n0 + dn/du(u0,v0) * du + dn/dv(u0,v0) * dv + eps with eps->0 so we can have the equivalence n ~ dn/du + dn/dv. dnu = ||dn/du|| and dnv = ||dn/dv|| //! . if dnu isnull (dnu <= resolution from gp) the answer done = true the normal direction is given by dn/dv . if dnv isnull (dnv <= resolution from gp) the answer done = true the normal direction is given by dn/du . if the two directions dn/du and dn/dv are parallel done = true the normal direction is given either by dn/du or dn/dv. to check that the two directions are colinear the sinus of the angle between these directions is computed and compared with sintol. . if dnu/dnv or dnv/dnu is lower or equal than real epsilon done = false, the normal is undefined . if dnu isnull and dnv is null done = false, there is an indetermination and we should do a limited development at order 2 (it means that we cannot omit eps). . if dnu is not null and dnv is not null done = false, there are an infinity of normals at the considered point on the surface.
 
 Parameters
 ----------

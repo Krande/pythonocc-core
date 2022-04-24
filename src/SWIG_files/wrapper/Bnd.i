@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define BNDDOCSTRING
 "Bnd module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_bnd.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_bnd.html"
 %enddef
 %module (package="OCC.Core", docstring=BNDDOCSTRING) Bnd
 
@@ -73,8 +73,8 @@ from OCC.Core.Exception import *
 
 /* handles */
 %wrap_handle(Bnd_HArray1OfBox)
-%wrap_handle(Bnd_HArray1OfSphere)
 %wrap_handle(Bnd_HArray1OfBox2d)
+%wrap_handle(Bnd_HArray1OfSphere)
 /* end handles declaration */
 
 /* templates */
@@ -1847,7 +1847,7 @@ None
 		/****************** Bnd_Box ******************/
 		/**** md5 signature: 8988059a3a19778057ad20076dff426e ****/
 		%feature("compactdefaultargs") Bnd_Box;
-		%feature("autodoc", "Creates a bounding box, it contains: - minimum/maximum point of bouning box, the constructed box is qualified void. its gap is null.
+		%feature("autodoc", "Creates a bounding box, it contains: - minimum/maximum point of bounding box, the constructed box is qualified void. its gap is null.
 
 Parameters
 ----------
@@ -2723,6 +2723,37 @@ Returns
 bool
 ") IsOut;
 		Standard_Boolean IsOut(const gp_Pnt2d & P);
+
+		/****************** IsOut ******************/
+		/**** md5 signature: b38b06569c00369b03abed2049a1c3e3 ****/
+		%feature("compactdefaultargs") IsOut;
+		%feature("autodoc", "Returns true if the line doesn't intersect the box.
+
+Parameters
+----------
+theL: gp_Lin2d
+
+Returns
+-------
+bool
+") IsOut;
+		Standard_Boolean IsOut(const gp_Lin2d & theL);
+
+		/****************** IsOut ******************/
+		/**** md5 signature: a23d5456f0cccf334434731d2ce66f73 ****/
+		%feature("compactdefaultargs") IsOut;
+		%feature("autodoc", "Returns true if the segment doesn't intersect the box.
+
+Parameters
+----------
+theP0: gp_Pnt2d
+theP1: gp_Pnt2d
+
+Returns
+-------
+bool
+") IsOut;
+		Standard_Boolean IsOut(const gp_Pnt2d & theP0, const gp_Pnt2d & theP1);
 
 		/****************** IsOut ******************/
 		/**** md5 signature: 76ce93721d21d2f47dd476b923763317 ****/
@@ -4037,17 +4068,6 @@ class Bnd_HArray1OfBox : public Bnd_Array1OfBox, public Standard_Transient {
 %make_alias(Bnd_HArray1OfBox)
 
 
-class Bnd_HArray1OfSphere : public Bnd_Array1OfSphere, public Standard_Transient {
-  public:
-    Bnd_HArray1OfSphere(const Standard_Integer theLower, const Standard_Integer theUpper);
-    Bnd_HArray1OfSphere(const Standard_Integer theLower, const Standard_Integer theUpper, const Bnd_Array1OfSphere::value_type& theValue);
-    Bnd_HArray1OfSphere(const Bnd_Array1OfSphere& theOther);
-    const Bnd_Array1OfSphere& Array1();
-    Bnd_Array1OfSphere& ChangeArray1();
-};
-%make_alias(Bnd_HArray1OfSphere)
-
-
 class Bnd_HArray1OfBox2d : public Bnd_Array1OfBox2d, public Standard_Transient {
   public:
     Bnd_HArray1OfBox2d(const Standard_Integer theLower, const Standard_Integer theUpper);
@@ -4057,6 +4077,17 @@ class Bnd_HArray1OfBox2d : public Bnd_Array1OfBox2d, public Standard_Transient {
     Bnd_Array1OfBox2d& ChangeArray1();
 };
 %make_alias(Bnd_HArray1OfBox2d)
+
+
+class Bnd_HArray1OfSphere : public Bnd_Array1OfSphere, public Standard_Transient {
+  public:
+    Bnd_HArray1OfSphere(const Standard_Integer theLower, const Standard_Integer theUpper);
+    Bnd_HArray1OfSphere(const Standard_Integer theLower, const Standard_Integer theUpper, const Bnd_Array1OfSphere::value_type& theValue);
+    Bnd_HArray1OfSphere(const Bnd_Array1OfSphere& theOther);
+    const Bnd_Array1OfSphere& Array1();
+    Bnd_Array1OfSphere& ChangeArray1();
+};
+%make_alias(Bnd_HArray1OfSphere)
 
 /* harray2 classes */
 /* hsequence classes */

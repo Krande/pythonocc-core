@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define TOPTRANSDOCSTRING
 "TopTrans module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_toptrans.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_toptrans.html"
 %enddef
 %module (package="OCC.Core", docstring=TOPTRANSDOCSTRING) TopTrans
 
@@ -134,7 +134,7 @@ None
 		/****************** Reset ******************/
 		/**** md5 signature: 477dbad6632871c94ebb699631f93444 ****/
 		%feature("compactdefaultargs") Reset;
-		%feature("autodoc", "Initialize a transition with the local description of a straigth line.
+		%feature("autodoc", "Initialize a transition with the local description of a straight line.
 
 Parameters
 ----------

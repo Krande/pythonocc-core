@@ -32,6 +32,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<Message_ExecStatus.hxx>
 #include<Message_Gravity.hxx>
 #include<Message_HArrayOfMsg.hxx>
+#include<Message_LazyProgressScope.hxx>
 #include<Message_Level.hxx>
 #include<Message_ListIteratorOfListOfMsg.hxx>
 #include<Message_ListOfAlert.hxx>

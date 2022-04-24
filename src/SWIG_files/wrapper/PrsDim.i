@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define PRSDIMDOCSTRING
 "PrsDim module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_prsdim.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_prsdim.html"
 %enddef
 %module (package="OCC.Core", docstring=PRSDIMDOCSTRING) PrsDim
 
@@ -96,10 +96,10 @@ enum PrsDim_DimensionSelectionMode {
 	PrsDim_DimensionSelectionMode_Text = 2,
 };
 
-enum PrsDim_TypeOfDist {
-	PrsDim_TypeOfDist_Unknown = 0,
-	PrsDim_TypeOfDist_Horizontal = 1,
-	PrsDim_TypeOfDist_Vertical = 2,
+enum PrsDim_DisplaySpecialSymbol {
+	PrsDim_DisplaySpecialSymbol_No = 0,
+	PrsDim_DisplaySpecialSymbol_Before = 1,
+	PrsDim_DisplaySpecialSymbol_After = 2,
 };
 
 enum PrsDim_KindOfDimension {
@@ -119,24 +119,6 @@ enum PrsDim_KindOfDimension {
 	PrsDim_KOD_ELLIPSERADIUS = 13,
 };
 
-enum PrsDim_TypeOfAngleArrowVisibility {
-	PrsDim_TypeOfAngleArrowVisibility_Both = 0,
-	PrsDim_TypeOfAngleArrowVisibility_First = 1,
-	PrsDim_TypeOfAngleArrowVisibility_Second = 2,
-	PrsDim_TypeOfAngleArrowVisibility_None = 3,
-};
-
-enum PrsDim_KindOfSurface {
-	PrsDim_KOS_Plane = 0,
-	PrsDim_KOS_Cylinder = 1,
-	PrsDim_KOS_Cone = 2,
-	PrsDim_KOS_Sphere = 3,
-	PrsDim_KOS_Torus = 4,
-	PrsDim_KOS_Revolution = 5,
-	PrsDim_KOS_Extrusion = 6,
-	PrsDim_KOS_OtherSurface = 7,
-};
-
 enum PrsDim_KindOfRelation {
 	PrsDim_KOR_NONE = 0,
 	PrsDim_KOR_CONCENTRIC = 1,
@@ -151,15 +133,33 @@ enum PrsDim_KindOfRelation {
 	PrsDim_KOR_SYMMETRIC = 10,
 };
 
-enum PrsDim_DisplaySpecialSymbol {
-	PrsDim_DisplaySpecialSymbol_No = 0,
-	PrsDim_DisplaySpecialSymbol_Before = 1,
-	PrsDim_DisplaySpecialSymbol_After = 2,
+enum PrsDim_KindOfSurface {
+	PrsDim_KOS_Plane = 0,
+	PrsDim_KOS_Cylinder = 1,
+	PrsDim_KOS_Cone = 2,
+	PrsDim_KOS_Sphere = 3,
+	PrsDim_KOS_Torus = 4,
+	PrsDim_KOS_Revolution = 5,
+	PrsDim_KOS_Extrusion = 6,
+	PrsDim_KOS_OtherSurface = 7,
 };
 
 enum PrsDim_TypeOfAngle {
 	PrsDim_TypeOfAngle_Interior = 0,
 	PrsDim_TypeOfAngle_Exterior = 1,
+};
+
+enum PrsDim_TypeOfAngleArrowVisibility {
+	PrsDim_TypeOfAngleArrowVisibility_Both = 0,
+	PrsDim_TypeOfAngleArrowVisibility_First = 1,
+	PrsDim_TypeOfAngleArrowVisibility_Second = 2,
+	PrsDim_TypeOfAngleArrowVisibility_None = 3,
+};
+
+enum PrsDim_TypeOfDist {
+	PrsDim_TypeOfDist_Unknown = 0,
+	PrsDim_TypeOfDist_Horizontal = 1,
+	PrsDim_TypeOfDist_Vertical = 2,
 };
 
 /* end public enums declaration */
@@ -175,13 +175,13 @@ PrsDim_DimensionSelectionMode_All = PrsDim_DimensionSelectionMode.PrsDim_Dimensi
 PrsDim_DimensionSelectionMode_Line = PrsDim_DimensionSelectionMode.PrsDim_DimensionSelectionMode_Line
 PrsDim_DimensionSelectionMode_Text = PrsDim_DimensionSelectionMode.PrsDim_DimensionSelectionMode_Text
 
-class PrsDim_TypeOfDist(IntEnum):
-	PrsDim_TypeOfDist_Unknown = 0
-	PrsDim_TypeOfDist_Horizontal = 1
-	PrsDim_TypeOfDist_Vertical = 2
-PrsDim_TypeOfDist_Unknown = PrsDim_TypeOfDist.PrsDim_TypeOfDist_Unknown
-PrsDim_TypeOfDist_Horizontal = PrsDim_TypeOfDist.PrsDim_TypeOfDist_Horizontal
-PrsDim_TypeOfDist_Vertical = PrsDim_TypeOfDist.PrsDim_TypeOfDist_Vertical
+class PrsDim_DisplaySpecialSymbol(IntEnum):
+	PrsDim_DisplaySpecialSymbol_No = 0
+	PrsDim_DisplaySpecialSymbol_Before = 1
+	PrsDim_DisplaySpecialSymbol_After = 2
+PrsDim_DisplaySpecialSymbol_No = PrsDim_DisplaySpecialSymbol.PrsDim_DisplaySpecialSymbol_No
+PrsDim_DisplaySpecialSymbol_Before = PrsDim_DisplaySpecialSymbol.PrsDim_DisplaySpecialSymbol_Before
+PrsDim_DisplaySpecialSymbol_After = PrsDim_DisplaySpecialSymbol.PrsDim_DisplaySpecialSymbol_After
 
 class PrsDim_KindOfDimension(IntEnum):
 	PrsDim_KOD_NONE = 0
@@ -213,34 +213,6 @@ PrsDim_KOD_CHAMF3D = PrsDim_KindOfDimension.PrsDim_KOD_CHAMF3D
 PrsDim_KOD_OFFSET = PrsDim_KindOfDimension.PrsDim_KOD_OFFSET
 PrsDim_KOD_ELLIPSERADIUS = PrsDim_KindOfDimension.PrsDim_KOD_ELLIPSERADIUS
 
-class PrsDim_TypeOfAngleArrowVisibility(IntEnum):
-	PrsDim_TypeOfAngleArrowVisibility_Both = 0
-	PrsDim_TypeOfAngleArrowVisibility_First = 1
-	PrsDim_TypeOfAngleArrowVisibility_Second = 2
-	PrsDim_TypeOfAngleArrowVisibility_None = 3
-PrsDim_TypeOfAngleArrowVisibility_Both = PrsDim_TypeOfAngleArrowVisibility.PrsDim_TypeOfAngleArrowVisibility_Both
-PrsDim_TypeOfAngleArrowVisibility_First = PrsDim_TypeOfAngleArrowVisibility.PrsDim_TypeOfAngleArrowVisibility_First
-PrsDim_TypeOfAngleArrowVisibility_Second = PrsDim_TypeOfAngleArrowVisibility.PrsDim_TypeOfAngleArrowVisibility_Second
-PrsDim_TypeOfAngleArrowVisibility_None = PrsDim_TypeOfAngleArrowVisibility.PrsDim_TypeOfAngleArrowVisibility_None
-
-class PrsDim_KindOfSurface(IntEnum):
-	PrsDim_KOS_Plane = 0
-	PrsDim_KOS_Cylinder = 1
-	PrsDim_KOS_Cone = 2
-	PrsDim_KOS_Sphere = 3
-	PrsDim_KOS_Torus = 4
-	PrsDim_KOS_Revolution = 5
-	PrsDim_KOS_Extrusion = 6
-	PrsDim_KOS_OtherSurface = 7
-PrsDim_KOS_Plane = PrsDim_KindOfSurface.PrsDim_KOS_Plane
-PrsDim_KOS_Cylinder = PrsDim_KindOfSurface.PrsDim_KOS_Cylinder
-PrsDim_KOS_Cone = PrsDim_KindOfSurface.PrsDim_KOS_Cone
-PrsDim_KOS_Sphere = PrsDim_KindOfSurface.PrsDim_KOS_Sphere
-PrsDim_KOS_Torus = PrsDim_KindOfSurface.PrsDim_KOS_Torus
-PrsDim_KOS_Revolution = PrsDim_KindOfSurface.PrsDim_KOS_Revolution
-PrsDim_KOS_Extrusion = PrsDim_KindOfSurface.PrsDim_KOS_Extrusion
-PrsDim_KOS_OtherSurface = PrsDim_KindOfSurface.PrsDim_KOS_OtherSurface
-
 class PrsDim_KindOfRelation(IntEnum):
 	PrsDim_KOR_NONE = 0
 	PrsDim_KOR_CONCENTRIC = 1
@@ -265,19 +237,47 @@ PrsDim_KOR_PERPENDICULAR = PrsDim_KindOfRelation.PrsDim_KOR_PERPENDICULAR
 PrsDim_KOR_TANGENT = PrsDim_KindOfRelation.PrsDim_KOR_TANGENT
 PrsDim_KOR_SYMMETRIC = PrsDim_KindOfRelation.PrsDim_KOR_SYMMETRIC
 
-class PrsDim_DisplaySpecialSymbol(IntEnum):
-	PrsDim_DisplaySpecialSymbol_No = 0
-	PrsDim_DisplaySpecialSymbol_Before = 1
-	PrsDim_DisplaySpecialSymbol_After = 2
-PrsDim_DisplaySpecialSymbol_No = PrsDim_DisplaySpecialSymbol.PrsDim_DisplaySpecialSymbol_No
-PrsDim_DisplaySpecialSymbol_Before = PrsDim_DisplaySpecialSymbol.PrsDim_DisplaySpecialSymbol_Before
-PrsDim_DisplaySpecialSymbol_After = PrsDim_DisplaySpecialSymbol.PrsDim_DisplaySpecialSymbol_After
+class PrsDim_KindOfSurface(IntEnum):
+	PrsDim_KOS_Plane = 0
+	PrsDim_KOS_Cylinder = 1
+	PrsDim_KOS_Cone = 2
+	PrsDim_KOS_Sphere = 3
+	PrsDim_KOS_Torus = 4
+	PrsDim_KOS_Revolution = 5
+	PrsDim_KOS_Extrusion = 6
+	PrsDim_KOS_OtherSurface = 7
+PrsDim_KOS_Plane = PrsDim_KindOfSurface.PrsDim_KOS_Plane
+PrsDim_KOS_Cylinder = PrsDim_KindOfSurface.PrsDim_KOS_Cylinder
+PrsDim_KOS_Cone = PrsDim_KindOfSurface.PrsDim_KOS_Cone
+PrsDim_KOS_Sphere = PrsDim_KindOfSurface.PrsDim_KOS_Sphere
+PrsDim_KOS_Torus = PrsDim_KindOfSurface.PrsDim_KOS_Torus
+PrsDim_KOS_Revolution = PrsDim_KindOfSurface.PrsDim_KOS_Revolution
+PrsDim_KOS_Extrusion = PrsDim_KindOfSurface.PrsDim_KOS_Extrusion
+PrsDim_KOS_OtherSurface = PrsDim_KindOfSurface.PrsDim_KOS_OtherSurface
 
 class PrsDim_TypeOfAngle(IntEnum):
 	PrsDim_TypeOfAngle_Interior = 0
 	PrsDim_TypeOfAngle_Exterior = 1
 PrsDim_TypeOfAngle_Interior = PrsDim_TypeOfAngle.PrsDim_TypeOfAngle_Interior
 PrsDim_TypeOfAngle_Exterior = PrsDim_TypeOfAngle.PrsDim_TypeOfAngle_Exterior
+
+class PrsDim_TypeOfAngleArrowVisibility(IntEnum):
+	PrsDim_TypeOfAngleArrowVisibility_Both = 0
+	PrsDim_TypeOfAngleArrowVisibility_First = 1
+	PrsDim_TypeOfAngleArrowVisibility_Second = 2
+	PrsDim_TypeOfAngleArrowVisibility_None = 3
+PrsDim_TypeOfAngleArrowVisibility_Both = PrsDim_TypeOfAngleArrowVisibility.PrsDim_TypeOfAngleArrowVisibility_Both
+PrsDim_TypeOfAngleArrowVisibility_First = PrsDim_TypeOfAngleArrowVisibility.PrsDim_TypeOfAngleArrowVisibility_First
+PrsDim_TypeOfAngleArrowVisibility_Second = PrsDim_TypeOfAngleArrowVisibility.PrsDim_TypeOfAngleArrowVisibility_Second
+PrsDim_TypeOfAngleArrowVisibility_None = PrsDim_TypeOfAngleArrowVisibility.PrsDim_TypeOfAngleArrowVisibility_None
+
+class PrsDim_TypeOfDist(IntEnum):
+	PrsDim_TypeOfDist_Unknown = 0
+	PrsDim_TypeOfDist_Horizontal = 1
+	PrsDim_TypeOfDist_Vertical = 2
+PrsDim_TypeOfDist_Unknown = PrsDim_TypeOfDist.PrsDim_TypeOfDist_Unknown
+PrsDim_TypeOfDist_Horizontal = PrsDim_TypeOfDist.PrsDim_TypeOfDist_Horizontal
+PrsDim_TypeOfDist_Vertical = PrsDim_TypeOfDist.PrsDim_TypeOfDist_Vertical
 };
 /* end python proxy for enums */
 
@@ -1060,7 +1060,7 @@ None
 		/****************** SetCustomValue ******************/
 		/**** md5 signature: aa638ede9bd0fe424934618474a9c131 ****/
 		%feature("compactdefaultargs") SetCustomValue;
-		%feature("autodoc", "Sets user-defined dimension value. unit conversion during the display is not applyed. @param thevalue [in] the user-defined value to display.
+		%feature("autodoc", "Sets user-defined dimension value. unit conversion during the display is not applied. @param thevalue [in] the user-defined value to display.
 
 Parameters
 ----------
@@ -1275,22 +1275,21 @@ None
 		 PrsDim_DimensionOwner(const opencascade::handle<SelectMgr_SelectableObject> & theSelObject, const PrsDim_DimensionSelectionMode theSelMode, const Standard_Integer thePriority = 0);
 
 		/****************** HilightWithColor ******************/
-		/**** md5 signature: 56e556dd0edce796a3c3d12b272af59e ****/
+		/**** md5 signature: ff872ded3a30d3b368f40f78eef3d5d8 ****/
 		%feature("compactdefaultargs") HilightWithColor;
 		%feature("autodoc", "No available documentation.
 
 Parameters
 ----------
-thePM: PrsMgr_PresentationManager3d
+thePM: PrsMgr_PresentationManager
 theStyle: Prs3d_Drawer
-theMode: int,optional
-	default value is 0
+theMode: int
 
 Returns
 -------
 None
 ") HilightWithColor;
-		virtual void HilightWithColor(const opencascade::handle<PrsMgr_PresentationManager3d> & thePM, const opencascade::handle<Prs3d_Drawer> & theStyle, const Standard_Integer theMode = 0);
+		virtual void HilightWithColor(const opencascade::handle<PrsMgr_PresentationManager> & thePM, const opencascade::handle<Prs3d_Drawer> & theStyle, const Standard_Integer theMode);
 
 		/****************** IsHilighted ******************/
 		/**** md5 signature: 47cdfcd94ad9e17a52e4b8d49964f328 ****/
@@ -3022,6 +3021,17 @@ TColStd_ListOfTransient
 class PrsDim_LengthDimension : public PrsDim_Dimension {
 	public:
 		/****************** PrsDim_LengthDimension ******************/
+		/**** md5 signature: 76e262900b82f282d533e9d72cd330de ****/
+		%feature("compactdefaultargs") PrsDim_LengthDimension;
+		%feature("autodoc", "Construct an empty length dimension. @sa setmeasuredgeometry(), setmeasuredshapes() for initialization.
+
+Returns
+-------
+None
+") PrsDim_LengthDimension;
+		 PrsDim_LengthDimension();
+
+		/****************** PrsDim_LengthDimension ******************/
 		/**** md5 signature: b8d2bd968153bc92dd94147ef64017a0 ****/
 		%feature("compactdefaultargs") PrsDim_LengthDimension;
 		%feature("autodoc", "Construct length dimension between face and edge. here dimension can be built without user-defined plane. @param theface [in] the face (first shape). @param theedge [in] the edge (second shape).
@@ -3106,7 +3116,7 @@ None
 		/****************** FirstPoint ******************/
 		/**** md5 signature: ce6daac63a94ae39a0d0bfa7edc5f3cd ****/
 		%feature("compactdefaultargs") FirstPoint;
-		%feature("autodoc", "Returns first attachement point.
+		%feature("autodoc", "Returns first attachment point.
 
 Returns
 -------
@@ -3117,7 +3127,7 @@ gp_Pnt
 		/****************** FirstShape ******************/
 		/**** md5 signature: 0052eba922702f3e525649e52d93f4e7 ****/
 		%feature("compactdefaultargs") FirstShape;
-		%feature("autodoc", "Returns first attachement shape.
+		%feature("autodoc", "Returns first attachment shape.
 
 Returns
 -------
@@ -3161,7 +3171,7 @@ gp_Pnt
 		/****************** SecondPoint ******************/
 		/**** md5 signature: 66319c8fbdc379c409c2efa67f6e79e2 ****/
 		%feature("compactdefaultargs") SecondPoint;
-		%feature("autodoc", "Returns second attachement point.
+		%feature("autodoc", "Returns second attachment point.
 
 Returns
 -------
@@ -3172,7 +3182,7 @@ gp_Pnt
 		/****************** SecondShape ******************/
 		/**** md5 signature: 3c9d5f80bfbcac42f6848475061ecf61 ****/
 		%feature("compactdefaultargs") SecondShape;
-		%feature("autodoc", "Returns second attachement shape.
+		%feature("autodoc", "Returns second attachment shape.
 
 Returns
 -------
@@ -3215,7 +3225,7 @@ None
 		/****************** SetMeasuredGeometry ******************/
 		/**** md5 signature: cef07b2afa7411d338e4348d1fb09cb3 ****/
 		%feature("compactdefaultargs") SetMeasuredGeometry;
-		%feature("autodoc", "Measure distance between two points. the dimension will become invalid if the new distance between attachement points is less than precision::confusion(). @param thefirstpoint [in] the first point. @param thesecondpoint [in] the second point. @param theplane [in] the user-defined plane.
+		%feature("autodoc", "Measure distance between two points. the dimension will become invalid if the new distance between attachment points is less than precision::confusion(). @param thefirstpoint [in] the first point. @param thesecondpoint [in] the second point. @param theplane [in] the user-defined plane.
 
 Parameters
 ----------

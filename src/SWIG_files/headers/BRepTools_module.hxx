@@ -27,6 +27,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<BRepTools_Modification.hxx>
 #include<BRepTools_Modifier.hxx>
 #include<BRepTools_NurbsConvertModification.hxx>
+#include<BRepTools_PurgeLocations.hxx>
 #include<BRepTools_Quilt.hxx>
 #include<BRepTools_ReShape.hxx>
 #include<BRepTools_ShapeSet.hxx>

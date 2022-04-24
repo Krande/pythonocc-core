@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define BREPFEATDOCSTRING
 "BRepFeat module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_brepfeat.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_brepfeat.html"
 %enddef
 %module (package="OCC.Core", docstring=BREPFEATDOCSTRING) BRepFeat
 
@@ -49,6 +49,7 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_brepfeat.html"
 #include<TopAbs_module.hxx>
 #include<BOPAlgo_module.hxx>
 #include<TopTools_module.hxx>
+#include<Message_module.hxx>
 #include<BRepBuilderAPI_module.hxx>
 #include<TColGeom_module.hxx>
 #include<LocOpe_module.hxx>
@@ -86,6 +87,7 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_brepfeat.html"
 %import TopAbs.i
 %import BOPAlgo.i
 %import TopTools.i
+%import Message.i
 %import BRepBuilderAPI.i
 %import TColGeom.i
 %import LocOpe.i
@@ -96,6 +98,14 @@ from OCC.Core.Exception import *
 };
 
 /* public enums */
+enum BRepFeat_PerfSelection {
+	BRepFeat_NoSelection = 0,
+	BRepFeat_SelectionFU = 1,
+	BRepFeat_SelectionU = 2,
+	BRepFeat_SelectionSh = 3,
+	BRepFeat_SelectionShU = 4,
+};
+
 enum BRepFeat_Status {
 	BRepFeat_NoError = 0,
 	BRepFeat_InvalidPlacement = 1,
@@ -133,18 +143,22 @@ enum BRepFeat_StatusError {
 	BRepFeat_NullToolU = 27,
 };
 
-enum BRepFeat_PerfSelection {
-	BRepFeat_NoSelection = 0,
-	BRepFeat_SelectionFU = 1,
-	BRepFeat_SelectionU = 2,
-	BRepFeat_SelectionSh = 3,
-	BRepFeat_SelectionShU = 4,
-};
-
 /* end public enums declaration */
 
 /* python proy classes for enums */
 %pythoncode {
+
+class BRepFeat_PerfSelection(IntEnum):
+	BRepFeat_NoSelection = 0
+	BRepFeat_SelectionFU = 1
+	BRepFeat_SelectionU = 2
+	BRepFeat_SelectionSh = 3
+	BRepFeat_SelectionShU = 4
+BRepFeat_NoSelection = BRepFeat_PerfSelection.BRepFeat_NoSelection
+BRepFeat_SelectionFU = BRepFeat_PerfSelection.BRepFeat_SelectionFU
+BRepFeat_SelectionU = BRepFeat_PerfSelection.BRepFeat_SelectionU
+BRepFeat_SelectionSh = BRepFeat_PerfSelection.BRepFeat_SelectionSh
+BRepFeat_SelectionShU = BRepFeat_PerfSelection.BRepFeat_SelectionShU
 
 class BRepFeat_Status(IntEnum):
 	BRepFeat_NoError = 0
@@ -211,18 +225,6 @@ BRepFeat_NotYetImplemented = BRepFeat_StatusError.BRepFeat_NotYetImplemented
 BRepFeat_NullRealTool = BRepFeat_StatusError.BRepFeat_NullRealTool
 BRepFeat_NullToolF = BRepFeat_StatusError.BRepFeat_NullToolF
 BRepFeat_NullToolU = BRepFeat_StatusError.BRepFeat_NullToolU
-
-class BRepFeat_PerfSelection(IntEnum):
-	BRepFeat_NoSelection = 0
-	BRepFeat_SelectionFU = 1
-	BRepFeat_SelectionU = 2
-	BRepFeat_SelectionSh = 3
-	BRepFeat_SelectionShU = 4
-BRepFeat_NoSelection = BRepFeat_PerfSelection.BRepFeat_NoSelection
-BRepFeat_SelectionFU = BRepFeat_PerfSelection.BRepFeat_SelectionFU
-BRepFeat_SelectionU = BRepFeat_PerfSelection.BRepFeat_SelectionU
-BRepFeat_SelectionSh = BRepFeat_PerfSelection.BRepFeat_SelectionSh
-BRepFeat_SelectionShU = BRepFeat_PerfSelection.BRepFeat_SelectionShU
 };
 /* end python proxy for enums */
 
@@ -441,7 +443,7 @@ None
 		/****************** Init ******************/
 		/**** md5 signature: e8c5d8680206212eeeecebd0f84dc5c5 ****/
 		%feature("compactdefaultargs") Init;
-		%feature("autodoc", "Initialyzes the object of local boolean operation.
+		%feature("autodoc", "Initializes the object of local boolean operation.
 
 Parameters
 ----------
@@ -456,7 +458,7 @@ None
 		/****************** Init ******************/
 		/**** md5 signature: 740bc54164d5b82a500c1564e244a758 ****/
 		%feature("compactdefaultargs") Init;
-		%feature("autodoc", "Initialyzes the arguments of local boolean operation.
+		%feature("autodoc", "Initializes the arguments of local boolean operation.
 
 Parameters
 ----------
@@ -487,7 +489,7 @@ None
 		/****************** KeepParts ******************/
 		/**** md5 signature: 87c4cd5b43d1f9a01b576ee02f68e27d ****/
 		%feature("compactdefaultargs") KeepParts;
-		%feature("autodoc", "Initialyzes parts of the tool for second step of algorithm. collects shapes and all sub-shapes into myshapes map.
+		%feature("autodoc", "Initializes parts of the tool for second step of algorithm. collects shapes and all sub-shapes into myshapes map.
 
 Parameters
 ----------
@@ -515,15 +517,20 @@ None
 		void PartsOfTool(TopTools_ListOfShape & theLT);
 
 		/****************** PerformResult ******************/
-		/**** md5 signature: 3e3cbe6224ffbb0eb5a7338673569f7a ****/
+		/**** md5 signature: ad968597e719efbcf84e11e3ce8b1439 ****/
 		%feature("compactdefaultargs") PerformResult;
 		%feature("autodoc", "Main function to build the result of the local operation required.
+
+Parameters
+----------
+theRange: Message_ProgressRange,optional
+	default value is Message_ProgressRange()
 
 Returns
 -------
 None
 ") PerformResult;
-		void PerformResult();
+		void PerformResult(const Message_ProgressRange & theRange = Message_ProgressRange());
 
 		/****************** RebuildEdge ******************/
 		/**** md5 signature: d7d24342c4440d5e9583f009a4320033 ****/
@@ -888,15 +895,20 @@ None
 		void Bind(const TopoDS_Edge & Enew, const TopoDS_Edge & Ebase);
 
 		/****************** Build ******************/
-		/**** md5 signature: 5ad4569f96377eec0c61c7f10d7c7aa9 ****/
+		/**** md5 signature: 58900897d55d51e349b2e40a091ec26f ****/
 		%feature("compactdefaultargs") Build;
 		%feature("autodoc", "This is called by shape(). it does nothing but may be redefined.
+
+Parameters
+----------
+theRange: Message_ProgressRange,optional
+	default value is Message_ProgressRange()
 
 Returns
 -------
 None
 ") Build;
-		virtual void Build();
+		virtual void Build(const Message_ProgressRange & theRange = Message_ProgressRange());
 
 		/****************** GluedShape ******************/
 		/**** md5 signature: cc05062c19ffec36edea50e2f74757fb ****/
@@ -1170,7 +1182,7 @@ None
 		/****************** Add ******************/
 		/**** md5 signature: a2f8855eb9d20716f921d30ba939fd6a ****/
 		%feature("compactdefaultargs") Add;
-		%feature("autodoc", "Add splitting edges or wires for whole initial shape withot additional specification edge->face, edge->edge this method puts edge on the corresponding faces from initial shape.
+		%feature("autodoc", "Add splitting edges or wires for whole initial shape without additional specification edge->face, edge->edge this method puts edge on the corresponding faces from initial shape.
 
 Parameters
 ----------
@@ -1247,15 +1259,20 @@ None
 		void Add(const TopoDS_Edge & E, const TopoDS_Edge & EOn);
 
 		/****************** Build ******************/
-		/**** md5 signature: fbc5fbed76b24de64a843e82da1c1005 ****/
+		/**** md5 signature: 6845a51502d14bd916482d98b6487bc6 ****/
 		%feature("compactdefaultargs") Build;
 		%feature("autodoc", "Builds the cut and the resulting faces and edges as well.
+
+Parameters
+----------
+theRange: Message_ProgressRange,optional
+	default value is Message_ProgressRange()
 
 Returns
 -------
 None
 ") Build;
-		void Build();
+		void Build(const Message_ProgressRange & theRange = Message_ProgressRange());
 
 		/****************** DirectLeft ******************/
 		/**** md5 signature: 3439933aeda7f1a1ec21dfaafbe0ab1a ****/

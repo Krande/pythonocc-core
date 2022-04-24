@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define IMAGEDOCSTRING
 "Image module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_image.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_image.html"
 %enddef
 %module (package="OCC.Core", docstring=IMAGEDOCSTRING) Image
 
@@ -85,10 +85,12 @@ enum Image_Format {
 	Image_Format_BGRF = 13,
 	Image_Format_RGBAF = 14,
 	Image_Format_BGRAF = 15,
+	Image_Format_RGF_half = 16,
+	Image_Format_RGBAF_half = 17,
 };
 
 enum  {
-	Image_Format_NB = Image_Format_BGRAF + 1,
+	Image_Format_NB = Image_Format_RGBAF_half + 1,
 };
 
 /* end public enums declaration */
@@ -125,6 +127,8 @@ class Image_Format(IntEnum):
 	Image_Format_BGRF = 13
 	Image_Format_RGBAF = 14
 	Image_Format_BGRAF = 15
+	Image_Format_RGF_half = 16
+	Image_Format_RGBAF_half = 17
 Image_Format_UNKNOWN = Image_Format.Image_Format_UNKNOWN
 Image_Format_Gray = Image_Format.Image_Format_Gray
 Image_Format_Alpha = Image_Format.Image_Format_Alpha
@@ -141,6 +145,8 @@ Image_Format_RGBF = Image_Format.Image_Format_RGBF
 Image_Format_BGRF = Image_Format.Image_Format_BGRF
 Image_Format_RGBAF = Image_Format.Image_Format_RGBAF
 Image_Format_BGRAF = Image_Format.Image_Format_BGRAF
+Image_Format_RGF_half = Image_Format.Image_Format_RGF_half
+Image_Format_RGBAF_half = Image_Format.Image_Format_RGBAF_half
 };
 /* end python proxy for enums */
 
@@ -219,6 +225,10 @@ Image_Format_BGRAF = Image_Format.Image_Format_BGRAF
 /* python proxy for excluded classes */
 %pythoncode {
 @classnotwrapped
+class Image_AlienPixMap:
+	pass
+
+@classnotwrapped
 class Image_ColorRGB:
 	pass
 
@@ -263,15 +273,19 @@ class Image_ColorBGRAF:
 	pass
 
 @classnotwrapped
-class Image_VideoParams:
-	pass
-
-@classnotwrapped
-class Image_VideoRecorder:
-	pass
-
-@classnotwrapped
 class Image_CompressedPixMap:
+	pass
+
+@classnotwrapped
+class Image_DDSParser:
+	pass
+
+@classnotwrapped
+class Image_Diff:
+	pass
+
+@classnotwrapped
+class Image_PixMap:
 	pass
 
 @classnotwrapped
@@ -283,11 +297,7 @@ class Image_PixMapTypedData:
 	pass
 
 @classnotwrapped
-class Image_DDSParser:
-	pass
-
-@classnotwrapped
-class Image_PixMap:
+class Image_SupportedFormats:
 	pass
 
 @classnotwrapped
@@ -295,15 +305,11 @@ class Image_Texture:
 	pass
 
 @classnotwrapped
-class Image_AlienPixMap:
+class Image_VideoParams:
 	pass
 
 @classnotwrapped
-class Image_Diff:
-	pass
-
-@classnotwrapped
-class Image_SupportedFormats:
+class Image_VideoRecorder:
 	pass
 
 }

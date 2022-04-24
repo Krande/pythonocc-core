@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define APPROXINTDOCSTRING
 "ApproxInt module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_approxint.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_approxint.html"
 %enddef
 %module (package="OCC.Core", docstring=APPROXINTDOCSTRING) ApproxInt
 
@@ -93,7 +93,7 @@ class ApproxInt_KnotTools {
 		/****************** BuildKnots ******************/
 		/**** md5 signature: 49c65485e14fc730360039ad6109a047 ****/
 		%feature("compactdefaultargs") BuildKnots;
-		%feature("autodoc", "Main function to build optimal knot sequence. at least one set from (thepntsxyz, thepntsu1v1, thepntsu2v2) should exist. @param thepntsxyz - set of 3d points. @param thepntsu1v1 - set of 2d points. @param thepntsu2v2 - set of 2d points. @param thepars - expected parameters assoiated with set. @param theapproxxyz - flag, existence of 3d set. @param theapproxu1v1 - flag existence of first 2d set. @param theapproxu2v2 - flag existence of second 2d set. @param theminnbpnts - minimal number of points per knot interval. @param theknots - output knots sequence.
+		%feature("autodoc", "Main function to build optimal knot sequence. at least one set from (thepntsxyz, thepntsu1v1, thepntsu2v2) should exist. @param thepntsxyz - set of 3d points. @param thepntsu1v1 - set of 2d points. @param thepntsu2v2 - set of 2d points. @param thepars - expected parameters associated with set. @param theapproxxyz - flag, existence of 3d set. @param theapproxu1v1 - flag existence of first 2d set. @param theapproxu2v2 - flag existence of second 2d set. @param theminnbpnts - minimal number of points per knot interval. @param theknots - output knots sequence.
 
 Parameters
 ----------
@@ -149,6 +149,17 @@ v2: float
 ") Compute;
 		virtual Standard_Boolean Compute(Standard_Real &OutValue, Standard_Real &OutValue, Standard_Real &OutValue, Standard_Real &OutValue, gp_Pnt & Pt, gp_Vec & Tg, gp_Vec2d & Tguv1, gp_Vec2d & Tguv2);
 
+		/****************** GetUseSolver ******************/
+		/**** md5 signature: 0cd3174a4b9b13255f5e86b8e6432347 ****/
+		%feature("compactdefaultargs") GetUseSolver;
+		%feature("autodoc", "No available documentation.
+
+Returns
+-------
+bool
+") GetUseSolver;
+		virtual Standard_Boolean GetUseSolver();
+
 		/****************** Pnt ******************/
 		/**** md5 signature: 16f6732cc231fab7357ba8adcca3b24d ****/
 		%feature("compactdefaultargs") Pnt;
@@ -186,6 +197,21 @@ Returns
 bool
 ") SeekPoint;
 		virtual Standard_Boolean SeekPoint(const Standard_Real u1, const Standard_Real v1, const Standard_Real u2, const Standard_Real v2, IntSurf_PntOn2S & Point);
+
+		/****************** SetUseSolver ******************/
+		/**** md5 signature: 60f84821ae19a493df618fb006dc01ad ****/
+		%feature("compactdefaultargs") SetUseSolver;
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+theUseSol: bool
+
+Returns
+-------
+None
+") SetUseSolver;
+		virtual void SetUseSolver(const Standard_Boolean theUseSol);
 
 		/****************** Tangency ******************/
 		/**** md5 signature: 2d07e542429be7042ab790c78def5d62 ****/

@@ -44,6 +44,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<TopTools_DataMapOfShapeReal.hxx>
 #include<TopTools_DataMapOfShapeSequenceOfShape.hxx>
 #include<TopTools_DataMapOfShapeShape.hxx>
+#include<TopTools_FormatVersion.hxx>
 #include<TopTools_HArray1OfListOfShape.hxx>
 #include<TopTools_HArray1OfShape.hxx>
 #include<TopTools_HArray2OfShape.hxx>

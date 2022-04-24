@@ -70,8 +70,10 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<RWStepRepr_RWReprItemAndPlaneAngleMeasureWithUnitAndQRI.hxx>
 #include<RWStepRepr_RWRepresentation.hxx>
 #include<RWStepRepr_RWRepresentationContext.hxx>
+#include<RWStepRepr_RWRepresentationContextReference.hxx>
 #include<RWStepRepr_RWRepresentationItem.hxx>
 #include<RWStepRepr_RWRepresentationMap.hxx>
+#include<RWStepRepr_RWRepresentationReference.hxx>
 #include<RWStepRepr_RWRepresentationRelationship.hxx>
 #include<RWStepRepr_RWRepresentationRelationshipWithTransformation.hxx>
 #include<RWStepRepr_RWShapeAspect.hxx>

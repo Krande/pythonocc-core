@@ -26,6 +26,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<BinMXCAFDoc_DatumDriver.hxx>
 #include<BinMXCAFDoc_DimTolDriver.hxx>
 #include<BinMXCAFDoc_GraphNodeDriver.hxx>
+#include<BinMXCAFDoc_LengthUnitDriver.hxx>
 #include<BinMXCAFDoc_LocationDriver.hxx>
 #include<BinMXCAFDoc_MaterialDriver.hxx>
 #include<BinMXCAFDoc_NoteBinDataDriver.hxx>

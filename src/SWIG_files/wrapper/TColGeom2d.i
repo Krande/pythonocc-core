@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define TCOLGEOM2DDOCSTRING
 "TColGeom2d module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_tcolgeom2d.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_tcolgeom2d.html"
 %enddef
 %module (package="OCC.Core", docstring=TCOLGEOM2DDOCSTRING) TColGeom2d
 
@@ -67,9 +67,9 @@ from OCC.Core.Exception import *
 /* end python proxy for enums */
 
 /* handles */
-%wrap_handle(TColGeom2d_HArray1OfCurve)
 %wrap_handle(TColGeom2d_HArray1OfBezierCurve)
 %wrap_handle(TColGeom2d_HArray1OfBSplineCurve)
+%wrap_handle(TColGeom2d_HArray1OfCurve)
 %wrap_handle(TColGeom2d_HSequenceOfBoundedCurve)
 %wrap_handle(TColGeom2d_HSequenceOfCurve)
 /* end handles declaration */
@@ -217,17 +217,6 @@ typedef NCollection_Sequence<opencascade::handle<Geom2d_Geometry>> TColGeom2d_Se
 
 /* harray1 classes */
 
-class TColGeom2d_HArray1OfCurve : public TColGeom2d_Array1OfCurve, public Standard_Transient {
-  public:
-    TColGeom2d_HArray1OfCurve(const Standard_Integer theLower, const Standard_Integer theUpper);
-    TColGeom2d_HArray1OfCurve(const Standard_Integer theLower, const Standard_Integer theUpper, const TColGeom2d_Array1OfCurve::value_type& theValue);
-    TColGeom2d_HArray1OfCurve(const TColGeom2d_Array1OfCurve& theOther);
-    const TColGeom2d_Array1OfCurve& Array1();
-    TColGeom2d_Array1OfCurve& ChangeArray1();
-};
-%make_alias(TColGeom2d_HArray1OfCurve)
-
-
 class TColGeom2d_HArray1OfBezierCurve : public TColGeom2d_Array1OfBezierCurve, public Standard_Transient {
   public:
     TColGeom2d_HArray1OfBezierCurve(const Standard_Integer theLower, const Standard_Integer theUpper);
@@ -248,6 +237,17 @@ class TColGeom2d_HArray1OfBSplineCurve : public TColGeom2d_Array1OfBSplineCurve,
     TColGeom2d_Array1OfBSplineCurve& ChangeArray1();
 };
 %make_alias(TColGeom2d_HArray1OfBSplineCurve)
+
+
+class TColGeom2d_HArray1OfCurve : public TColGeom2d_Array1OfCurve, public Standard_Transient {
+  public:
+    TColGeom2d_HArray1OfCurve(const Standard_Integer theLower, const Standard_Integer theUpper);
+    TColGeom2d_HArray1OfCurve(const Standard_Integer theLower, const Standard_Integer theUpper, const TColGeom2d_Array1OfCurve::value_type& theValue);
+    TColGeom2d_HArray1OfCurve(const TColGeom2d_Array1OfCurve& theOther);
+    const TColGeom2d_Array1OfCurve& Array1();
+    TColGeom2d_Array1OfCurve& ChangeArray1();
+};
+%make_alias(TColGeom2d_HArray1OfCurve)
 
 /* harray2 classes */
 /* hsequence classes */

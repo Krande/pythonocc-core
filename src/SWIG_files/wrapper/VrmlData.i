@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define VRMLDATADOCSTRING
 "VrmlData module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_vrmldata.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_vrmldata.html"
 %enddef
 %module (package="OCC.Core", docstring=VRMLDATADOCSTRING) VrmlData
 
@@ -214,9 +214,9 @@ opencascade::handle<VrmlData_Node>
 
 Returns
 -------
-int
+inline int
 ") GlobalIndent;
-		static Standard_Integer GlobalIndent();
+		static inline Standard_Integer GlobalIndent();
 
 		/****************** IsDefault ******************/
 		/**** md5 signature: 1b7a136faa0c8ac407d7529214546ac4 ****/
@@ -251,9 +251,9 @@ theStat: VrmlData_ErrorStatus
 
 Returns
 -------
-bool
+inline bool
 ") OK;
-		static Standard_Boolean OK(const VrmlData_ErrorStatus theStat);
+		static inline Standard_Boolean OK(const VrmlData_ErrorStatus theStat);
 
 		/****************** OK ******************/
 		/**** md5 signature: 78490ef035e0d10fa78bb02187dae4ae ****/
@@ -268,7 +268,7 @@ Returns
 -------
 outStat: VrmlData_ErrorStatus
 ") OK;
-		static Standard_Boolean OK(VrmlData_ErrorStatus &OutValue, const VrmlData_ErrorStatus theStat);
+		static inline Standard_Boolean OK(VrmlData_ErrorStatus &OutValue, const VrmlData_ErrorStatus theStat);
 
 		/****************** Read ******************/
 		/**** md5 signature: 1ad536bb6f0a141f658023ed487ae5c4 ****/
@@ -865,7 +865,7 @@ None
 		/****************** Convert ******************/
 		/**** md5 signature: f593201deba882e1902592660879f146 ****/
 		%feature("compactdefaultargs") Convert;
-		%feature("autodoc", "/** * convert all accumulated shapes and store them in myscene. * the internal data structures are cleared in the end of convertion. * @param theextractfaces * if true, converter extracst faces from the shapes. * @param theextractedges * if true, converter extracts edges from the shapes. * @param thedeflection * deflection for tessellation of geometrical lines/surfaces. existing mesh * is used if its deflection is smaller than the one given by this * parameter. * @param thedeflangle * angular deflection for tessellation of geometrical lines. */.
+		%feature("autodoc", "/** * convert all accumulated shapes and store them in myscene. * the internal data structures are cleared in the end of conversion. * @param theextractfaces * if true, converter extracst faces from the shapes. * @param theextractedges * if true, converter extracts edges from the shapes. * @param thedeflection * deflection for tessellation of geometrical lines/surfaces. existing mesh * is used if its deflection is smaller than the one given by this * parameter. * @param thedeflangle * angular deflection for tessellation of geometrical lines. */.
 
 Parameters
 ----------

@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define BREPAPPROXDOCSTRING
 "BRepApprox module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_brepapprox.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_brepapprox.html"
 %enddef
 %module (package="OCC.Core", docstring=BREPAPPROXDOCSTRING) BRepApprox
 
@@ -3285,7 +3285,7 @@ None
 		/****************** SetPeriodic ******************/
 		/**** md5 signature: 3109823bbe448d62437b44b39b4d9b19 ****/
 		%feature("compactdefaultargs") SetPeriodic;
-		%feature("autodoc", "Sets periodic flag. if theperiodic = standard_true, algorith tries to build periodic multicurve using corresponding c1 boundary condition for first and last multipoints. multiline must be closed.
+		%feature("autodoc", "Sets periodic flag. if theperiodic = standard_true, algorithm tries to build periodic multicurve using corresponding c1 boundary condition for first and last multipoints. multiline must be closed.
 
 Parameters
 ----------

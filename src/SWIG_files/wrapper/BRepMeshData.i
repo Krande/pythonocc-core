@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define BREPMESHDATADOCSTRING
 "BRepMeshData module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_brepmeshdata.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_brepmeshdata.html"
 %enddef
 %module (package="OCC.Core", docstring=BREPMESHDATADOCSTRING) BRepMeshData
 
@@ -288,7 +288,7 @@ class BRepMeshData_Edge : public IMeshData_Edge {
 		/****************** AddPCurve ******************/
 		/**** md5 signature: b0e75fdb233dd95364fad0411000ec96 ****/
 		%feature("compactdefaultargs") AddPCurve;
-		%feature("autodoc", "Adds disrete pcurve for the specifed discrete face.
+		%feature("autodoc", "Adds discrete pcurve for the specified discrete face.
 
 Parameters
 ----------

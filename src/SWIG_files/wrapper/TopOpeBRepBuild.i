@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define TOPOPEBREPBUILDDOCSTRING
 "TopOpeBRepBuild module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_topopebrepbuild.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_topopebrepbuild.html"
 %enddef
 %module (package="OCC.Core", docstring=TOPOPEBREPBUILDDOCSTRING) TopOpeBRepBuild
 
@@ -2957,7 +2957,7 @@ None
 		/****************** MergeEdges ******************/
 		/**** md5 signature: 952be977f0e0dd8bdea0d200eddaf660 ****/
 		%feature("compactdefaultargs") MergeEdges;
-		%feature("autodoc", "Merges the two edges <s1> and <s2> keeping the parts in each edge of states <tb1> and <tb2>. booleans ona, onb, onab indicate wheter parts of edges found as state on respectively on first, second, and both shapes must be (or not) built.
+		%feature("autodoc", "Merges the two edges <s1> and <s2> keeping the parts in each edge of states <tb1> and <tb2>. booleans ona, onb, onab indicate whether parts of edges found as state on respectively on first, second, and both shapes must be (or not) built.
 
 Parameters
 ----------

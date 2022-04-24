@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define BREPPRIMDOCSTRING
 "BRepPrim module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_brepprim.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_brepprim.html"
 %enddef
 %module (package="OCC.Core", docstring=BREPPRIMDOCSTRING) BRepPrim
 
@@ -951,7 +951,7 @@ bool
 		/****************** IsDegeneratedShape ******************/
 		/**** md5 signature: bedacae663032f1f3a7887e26e731a50 ****/
 		%feature("compactdefaultargs") IsDegeneratedShape;
-		%feature("autodoc", "Checkes a shape on degeneracy returns true if a shape is degenerated.
+		%feature("autodoc", "Checks a shape on degeneracy returns true if a shape is degenerated.
 
 Returns
 -------
@@ -2158,7 +2158,7 @@ None
 		/****************** BRepPrim_Sphere ******************/
 		/**** md5 signature: 40fe35bc704dd685fcd8f42947b874a9 ****/
 		%feature("compactdefaultargs") BRepPrim_Sphere;
-		%feature("autodoc", "Creates a sphere with center and radius. axes are the referrence axes. this is the step constructor.
+		%feature("autodoc", "Creates a sphere with center and radius. axes are the reference axes. this is the step constructor.
 
 Parameters
 ----------

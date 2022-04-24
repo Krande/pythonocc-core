@@ -25,7 +25,6 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<Aspect_Background.hxx>
 #include<Aspect_CircularGrid.hxx>
 #include<Aspect_ColorSpace.hxx>
-#include<Aspect_Convert.hxx>
 #include<Aspect_Display.hxx>
 #include<Aspect_DisplayConnection.hxx>
 #include<Aspect_DisplayConnectionDefinitionError.hxx>
@@ -75,6 +74,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<Aspect_Window.hxx>
 #include<Aspect_WindowDefinitionError.hxx>
 #include<Aspect_WindowError.hxx>
+#include<Aspect_WindowInputListener.hxx>
 #include<Aspect_XAtom.hxx>
 #include<Aspect_XRAction.hxx>
 #include<Aspect_XRActionSet.hxx>

@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define MESSAGEDOCSTRING
 "Message module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_message.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_message.html"
 %enddef
 %module (package="OCC.Core", docstring=MESSAGEDOCSTRING) Message
 
@@ -62,6 +62,42 @@ from OCC.Core.Exception import *
 };
 
 /* public enums */
+enum Message_ConsoleColor {
+	Message_ConsoleColor_Default = 0,
+	Message_ConsoleColor_Black = 1,
+	Message_ConsoleColor_White = 2,
+	Message_ConsoleColor_Red = 3,
+	Message_ConsoleColor_Blue = 4,
+	Message_ConsoleColor_Green = 5,
+	Message_ConsoleColor_Yellow = 6,
+	Message_ConsoleColor_Cyan = 7,
+	Message_ConsoleColor_Magenta = 8,
+};
+
+enum Message_Gravity {
+	Message_Trace = 0,
+	Message_Info = 1,
+	Message_Warning = 2,
+	Message_Alarm = 3,
+	Message_Fail = 4,
+};
+
+enum Message_MetricType {
+	Message_MetricType_None = 0,
+	Message_MetricType_ThreadCPUUserTime = 1,
+	Message_MetricType_ThreadCPUSystemTime = 2,
+	Message_MetricType_ProcessCPUUserTime = 3,
+	Message_MetricType_ProcessCPUSystemTime = 4,
+	Message_MetricType_WallClock = 5,
+	Message_MetricType_MemPrivate = 6,
+	Message_MetricType_MemVirtual = 7,
+	Message_MetricType_MemWorkingSet = 8,
+	Message_MetricType_MemWorkingSetPeak = 9,
+	Message_MetricType_MemSwapUsage = 10,
+	Message_MetricType_MemSwapUsagePeak = 11,
+	Message_MetricType_MemHeapUsage = 12,
+};
+
 enum Message_Status {
 	Message_None = 0,
 	Message_Done1 = Message_DONE,
@@ -194,41 +230,6 @@ enum Message_Status {
 	Message_Fail32 = 128,
 };
 
-enum Message_ConsoleColor {
-	Message_ConsoleColor_Default = 0,
-	Message_ConsoleColor_Black = 1,
-	Message_ConsoleColor_White = 2,
-	Message_ConsoleColor_Red = 3,
-	Message_ConsoleColor_Blue = 4,
-	Message_ConsoleColor_Green = 5,
-	Message_ConsoleColor_Yellow = 6,
-	Message_ConsoleColor_Cyan = 7,
-	Message_ConsoleColor_Magenta = 8,
-};
-
-enum Message_Gravity {
-	Message_Trace = 0,
-	Message_Info = 1,
-	Message_Warning = 2,
-	Message_Alarm = 3,
-	Message_Fail = 4,
-};
-
-enum Message_MetricType {
-	Message_MetricType_None = 0,
-	Message_MetricType_ThreadCPUUserTime = 1,
-	Message_MetricType_ThreadCPUSystemTime = 2,
-	Message_MetricType_ProcessCPUUserTime = 3,
-	Message_MetricType_ProcessCPUSystemTime = 4,
-	Message_MetricType_MemPrivate = 5,
-	Message_MetricType_MemVirtual = 6,
-	Message_MetricType_MemWorkingSet = 7,
-	Message_MetricType_MemWorkingSetPeak = 8,
-	Message_MetricType_MemSwapUsage = 9,
-	Message_MetricType_MemSwapUsagePeak = 10,
-	Message_MetricType_MemHeapUsage = 11,
-};
-
 enum Message_StatusType {
 	Message_DONE = 256,
 	Message_WARN = 512,
@@ -240,6 +241,66 @@ enum Message_StatusType {
 
 /* python proy classes for enums */
 %pythoncode {
+
+class Message_ConsoleColor(IntEnum):
+	Message_ConsoleColor_Default = 0
+	Message_ConsoleColor_Black = 1
+	Message_ConsoleColor_White = 2
+	Message_ConsoleColor_Red = 3
+	Message_ConsoleColor_Blue = 4
+	Message_ConsoleColor_Green = 5
+	Message_ConsoleColor_Yellow = 6
+	Message_ConsoleColor_Cyan = 7
+	Message_ConsoleColor_Magenta = 8
+Message_ConsoleColor_Default = Message_ConsoleColor.Message_ConsoleColor_Default
+Message_ConsoleColor_Black = Message_ConsoleColor.Message_ConsoleColor_Black
+Message_ConsoleColor_White = Message_ConsoleColor.Message_ConsoleColor_White
+Message_ConsoleColor_Red = Message_ConsoleColor.Message_ConsoleColor_Red
+Message_ConsoleColor_Blue = Message_ConsoleColor.Message_ConsoleColor_Blue
+Message_ConsoleColor_Green = Message_ConsoleColor.Message_ConsoleColor_Green
+Message_ConsoleColor_Yellow = Message_ConsoleColor.Message_ConsoleColor_Yellow
+Message_ConsoleColor_Cyan = Message_ConsoleColor.Message_ConsoleColor_Cyan
+Message_ConsoleColor_Magenta = Message_ConsoleColor.Message_ConsoleColor_Magenta
+
+class Message_Gravity(IntEnum):
+	Message_Trace = 0
+	Message_Info = 1
+	Message_Warning = 2
+	Message_Alarm = 3
+	Message_Fail = 4
+Message_Trace = Message_Gravity.Message_Trace
+Message_Info = Message_Gravity.Message_Info
+Message_Warning = Message_Gravity.Message_Warning
+Message_Alarm = Message_Gravity.Message_Alarm
+Message_Fail = Message_Gravity.Message_Fail
+
+class Message_MetricType(IntEnum):
+	Message_MetricType_None = 0
+	Message_MetricType_ThreadCPUUserTime = 1
+	Message_MetricType_ThreadCPUSystemTime = 2
+	Message_MetricType_ProcessCPUUserTime = 3
+	Message_MetricType_ProcessCPUSystemTime = 4
+	Message_MetricType_WallClock = 5
+	Message_MetricType_MemPrivate = 6
+	Message_MetricType_MemVirtual = 7
+	Message_MetricType_MemWorkingSet = 8
+	Message_MetricType_MemWorkingSetPeak = 9
+	Message_MetricType_MemSwapUsage = 10
+	Message_MetricType_MemSwapUsagePeak = 11
+	Message_MetricType_MemHeapUsage = 12
+Message_MetricType_None = Message_MetricType.Message_MetricType_None
+Message_MetricType_ThreadCPUUserTime = Message_MetricType.Message_MetricType_ThreadCPUUserTime
+Message_MetricType_ThreadCPUSystemTime = Message_MetricType.Message_MetricType_ThreadCPUSystemTime
+Message_MetricType_ProcessCPUUserTime = Message_MetricType.Message_MetricType_ProcessCPUUserTime
+Message_MetricType_ProcessCPUSystemTime = Message_MetricType.Message_MetricType_ProcessCPUSystemTime
+Message_MetricType_WallClock = Message_MetricType.Message_MetricType_WallClock
+Message_MetricType_MemPrivate = Message_MetricType.Message_MetricType_MemPrivate
+Message_MetricType_MemVirtual = Message_MetricType.Message_MetricType_MemVirtual
+Message_MetricType_MemWorkingSet = Message_MetricType.Message_MetricType_MemWorkingSet
+Message_MetricType_MemWorkingSetPeak = Message_MetricType.Message_MetricType_MemWorkingSetPeak
+Message_MetricType_MemSwapUsage = Message_MetricType.Message_MetricType_MemSwapUsage
+Message_MetricType_MemSwapUsagePeak = Message_MetricType.Message_MetricType_MemSwapUsagePeak
+Message_MetricType_MemHeapUsage = Message_MetricType.Message_MetricType_MemHeapUsage
 
 class Message_Status(IntEnum):
 	Message_None = 0
@@ -500,64 +561,6 @@ Message_Fail29 = Message_Status.Message_Fail29
 Message_Fail30 = Message_Status.Message_Fail30
 Message_Fail31 = Message_Status.Message_Fail31
 Message_Fail32 = Message_Status.Message_Fail32
-
-class Message_ConsoleColor(IntEnum):
-	Message_ConsoleColor_Default = 0
-	Message_ConsoleColor_Black = 1
-	Message_ConsoleColor_White = 2
-	Message_ConsoleColor_Red = 3
-	Message_ConsoleColor_Blue = 4
-	Message_ConsoleColor_Green = 5
-	Message_ConsoleColor_Yellow = 6
-	Message_ConsoleColor_Cyan = 7
-	Message_ConsoleColor_Magenta = 8
-Message_ConsoleColor_Default = Message_ConsoleColor.Message_ConsoleColor_Default
-Message_ConsoleColor_Black = Message_ConsoleColor.Message_ConsoleColor_Black
-Message_ConsoleColor_White = Message_ConsoleColor.Message_ConsoleColor_White
-Message_ConsoleColor_Red = Message_ConsoleColor.Message_ConsoleColor_Red
-Message_ConsoleColor_Blue = Message_ConsoleColor.Message_ConsoleColor_Blue
-Message_ConsoleColor_Green = Message_ConsoleColor.Message_ConsoleColor_Green
-Message_ConsoleColor_Yellow = Message_ConsoleColor.Message_ConsoleColor_Yellow
-Message_ConsoleColor_Cyan = Message_ConsoleColor.Message_ConsoleColor_Cyan
-Message_ConsoleColor_Magenta = Message_ConsoleColor.Message_ConsoleColor_Magenta
-
-class Message_Gravity(IntEnum):
-	Message_Trace = 0
-	Message_Info = 1
-	Message_Warning = 2
-	Message_Alarm = 3
-	Message_Fail = 4
-Message_Trace = Message_Gravity.Message_Trace
-Message_Info = Message_Gravity.Message_Info
-Message_Warning = Message_Gravity.Message_Warning
-Message_Alarm = Message_Gravity.Message_Alarm
-Message_Fail = Message_Gravity.Message_Fail
-
-class Message_MetricType(IntEnum):
-	Message_MetricType_None = 0
-	Message_MetricType_ThreadCPUUserTime = 1
-	Message_MetricType_ThreadCPUSystemTime = 2
-	Message_MetricType_ProcessCPUUserTime = 3
-	Message_MetricType_ProcessCPUSystemTime = 4
-	Message_MetricType_MemPrivate = 5
-	Message_MetricType_MemVirtual = 6
-	Message_MetricType_MemWorkingSet = 7
-	Message_MetricType_MemWorkingSetPeak = 8
-	Message_MetricType_MemSwapUsage = 9
-	Message_MetricType_MemSwapUsagePeak = 10
-	Message_MetricType_MemHeapUsage = 11
-Message_MetricType_None = Message_MetricType.Message_MetricType_None
-Message_MetricType_ThreadCPUUserTime = Message_MetricType.Message_MetricType_ThreadCPUUserTime
-Message_MetricType_ThreadCPUSystemTime = Message_MetricType.Message_MetricType_ThreadCPUSystemTime
-Message_MetricType_ProcessCPUUserTime = Message_MetricType.Message_MetricType_ProcessCPUUserTime
-Message_MetricType_ProcessCPUSystemTime = Message_MetricType.Message_MetricType_ProcessCPUSystemTime
-Message_MetricType_MemPrivate = Message_MetricType.Message_MetricType_MemPrivate
-Message_MetricType_MemVirtual = Message_MetricType.Message_MetricType_MemVirtual
-Message_MetricType_MemWorkingSet = Message_MetricType.Message_MetricType_MemWorkingSet
-Message_MetricType_MemWorkingSetPeak = Message_MetricType.Message_MetricType_MemWorkingSetPeak
-Message_MetricType_MemSwapUsage = Message_MetricType.Message_MetricType_MemSwapUsage
-Message_MetricType_MemSwapUsagePeak = Message_MetricType.Message_MetricType_MemSwapUsagePeak
-Message_MetricType_MemHeapUsage = Message_MetricType.Message_MetricType_MemHeapUsage
 
 class Message_StatusType(IntEnum):
 	Message_DONE = 256
@@ -2357,7 +2360,7 @@ TCollection_ExtendedString
 		/****************** Msg ******************/
 		/**** md5 signature: 8c621fc4cece4752495337f2186770bf ****/
 		%feature("compactdefaultargs") Msg;
-		%feature("autodoc", "Gives the text for the message identified by the keyword <key> if there are no messages with such keyword defined, the error message is returned. in that case reference to static string is returned, it can be chenged with next call(s) to msg(). note: the error message is constructed like 'unknown message: <key>', and can itself be customized by defining message with key message_msg_badkeyword.
+		%feature("autodoc", "Gives the text for the message identified by the keyword <key>. if there are no messages with such keyword defined, the error message is returned. in that case reference to static string is returned, it can be changed with next call(s) to msg(). note: the error message is constructed like 'unknown message: <key>', and can itself be customized by defining message with key message_msg_badkeyword.
 
 Parameters
 ----------
@@ -3187,7 +3190,7 @@ bool
 		/****************** SetAlertMetrics ******************/
 		/**** md5 signature: c66a5c7cae777f915625c21e78f2d68c ****/
 		%feature("compactdefaultargs") SetAlertMetrics;
-		%feature("autodoc", "Sets current values of default report metrics into the alert. processed oly alert with message_attributemeter attribute @param thealert an alert @param thestartvalue flag, if true, the start value is collected otherwise stop.
+		%feature("autodoc", "Sets current values of default report metrics into the alert. processed only alert with message_attributemeter attribute @param thealert an alert @param thestartvalue flag, if true, the start value is collected otherwise stop.
 
 Parameters
 ----------

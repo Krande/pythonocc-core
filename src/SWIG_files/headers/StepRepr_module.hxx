@@ -88,8 +88,11 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<StepRepr_ReprItemAndPlaneAngleMeasureWithUnitAndQRI.hxx>
 #include<StepRepr_Representation.hxx>
 #include<StepRepr_RepresentationContext.hxx>
+#include<StepRepr_RepresentationContextReference.hxx>
 #include<StepRepr_RepresentationItem.hxx>
 #include<StepRepr_RepresentationMap.hxx>
+#include<StepRepr_RepresentationOrRepresentationReference.hxx>
+#include<StepRepr_RepresentationReference.hxx>
 #include<StepRepr_RepresentationRelationship.hxx>
 #include<StepRepr_RepresentationRelationshipWithTransformation.hxx>
 #include<StepRepr_RepresentedDefinition.hxx>

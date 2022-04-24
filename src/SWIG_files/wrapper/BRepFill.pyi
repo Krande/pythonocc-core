@@ -3,8 +3,8 @@ from typing import overload, NewType, Optional, Tuple
 
 from OCC.Core.Standard import *
 from OCC.Core.NCollection import *
-from OCC.Core.TopTools import *
 from OCC.Core.MAT import *
+from OCC.Core.TopTools import *
 from OCC.Core.TopoDS import *
 from OCC.Core.gp import *
 from OCC.Core.TColStd import *
@@ -83,15 +83,6 @@ class BRepFill_SequenceOfSection:
     def Value(self, theIndex: int) -> BRepFill_Section: ...
     def SetValue(self, theIndex: int, theValue: BRepFill_Section) -> None: ...
 
-class BRepFill_TypeOfContact(IntEnum):
-    BRepFill_NoContact: int = ...
-    BRepFill_Contact: int = ...
-    BRepFill_ContactOnBorder: int = ...
-
-BRepFill_NoContact = BRepFill_TypeOfContact.BRepFill_NoContact
-BRepFill_Contact = BRepFill_TypeOfContact.BRepFill_Contact
-BRepFill_ContactOnBorder = BRepFill_TypeOfContact.BRepFill_ContactOnBorder
-
 class BRepFill_TransitionStyle(IntEnum):
     BRepFill_Modified: int = ...
     BRepFill_Right: int = ...
@@ -100,6 +91,15 @@ class BRepFill_TransitionStyle(IntEnum):
 BRepFill_Modified = BRepFill_TransitionStyle.BRepFill_Modified
 BRepFill_Right = BRepFill_TransitionStyle.BRepFill_Right
 BRepFill_Round = BRepFill_TransitionStyle.BRepFill_Round
+
+class BRepFill_TypeOfContact(IntEnum):
+    BRepFill_NoContact: int = ...
+    BRepFill_Contact: int = ...
+    BRepFill_ContactOnBorder: int = ...
+
+BRepFill_NoContact = BRepFill_TypeOfContact.BRepFill_NoContact
+BRepFill_Contact = BRepFill_TypeOfContact.BRepFill_Contact
+BRepFill_ContactOnBorder = BRepFill_TypeOfContact.BRepFill_ContactOnBorder
 
 class brepfill:
     @staticmethod
@@ -168,9 +168,9 @@ class BRepFill_ComputeCLine:
 
 class BRepFill_CurveConstraint(GeomPlate_CurveConstraint):
     @overload
-    def __init__(self, Boundary: Adaptor3d_HCurveOnSurface, Order: int, NPt: Optional[int] = 10, TolDist: Optional[float] = 0.0001, TolAng: Optional[float] = 0.01, TolCurv: Optional[float] = 0.1) -> None: ...
+    def __init__(self, Boundary: Adaptor3d_CurveOnSurface, Order: int, NPt: Optional[int] = 10, TolDist: Optional[float] = 0.0001, TolAng: Optional[float] = 0.01, TolCurv: Optional[float] = 0.1) -> None: ...
     @overload
-    def __init__(self, Boundary: Adaptor3d_HCurve, Tang: int, NPt: Optional[int] = 10, TolDist: Optional[float] = 0.0001) -> None: ...
+    def __init__(self, Boundary: Adaptor3d_Curve, Tang: int, NPt: Optional[int] = 10, TolDist: Optional[float] = 0.0001) -> None: ...
 
 class BRepFill_Draft:
     def __init__(self, Shape: TopoDS_Shape, Dir: gp_Dir, Angle: float) -> None: ...

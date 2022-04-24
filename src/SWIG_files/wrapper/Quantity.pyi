@@ -5,87 +5,8 @@ from OCC.Core.Standard import *
 from OCC.Core.NCollection import *
 from OCC.Core.TCollection import *
 
-Quantity_AbsorbedDose = NewType('Quantity_AbsorbedDose', Standard_Real)
-Quantity_Acceleration = NewType('Quantity_Acceleration', Standard_Real)
-Quantity_AcousticIntensity = NewType('Quantity_AcousticIntensity', Standard_Real)
-Quantity_Activity = NewType('Quantity_Activity', Standard_Real)
-Quantity_Admittance = NewType('Quantity_Admittance', Standard_Real)
-Quantity_AmountOfSubstance = NewType('Quantity_AmountOfSubstance', Standard_Real)
-Quantity_AngularVelocity = NewType('Quantity_AngularVelocity', Standard_Real)
-Quantity_Area = NewType('Quantity_Area', Standard_Real)
 #the following typedef cannot be wrapped as is
 Quantity_Array2OfColor = NewType('Quantity_Array2OfColor', Any)
-Quantity_Capacitance = NewType('Quantity_Capacitance', Standard_Real)
-Quantity_Coefficient = NewType('Quantity_Coefficient', Standard_Real)
-Quantity_CoefficientOfExpansion = NewType('Quantity_CoefficientOfExpansion', Standard_Real)
-Quantity_Concentration = NewType('Quantity_Concentration', Standard_Real)
-Quantity_Conductivity = NewType('Quantity_Conductivity', Standard_Real)
-Quantity_Constant = NewType('Quantity_Constant', Standard_Real)
-Quantity_Consumption = NewType('Quantity_Consumption', Standard_Real)
-Quantity_Content = NewType('Quantity_Content', Standard_Real)
-Quantity_Density = NewType('Quantity_Density', Standard_Real)
-Quantity_DoseEquivalent = NewType('Quantity_DoseEquivalent', Standard_Real)
-Quantity_ElectricCapacitance = NewType('Quantity_ElectricCapacitance', Standard_Real)
-Quantity_ElectricCharge = NewType('Quantity_ElectricCharge', Standard_Real)
-Quantity_ElectricCurrent = NewType('Quantity_ElectricCurrent', Standard_Real)
-Quantity_ElectricFieldStrength = NewType('Quantity_ElectricFieldStrength', Standard_Real)
-Quantity_ElectricPotential = NewType('Quantity_ElectricPotential', Standard_Real)
-Quantity_Energy = NewType('Quantity_Energy', Standard_Real)
-Quantity_Enthalpy = NewType('Quantity_Enthalpy', Standard_Real)
-Quantity_Entropy = NewType('Quantity_Entropy', Standard_Real)
-Quantity_Factor = NewType('Quantity_Factor', Standard_Real)
-Quantity_Force = NewType('Quantity_Force', Standard_Real)
-Quantity_Frequency = NewType('Quantity_Frequency', Standard_Real)
-Quantity_Illuminance = NewType('Quantity_Illuminance', Standard_Real)
-Quantity_Impedance = NewType('Quantity_Impedance', Standard_Real)
-Quantity_Index = NewType('Quantity_Index', Standard_Real)
-Quantity_Inductance = NewType('Quantity_Inductance', Standard_Real)
-Quantity_KinematicViscosity = NewType('Quantity_KinematicViscosity', Standard_Real)
-Quantity_KineticMoment = NewType('Quantity_KineticMoment', Standard_Real)
-Quantity_Length = NewType('Quantity_Length', Standard_Real)
-Quantity_Luminance = NewType('Quantity_Luminance', Standard_Real)
-Quantity_LuminousEfficacity = NewType('Quantity_LuminousEfficacity', Standard_Real)
-Quantity_LuminousExposition = NewType('Quantity_LuminousExposition', Standard_Real)
-Quantity_LuminousFlux = NewType('Quantity_LuminousFlux', Standard_Real)
-Quantity_LuminousIntensity = NewType('Quantity_LuminousIntensity', Standard_Real)
-Quantity_MagneticFieldStrength = NewType('Quantity_MagneticFieldStrength', Standard_Real)
-Quantity_MagneticFlux = NewType('Quantity_MagneticFlux', Standard_Real)
-Quantity_MagneticFluxDensity = NewType('Quantity_MagneticFluxDensity', Standard_Real)
-Quantity_Mass = NewType('Quantity_Mass', Standard_Real)
-Quantity_MassFlow = NewType('Quantity_MassFlow', Standard_Real)
-Quantity_MolarConcentration = NewType('Quantity_MolarConcentration', Standard_Real)
-Quantity_MolarMass = NewType('Quantity_MolarMass', Standard_Real)
-Quantity_MolarVolume = NewType('Quantity_MolarVolume', Standard_Real)
-Quantity_Molarity = NewType('Quantity_Molarity', Standard_Real)
-Quantity_MomentOfAForce = NewType('Quantity_MomentOfAForce', Standard_Real)
-Quantity_MomentOfInertia = NewType('Quantity_MomentOfInertia', Standard_Real)
-Quantity_Momentum = NewType('Quantity_Momentum', Standard_Real)
-Quantity_Normality = NewType('Quantity_Normality', Standard_Real)
-Quantity_Parameter = NewType('Quantity_Parameter', Standard_Real)
-Quantity_PlaneAngle = NewType('Quantity_PlaneAngle', Standard_Real)
-Quantity_Power = NewType('Quantity_Power', Standard_Real)
-Quantity_Pressure = NewType('Quantity_Pressure', Standard_Real)
-Quantity_Quotient = NewType('Quantity_Quotient', Standard_Real)
-Quantity_Rate = NewType('Quantity_Rate', Standard_Real)
-Quantity_Ratio = NewType('Quantity_Ratio', Standard_Real)
-Quantity_Reluctance = NewType('Quantity_Reluctance', Standard_Real)
-Quantity_Resistance = NewType('Quantity_Resistance', Standard_Real)
-Quantity_Resistivity = NewType('Quantity_Resistivity', Standard_Real)
-Quantity_Scalaire = NewType('Quantity_Scalaire', Standard_Real)
-Quantity_SolidAngle = NewType('Quantity_SolidAngle', Standard_Real)
-Quantity_SoundIntensity = NewType('Quantity_SoundIntensity', Standard_Real)
-Quantity_SpecificHeatCapacity = NewType('Quantity_SpecificHeatCapacity', Standard_Real)
-Quantity_Speed = NewType('Quantity_Speed', Standard_Real)
-Quantity_SurfaceTension = NewType('Quantity_SurfaceTension', Standard_Real)
-Quantity_Temperature = NewType('Quantity_Temperature', Standard_Real)
-Quantity_ThermalConductivity = NewType('Quantity_ThermalConductivity', Standard_Real)
-Quantity_Torque = NewType('Quantity_Torque', Standard_Real)
-Quantity_Velocity = NewType('Quantity_Velocity', Standard_Real)
-Quantity_Viscosity = NewType('Quantity_Viscosity', Standard_Real)
-Quantity_Volume = NewType('Quantity_Volume', Standard_Real)
-Quantity_VolumeFlow = NewType('Quantity_VolumeFlow', Standard_Real)
-Quantity_Weight = NewType('Quantity_Weight', Standard_Real)
-Quantity_Work = NewType('Quantity_Work', Standard_Real)
 
 class Quantity_Array1OfColor:
     @overload
@@ -1156,19 +1077,6 @@ Quantity_NOC_YELLOW4 = Quantity_NameOfColor.Quantity_NOC_YELLOW4
 Quantity_NOC_YELLOWGREEN = Quantity_NameOfColor.Quantity_NOC_YELLOWGREEN
 Quantity_NOC_WHITE = Quantity_NameOfColor.Quantity_NOC_WHITE
 
-class Quantity_TypeOfColor(IntEnum):
-    Quantity_TOC_RGB: int = ...
-    Quantity_TOC_sRGB: int = ...
-    Quantity_TOC_HLS: int = ...
-    Quantity_TOC_CIELab: int = ...
-    Quantity_TOC_CIELch: int = ...
-
-Quantity_TOC_RGB = Quantity_TypeOfColor.Quantity_TOC_RGB
-Quantity_TOC_sRGB = Quantity_TypeOfColor.Quantity_TOC_sRGB
-Quantity_TOC_HLS = Quantity_TypeOfColor.Quantity_TOC_HLS
-Quantity_TOC_CIELab = Quantity_TypeOfColor.Quantity_TOC_CIELab
-Quantity_TOC_CIELch = Quantity_TypeOfColor.Quantity_TOC_CIELch
-
 class Quantity_PhysicalQuantity(IntEnum):
     Quantity_MASS: int = ...
     Quantity_PLANEANGLE: int = ...
@@ -1307,6 +1215,19 @@ Quantity_ACOUSTICINTENSITY = Quantity_PhysicalQuantity.Quantity_ACOUSTICINTENSIT
 Quantity_ACTIVITY = Quantity_PhysicalQuantity.Quantity_ACTIVITY
 Quantity_ABSORBEDDOSE = Quantity_PhysicalQuantity.Quantity_ABSORBEDDOSE
 Quantity_DOSEEQUIVALENT = Quantity_PhysicalQuantity.Quantity_DOSEEQUIVALENT
+
+class Quantity_TypeOfColor(IntEnum):
+    Quantity_TOC_RGB: int = ...
+    Quantity_TOC_sRGB: int = ...
+    Quantity_TOC_HLS: int = ...
+    Quantity_TOC_CIELab: int = ...
+    Quantity_TOC_CIELch: int = ...
+
+Quantity_TOC_RGB = Quantity_TypeOfColor.Quantity_TOC_RGB
+Quantity_TOC_sRGB = Quantity_TypeOfColor.Quantity_TOC_sRGB
+Quantity_TOC_HLS = Quantity_TypeOfColor.Quantity_TOC_HLS
+Quantity_TOC_CIELab = Quantity_TypeOfColor.Quantity_TOC_CIELab
+Quantity_TOC_CIELch = Quantity_TypeOfColor.Quantity_TOC_CIELch
 
 class Quantity_Color:
     @overload

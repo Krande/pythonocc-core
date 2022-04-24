@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define BVHDOCSTRING
 "BVH module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_bvh.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_bvh.html"
 %enddef
 %module (package="OCC.Core", docstring=BVHDOCSTRING) BVH
 
@@ -633,23 +633,19 @@ None
 /* python proxy for excluded classes */
 %pythoncode {
 @classnotwrapped
-class BVH_Tools:
+class BVH_Tree:
 	pass
 
 @classnotwrapped
-class BVH_BuildTool:
+class BVH_Bin:
 	pass
 
 @classnotwrapped
-class BVH_BuildThread:
+class BVH_BinnedBuilder:
 	pass
 
 @classnotwrapped
-class BVH_Sorter:
-	pass
-
-@classnotwrapped
-class BVH_ObjectSet:
+class BVH_AxisSelector:
 	pass
 
 @classnotwrapped
@@ -673,7 +669,51 @@ class BoxMinMax:
 	pass
 
 @classnotwrapped
+class BVH_BoxSet:
+	pass
+
+@classnotwrapped
+class BVH_BuilderTransient:
+	pass
+
+@classnotwrapped
+class BVH_Builder:
+	pass
+
+@classnotwrapped
+class BVH_BuildQueue:
+	pass
+
+@classnotwrapped
+class BVH_BuildTool:
+	pass
+
+@classnotwrapped
+class BVH_BuildThread:
+	pass
+
+@classnotwrapped
 class BVH_Distance:
+	pass
+
+@classnotwrapped
+class BVH_DistanceField:
+	pass
+
+@classnotwrapped
+class BVH_Geometry:
+	pass
+
+@classnotwrapped
+class BVH_LinearBuilder:
+	pass
+
+@classnotwrapped
+class BoundData:
+	pass
+
+@classnotwrapped
+class UpdateBoundTask:
 	pass
 
 @classnotwrapped
@@ -685,35 +725,15 @@ class BVH_Object:
 	pass
 
 @classnotwrapped
-class BVH_QuickSorter:
+class BVH_ObjectSet:
 	pass
 
 @classnotwrapped
-class BVH_Set:
-	pass
-
-@classnotwrapped
-class BVH_SpatialMedianBuilder:
-	pass
-
-@classnotwrapped
-class BVH_Tree:
+class BVH_PairDistance:
 	pass
 
 @classnotwrapped
 class BVH_PrimitiveSet:
-	pass
-
-@classnotwrapped
-class BVH_BuildQueue:
-	pass
-
-@classnotwrapped
-class BVH_BuilderTransient:
-	pass
-
-@classnotwrapped
-class BVH_Builder:
 	pass
 
 @classnotwrapped
@@ -733,6 +753,14 @@ class UnitVector:
 	pass
 
 @classnotwrapped
+class BVH_QueueBuilder:
+	pass
+
+@classnotwrapped
+class BVH_QuickSorter:
+	pass
+
+@classnotwrapped
 class BVH_RadixSorter:
 	pass
 
@@ -746,6 +774,62 @@ class BitComparator:
 
 @classnotwrapped
 class RadixSorter:
+	pass
+
+@classnotwrapped
+class BVH_Ray:
+	pass
+
+@classnotwrapped
+class BVH_Set:
+	pass
+
+@classnotwrapped
+class BVH_Sorter:
+	pass
+
+@classnotwrapped
+class BVH_SpatialMedianBuilder:
+	pass
+
+@classnotwrapped
+class BVH_SweepPlaneBuilder:
+	pass
+
+@classnotwrapped
+class BVH_Tools:
+	pass
+
+@classnotwrapped
+class BVH_BaseTraverse:
+	pass
+
+@classnotwrapped
+class BVH_Traverse:
+	pass
+
+@classnotwrapped
+class BVH_PairTraverse:
+	pass
+
+@classnotwrapped
+class BVH_TreeBaseTransient:
+	pass
+
+@classnotwrapped
+class BVH_TreeBase:
+	pass
+
+@classnotwrapped
+class BVH_QuadTree:
+	pass
+
+@classnotwrapped
+class BVH_BinaryTree:
+	pass
+
+@classnotwrapped
+class BVH_Triangulation:
 	pass
 
 @classnotwrapped
@@ -766,90 +850,6 @@ class VecComp:
 
 @classnotwrapped
 class Array:
-	pass
-
-@classnotwrapped
-class BVH_Triangulation:
-	pass
-
-@classnotwrapped
-class BVH_PairDistance:
-	pass
-
-@classnotwrapped
-class BVH_TreeBaseTransient:
-	pass
-
-@classnotwrapped
-class BVH_TreeBase:
-	pass
-
-@classnotwrapped
-class BVH_QuadTree:
-	pass
-
-@classnotwrapped
-class BVH_BinaryTree:
-	pass
-
-@classnotwrapped
-class BVH_SweepPlaneBuilder:
-	pass
-
-@classnotwrapped
-class BVH_BaseTraverse:
-	pass
-
-@classnotwrapped
-class BVH_Traverse:
-	pass
-
-@classnotwrapped
-class BVH_PairTraverse:
-	pass
-
-@classnotwrapped
-class BVH_BoxSet:
-	pass
-
-@classnotwrapped
-class BVH_Ray:
-	pass
-
-@classnotwrapped
-class BVH_Geometry:
-	pass
-
-@classnotwrapped
-class BVH_QueueBuilder:
-	pass
-
-@classnotwrapped
-class BVH_DistanceField:
-	pass
-
-@classnotwrapped
-class BVH_LinearBuilder:
-	pass
-
-@classnotwrapped
-class BoundData:
-	pass
-
-@classnotwrapped
-class UpdateBoundTask:
-	pass
-
-@classnotwrapped
-class BVH_Bin:
-	pass
-
-@classnotwrapped
-class BVH_BinnedBuilder:
-	pass
-
-@classnotwrapped
-class BVH_AxisSelector:
 	pass
 
 }

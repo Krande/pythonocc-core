@@ -24,7 +24,6 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<CDF_DirectoryIterator.hxx>
 #include<CDF_FWOSDriver.hxx>
 #include<CDF_MetaDataDriver.hxx>
-#include<CDF_MetaDataDriverError.hxx>
 #include<CDF_MetaDataDriverFactory.hxx>
 #include<CDF_Store.hxx>
 #include<CDF_StoreList.hxx>

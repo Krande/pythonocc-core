@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define FSDDOCSTRING
 "FSD module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_fsd.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_fsd.html"
 %enddef
 %module (package="OCC.Core", docstring=FSDDOCSTRING) FSD
 
@@ -71,9 +71,9 @@ typedef FILE * FSD_BStream;
 typedef std::fstream FSD_FStream;
 /* end typedefs declaration */
 
-/**************************
-* class FSD_Base64Decoder *
-**************************/
+/*******************
+* class FSD_Base64 *
+*******************/
 /***********************
 * class FSD_BinaryFile *
 ***********************/
@@ -89,7 +89,7 @@ typedef std::fstream FSD_FStream;
 /* python proxy for excluded classes */
 %pythoncode {
 @classnotwrapped
-class FSD_File:
+class FSD_Base64:
 	pass
 
 @classnotwrapped
@@ -98,6 +98,10 @@ class FSD_BinaryFile:
 
 @classnotwrapped
 class FSD_CmpFile:
+	pass
+
+@classnotwrapped
+class FSD_File:
 	pass
 
 @classnotwrapped

@@ -58,6 +58,8 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<gp_TrsfNLerp.hxx>
 #include<gp_Vec.hxx>
 #include<gp_Vec2d.hxx>
+#include<gp_Vec2f.hxx>
+#include<gp_Vec3f.hxx>
 #include<gp_VectorWithNullMagnitude.hxx>
 #include<gp_XY.hxx>
 #include<gp_XYZ.hxx>

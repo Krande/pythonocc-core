@@ -24,10 +24,6 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<BRepAdaptor_Curve.hxx>
 #include<BRepAdaptor_Curve2d.hxx>
 #include<BRepAdaptor_HArray1OfCurve.hxx>
-#include<BRepAdaptor_HCompCurve.hxx>
-#include<BRepAdaptor_HCurve.hxx>
-#include<BRepAdaptor_HCurve2d.hxx>
-#include<BRepAdaptor_HSurface.hxx>
 #include<BRepAdaptor_Surface.hxx>
 
 #endif // BREPADAPTOR_HXX

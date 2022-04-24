@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define FILLETSURFDOCSTRING
 "FilletSurf module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_filletsurf.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_filletsurf.html"
 %enddef
 %module (package="OCC.Core", docstring=FILLETSURFDOCSTRING) FilletSurf
 
@@ -86,6 +86,15 @@ from OCC.Core.Exception import *
 };
 
 /* public enums */
+enum FilletSurf_ErrorTypeStatus {
+	FilletSurf_EmptyList = 0,
+	FilletSurf_EdgeNotG1 = 1,
+	FilletSurf_FacesNotG1 = 2,
+	FilletSurf_EdgeNotOnShape = 3,
+	FilletSurf_NotSharpEdge = 4,
+	FilletSurf_PbFilletCompute = 5,
+};
+
 enum FilletSurf_StatusDone {
 	FilletSurf_IsOk = 0,
 	FilletSurf_IsNotOk = 1,
@@ -98,19 +107,24 @@ enum FilletSurf_StatusType {
 	FilletSurf_NoExtremityOnEdge = 2,
 };
 
-enum FilletSurf_ErrorTypeStatus {
-	FilletSurf_EmptyList = 0,
-	FilletSurf_EdgeNotG1 = 1,
-	FilletSurf_FacesNotG1 = 2,
-	FilletSurf_EdgeNotOnShape = 3,
-	FilletSurf_NotSharpEdge = 4,
-	FilletSurf_PbFilletCompute = 5,
-};
-
 /* end public enums declaration */
 
 /* python proy classes for enums */
 %pythoncode {
+
+class FilletSurf_ErrorTypeStatus(IntEnum):
+	FilletSurf_EmptyList = 0
+	FilletSurf_EdgeNotG1 = 1
+	FilletSurf_FacesNotG1 = 2
+	FilletSurf_EdgeNotOnShape = 3
+	FilletSurf_NotSharpEdge = 4
+	FilletSurf_PbFilletCompute = 5
+FilletSurf_EmptyList = FilletSurf_ErrorTypeStatus.FilletSurf_EmptyList
+FilletSurf_EdgeNotG1 = FilletSurf_ErrorTypeStatus.FilletSurf_EdgeNotG1
+FilletSurf_FacesNotG1 = FilletSurf_ErrorTypeStatus.FilletSurf_FacesNotG1
+FilletSurf_EdgeNotOnShape = FilletSurf_ErrorTypeStatus.FilletSurf_EdgeNotOnShape
+FilletSurf_NotSharpEdge = FilletSurf_ErrorTypeStatus.FilletSurf_NotSharpEdge
+FilletSurf_PbFilletCompute = FilletSurf_ErrorTypeStatus.FilletSurf_PbFilletCompute
 
 class FilletSurf_StatusDone(IntEnum):
 	FilletSurf_IsOk = 0
@@ -127,20 +141,6 @@ class FilletSurf_StatusType(IntEnum):
 FilletSurf_TwoExtremityOnEdge = FilletSurf_StatusType.FilletSurf_TwoExtremityOnEdge
 FilletSurf_OneExtremityOnEdge = FilletSurf_StatusType.FilletSurf_OneExtremityOnEdge
 FilletSurf_NoExtremityOnEdge = FilletSurf_StatusType.FilletSurf_NoExtremityOnEdge
-
-class FilletSurf_ErrorTypeStatus(IntEnum):
-	FilletSurf_EmptyList = 0
-	FilletSurf_EdgeNotG1 = 1
-	FilletSurf_FacesNotG1 = 2
-	FilletSurf_EdgeNotOnShape = 3
-	FilletSurf_NotSharpEdge = 4
-	FilletSurf_PbFilletCompute = 5
-FilletSurf_EmptyList = FilletSurf_ErrorTypeStatus.FilletSurf_EmptyList
-FilletSurf_EdgeNotG1 = FilletSurf_ErrorTypeStatus.FilletSurf_EdgeNotG1
-FilletSurf_FacesNotG1 = FilletSurf_ErrorTypeStatus.FilletSurf_FacesNotG1
-FilletSurf_EdgeNotOnShape = FilletSurf_ErrorTypeStatus.FilletSurf_EdgeNotOnShape
-FilletSurf_NotSharpEdge = FilletSurf_ErrorTypeStatus.FilletSurf_NotSharpEdge
-FilletSurf_PbFilletCompute = FilletSurf_ErrorTypeStatus.FilletSurf_PbFilletCompute
 };
 /* end python proxy for enums */
 
@@ -161,7 +161,7 @@ class FilletSurf_Builder {
 		/****************** FilletSurf_Builder ******************/
 		/**** md5 signature: c321636a39909ce21004c881f9c9aefa ****/
 		%feature("compactdefaultargs") FilletSurf_Builder;
-		%feature("autodoc", "Initialize of the informations necessary for the computation of the fillet on the shape s from a list of edges e and a radius r. //! ta is the angular tolerance tapp3d is the 3d approximation tolerance tapp2d is the 2d approximation tolerance.
+		%feature("autodoc", "Initialize of the information necessary for the computation of the fillet on the shape s from a list of edges e and a radius r. //! ta is the angular tolerance tapp3d is the 3d approximation tolerance tapp2d is the 2d approximation tolerance.
 
 Parameters
 ----------
@@ -394,7 +394,7 @@ FilletSurf_StatusType
 		/****************** StatusError ******************/
 		/**** md5 signature: 5167445f2539889d85097497988c0fab ****/
 		%feature("compactdefaultargs") StatusError;
-		%feature("autodoc", "Gives informations about error status if isdone=isnotok returns edgenotg1: the edges are not g1 facesnotg1 : two connected faces on a same support are not g1 edgenotonshape: the edge is not on shape notsharpedge: the edge is not sharp pbfilletcompute: problem during the computation of the fillet.
+		%feature("autodoc", "Gives information about error status if isdone=isnotok returns edgenotg1: the edges are not g1 facesnotg1 : two connected faces on a same support are not g1 edgenotonshape: the edge is not on shape notsharpedge: the edge is not sharp pbfilletcompute: problem during the computation of the fillet.
 
 Returns
 -------

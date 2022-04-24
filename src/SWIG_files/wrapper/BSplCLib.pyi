@@ -10,6 +10,13 @@ from OCC.Core.gp import *
 from OCC.Core.GeomAbs import *
 
 
+class BSplCLib_KnotDistribution(IntEnum):
+    BSplCLib_NonUniform: int = ...
+    BSplCLib_Uniform: int = ...
+
+BSplCLib_NonUniform = BSplCLib_KnotDistribution.BSplCLib_NonUniform
+BSplCLib_Uniform = BSplCLib_KnotDistribution.BSplCLib_Uniform
+
 class BSplCLib_MultDistribution(IntEnum):
     BSplCLib_NonConstant: int = ...
     BSplCLib_Constant: int = ...
@@ -18,13 +25,6 @@ class BSplCLib_MultDistribution(IntEnum):
 BSplCLib_NonConstant = BSplCLib_MultDistribution.BSplCLib_NonConstant
 BSplCLib_Constant = BSplCLib_MultDistribution.BSplCLib_Constant
 BSplCLib_QuasiConstant = BSplCLib_MultDistribution.BSplCLib_QuasiConstant
-
-class BSplCLib_KnotDistribution(IntEnum):
-    BSplCLib_NonUniform: int = ...
-    BSplCLib_Uniform: int = ...
-
-BSplCLib_NonUniform = BSplCLib_KnotDistribution.BSplCLib_NonUniform
-BSplCLib_Uniform = BSplCLib_KnotDistribution.BSplCLib_Uniform
 
 class bsplclib:
     @staticmethod
@@ -241,7 +241,7 @@ class bsplclib:
     def IncreaseDegree(NewDegree: int, Poles: TColgp_Array1OfPnt, Weights: TColStd_Array1OfReal, NewPoles: TColgp_Array1OfPnt, NewWeights: TColStd_Array1OfReal) -> None: ...
     @overload
     @staticmethod
-    def IncreaseDegree(NewDegree: int, Poles: TColgp_Array1OfPnt2d, Weights: TColStd_Array1OfReal, NewPoles: TColgp_Array1OfPnt2d, NewWeights: TColStd_Array1OfReal) -> None: ...
+    def IncreaseDegree(theNewDegree: int, thePoles: TColgp_Array1OfPnt2d, theWeights: TColStd_Array1OfReal, theNewPoles: TColgp_Array1OfPnt2d, theNewWeights: TColStd_Array1OfReal) -> None: ...
     @staticmethod
     def IncreaseDegreeCountKnots(Degree: int, NewDegree: int, Periodic: bool, Mults: TColStd_Array1OfInteger) -> int: ...
     @overload

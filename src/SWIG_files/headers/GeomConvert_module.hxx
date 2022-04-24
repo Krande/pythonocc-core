@@ -28,5 +28,6 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<GeomConvert_BSplineSurfaceToBezierSurface.hxx>
 #include<GeomConvert_CompBezierSurfacesToBSplineSurface.hxx>
 #include<GeomConvert_CompCurveToBSplineCurve.hxx>
+#include<GeomConvert_Units.hxx>
 
 #endif // GEOMCONVERT_HXX

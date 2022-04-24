@@ -40,6 +40,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<XCAFDoc_GraphNode.hxx>
 #include<XCAFDoc_GraphNodeSequence.hxx>
 #include<XCAFDoc_LayerTool.hxx>
+#include<XCAFDoc_LengthUnit.hxx>
 #include<XCAFDoc_Location.hxx>
 #include<XCAFDoc_Material.hxx>
 #include<XCAFDoc_MaterialTool.hxx>

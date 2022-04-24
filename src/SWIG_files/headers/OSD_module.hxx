@@ -20,6 +20,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #include<OSD.hxx>
+#include<OSD_CachedFileSystem.hxx>
 #include<OSD_Chronometer.hxx>
 #include<OSD_Directory.hxx>
 #include<OSD_DirectoryIterator.hxx>
@@ -50,11 +51,14 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<OSD_File.hxx>
 #include<OSD_FileIterator.hxx>
 #include<OSD_FileNode.hxx>
+#include<OSD_FileSystem.hxx>
+#include<OSD_FileSystemSelector.hxx>
 #include<OSD_FromWhere.hxx>
 #include<OSD_Function.hxx>
 #include<OSD_Host.hxx>
 #include<OSD_KindFile.hxx>
 #include<OSD_LoadMode.hxx>
+#include<OSD_LocalFileSystem.hxx>
 #include<OSD_LockType.hxx>
 #include<OSD_MAllocHook.hxx>
 #include<OSD_MemInfo.hxx>

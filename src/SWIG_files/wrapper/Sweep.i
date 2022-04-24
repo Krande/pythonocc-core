@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define SWEEPDOCSTRING
 "Sweep module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_sweep.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_sweep.html"
 %enddef
 %module (package="OCC.Core", docstring=SWEEPDOCSTRING) Sweep
 
@@ -228,7 +228,7 @@ None
 		/****************** Init ******************/
 		/**** md5 signature: 9d541733c548a19a3e04659ced67dd20 ****/
 		%feature("compactdefaultargs") Init;
-		%feature("autodoc", "Resest the numshapeiterator on sub-shapes of <ashape>.
+		%feature("autodoc", "Reset the numshapeiterator on sub-shapes of <ashape>.
 
 Parameters
 ----------

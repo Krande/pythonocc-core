@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define TOPTOOLSDOCSTRING
 "TopTools module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_toptools.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_toptools.html"
 %enddef
 %module (package="OCC.Core", docstring=TOPTOOLSDOCSTRING) TopTools
 
@@ -65,16 +65,38 @@ from OCC.Core.Exception import *
 };
 
 /* public enums */
+enum TopTools_FormatVersion {
+	TopTools_FormatVersion_VERSION_1 = 1,
+	TopTools_FormatVersion_VERSION_2 = 2,
+	TopTools_FormatVersion_VERSION_3 = 3,
+	TopTools_FormatVersion_CURRENT = TopTools_FormatVersion_VERSION_3,
+};
+
+enum  {
+	TopTools_FormatVersion_LOWER = TopTools_FormatVersion_VERSION_1,
+	TopTools_FormatVersion_UPPER = TopTools_FormatVersion_VERSION_3,
+};
+
 /* end public enums declaration */
 
 /* python proy classes for enums */
 %pythoncode {
+
+class TopTools_FormatVersion(IntEnum):
+	TopTools_FormatVersion_VERSION_1 = 1
+	TopTools_FormatVersion_VERSION_2 = 2
+	TopTools_FormatVersion_VERSION_3 = 3
+	TopTools_FormatVersion_CURRENT = TopTools_FormatVersion_VERSION_3
+TopTools_FormatVersion_VERSION_1 = TopTools_FormatVersion.TopTools_FormatVersion_VERSION_1
+TopTools_FormatVersion_VERSION_2 = TopTools_FormatVersion.TopTools_FormatVersion_VERSION_2
+TopTools_FormatVersion_VERSION_3 = TopTools_FormatVersion.TopTools_FormatVersion_VERSION_3
+TopTools_FormatVersion_CURRENT = TopTools_FormatVersion.TopTools_FormatVersion_CURRENT
 };
 /* end python proxy for enums */
 
 /* handles */
-%wrap_handle(TopTools_HArray1OfShape)
 %wrap_handle(TopTools_HArray1OfListOfShape)
+%wrap_handle(TopTools_HArray1OfShape)
 %wrap_handle(TopTools_HArray2OfShape)
 %wrap_handle(TopTools_HSequenceOfShape)
 /* end handles declaration */
@@ -715,7 +737,7 @@ None
 		/****************** FormatNb ******************/
 		/**** md5 signature: 4ba7a37f990f272738aa2003a22fc1da ****/
 		%feature("compactdefaultargs") FormatNb;
-		%feature("autodoc", "Two formats available for the moment: first: does not write curveonsurface uv points into the file on reading calls check() method. second: stores curveonsurface uv points. on reading format is recognized from version string.
+		%feature("autodoc", "Returns the toptools_formatversion.
 
 Returns
 -------
@@ -777,7 +799,7 @@ int
 		/****************** SetFormatNb ******************/
 		/**** md5 signature: efa61c5f0aa586c699f53e1139cd95f9 ****/
 		%feature("compactdefaultargs") SetFormatNb;
-		%feature("autodoc", "No available documentation.
+		%feature("autodoc", "Sets the toptools_formatversion.
 
 Parameters
 ----------
@@ -831,17 +853,6 @@ TopoDS_Shape
 
 /* harray1 classes */
 
-class TopTools_HArray1OfShape : public TopTools_Array1OfShape, public Standard_Transient {
-  public:
-    TopTools_HArray1OfShape(const Standard_Integer theLower, const Standard_Integer theUpper);
-    TopTools_HArray1OfShape(const Standard_Integer theLower, const Standard_Integer theUpper, const TopTools_Array1OfShape::value_type& theValue);
-    TopTools_HArray1OfShape(const TopTools_Array1OfShape& theOther);
-    const TopTools_Array1OfShape& Array1();
-    TopTools_Array1OfShape& ChangeArray1();
-};
-%make_alias(TopTools_HArray1OfShape)
-
-
 class TopTools_HArray1OfListOfShape : public TopTools_Array1OfListOfShape, public Standard_Transient {
   public:
     TopTools_HArray1OfListOfShape(const Standard_Integer theLower, const Standard_Integer theUpper);
@@ -851,6 +862,17 @@ class TopTools_HArray1OfListOfShape : public TopTools_Array1OfListOfShape, publi
     TopTools_Array1OfListOfShape& ChangeArray1();
 };
 %make_alias(TopTools_HArray1OfListOfShape)
+
+
+class TopTools_HArray1OfShape : public TopTools_Array1OfShape, public Standard_Transient {
+  public:
+    TopTools_HArray1OfShape(const Standard_Integer theLower, const Standard_Integer theUpper);
+    TopTools_HArray1OfShape(const Standard_Integer theLower, const Standard_Integer theUpper, const TopTools_Array1OfShape::value_type& theValue);
+    TopTools_HArray1OfShape(const TopTools_Array1OfShape& theOther);
+    const TopTools_Array1OfShape& Array1();
+    TopTools_Array1OfShape& ChangeArray1();
+};
+%make_alias(TopTools_HArray1OfShape)
 
 /* harray2 classes */
 class TopTools_HArray2OfShape : public TopTools_Array2OfShape, public Standard_Transient {

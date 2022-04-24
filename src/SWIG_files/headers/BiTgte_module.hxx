@@ -23,7 +23,5 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<BiTgte_ContactType.hxx>
 #include<BiTgte_CurveOnEdge.hxx>
 #include<BiTgte_CurveOnVertex.hxx>
-#include<BiTgte_HCurveOnEdge.hxx>
-#include<BiTgte_HCurveOnVertex.hxx>
 
 #endif // BITGTE_HXX

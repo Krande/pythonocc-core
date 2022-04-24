@@ -21,12 +21,6 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 
 #include<GeomAdaptor.hxx>
 #include<GeomAdaptor_Curve.hxx>
-#include<GeomAdaptor_GHCurve.hxx>
-#include<GeomAdaptor_GHSurface.hxx>
-#include<GeomAdaptor_HCurve.hxx>
-#include<GeomAdaptor_HSurface.hxx>
-#include<GeomAdaptor_HSurfaceOfLinearExtrusion.hxx>
-#include<GeomAdaptor_HSurfaceOfRevolution.hxx>
 #include<GeomAdaptor_Surface.hxx>
 #include<GeomAdaptor_SurfaceOfLinearExtrusion.hxx>
 #include<GeomAdaptor_SurfaceOfRevolution.hxx>

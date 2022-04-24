@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define STDSELECTDOCSTRING
 "StdSelect module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_stdselect.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_stdselect.html"
 %enddef
 %module (package="OCC.Core", docstring=STDSELECTDOCSTRING) StdSelect
 
@@ -91,6 +91,12 @@ from OCC.Core.Exception import *
 };
 
 /* public enums */
+enum StdSelect_TypeOfEdge {
+	StdSelect_AnyEdge = 0,
+	StdSelect_Line = 1,
+	StdSelect_Circle = 2,
+};
+
 enum StdSelect_TypeOfFace {
 	StdSelect_AnyFace = 0,
 	StdSelect_Plane = 1,
@@ -101,26 +107,30 @@ enum StdSelect_TypeOfFace {
 	StdSelect_Cone = 6,
 };
 
-enum StdSelect_TypeOfEdge {
-	StdSelect_AnyEdge = 0,
-	StdSelect_Line = 1,
-	StdSelect_Circle = 2,
-};
-
 enum StdSelect_TypeOfSelectionImage {
 	StdSelect_TypeOfSelectionImage_NormalizedDepth = 0,
 	StdSelect_TypeOfSelectionImage_NormalizedDepthInverted = 1,
 	StdSelect_TypeOfSelectionImage_UnnormalizedDepth = 2,
 	StdSelect_TypeOfSelectionImage_ColoredDetectedObject = 3,
 	StdSelect_TypeOfSelectionImage_ColoredEntity = 4,
-	StdSelect_TypeOfSelectionImage_ColoredOwner = 5,
-	StdSelect_TypeOfSelectionImage_ColoredSelectionMode = 6,
+	StdSelect_TypeOfSelectionImage_ColoredEntityType = 5,
+	StdSelect_TypeOfSelectionImage_ColoredOwner = 6,
+	StdSelect_TypeOfSelectionImage_ColoredSelectionMode = 7,
+	StdSelect_TypeOfSelectionImage_SurfaceNormal = 8,
 };
 
 /* end public enums declaration */
 
 /* python proy classes for enums */
 %pythoncode {
+
+class StdSelect_TypeOfEdge(IntEnum):
+	StdSelect_AnyEdge = 0
+	StdSelect_Line = 1
+	StdSelect_Circle = 2
+StdSelect_AnyEdge = StdSelect_TypeOfEdge.StdSelect_AnyEdge
+StdSelect_Line = StdSelect_TypeOfEdge.StdSelect_Line
+StdSelect_Circle = StdSelect_TypeOfEdge.StdSelect_Circle
 
 class StdSelect_TypeOfFace(IntEnum):
 	StdSelect_AnyFace = 0
@@ -138,29 +148,25 @@ StdSelect_Torus = StdSelect_TypeOfFace.StdSelect_Torus
 StdSelect_Revol = StdSelect_TypeOfFace.StdSelect_Revol
 StdSelect_Cone = StdSelect_TypeOfFace.StdSelect_Cone
 
-class StdSelect_TypeOfEdge(IntEnum):
-	StdSelect_AnyEdge = 0
-	StdSelect_Line = 1
-	StdSelect_Circle = 2
-StdSelect_AnyEdge = StdSelect_TypeOfEdge.StdSelect_AnyEdge
-StdSelect_Line = StdSelect_TypeOfEdge.StdSelect_Line
-StdSelect_Circle = StdSelect_TypeOfEdge.StdSelect_Circle
-
 class StdSelect_TypeOfSelectionImage(IntEnum):
 	StdSelect_TypeOfSelectionImage_NormalizedDepth = 0
 	StdSelect_TypeOfSelectionImage_NormalizedDepthInverted = 1
 	StdSelect_TypeOfSelectionImage_UnnormalizedDepth = 2
 	StdSelect_TypeOfSelectionImage_ColoredDetectedObject = 3
 	StdSelect_TypeOfSelectionImage_ColoredEntity = 4
-	StdSelect_TypeOfSelectionImage_ColoredOwner = 5
-	StdSelect_TypeOfSelectionImage_ColoredSelectionMode = 6
+	StdSelect_TypeOfSelectionImage_ColoredEntityType = 5
+	StdSelect_TypeOfSelectionImage_ColoredOwner = 6
+	StdSelect_TypeOfSelectionImage_ColoredSelectionMode = 7
+	StdSelect_TypeOfSelectionImage_SurfaceNormal = 8
 StdSelect_TypeOfSelectionImage_NormalizedDepth = StdSelect_TypeOfSelectionImage.StdSelect_TypeOfSelectionImage_NormalizedDepth
 StdSelect_TypeOfSelectionImage_NormalizedDepthInverted = StdSelect_TypeOfSelectionImage.StdSelect_TypeOfSelectionImage_NormalizedDepthInverted
 StdSelect_TypeOfSelectionImage_UnnormalizedDepth = StdSelect_TypeOfSelectionImage.StdSelect_TypeOfSelectionImage_UnnormalizedDepth
 StdSelect_TypeOfSelectionImage_ColoredDetectedObject = StdSelect_TypeOfSelectionImage.StdSelect_TypeOfSelectionImage_ColoredDetectedObject
 StdSelect_TypeOfSelectionImage_ColoredEntity = StdSelect_TypeOfSelectionImage.StdSelect_TypeOfSelectionImage_ColoredEntity
+StdSelect_TypeOfSelectionImage_ColoredEntityType = StdSelect_TypeOfSelectionImage.StdSelect_TypeOfSelectionImage_ColoredEntityType
 StdSelect_TypeOfSelectionImage_ColoredOwner = StdSelect_TypeOfSelectionImage.StdSelect_TypeOfSelectionImage_ColoredOwner
 StdSelect_TypeOfSelectionImage_ColoredSelectionMode = StdSelect_TypeOfSelectionImage.StdSelect_TypeOfSelectionImage_ColoredSelectionMode
+StdSelect_TypeOfSelectionImage_SurfaceNormal = StdSelect_TypeOfSelectionImage.StdSelect_TypeOfSelectionImage_SurfaceNormal
 };
 /* end python proxy for enums */
 
@@ -327,22 +333,21 @@ int
 		Standard_Integer HilightMode();
 
 		/****************** HilightWithColor ******************/
-		/**** md5 signature: 56e556dd0edce796a3c3d12b272af59e ****/
+		/**** md5 signature: ff872ded3a30d3b368f40f78eef3d5d8 ****/
 		%feature("compactdefaultargs") HilightWithColor;
 		%feature("autodoc", "No available documentation.
 
 Parameters
 ----------
-thePM: PrsMgr_PresentationManager3d
+thePM: PrsMgr_PresentationManager
 theStyle: Prs3d_Drawer
-theMode: int,optional
-	default value is 0
+theMode: int
 
 Returns
 -------
 None
 ") HilightWithColor;
-		virtual void HilightWithColor(const opencascade::handle<PrsMgr_PresentationManager3d> & thePM, const opencascade::handle<Prs3d_Drawer> & theStyle, const Standard_Integer theMode = 0);
+		virtual void HilightWithColor(const opencascade::handle<PrsMgr_PresentationManager> & thePM, const opencascade::handle<Prs3d_Drawer> & theStyle, const Standard_Integer theMode);
 
 		/****************** IsHilighted ******************/
 		/**** md5 signature: 19f129c3adba382b625d88256f1470cb ****/
@@ -431,21 +436,21 @@ None
 		virtual void Unhilight(const opencascade::handle<PrsMgr_PresentationManager> & aPM, const Standard_Integer aMode = 0);
 
 		/****************** UpdateHighlightTrsf ******************/
-		/**** md5 signature: e61a4536040859fb2d3616b477fa8627 ****/
+		/**** md5 signature: 5cda4347f3f81c378d7a079e96459f5e ****/
 		%feature("compactdefaultargs") UpdateHighlightTrsf;
 		%feature("autodoc", "Implements immediate application of location transformation of parent object to dynamic highlight structure.
 
 Parameters
 ----------
 theViewer: V3d_Viewer
-theManager: PrsMgr_PresentationManager3d
+theManager: PrsMgr_PresentationManager
 theDispMode: int
 
 Returns
 -------
 None
 ") UpdateHighlightTrsf;
-		virtual void UpdateHighlightTrsf(const opencascade::handle<V3d_Viewer> & theViewer, const opencascade::handle<PrsMgr_PresentationManager3d> & theManager, const Standard_Integer theDispMode);
+		virtual void UpdateHighlightTrsf(const opencascade::handle<V3d_Viewer> & theViewer, const opencascade::handle<PrsMgr_PresentationManager> & theManager, const Standard_Integer theDispMode);
 
 };
 
@@ -579,7 +584,7 @@ None
 		/****************** Load ******************/
 		/**** md5 signature: 00cf72412f1de1b90a4446a128411b90 ****/
 		%feature("compactdefaultargs") Load;
-		%feature("autodoc", "Same functionnalities ; the only difference is that the selectable object from which the selection comes is stored in each sensitive entityowner; decomposition of <ashape> into sensitive entities following a mode of decomposition <atype>. these entities are stored in <aselection> the major difference is that the known users are first inserted in the brepowners. the original shape is the last user... (see entityowner from selectbasics and brepowner)...
+		%feature("autodoc", "Same functionalities ; the only difference is that the selectable object from which the selection comes is stored in each sensitive entityowner; decomposition of <ashape> into sensitive entities following a mode of decomposition <atype>. these entities are stored in <aselection> the major difference is that the known users are first inserted in the brepowners. the original shape is the last user... (see entityowner from selectbasics and brepowner)...
 
 Parameters
 ----------
@@ -825,22 +830,21 @@ None
 		 StdSelect_Shape(const TopoDS_Shape & theShape, const opencascade::handle<Prs3d_Drawer> & theDrawer = opencascade::handle<Prs3d_Drawer>());
 
 		/****************** Compute ******************/
-		/**** md5 signature: 7a2e6142c1414b0e4f62cf86893d72b9 ****/
+		/**** md5 signature: f53f89fd95d4c315c88ee451ac3f4363 ****/
 		%feature("compactdefaultargs") Compute;
 		%feature("autodoc", "No available documentation.
 
 Parameters
 ----------
-aPresentationManager: PrsMgr_PresentationManager3d
-aPresentation: Prs3d_Presentation
-aMode: int,optional
-	default value is 0
+thePrsMgr: PrsMgr_PresentationManager
+thePrs: Prs3d_Presentation
+theMode: int
 
 Returns
 -------
 None
 ") Compute;
-		void Compute(const opencascade::handle<PrsMgr_PresentationManager3d> & aPresentationManager, const opencascade::handle<Prs3d_Presentation> & aPresentation, const Standard_Integer aMode = 0);
+		virtual void Compute(const opencascade::handle<PrsMgr_PresentationManager> & thePrsMgr, const opencascade::handle<Prs3d_Presentation> & thePrs, const Standard_Integer theMode);
 
 
             %feature("autodoc", "1");

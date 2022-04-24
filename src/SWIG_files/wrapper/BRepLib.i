@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define BREPLIBDOCSTRING
 "BRepLib module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_breplib.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_breplib.html"
 %enddef
 %module (package="OCC.Core", docstring=BREPLIBDOCSTRING) BRepLib
 
@@ -91,11 +91,12 @@ enum BRepLib_EdgeError {
 	BRepLib_LineThroughIdenticPoints = 6,
 };
 
-enum BRepLib_ShellError {
-	BRepLib_ShellDone = 0,
-	BRepLib_EmptyShell = 1,
-	BRepLib_DisconnectedShell = 2,
-	BRepLib_ShellParametersOutOfRange = 3,
+enum BRepLib_FaceError {
+	BRepLib_FaceDone = 0,
+	BRepLib_NoFace = 1,
+	BRepLib_NotPlanar = 2,
+	BRepLib_CurveProjectionFailed = 3,
+	BRepLib_ParametersOutOfRange = 4,
 };
 
 enum BRepLib_ShapeModification {
@@ -106,19 +107,18 @@ enum BRepLib_ShapeModification {
 	BRepLib_BoundaryModified = 4,
 };
 
+enum BRepLib_ShellError {
+	BRepLib_ShellDone = 0,
+	BRepLib_EmptyShell = 1,
+	BRepLib_DisconnectedShell = 2,
+	BRepLib_ShellParametersOutOfRange = 3,
+};
+
 enum BRepLib_WireError {
 	BRepLib_WireDone = 0,
 	BRepLib_EmptyWire = 1,
 	BRepLib_DisconnectedWire = 2,
 	BRepLib_NonManifoldWire = 3,
-};
-
-enum BRepLib_FaceError {
-	BRepLib_FaceDone = 0,
-	BRepLib_NoFace = 1,
-	BRepLib_NotPlanar = 2,
-	BRepLib_CurveProjectionFailed = 3,
-	BRepLib_ParametersOutOfRange = 4,
 };
 
 /* end public enums declaration */
@@ -142,15 +142,17 @@ BRepLib_PointWithInfiniteParameter = BRepLib_EdgeError.BRepLib_PointWithInfinite
 BRepLib_DifferentsPointAndParameter = BRepLib_EdgeError.BRepLib_DifferentsPointAndParameter
 BRepLib_LineThroughIdenticPoints = BRepLib_EdgeError.BRepLib_LineThroughIdenticPoints
 
-class BRepLib_ShellError(IntEnum):
-	BRepLib_ShellDone = 0
-	BRepLib_EmptyShell = 1
-	BRepLib_DisconnectedShell = 2
-	BRepLib_ShellParametersOutOfRange = 3
-BRepLib_ShellDone = BRepLib_ShellError.BRepLib_ShellDone
-BRepLib_EmptyShell = BRepLib_ShellError.BRepLib_EmptyShell
-BRepLib_DisconnectedShell = BRepLib_ShellError.BRepLib_DisconnectedShell
-BRepLib_ShellParametersOutOfRange = BRepLib_ShellError.BRepLib_ShellParametersOutOfRange
+class BRepLib_FaceError(IntEnum):
+	BRepLib_FaceDone = 0
+	BRepLib_NoFace = 1
+	BRepLib_NotPlanar = 2
+	BRepLib_CurveProjectionFailed = 3
+	BRepLib_ParametersOutOfRange = 4
+BRepLib_FaceDone = BRepLib_FaceError.BRepLib_FaceDone
+BRepLib_NoFace = BRepLib_FaceError.BRepLib_NoFace
+BRepLib_NotPlanar = BRepLib_FaceError.BRepLib_NotPlanar
+BRepLib_CurveProjectionFailed = BRepLib_FaceError.BRepLib_CurveProjectionFailed
+BRepLib_ParametersOutOfRange = BRepLib_FaceError.BRepLib_ParametersOutOfRange
 
 class BRepLib_ShapeModification(IntEnum):
 	BRepLib_Preserved = 0
@@ -164,6 +166,16 @@ BRepLib_Trimmed = BRepLib_ShapeModification.BRepLib_Trimmed
 BRepLib_Merged = BRepLib_ShapeModification.BRepLib_Merged
 BRepLib_BoundaryModified = BRepLib_ShapeModification.BRepLib_BoundaryModified
 
+class BRepLib_ShellError(IntEnum):
+	BRepLib_ShellDone = 0
+	BRepLib_EmptyShell = 1
+	BRepLib_DisconnectedShell = 2
+	BRepLib_ShellParametersOutOfRange = 3
+BRepLib_ShellDone = BRepLib_ShellError.BRepLib_ShellDone
+BRepLib_EmptyShell = BRepLib_ShellError.BRepLib_EmptyShell
+BRepLib_DisconnectedShell = BRepLib_ShellError.BRepLib_DisconnectedShell
+BRepLib_ShellParametersOutOfRange = BRepLib_ShellError.BRepLib_ShellParametersOutOfRange
+
 class BRepLib_WireError(IntEnum):
 	BRepLib_WireDone = 0
 	BRepLib_EmptyWire = 1
@@ -173,18 +185,6 @@ BRepLib_WireDone = BRepLib_WireError.BRepLib_WireDone
 BRepLib_EmptyWire = BRepLib_WireError.BRepLib_EmptyWire
 BRepLib_DisconnectedWire = BRepLib_WireError.BRepLib_DisconnectedWire
 BRepLib_NonManifoldWire = BRepLib_WireError.BRepLib_NonManifoldWire
-
-class BRepLib_FaceError(IntEnum):
-	BRepLib_FaceDone = 0
-	BRepLib_NoFace = 1
-	BRepLib_NotPlanar = 2
-	BRepLib_CurveProjectionFailed = 3
-	BRepLib_ParametersOutOfRange = 4
-BRepLib_FaceDone = BRepLib_FaceError.BRepLib_FaceDone
-BRepLib_NoFace = BRepLib_FaceError.BRepLib_NoFace
-BRepLib_NotPlanar = BRepLib_FaceError.BRepLib_NotPlanar
-BRepLib_CurveProjectionFailed = BRepLib_FaceError.BRepLib_CurveProjectionFailed
-BRepLib_ParametersOutOfRange = BRepLib_FaceError.BRepLib_ParametersOutOfRange
 };
 /* end python proxy for enums */
 
@@ -367,7 +367,7 @@ None
 		/****************** EncodeRegularity ******************/
 		/**** md5 signature: 172eaf1d13de1fe1ad03867f4f67dce0 ****/
 		%feature("compactdefaultargs") EncodeRegularity;
-		%feature("autodoc", "Encodes the regularity beetween <f1> and <f2> by <e> warning: <tolang> is an angular tolerance, expressed in rad. warning: if the edge's regularity is coded before, nothing is done.
+		%feature("autodoc", "Encodes the regularity between <f1> and <f2> by <e> warning: <tolang> is an angular tolerance, expressed in rad. warning: if the edge's regularity is coded before, nothing is done.
 
 Parameters
 ----------
@@ -651,10 +651,25 @@ None
 ") SortFaces;
 		static void SortFaces(const TopoDS_Shape & S, TopTools_ListOfShape & LF);
 
+		/****************** UpdateDeflection ******************/
+		/**** md5 signature: 76d35fdabbd1c46be0db3f1ad51bcdc9 ****/
+		%feature("compactdefaultargs") UpdateDeflection;
+		%feature("autodoc", "Updates value of deflection in poly_triangulation of faces by the maximum deviation measured on existing triangulation.
+
+Parameters
+----------
+S: TopoDS_Shape
+
+Returns
+-------
+None
+") UpdateDeflection;
+		static void UpdateDeflection(const TopoDS_Shape & S);
+
 		/****************** UpdateEdgeTol ******************/
 		/**** md5 signature: 38bb8b704b359479ae8f63fd5e383848 ****/
 		%feature("compactdefaultargs") UpdateEdgeTol;
-		%feature("autodoc", "Checks if the edge has a tolerance smaller than -- -- -- -- maxtolerancetocheck if so it will compute the radius of -- the cylindrical pipe surface that mintolerancerequest is the minimum tolerance before it is usefull to start testing. usually it should be arround 10e-5 contains all -- the curve represenation of the edge returns true if the edge tolerance had to be updated.
+		%feature("autodoc", "Checks if the edge has a tolerance smaller than -- -- -- -- maxtolerancetocheck if so it will compute the radius of -- the cylindrical pipe surface that mintolerancerequest is the minimum tolerance before it is useful to start testing. usually it should be around 10e-5 contains all -- the curve representation of the edge returns true if the edge tolerance had to be updated.
 
 Parameters
 ----------
@@ -671,7 +686,7 @@ bool
 		/****************** UpdateEdgeTolerance ******************/
 		/**** md5 signature: a900570e66aa87edd638ebad627eb240 ****/
 		%feature("compactdefaultargs") UpdateEdgeTolerance;
-		%feature("autodoc", "-- checks all the edges of the shape whose -- -- -- tolerance is smaller than maxtolerancetocheck -- returns true if at least one edge was updated -- mintolerancerequest is the minimum tolerance before -- it -- is usefull to start testing. usually it should be arround -- 10e-5-- //! warning :the method is very slow as it checks all. use only in interfaces or processing assimilate batch.
+		%feature("autodoc", "-- checks all the edges of the shape whose -- -- -- tolerance is smaller than maxtolerancetocheck -- returns true if at least one edge was updated -- mintolerancerequest is the minimum tolerance before -- it -- is useful to start testing. usually it should be around -- 10e-5-- //! warning :the method is very slow as it checks all. use only in interfaces or processing assimilate batch.
 
 Parameters
 ----------
@@ -756,7 +771,7 @@ class BRepLib_CheckCurveOnSurface {
 		/****************** BRepLib_CheckCurveOnSurface ******************/
 		/**** md5 signature: 588c2b7becc8474a44af769cd1861cc0 ****/
 		%feature("compactdefaultargs") BRepLib_CheckCurveOnSurface;
-		%feature("autodoc", "Default contructor.
+		%feature("autodoc", "Default constructor.
 
 Returns
 -------
@@ -767,7 +782,7 @@ None
 		/****************** BRepLib_CheckCurveOnSurface ******************/
 		/**** md5 signature: 4463fa8016612b07a0638ab8e597c79a ****/
 		%feature("compactdefaultargs") BRepLib_CheckCurveOnSurface;
-		%feature("autodoc", "Contructor.
+		%feature("autodoc", "Constructor.
 
 Parameters
 ----------
@@ -779,17 +794,6 @@ Returns
 None
 ") BRepLib_CheckCurveOnSurface;
 		 BRepLib_CheckCurveOnSurface(const TopoDS_Edge & theEdge, const TopoDS_Face & theFace);
-
-		/****************** Curve ******************/
-		/**** md5 signature: 62a16889fb975efa1b2de012099c169b ****/
-		%feature("compactdefaultargs") Curve;
-		%feature("autodoc", "Returns source 3d-curve.
-
-Returns
--------
-opencascade::handle<Geom_Curve>
-") Curve;
-		const opencascade::handle<Geom_Curve> & Curve();
 
 		/****************** ErrorStatus ******************/
 		/**** md5 signature: 23ccaf4f25108c0b871675cdf964cbf6 ****/
@@ -851,69 +855,21 @@ float
 ") MaxParameter;
 		Standard_Real MaxParameter();
 
-		/****************** PCurve ******************/
-		/**** md5 signature: 02216b6aba2c78f7fc310936f46a0781 ****/
-		%feature("compactdefaultargs") PCurve;
-		%feature("autodoc", "Returns mine 2d-curve.
-
-Returns
--------
-opencascade::handle<Geom2d_Curve>
-") PCurve;
-		const opencascade::handle<Geom2d_Curve> & PCurve();
-
-		/****************** PCurve2 ******************/
-		/**** md5 signature: 59fdc85af76719d116ff8e4e51299a26 ****/
-		%feature("compactdefaultargs") PCurve2;
-		%feature("autodoc", "Returns 2nd 2d-curve (if it exists, e.g. for seam-edge).
-
-Returns
--------
-opencascade::handle<Geom2d_Curve>
-") PCurve2;
-		const opencascade::handle<Geom2d_Curve> & PCurve2();
-
 		/****************** Perform ******************/
-		/**** md5 signature: be005fa96430b01dfd3d5c428d6ad6e3 ****/
+		/**** md5 signature: 7c48e222647f30c71b37ef8e0a2cdb24 ****/
 		%feature("compactdefaultargs") Perform;
-		%feature("autodoc", "Performs the calculation if isthemultytheaddisabled == true then computation will be made without any parallelization.
+		%feature("autodoc", "Performs the calculation if ismultithread == standard_true then computation will be performed in parallel.
 
 Parameters
 ----------
-isTheMultyTheradDisabled: bool,optional
+isMultiThread: bool,optional
 	default value is Standard_False
 
 Returns
 -------
 None
 ") Perform;
-		void Perform(const Standard_Boolean isTheMultyTheradDisabled = Standard_False);
-
-		/****************** Range ******************/
-		/**** md5 signature: d6d291eeedf26e22d25b030eceff7dfa ****/
-		%feature("compactdefaultargs") Range;
-		%feature("autodoc", "Returns first and last parameter of the curves (2d- and 3d-curves are considered to have same range).
-
-Parameters
-----------
-
-Returns
--------
-theFirst: float
-theLast: float
-") Range;
-		void Range(Standard_Real &OutValue, Standard_Real &OutValue);
-
-		/****************** Surface ******************/
-		/**** md5 signature: 3aa31a6d63da8a25f018cf96599c0928 ****/
-		%feature("compactdefaultargs") Surface;
-		%feature("autodoc", "Returns source surface.
-
-Returns
--------
-opencascade::handle<Geom_Surface>
-") Surface;
-		const opencascade::handle<Geom_Surface> & Surface();
+		void Perform(const Standard_Boolean isMultiThread = Standard_False);
 
 };
 
@@ -980,7 +936,7 @@ None
 		/****************** BRepLib_FindSurface ******************/
 		/**** md5 signature: b8cba8dda11d30fdcb78d4560e9a7962 ****/
 		%feature("compactdefaultargs") BRepLib_FindSurface;
-		%feature("autodoc", "Computes the surface from the edges of <s> with the given tolerance. if <onlyplane> is true, the computed surface will be a plane. if it is not possible to find a plane, the flag notdone will be set. if <onlyclosed> is true, then s sould be a wire and the existing surface, on which wire s is not closed in 2d, will be ignored.
+		%feature("autodoc", "Computes the surface from the edges of <s> with the given tolerance. if <onlyplane> is true, the computed surface will be a plane. if it is not possible to find a plane, the flag notdone will be set. if <onlyclosed> is true, then s should be a wire and the existing surface, on which wire s is not closed in 2d, will be ignored.
 
 Parameters
 ----------
@@ -1023,7 +979,7 @@ bool
 		/****************** Init ******************/
 		/**** md5 signature: ffdff77a564b351561b3277d0ad3c0f6 ****/
 		%feature("compactdefaultargs") Init;
-		%feature("autodoc", "Computes the surface from the edges of <s> with the given tolerance. if <onlyplane> is true, the computed surface will be a plane. if it is not possible to find a plane, the flag notdone will be set. if <onlyclosed> is true, then s sould be a wire and the existing surface, on which wire s is not closed in 2d, will be ignored.
+		%feature("autodoc", "Computes the surface from the edges of <s> with the given tolerance. if <onlyplane> is true, the computed surface will be a plane. if it is not possible to find a plane, the flag notdone will be set. if <onlyclosed> is true, then s should be a wire and the existing surface, on which wire s is not closed in 2d, will be ignored.
 
 Parameters
 ----------
@@ -1229,6 +1185,129 @@ TopoDS_Shape
 
 
 %extend BRepLib_FuseEdges {
+	%pythoncode {
+	__repr__ = _dumps_object
+	}
+};
+
+/*****************************
+* class BRepLib_ValidateEdge *
+*****************************/
+class BRepLib_ValidateEdge {
+	public:
+		/****************** BRepLib_ValidateEdge ******************/
+		/**** md5 signature: 743d4b813a0a60f0a8f03719aecc2eb8 ****/
+		%feature("compactdefaultargs") BRepLib_ValidateEdge;
+		%feature("autodoc", "Initialization constructor.
+
+Parameters
+----------
+theReferenceCurve: Adaptor3d_Curve
+theOtherCurve: Adaptor3d_CurveOnSurface
+theSameParameter: bool
+
+Returns
+-------
+None
+") BRepLib_ValidateEdge;
+		 BRepLib_ValidateEdge(const opencascade::handle<Adaptor3d_Curve > theReferenceCurve, const opencascade::handle<Adaptor3d_CurveOnSurface > theOtherCurve, Standard_Boolean theSameParameter);
+
+		/****************** CheckTolerance ******************/
+		/**** md5 signature: 5785e5be76b0b006dcca89fcac000a5f ****/
+		%feature("compactdefaultargs") CheckTolerance;
+		%feature("autodoc", "Returns true if computed distance is less than <thetolerancetocheck>.
+
+Parameters
+----------
+theToleranceToCheck: float
+
+Returns
+-------
+bool
+") CheckTolerance;
+		Standard_Boolean CheckTolerance(Standard_Real theToleranceToCheck);
+
+		/****************** GetMaxDistance ******************/
+		/**** md5 signature: 4732d2c21b2f300e493e252dd95feaf9 ****/
+		%feature("compactdefaultargs") GetMaxDistance;
+		%feature("autodoc", "Returns max distance.
+
+Returns
+-------
+float
+") GetMaxDistance;
+		Standard_Real GetMaxDistance();
+
+		/****************** IsDone ******************/
+		/**** md5 signature: e82277147f75ca02ef6500d3c84de9e6 ****/
+		%feature("compactdefaultargs") IsDone;
+		%feature("autodoc", "Returns true if the distance has been found for all points.
+
+Returns
+-------
+bool
+") IsDone;
+		Standard_Boolean IsDone();
+
+		/****************** Process ******************/
+		/**** md5 signature: f69ec5068362d1fb1c1da24f6f943a3d ****/
+		%feature("compactdefaultargs") Process;
+		%feature("autodoc", "Computes the max distance for the 3d curve <myreferencecurve> and curve on surface <myothercurve>. if the setexitiftoleranceexceeded() function was called before <mycalculateddistance> contains first greater than setexitiftoleranceexceeded() parameter value.
+
+Returns
+-------
+None
+") Process;
+		void Process();
+
+		/****************** SetControlPointsNumber ******************/
+		/**** md5 signature: 23357e0c62202a31f8a5a8da5865b56d ****/
+		%feature("compactdefaultargs") SetControlPointsNumber;
+		%feature("autodoc", "Set control points number (if you need a value other than 22).
+
+Parameters
+----------
+theControlPointsNumber: int
+
+Returns
+-------
+None
+") SetControlPointsNumber;
+		void SetControlPointsNumber(Standard_Integer theControlPointsNumber);
+
+		/****************** SetExitIfToleranceExceeded ******************/
+		/**** md5 signature: e317acb89ec96fb57ad5d8a365a0c932 ****/
+		%feature("compactdefaultargs") SetExitIfToleranceExceeded;
+		%feature("autodoc", "Sets the maximal allowed distance in the process() function. if the distance greater than thetoleranceforchecking the process() function stops. use this for best performance in case of checking of tolerance.
+
+Parameters
+----------
+theToleranceForChecking: float
+
+Returns
+-------
+None
+") SetExitIfToleranceExceeded;
+		void SetExitIfToleranceExceeded(Standard_Real theToleranceForChecking);
+
+		/****************** UpdateTolerance ******************/
+		/**** md5 signature: 041719f1b7cceef57cb2fd1857736488 ****/
+		%feature("compactdefaultargs") UpdateTolerance;
+		%feature("autodoc", "Increase <thetolerancetoupdate> if max distance is greater than <thetolerancetoupdate>.
+
+Parameters
+----------
+
+Returns
+-------
+theToleranceToUpdate: float
+") UpdateTolerance;
+		void UpdateTolerance(Standard_Real &OutValue);
+
+};
+
+
+%extend BRepLib_ValidateEdge {
 	%pythoncode {
 	__repr__ = _dumps_object
 	}
@@ -2863,7 +2942,7 @@ None
 		/****************** BRepLib_MakeFace ******************/
 		/**** md5 signature: 5ce188b7df2a0fe70e449d0f77eb834b ****/
 		%feature("compactdefaultargs") BRepLib_MakeFace;
-		%feature("autodoc", "Load a face. usefull to add wires.
+		%feature("autodoc", "Load a face. useful to add wires.
 
 Parameters
 ----------
@@ -3495,7 +3574,7 @@ None
 		/****************** Added ******************/
 		/**** md5 signature: ae76eff202ef54dd186494f9fb9a5cb0 ****/
 		%feature("compactdefaultargs") Added;
-		%feature("autodoc", "Returns true if the last vertex or point was succesfully added.
+		%feature("autodoc", "Returns true if the last vertex or point was successfully added.
 
 Returns
 -------
@@ -3755,7 +3834,7 @@ None
 		/****************** BRepLib_MakeSolid ******************/
 		/**** md5 signature: d194d2606b4ba8b1988d6dbd38da4766 ****/
 		%feature("compactdefaultargs") BRepLib_MakeSolid;
-		%feature("autodoc", "Make a solid from a solid. usefull for adding later.
+		%feature("autodoc", "Make a solid from a solid. useful for adding later.
 
 Parameters
 ----------
@@ -3959,7 +4038,7 @@ None
 		/****************** BRepLib_MakeWire ******************/
 		/**** md5 signature: ac5c38632b4fb819b03eb4dc3b435233 ****/
 		%feature("compactdefaultargs") BRepLib_MakeWire;
-		%feature("autodoc", "Make a wire from a wire. usefull for adding later.
+		%feature("autodoc", "Make a wire from a wire. useful for adding later.
 
 Parameters
 ----------

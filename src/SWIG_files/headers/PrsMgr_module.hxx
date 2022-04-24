@@ -19,6 +19,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #define PRSMGR_HXX
 
 
+#include<PrsMgr_DisplayStatus.hxx>
 #include<PrsMgr_ListOfPresentableObjects.hxx>
 #include<PrsMgr_ListOfPresentations.hxx>
 #include<PrsMgr_PresentableObject.hxx>

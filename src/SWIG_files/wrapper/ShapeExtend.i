@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define SHAPEEXTENDDOCSTRING
 "ShapeExtend module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_shapeextend.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_shapeextend.html"
 %enddef
 %module (package="OCC.Core", docstring=SHAPEEXTENDDOCSTRING) ShapeExtend
 
@@ -80,6 +80,12 @@ from OCC.Core.Exception import *
 };
 
 /* public enums */
+enum ShapeExtend_Parametrisation {
+	ShapeExtend_Natural = 0,
+	ShapeExtend_Uniform = 1,
+	ShapeExtend_Unitary = 2,
+};
+
 enum ShapeExtend_Status {
 	ShapeExtend_OK = 0,
 	ShapeExtend_DONE1 = 1,
@@ -102,16 +108,18 @@ enum ShapeExtend_Status {
 	ShapeExtend_FAIL = 18,
 };
 
-enum ShapeExtend_Parametrisation {
-	ShapeExtend_Natural = 0,
-	ShapeExtend_Uniform = 1,
-	ShapeExtend_Unitary = 2,
-};
-
 /* end public enums declaration */
 
 /* python proy classes for enums */
 %pythoncode {
+
+class ShapeExtend_Parametrisation(IntEnum):
+	ShapeExtend_Natural = 0
+	ShapeExtend_Uniform = 1
+	ShapeExtend_Unitary = 2
+ShapeExtend_Natural = ShapeExtend_Parametrisation.ShapeExtend_Natural
+ShapeExtend_Uniform = ShapeExtend_Parametrisation.ShapeExtend_Uniform
+ShapeExtend_Unitary = ShapeExtend_Parametrisation.ShapeExtend_Unitary
 
 class ShapeExtend_Status(IntEnum):
 	ShapeExtend_OK = 0
@@ -152,14 +160,6 @@ ShapeExtend_FAIL6 = ShapeExtend_Status.ShapeExtend_FAIL6
 ShapeExtend_FAIL7 = ShapeExtend_Status.ShapeExtend_FAIL7
 ShapeExtend_FAIL8 = ShapeExtend_Status.ShapeExtend_FAIL8
 ShapeExtend_FAIL = ShapeExtend_Status.ShapeExtend_FAIL
-
-class ShapeExtend_Parametrisation(IntEnum):
-	ShapeExtend_Natural = 0
-	ShapeExtend_Uniform = 1
-	ShapeExtend_Unitary = 2
-ShapeExtend_Natural = ShapeExtend_Parametrisation.ShapeExtend_Natural
-ShapeExtend_Uniform = ShapeExtend_Parametrisation.ShapeExtend_Uniform
-ShapeExtend_Unitary = ShapeExtend_Parametrisation.ShapeExtend_Unitary
 };
 /* end python proxy for enums */
 
@@ -1789,7 +1789,7 @@ None
 		/****************** Init ******************/
 		/**** md5 signature: a9e5faa7293c857497a7c93fe76d0f12 ****/
 		%feature("compactdefaultargs") Init;
-		%feature("autodoc", "Loads an already existing wire if <chained> is true (default), edges are added in the sequence as they are explored by topods_iterator else, if <chained> is false, wire is explored by breptools_wireexplorer and it is guaranteed that edges will be sequencially connected. remark : in the latter case it can happen that not all edges will be found (because of limitations of breptools_wireexplorer for disconnected wires and wires with seam edges).
+		%feature("autodoc", "Loads an already existing wire if <chained> is true (default), edges are added in the sequence as they are explored by topods_iterator else, if <chained> is false, wire is explored by breptools_wireexplorer and it is guaranteed that edges will be sequentially connected. remark : in the latter case it can happen that not all edges will be found (because of limitations of breptools_wireexplorer for disconnected wires and wires with seam edges).
 
 Parameters
 ----------

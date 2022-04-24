@@ -64,6 +64,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<BRepMesh_ShapeTool.hxx>
 #include<BRepMesh_ShapeVisitor.hxx>
 #include<BRepMesh_Triangle.hxx>
+#include<BRepMesh_Triangulator.hxx>
 #include<BRepMesh_Vertex.hxx>
 #include<BRepMesh_VertexInspector.hxx>
 #include<BRepMesh_VertexTool.hxx>

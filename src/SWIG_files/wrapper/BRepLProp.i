@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define BREPLPROPDOCSTRING
 "BRepLProp module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_breplprop.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_breplprop.html"
 %enddef
 %module (package="OCC.Core", docstring=BREPLPROPDOCSTRING) BRepLProp
 
@@ -116,7 +116,7 @@ GeomAbs_Shape
 		/****************** Continuity ******************/
 		/**** md5 signature: 6e2749f77e1b8216030c4a38b7461152 ****/
 		%feature("compactdefaultargs") Continuity;
-		%feature("autodoc", "The same as preciding but using the standard tolerances from package precision.
+		%feature("autodoc", "The same as preceding but using the standard tolerances from package precision.
 
 Parameters
 ----------

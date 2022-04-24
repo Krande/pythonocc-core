@@ -26,6 +26,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<BinObjMgt_PReal.hxx>
 #include<BinObjMgt_PShortReal.hxx>
 #include<BinObjMgt_Persistent.hxx>
+#include<BinObjMgt_Position.hxx>
 #include<BinObjMgt_RRelocationTable.hxx>
 #include<BinObjMgt_SRelocationTable.hxx>
 

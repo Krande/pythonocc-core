@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define ASPECTDOCSTRING
 "Aspect module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_aspect.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_aspect.html"
 %enddef
 %module (package="OCC.Core", docstring=ASPECTDOCSTRING) Aspect
 
@@ -43,10 +43,10 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_aspect.html"
 #include<Standard_module.hxx>
 #include<NCollection_module.hxx>
 #include<Quantity_module.hxx>
+#include<Graphic3d_module.hxx>
 #include<TCollection_module.hxx>
 #include<gp_module.hxx>
 #include<Image_module.hxx>
-#include<Graphic3d_module.hxx>
 #include<Bnd_module.hxx>
 #include<Media_module.hxx>
 #include<TColgp_module.hxx>
@@ -57,10 +57,10 @@ https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_aspect.html"
 %import Standard.i
 %import NCollection.i
 %import Quantity.i
+%import Graphic3d.i
 %import TCollection.i
 %import gp.i
 %import Image.i
-%import Graphic3d.i
 
 %pythoncode {
 from enum import IntEnum
@@ -68,9 +68,196 @@ from OCC.Core.Exception import *
 };
 
 /* public enums */
+enum Aspect_ColorSpace {
+	Aspect_ColorSpace_sRGB = 0,
+	Aspect_ColorSpace_Linear = 1,
+};
+
 enum Aspect_Eye {
 	Aspect_Eye_Left = 0,
 	Aspect_Eye_Right = 1,
+};
+
+enum Aspect_FillMethod {
+	Aspect_FM_NONE = 0,
+	Aspect_FM_CENTERED = 1,
+	Aspect_FM_TILED = 2,
+	Aspect_FM_STRETCH = 3,
+};
+
+enum Aspect_GradientFillMethod {
+	Aspect_GradientFillMethod_None = 0,
+	Aspect_GradientFillMethod_Horizontal = 1,
+	Aspect_GradientFillMethod_Vertical = 2,
+	Aspect_GradientFillMethod_Diagonal1 = 3,
+	Aspect_GradientFillMethod_Diagonal2 = 4,
+	Aspect_GradientFillMethod_Corner1 = 5,
+	Aspect_GradientFillMethod_Corner2 = 6,
+	Aspect_GradientFillMethod_Corner3 = 7,
+	Aspect_GradientFillMethod_Corner4 = 8,
+	Aspect_GradientFillMethod_Elliptical = 9,
+	Aspect_GFM_NONE = Aspect_GradientFillMethod_None,
+	Aspect_GFM_HOR = Aspect_GradientFillMethod_Horizontal,
+	Aspect_GFM_VER = Aspect_GradientFillMethod_Vertical,
+	Aspect_GFM_DIAG1 = Aspect_GradientFillMethod_Diagonal1,
+	Aspect_GFM_DIAG2 = Aspect_GradientFillMethod_Diagonal2,
+	Aspect_GFM_CORNER1 = Aspect_GradientFillMethod_Corner1,
+	Aspect_GFM_CORNER2 = Aspect_GradientFillMethod_Corner2,
+	Aspect_GFM_CORNER3 = Aspect_GradientFillMethod_Corner3,
+	Aspect_GFM_CORNER4 = Aspect_GradientFillMethod_Corner4,
+};
+
+enum Aspect_GraphicsLibrary {
+	Aspect_GraphicsLibrary_OpenGL = 0,
+	Aspect_GraphicsLibrary_OpenGLES = 1,
+};
+
+enum Aspect_GridDrawMode {
+	Aspect_GDM_Lines = 0,
+	Aspect_GDM_Points = 1,
+	Aspect_GDM_None = 2,
+};
+
+enum Aspect_GridType {
+	Aspect_GT_Rectangular = 0,
+	Aspect_GT_Circular = 1,
+};
+
+enum Aspect_HatchStyle {
+	Aspect_HS_SOLID = 0,
+	Aspect_HS_HORIZONTAL = 7,
+	Aspect_HS_HORIZONTAL_WIDE = 11,
+	Aspect_HS_VERTICAL = 8,
+	Aspect_HS_VERTICAL_WIDE = 12,
+	Aspect_HS_DIAGONAL_45 = 5,
+	Aspect_HS_DIAGONAL_45_WIDE = 9,
+	Aspect_HS_DIAGONAL_135 = 6,
+	Aspect_HS_DIAGONAL_135_WIDE = 10,
+	Aspect_HS_GRID = 3,
+	Aspect_HS_GRID_WIDE = 4,
+	Aspect_HS_GRID_DIAGONAL = 1,
+	Aspect_HS_GRID_DIAGONAL_WIDE = 2,
+	Aspect_HS_NB = 13,
+};
+
+enum Aspect_InteriorStyle {
+	Aspect_IS_EMPTY = - 1,
+	Aspect_IS_SOLID = 0,
+	Aspect_IS_HATCH = 1,
+	Aspect_IS_HIDDENLINE = 2,
+	Aspect_IS_POINT = 3,
+	Aspect_IS_HOLLOW = Aspect_IS_EMPTY,
+};
+
+enum Aspect_PolygonOffsetMode {
+	Aspect_POM_Off = 0,
+	Aspect_POM_Fill = 1,
+	Aspect_POM_Line = 2,
+	Aspect_POM_Point = 4,
+	Aspect_POM_All = Aspect_POM_Fill | Aspect_POM_Line | Aspect_POM_Point,
+	Aspect_POM_None = 8,
+	Aspect_POM_Mask = Aspect_POM_All | Aspect_POM_None,
+};
+
+enum Aspect_TypeOfColorScaleData {
+	Aspect_TOCSD_AUTO = 0,
+	Aspect_TOCSD_USER = 1,
+};
+
+enum Aspect_TypeOfColorScaleOrientation {
+	Aspect_TOCSO_NONE = 0,
+	Aspect_TOCSO_LEFT = 1,
+	Aspect_TOCSO_RIGHT = 2,
+	Aspect_TOCSO_CENTER = 3,
+};
+
+enum Aspect_TypeOfColorScalePosition {
+	Aspect_TOCSP_NONE = 0,
+	Aspect_TOCSP_LEFT = 1,
+	Aspect_TOCSP_RIGHT = 2,
+	Aspect_TOCSP_CENTER = 3,
+};
+
+enum Aspect_TypeOfDeflection {
+	Aspect_TOD_RELATIVE = 0,
+	Aspect_TOD_ABSOLUTE = 1,
+};
+
+enum Aspect_TypeOfDisplayText {
+	Aspect_TODT_NORMAL = 0,
+	Aspect_TODT_SUBTITLE = 1,
+	Aspect_TODT_DEKALE = 2,
+	Aspect_TODT_BLEND = 3,
+	Aspect_TODT_DIMENSION = 4,
+	Aspect_TODT_SHADOW = 5,
+};
+
+enum Aspect_TypeOfFacingModel {
+	Aspect_TOFM_BOTH_SIDE = 0,
+	Aspect_TOFM_BACK_SIDE = 1,
+	Aspect_TOFM_FRONT_SIDE = 2,
+};
+
+enum Aspect_TypeOfHighlightMethod {
+	Aspect_TOHM_COLOR = 0,
+	Aspect_TOHM_BOUNDBOX = 1,
+};
+
+enum Aspect_TypeOfLine {
+	Aspect_TOL_EMPTY = - 1,
+	Aspect_TOL_SOLID = 0,
+	Aspect_TOL_DASH = 1,
+	Aspect_TOL_DOT = 2,
+	Aspect_TOL_DOTDASH = 3,
+	Aspect_TOL_USERDEFINED = 4,
+};
+
+enum Aspect_TypeOfMarker {
+	Aspect_TOM_EMPTY = - 1,
+	Aspect_TOM_POINT = 0,
+	Aspect_TOM_PLUS = 1,
+	Aspect_TOM_STAR = 2,
+	Aspect_TOM_X = 3,
+	Aspect_TOM_O = 4,
+	Aspect_TOM_O_POINT = 5,
+	Aspect_TOM_O_PLUS = 6,
+	Aspect_TOM_O_STAR = 7,
+	Aspect_TOM_O_X = 8,
+	Aspect_TOM_RING1 = 9,
+	Aspect_TOM_RING2 = 10,
+	Aspect_TOM_RING3 = 11,
+	Aspect_TOM_BALL = 12,
+	Aspect_TOM_USERDEFINED = 13,
+};
+
+enum Aspect_TypeOfResize {
+	Aspect_TOR_UNKNOWN = 0,
+	Aspect_TOR_NO_BORDER = 1,
+	Aspect_TOR_TOP_BORDER = 2,
+	Aspect_TOR_RIGHT_BORDER = 3,
+	Aspect_TOR_BOTTOM_BORDER = 4,
+	Aspect_TOR_LEFT_BORDER = 5,
+	Aspect_TOR_TOP_AND_RIGHT_BORDER = 6,
+	Aspect_TOR_RIGHT_AND_BOTTOM_BORDER = 7,
+	Aspect_TOR_BOTTOM_AND_LEFT_BORDER = 8,
+	Aspect_TOR_LEFT_AND_TOP_BORDER = 9,
+};
+
+enum Aspect_TypeOfStyleText {
+	Aspect_TOST_NORMAL = 0,
+	Aspect_TOST_ANNOTATION = 1,
+};
+
+enum Aspect_TypeOfTriedronPosition {
+	Aspect_TOTP_CENTER = 0,
+	Aspect_TOTP_TOP = 1,
+	Aspect_TOTP_BOTTOM = 2,
+	Aspect_TOTP_LEFT = 4,
+	Aspect_TOTP_RIGHT = 8,
+	Aspect_TOTP_LEFT_LOWER = Aspect_TOTP_BOTTOM | Aspect_TOTP_LEFT,
+	Aspect_TOTP_LEFT_UPPER = Aspect_TOTP_TOP | Aspect_TOTP_LEFT,
+	Aspect_TOTP_RIGHT_LOWER = Aspect_TOTP_BOTTOM | Aspect_TOTP_RIGHT,
+	Aspect_TOTP_RIGHT_UPPER = Aspect_TOTP_TOP | Aspect_TOTP_RIGHT,
 };
 
 enum Aspect_VKeyBasic {
@@ -230,30 +417,42 @@ enum  {
 	Aspect_VKey_MAX = 255,
 };
 
-enum Aspect_TypeOfDeflection {
-	Aspect_TOD_RELATIVE = 0,
-	Aspect_TOD_ABSOLUTE = 1,
+enum  {
+	Aspect_VKeyFlags_NONE = 0,
+	Aspect_VKeyFlags_SHIFT = 1 << 8,
+	Aspect_VKeyFlags_CTRL = 1 << 9,
+	Aspect_VKeyFlags_ALT = 1 << 10,
+	Aspect_VKeyFlags_MENU = 1 << 11,
+	Aspect_VKeyFlags_META = 1 << 12,
+	Aspect_VKeyFlags_ALL = Aspect_VKeyFlags_SHIFT | Aspect_VKeyFlags_CTRL | Aspect_VKeyFlags_ALT | Aspect_VKeyFlags_MENU | Aspect_VKeyFlags_META,
 };
 
-enum Aspect_TypeOfLine {
-	Aspect_TOL_EMPTY = - 1,
-	Aspect_TOL_SOLID = 0,
-	Aspect_TOL_DASH = 1,
-	Aspect_TOL_DOT = 2,
-	Aspect_TOL_DOTDASH = 3,
-	Aspect_TOL_USERDEFINED = 4,
+enum  {
+	Aspect_VKeyMouse_NONE = 0,
+	Aspect_VKeyMouse_LeftButton = 1 << 13,
+	Aspect_VKeyMouse_MiddleButton = 1 << 14,
+	Aspect_VKeyMouse_RightButton = 1 << 15,
+	Aspect_VKeyMouse_MainButtons = Aspect_VKeyMouse_LeftButton | Aspect_VKeyMouse_MiddleButton | Aspect_VKeyMouse_RightButton,
 };
 
-enum Aspect_GradientFillMethod {
-	Aspect_GFM_NONE = 0,
-	Aspect_GFM_HOR = 1,
-	Aspect_GFM_VER = 2,
-	Aspect_GFM_DIAG1 = 3,
-	Aspect_GFM_DIAG2 = 4,
-	Aspect_GFM_CORNER1 = 5,
-	Aspect_GFM_CORNER2 = 6,
-	Aspect_GFM_CORNER3 = 7,
-	Aspect_GFM_CORNER4 = 8,
+enum Aspect_WidthOfLine {
+	Aspect_WOL_THIN = 0,
+	Aspect_WOL_MEDIUM = 1,
+	Aspect_WOL_THICK = 2,
+	Aspect_WOL_VERYTHICK = 3,
+	Aspect_WOL_USERDEFINED = 4,
+};
+
+enum Aspect_XAtom {
+	Aspect_XA_DELETE_WINDOW = 0,
+};
+
+enum Aspect_XRActionType {
+	Aspect_XRActionType_InputDigital = 0,
+	Aspect_XRActionType_InputAnalog = 1,
+	Aspect_XRActionType_InputPose = 2,
+	Aspect_XRActionType_InputSkeletal = 3,
+	Aspect_XRActionType_OutputHaptic = 4,
 };
 
 enum Aspect_XRGenericAction {
@@ -280,117 +479,6 @@ enum  {
 	Aspect_XRGenericAction_NB = Aspect_XRGenericAction_OutputHaptic + 1,
 };
 
-enum Aspect_TypeOfHighlightMethod {
-	Aspect_TOHM_COLOR = 0,
-	Aspect_TOHM_BOUNDBOX = 1,
-};
-
-enum Aspect_TypeOfResize {
-	Aspect_TOR_UNKNOWN = 0,
-	Aspect_TOR_NO_BORDER = 1,
-	Aspect_TOR_TOP_BORDER = 2,
-	Aspect_TOR_RIGHT_BORDER = 3,
-	Aspect_TOR_BOTTOM_BORDER = 4,
-	Aspect_TOR_LEFT_BORDER = 5,
-	Aspect_TOR_TOP_AND_RIGHT_BORDER = 6,
-	Aspect_TOR_RIGHT_AND_BOTTOM_BORDER = 7,
-	Aspect_TOR_BOTTOM_AND_LEFT_BORDER = 8,
-	Aspect_TOR_LEFT_AND_TOP_BORDER = 9,
-};
-
-enum Aspect_GridType {
-	Aspect_GT_Rectangular = 0,
-	Aspect_GT_Circular = 1,
-};
-
-enum Aspect_TypeOfColorScaleData {
-	Aspect_TOCSD_AUTO = 0,
-	Aspect_TOCSD_USER = 1,
-};
-
-enum Aspect_TypeOfStyleText {
-	Aspect_TOST_NORMAL = 0,
-	Aspect_TOST_ANNOTATION = 1,
-};
-
-enum Aspect_TypeOfMarker {
-	Aspect_TOM_EMPTY = - 1,
-	Aspect_TOM_POINT = 0,
-	Aspect_TOM_PLUS = 1,
-	Aspect_TOM_STAR = 2,
-	Aspect_TOM_X = 3,
-	Aspect_TOM_O = 4,
-	Aspect_TOM_O_POINT = 5,
-	Aspect_TOM_O_PLUS = 6,
-	Aspect_TOM_O_STAR = 7,
-	Aspect_TOM_O_X = 8,
-	Aspect_TOM_RING1 = 9,
-	Aspect_TOM_RING2 = 10,
-	Aspect_TOM_RING3 = 11,
-	Aspect_TOM_BALL = 12,
-	Aspect_TOM_USERDEFINED = 13,
-};
-
-enum Aspect_TypeOfColorScaleOrientation {
-	Aspect_TOCSO_NONE = 0,
-	Aspect_TOCSO_LEFT = 1,
-	Aspect_TOCSO_RIGHT = 2,
-	Aspect_TOCSO_CENTER = 3,
-};
-
-enum Aspect_TypeOfFacingModel {
-	Aspect_TOFM_BOTH_SIDE = 0,
-	Aspect_TOFM_BACK_SIDE = 1,
-	Aspect_TOFM_FRONT_SIDE = 2,
-};
-
-enum Aspect_FillMethod {
-	Aspect_FM_NONE = 0,
-	Aspect_FM_CENTERED = 1,
-	Aspect_FM_TILED = 2,
-	Aspect_FM_STRETCH = 3,
-};
-
-enum Aspect_ColorSpace {
-	Aspect_ColorSpace_sRGB = 0,
-	Aspect_ColorSpace_Linear = 1,
-};
-
-enum Aspect_HatchStyle {
-	Aspect_HS_SOLID = 0,
-	Aspect_HS_HORIZONTAL = 7,
-	Aspect_HS_HORIZONTAL_WIDE = 11,
-	Aspect_HS_VERTICAL = 8,
-	Aspect_HS_VERTICAL_WIDE = 12,
-	Aspect_HS_DIAGONAL_45 = 5,
-	Aspect_HS_DIAGONAL_45_WIDE = 9,
-	Aspect_HS_DIAGONAL_135 = 6,
-	Aspect_HS_DIAGONAL_135_WIDE = 10,
-	Aspect_HS_GRID = 3,
-	Aspect_HS_GRID_WIDE = 4,
-	Aspect_HS_GRID_DIAGONAL = 1,
-	Aspect_HS_GRID_DIAGONAL_WIDE = 2,
-	Aspect_HS_NB = 13,
-};
-
-enum Aspect_XRActionType {
-	Aspect_XRActionType_InputDigital = 0,
-	Aspect_XRActionType_InputAnalog = 1,
-	Aspect_XRActionType_InputPose = 2,
-	Aspect_XRActionType_InputSkeletal = 3,
-	Aspect_XRActionType_OutputHaptic = 4,
-};
-
-enum Aspect_PolygonOffsetMode {
-	Aspect_POM_Off = 0,
-	Aspect_POM_Fill = 1,
-	Aspect_POM_Line = 2,
-	Aspect_POM_Point = 4,
-	Aspect_POM_All = Aspect_POM_Fill | Aspect_POM_Line | Aspect_POM_Point,
-	Aspect_POM_None = 8,
-	Aspect_POM_Mask = Aspect_POM_All | Aspect_POM_None,
-};
-
 enum Aspect_XRTrackedDeviceRole {
 	Aspect_XRTrackedDeviceRole_Head = 0,
 	Aspect_XRTrackedDeviceRole_LeftHand = 1,
@@ -402,94 +490,306 @@ enum  {
 	Aspect_XRTrackedDeviceRole_NB = Aspect_XRTrackedDeviceRole_Other + 1,
 };
 
-enum Aspect_TypeOfColorScalePosition {
-	Aspect_TOCSP_NONE = 0,
-	Aspect_TOCSP_LEFT = 1,
-	Aspect_TOCSP_RIGHT = 2,
-	Aspect_TOCSP_CENTER = 3,
-};
-
-enum Aspect_GraphicsLibrary {
-	Aspect_GraphicsLibrary_OpenGL = 0,
-	Aspect_GraphicsLibrary_OpenGLES = 1,
-};
-
-enum  {
-	Aspect_VKeyFlags_NONE = 0,
-	Aspect_VKeyFlags_SHIFT = 1 << 8,
-	Aspect_VKeyFlags_CTRL = 1 << 9,
-	Aspect_VKeyFlags_ALT = 1 << 10,
-	Aspect_VKeyFlags_MENU = 1 << 11,
-	Aspect_VKeyFlags_META = 1 << 12,
-	Aspect_VKeyFlags_ALL = Aspect_VKeyFlags_SHIFT | Aspect_VKeyFlags_CTRL | Aspect_VKeyFlags_ALT | Aspect_VKeyFlags_MENU | Aspect_VKeyFlags_META,
-};
-
-enum  {
-	Aspect_VKeyMouse_NONE = 0,
-	Aspect_VKeyMouse_LeftButton = 1 << 13,
-	Aspect_VKeyMouse_MiddleButton = 1 << 14,
-	Aspect_VKeyMouse_RightButton = 1 << 15,
-	Aspect_VKeyMouse_MainButtons = Aspect_VKeyMouse_LeftButton | Aspect_VKeyMouse_MiddleButton | Aspect_VKeyMouse_RightButton,
-};
-
-enum Aspect_XAtom {
-	Aspect_XA_DELETE_WINDOW = 0,
-};
-
-enum Aspect_TypeOfTriedronPosition {
-	Aspect_TOTP_CENTER = 0,
-	Aspect_TOTP_TOP = 1,
-	Aspect_TOTP_BOTTOM = 2,
-	Aspect_TOTP_LEFT = 4,
-	Aspect_TOTP_RIGHT = 8,
-	Aspect_TOTP_LEFT_LOWER = Aspect_TOTP_BOTTOM | Aspect_TOTP_LEFT,
-	Aspect_TOTP_LEFT_UPPER = Aspect_TOTP_TOP | Aspect_TOTP_LEFT,
-	Aspect_TOTP_RIGHT_LOWER = Aspect_TOTP_BOTTOM | Aspect_TOTP_RIGHT,
-	Aspect_TOTP_RIGHT_UPPER = Aspect_TOTP_TOP | Aspect_TOTP_RIGHT,
-};
-
-enum Aspect_GridDrawMode {
-	Aspect_GDM_Lines = 0,
-	Aspect_GDM_Points = 1,
-	Aspect_GDM_None = 2,
-};
-
-enum Aspect_WidthOfLine {
-	Aspect_WOL_THIN = 0,
-	Aspect_WOL_MEDIUM = 1,
-	Aspect_WOL_THICK = 2,
-	Aspect_WOL_VERYTHICK = 3,
-	Aspect_WOL_USERDEFINED = 4,
-};
-
-enum Aspect_TypeOfDisplayText {
-	Aspect_TODT_NORMAL = 0,
-	Aspect_TODT_SUBTITLE = 1,
-	Aspect_TODT_DEKALE = 2,
-	Aspect_TODT_BLEND = 3,
-	Aspect_TODT_DIMENSION = 4,
-	Aspect_TODT_SHADOW = 5,
-};
-
-enum Aspect_InteriorStyle {
-	Aspect_IS_EMPTY = - 1,
-	Aspect_IS_SOLID = 0,
-	Aspect_IS_HATCH = 1,
-	Aspect_IS_HIDDENLINE = 2,
-	Aspect_IS_POINT = 3,
-	Aspect_IS_HOLLOW = Aspect_IS_EMPTY,
-};
-
 /* end public enums declaration */
 
 /* python proy classes for enums */
 %pythoncode {
+
+class Aspect_ColorSpace(IntEnum):
+	Aspect_ColorSpace_sRGB = 0
+	Aspect_ColorSpace_Linear = 1
+Aspect_ColorSpace_sRGB = Aspect_ColorSpace.Aspect_ColorSpace_sRGB
+Aspect_ColorSpace_Linear = Aspect_ColorSpace.Aspect_ColorSpace_Linear
 
 class Aspect_Eye(IntEnum):
 	Aspect_Eye_Left = 0
 	Aspect_Eye_Right = 1
 Aspect_Eye_Left = Aspect_Eye.Aspect_Eye_Left
 Aspect_Eye_Right = Aspect_Eye.Aspect_Eye_Right
+
+class Aspect_FillMethod(IntEnum):
+	Aspect_FM_NONE = 0
+	Aspect_FM_CENTERED = 1
+	Aspect_FM_TILED = 2
+	Aspect_FM_STRETCH = 3
+Aspect_FM_NONE = Aspect_FillMethod.Aspect_FM_NONE
+Aspect_FM_CENTERED = Aspect_FillMethod.Aspect_FM_CENTERED
+Aspect_FM_TILED = Aspect_FillMethod.Aspect_FM_TILED
+Aspect_FM_STRETCH = Aspect_FillMethod.Aspect_FM_STRETCH
+
+class Aspect_GradientFillMethod(IntEnum):
+	Aspect_GradientFillMethod_None = 0
+	Aspect_GradientFillMethod_Horizontal = 1
+	Aspect_GradientFillMethod_Vertical = 2
+	Aspect_GradientFillMethod_Diagonal1 = 3
+	Aspect_GradientFillMethod_Diagonal2 = 4
+	Aspect_GradientFillMethod_Corner1 = 5
+	Aspect_GradientFillMethod_Corner2 = 6
+	Aspect_GradientFillMethod_Corner3 = 7
+	Aspect_GradientFillMethod_Corner4 = 8
+	Aspect_GradientFillMethod_Elliptical = 9
+	Aspect_GFM_NONE = Aspect_GradientFillMethod_None
+	Aspect_GFM_HOR = Aspect_GradientFillMethod_Horizontal
+	Aspect_GFM_VER = Aspect_GradientFillMethod_Vertical
+	Aspect_GFM_DIAG1 = Aspect_GradientFillMethod_Diagonal1
+	Aspect_GFM_DIAG2 = Aspect_GradientFillMethod_Diagonal2
+	Aspect_GFM_CORNER1 = Aspect_GradientFillMethod_Corner1
+	Aspect_GFM_CORNER2 = Aspect_GradientFillMethod_Corner2
+	Aspect_GFM_CORNER3 = Aspect_GradientFillMethod_Corner3
+	Aspect_GFM_CORNER4 = Aspect_GradientFillMethod_Corner4
+Aspect_GradientFillMethod_None = Aspect_GradientFillMethod.Aspect_GradientFillMethod_None
+Aspect_GradientFillMethod_Horizontal = Aspect_GradientFillMethod.Aspect_GradientFillMethod_Horizontal
+Aspect_GradientFillMethod_Vertical = Aspect_GradientFillMethod.Aspect_GradientFillMethod_Vertical
+Aspect_GradientFillMethod_Diagonal1 = Aspect_GradientFillMethod.Aspect_GradientFillMethod_Diagonal1
+Aspect_GradientFillMethod_Diagonal2 = Aspect_GradientFillMethod.Aspect_GradientFillMethod_Diagonal2
+Aspect_GradientFillMethod_Corner1 = Aspect_GradientFillMethod.Aspect_GradientFillMethod_Corner1
+Aspect_GradientFillMethod_Corner2 = Aspect_GradientFillMethod.Aspect_GradientFillMethod_Corner2
+Aspect_GradientFillMethod_Corner3 = Aspect_GradientFillMethod.Aspect_GradientFillMethod_Corner3
+Aspect_GradientFillMethod_Corner4 = Aspect_GradientFillMethod.Aspect_GradientFillMethod_Corner4
+Aspect_GradientFillMethod_Elliptical = Aspect_GradientFillMethod.Aspect_GradientFillMethod_Elliptical
+Aspect_GFM_NONE = Aspect_GradientFillMethod.Aspect_GFM_NONE
+Aspect_GFM_HOR = Aspect_GradientFillMethod.Aspect_GFM_HOR
+Aspect_GFM_VER = Aspect_GradientFillMethod.Aspect_GFM_VER
+Aspect_GFM_DIAG1 = Aspect_GradientFillMethod.Aspect_GFM_DIAG1
+Aspect_GFM_DIAG2 = Aspect_GradientFillMethod.Aspect_GFM_DIAG2
+Aspect_GFM_CORNER1 = Aspect_GradientFillMethod.Aspect_GFM_CORNER1
+Aspect_GFM_CORNER2 = Aspect_GradientFillMethod.Aspect_GFM_CORNER2
+Aspect_GFM_CORNER3 = Aspect_GradientFillMethod.Aspect_GFM_CORNER3
+Aspect_GFM_CORNER4 = Aspect_GradientFillMethod.Aspect_GFM_CORNER4
+
+class Aspect_GraphicsLibrary(IntEnum):
+	Aspect_GraphicsLibrary_OpenGL = 0
+	Aspect_GraphicsLibrary_OpenGLES = 1
+Aspect_GraphicsLibrary_OpenGL = Aspect_GraphicsLibrary.Aspect_GraphicsLibrary_OpenGL
+Aspect_GraphicsLibrary_OpenGLES = Aspect_GraphicsLibrary.Aspect_GraphicsLibrary_OpenGLES
+
+class Aspect_GridDrawMode(IntEnum):
+	Aspect_GDM_Lines = 0
+	Aspect_GDM_Points = 1
+	Aspect_GDM_None = 2
+Aspect_GDM_Lines = Aspect_GridDrawMode.Aspect_GDM_Lines
+Aspect_GDM_Points = Aspect_GridDrawMode.Aspect_GDM_Points
+Aspect_GDM_None = Aspect_GridDrawMode.Aspect_GDM_None
+
+class Aspect_GridType(IntEnum):
+	Aspect_GT_Rectangular = 0
+	Aspect_GT_Circular = 1
+Aspect_GT_Rectangular = Aspect_GridType.Aspect_GT_Rectangular
+Aspect_GT_Circular = Aspect_GridType.Aspect_GT_Circular
+
+class Aspect_HatchStyle(IntEnum):
+	Aspect_HS_SOLID = 0
+	Aspect_HS_HORIZONTAL = 7
+	Aspect_HS_HORIZONTAL_WIDE = 11
+	Aspect_HS_VERTICAL = 8
+	Aspect_HS_VERTICAL_WIDE = 12
+	Aspect_HS_DIAGONAL_45 = 5
+	Aspect_HS_DIAGONAL_45_WIDE = 9
+	Aspect_HS_DIAGONAL_135 = 6
+	Aspect_HS_DIAGONAL_135_WIDE = 10
+	Aspect_HS_GRID = 3
+	Aspect_HS_GRID_WIDE = 4
+	Aspect_HS_GRID_DIAGONAL = 1
+	Aspect_HS_GRID_DIAGONAL_WIDE = 2
+	Aspect_HS_NB = 13
+Aspect_HS_SOLID = Aspect_HatchStyle.Aspect_HS_SOLID
+Aspect_HS_HORIZONTAL = Aspect_HatchStyle.Aspect_HS_HORIZONTAL
+Aspect_HS_HORIZONTAL_WIDE = Aspect_HatchStyle.Aspect_HS_HORIZONTAL_WIDE
+Aspect_HS_VERTICAL = Aspect_HatchStyle.Aspect_HS_VERTICAL
+Aspect_HS_VERTICAL_WIDE = Aspect_HatchStyle.Aspect_HS_VERTICAL_WIDE
+Aspect_HS_DIAGONAL_45 = Aspect_HatchStyle.Aspect_HS_DIAGONAL_45
+Aspect_HS_DIAGONAL_45_WIDE = Aspect_HatchStyle.Aspect_HS_DIAGONAL_45_WIDE
+Aspect_HS_DIAGONAL_135 = Aspect_HatchStyle.Aspect_HS_DIAGONAL_135
+Aspect_HS_DIAGONAL_135_WIDE = Aspect_HatchStyle.Aspect_HS_DIAGONAL_135_WIDE
+Aspect_HS_GRID = Aspect_HatchStyle.Aspect_HS_GRID
+Aspect_HS_GRID_WIDE = Aspect_HatchStyle.Aspect_HS_GRID_WIDE
+Aspect_HS_GRID_DIAGONAL = Aspect_HatchStyle.Aspect_HS_GRID_DIAGONAL
+Aspect_HS_GRID_DIAGONAL_WIDE = Aspect_HatchStyle.Aspect_HS_GRID_DIAGONAL_WIDE
+Aspect_HS_NB = Aspect_HatchStyle.Aspect_HS_NB
+
+class Aspect_InteriorStyle(IntEnum):
+	Aspect_IS_EMPTY = - 1
+	Aspect_IS_SOLID = 0
+	Aspect_IS_HATCH = 1
+	Aspect_IS_HIDDENLINE = 2
+	Aspect_IS_POINT = 3
+	Aspect_IS_HOLLOW = Aspect_IS_EMPTY
+Aspect_IS_EMPTY = Aspect_InteriorStyle.Aspect_IS_EMPTY
+Aspect_IS_SOLID = Aspect_InteriorStyle.Aspect_IS_SOLID
+Aspect_IS_HATCH = Aspect_InteriorStyle.Aspect_IS_HATCH
+Aspect_IS_HIDDENLINE = Aspect_InteriorStyle.Aspect_IS_HIDDENLINE
+Aspect_IS_POINT = Aspect_InteriorStyle.Aspect_IS_POINT
+Aspect_IS_HOLLOW = Aspect_InteriorStyle.Aspect_IS_HOLLOW
+
+class Aspect_PolygonOffsetMode(IntEnum):
+	Aspect_POM_Off = 0
+	Aspect_POM_Fill = 1
+	Aspect_POM_Line = 2
+	Aspect_POM_Point = 4
+	Aspect_POM_All = Aspect_POM_Fill | Aspect_POM_Line | Aspect_POM_Point
+	Aspect_POM_None = 8
+	Aspect_POM_Mask = Aspect_POM_All | Aspect_POM_None
+Aspect_POM_Off = Aspect_PolygonOffsetMode.Aspect_POM_Off
+Aspect_POM_Fill = Aspect_PolygonOffsetMode.Aspect_POM_Fill
+Aspect_POM_Line = Aspect_PolygonOffsetMode.Aspect_POM_Line
+Aspect_POM_Point = Aspect_PolygonOffsetMode.Aspect_POM_Point
+Aspect_POM_All = Aspect_PolygonOffsetMode.Aspect_POM_All
+Aspect_POM_None = Aspect_PolygonOffsetMode.Aspect_POM_None
+Aspect_POM_Mask = Aspect_PolygonOffsetMode.Aspect_POM_Mask
+
+class Aspect_TypeOfColorScaleData(IntEnum):
+	Aspect_TOCSD_AUTO = 0
+	Aspect_TOCSD_USER = 1
+Aspect_TOCSD_AUTO = Aspect_TypeOfColorScaleData.Aspect_TOCSD_AUTO
+Aspect_TOCSD_USER = Aspect_TypeOfColorScaleData.Aspect_TOCSD_USER
+
+class Aspect_TypeOfColorScaleOrientation(IntEnum):
+	Aspect_TOCSO_NONE = 0
+	Aspect_TOCSO_LEFT = 1
+	Aspect_TOCSO_RIGHT = 2
+	Aspect_TOCSO_CENTER = 3
+Aspect_TOCSO_NONE = Aspect_TypeOfColorScaleOrientation.Aspect_TOCSO_NONE
+Aspect_TOCSO_LEFT = Aspect_TypeOfColorScaleOrientation.Aspect_TOCSO_LEFT
+Aspect_TOCSO_RIGHT = Aspect_TypeOfColorScaleOrientation.Aspect_TOCSO_RIGHT
+Aspect_TOCSO_CENTER = Aspect_TypeOfColorScaleOrientation.Aspect_TOCSO_CENTER
+
+class Aspect_TypeOfColorScalePosition(IntEnum):
+	Aspect_TOCSP_NONE = 0
+	Aspect_TOCSP_LEFT = 1
+	Aspect_TOCSP_RIGHT = 2
+	Aspect_TOCSP_CENTER = 3
+Aspect_TOCSP_NONE = Aspect_TypeOfColorScalePosition.Aspect_TOCSP_NONE
+Aspect_TOCSP_LEFT = Aspect_TypeOfColorScalePosition.Aspect_TOCSP_LEFT
+Aspect_TOCSP_RIGHT = Aspect_TypeOfColorScalePosition.Aspect_TOCSP_RIGHT
+Aspect_TOCSP_CENTER = Aspect_TypeOfColorScalePosition.Aspect_TOCSP_CENTER
+
+class Aspect_TypeOfDeflection(IntEnum):
+	Aspect_TOD_RELATIVE = 0
+	Aspect_TOD_ABSOLUTE = 1
+Aspect_TOD_RELATIVE = Aspect_TypeOfDeflection.Aspect_TOD_RELATIVE
+Aspect_TOD_ABSOLUTE = Aspect_TypeOfDeflection.Aspect_TOD_ABSOLUTE
+
+class Aspect_TypeOfDisplayText(IntEnum):
+	Aspect_TODT_NORMAL = 0
+	Aspect_TODT_SUBTITLE = 1
+	Aspect_TODT_DEKALE = 2
+	Aspect_TODT_BLEND = 3
+	Aspect_TODT_DIMENSION = 4
+	Aspect_TODT_SHADOW = 5
+Aspect_TODT_NORMAL = Aspect_TypeOfDisplayText.Aspect_TODT_NORMAL
+Aspect_TODT_SUBTITLE = Aspect_TypeOfDisplayText.Aspect_TODT_SUBTITLE
+Aspect_TODT_DEKALE = Aspect_TypeOfDisplayText.Aspect_TODT_DEKALE
+Aspect_TODT_BLEND = Aspect_TypeOfDisplayText.Aspect_TODT_BLEND
+Aspect_TODT_DIMENSION = Aspect_TypeOfDisplayText.Aspect_TODT_DIMENSION
+Aspect_TODT_SHADOW = Aspect_TypeOfDisplayText.Aspect_TODT_SHADOW
+
+class Aspect_TypeOfFacingModel(IntEnum):
+	Aspect_TOFM_BOTH_SIDE = 0
+	Aspect_TOFM_BACK_SIDE = 1
+	Aspect_TOFM_FRONT_SIDE = 2
+Aspect_TOFM_BOTH_SIDE = Aspect_TypeOfFacingModel.Aspect_TOFM_BOTH_SIDE
+Aspect_TOFM_BACK_SIDE = Aspect_TypeOfFacingModel.Aspect_TOFM_BACK_SIDE
+Aspect_TOFM_FRONT_SIDE = Aspect_TypeOfFacingModel.Aspect_TOFM_FRONT_SIDE
+
+class Aspect_TypeOfHighlightMethod(IntEnum):
+	Aspect_TOHM_COLOR = 0
+	Aspect_TOHM_BOUNDBOX = 1
+Aspect_TOHM_COLOR = Aspect_TypeOfHighlightMethod.Aspect_TOHM_COLOR
+Aspect_TOHM_BOUNDBOX = Aspect_TypeOfHighlightMethod.Aspect_TOHM_BOUNDBOX
+
+class Aspect_TypeOfLine(IntEnum):
+	Aspect_TOL_EMPTY = - 1
+	Aspect_TOL_SOLID = 0
+	Aspect_TOL_DASH = 1
+	Aspect_TOL_DOT = 2
+	Aspect_TOL_DOTDASH = 3
+	Aspect_TOL_USERDEFINED = 4
+Aspect_TOL_EMPTY = Aspect_TypeOfLine.Aspect_TOL_EMPTY
+Aspect_TOL_SOLID = Aspect_TypeOfLine.Aspect_TOL_SOLID
+Aspect_TOL_DASH = Aspect_TypeOfLine.Aspect_TOL_DASH
+Aspect_TOL_DOT = Aspect_TypeOfLine.Aspect_TOL_DOT
+Aspect_TOL_DOTDASH = Aspect_TypeOfLine.Aspect_TOL_DOTDASH
+Aspect_TOL_USERDEFINED = Aspect_TypeOfLine.Aspect_TOL_USERDEFINED
+
+class Aspect_TypeOfMarker(IntEnum):
+	Aspect_TOM_EMPTY = - 1
+	Aspect_TOM_POINT = 0
+	Aspect_TOM_PLUS = 1
+	Aspect_TOM_STAR = 2
+	Aspect_TOM_X = 3
+	Aspect_TOM_O = 4
+	Aspect_TOM_O_POINT = 5
+	Aspect_TOM_O_PLUS = 6
+	Aspect_TOM_O_STAR = 7
+	Aspect_TOM_O_X = 8
+	Aspect_TOM_RING1 = 9
+	Aspect_TOM_RING2 = 10
+	Aspect_TOM_RING3 = 11
+	Aspect_TOM_BALL = 12
+	Aspect_TOM_USERDEFINED = 13
+Aspect_TOM_EMPTY = Aspect_TypeOfMarker.Aspect_TOM_EMPTY
+Aspect_TOM_POINT = Aspect_TypeOfMarker.Aspect_TOM_POINT
+Aspect_TOM_PLUS = Aspect_TypeOfMarker.Aspect_TOM_PLUS
+Aspect_TOM_STAR = Aspect_TypeOfMarker.Aspect_TOM_STAR
+Aspect_TOM_X = Aspect_TypeOfMarker.Aspect_TOM_X
+Aspect_TOM_O = Aspect_TypeOfMarker.Aspect_TOM_O
+Aspect_TOM_O_POINT = Aspect_TypeOfMarker.Aspect_TOM_O_POINT
+Aspect_TOM_O_PLUS = Aspect_TypeOfMarker.Aspect_TOM_O_PLUS
+Aspect_TOM_O_STAR = Aspect_TypeOfMarker.Aspect_TOM_O_STAR
+Aspect_TOM_O_X = Aspect_TypeOfMarker.Aspect_TOM_O_X
+Aspect_TOM_RING1 = Aspect_TypeOfMarker.Aspect_TOM_RING1
+Aspect_TOM_RING2 = Aspect_TypeOfMarker.Aspect_TOM_RING2
+Aspect_TOM_RING3 = Aspect_TypeOfMarker.Aspect_TOM_RING3
+Aspect_TOM_BALL = Aspect_TypeOfMarker.Aspect_TOM_BALL
+Aspect_TOM_USERDEFINED = Aspect_TypeOfMarker.Aspect_TOM_USERDEFINED
+
+class Aspect_TypeOfResize(IntEnum):
+	Aspect_TOR_UNKNOWN = 0
+	Aspect_TOR_NO_BORDER = 1
+	Aspect_TOR_TOP_BORDER = 2
+	Aspect_TOR_RIGHT_BORDER = 3
+	Aspect_TOR_BOTTOM_BORDER = 4
+	Aspect_TOR_LEFT_BORDER = 5
+	Aspect_TOR_TOP_AND_RIGHT_BORDER = 6
+	Aspect_TOR_RIGHT_AND_BOTTOM_BORDER = 7
+	Aspect_TOR_BOTTOM_AND_LEFT_BORDER = 8
+	Aspect_TOR_LEFT_AND_TOP_BORDER = 9
+Aspect_TOR_UNKNOWN = Aspect_TypeOfResize.Aspect_TOR_UNKNOWN
+Aspect_TOR_NO_BORDER = Aspect_TypeOfResize.Aspect_TOR_NO_BORDER
+Aspect_TOR_TOP_BORDER = Aspect_TypeOfResize.Aspect_TOR_TOP_BORDER
+Aspect_TOR_RIGHT_BORDER = Aspect_TypeOfResize.Aspect_TOR_RIGHT_BORDER
+Aspect_TOR_BOTTOM_BORDER = Aspect_TypeOfResize.Aspect_TOR_BOTTOM_BORDER
+Aspect_TOR_LEFT_BORDER = Aspect_TypeOfResize.Aspect_TOR_LEFT_BORDER
+Aspect_TOR_TOP_AND_RIGHT_BORDER = Aspect_TypeOfResize.Aspect_TOR_TOP_AND_RIGHT_BORDER
+Aspect_TOR_RIGHT_AND_BOTTOM_BORDER = Aspect_TypeOfResize.Aspect_TOR_RIGHT_AND_BOTTOM_BORDER
+Aspect_TOR_BOTTOM_AND_LEFT_BORDER = Aspect_TypeOfResize.Aspect_TOR_BOTTOM_AND_LEFT_BORDER
+Aspect_TOR_LEFT_AND_TOP_BORDER = Aspect_TypeOfResize.Aspect_TOR_LEFT_AND_TOP_BORDER
+
+class Aspect_TypeOfStyleText(IntEnum):
+	Aspect_TOST_NORMAL = 0
+	Aspect_TOST_ANNOTATION = 1
+Aspect_TOST_NORMAL = Aspect_TypeOfStyleText.Aspect_TOST_NORMAL
+Aspect_TOST_ANNOTATION = Aspect_TypeOfStyleText.Aspect_TOST_ANNOTATION
+
+class Aspect_TypeOfTriedronPosition(IntEnum):
+	Aspect_TOTP_CENTER = 0
+	Aspect_TOTP_TOP = 1
+	Aspect_TOTP_BOTTOM = 2
+	Aspect_TOTP_LEFT = 4
+	Aspect_TOTP_RIGHT = 8
+	Aspect_TOTP_LEFT_LOWER = Aspect_TOTP_BOTTOM | Aspect_TOTP_LEFT
+	Aspect_TOTP_LEFT_UPPER = Aspect_TOTP_TOP | Aspect_TOTP_LEFT
+	Aspect_TOTP_RIGHT_LOWER = Aspect_TOTP_BOTTOM | Aspect_TOTP_RIGHT
+	Aspect_TOTP_RIGHT_UPPER = Aspect_TOTP_TOP | Aspect_TOTP_RIGHT
+Aspect_TOTP_CENTER = Aspect_TypeOfTriedronPosition.Aspect_TOTP_CENTER
+Aspect_TOTP_TOP = Aspect_TypeOfTriedronPosition.Aspect_TOTP_TOP
+Aspect_TOTP_BOTTOM = Aspect_TypeOfTriedronPosition.Aspect_TOTP_BOTTOM
+Aspect_TOTP_LEFT = Aspect_TypeOfTriedronPosition.Aspect_TOTP_LEFT
+Aspect_TOTP_RIGHT = Aspect_TypeOfTriedronPosition.Aspect_TOTP_RIGHT
+Aspect_TOTP_LEFT_LOWER = Aspect_TypeOfTriedronPosition.Aspect_TOTP_LEFT_LOWER
+Aspect_TOTP_LEFT_UPPER = Aspect_TypeOfTriedronPosition.Aspect_TOTP_LEFT_UPPER
+Aspect_TOTP_RIGHT_LOWER = Aspect_TypeOfTriedronPosition.Aspect_TOTP_RIGHT_LOWER
+Aspect_TOTP_RIGHT_UPPER = Aspect_TypeOfTriedronPosition.Aspect_TOTP_RIGHT_UPPER
 
 class Aspect_VKeyBasic(IntEnum):
 	Aspect_VKey_UNKNOWN = 0
@@ -779,45 +1079,33 @@ Aspect_VKey_NavThrustStop = Aspect_VKeyBasic.Aspect_VKey_NavThrustStop
 Aspect_VKey_NavSpeedIncrease = Aspect_VKeyBasic.Aspect_VKey_NavSpeedIncrease
 Aspect_VKey_NavSpeedDecrease = Aspect_VKeyBasic.Aspect_VKey_NavSpeedDecrease
 
-class Aspect_TypeOfDeflection(IntEnum):
-	Aspect_TOD_RELATIVE = 0
-	Aspect_TOD_ABSOLUTE = 1
-Aspect_TOD_RELATIVE = Aspect_TypeOfDeflection.Aspect_TOD_RELATIVE
-Aspect_TOD_ABSOLUTE = Aspect_TypeOfDeflection.Aspect_TOD_ABSOLUTE
+class Aspect_WidthOfLine(IntEnum):
+	Aspect_WOL_THIN = 0
+	Aspect_WOL_MEDIUM = 1
+	Aspect_WOL_THICK = 2
+	Aspect_WOL_VERYTHICK = 3
+	Aspect_WOL_USERDEFINED = 4
+Aspect_WOL_THIN = Aspect_WidthOfLine.Aspect_WOL_THIN
+Aspect_WOL_MEDIUM = Aspect_WidthOfLine.Aspect_WOL_MEDIUM
+Aspect_WOL_THICK = Aspect_WidthOfLine.Aspect_WOL_THICK
+Aspect_WOL_VERYTHICK = Aspect_WidthOfLine.Aspect_WOL_VERYTHICK
+Aspect_WOL_USERDEFINED = Aspect_WidthOfLine.Aspect_WOL_USERDEFINED
 
-class Aspect_TypeOfLine(IntEnum):
-	Aspect_TOL_EMPTY = - 1
-	Aspect_TOL_SOLID = 0
-	Aspect_TOL_DASH = 1
-	Aspect_TOL_DOT = 2
-	Aspect_TOL_DOTDASH = 3
-	Aspect_TOL_USERDEFINED = 4
-Aspect_TOL_EMPTY = Aspect_TypeOfLine.Aspect_TOL_EMPTY
-Aspect_TOL_SOLID = Aspect_TypeOfLine.Aspect_TOL_SOLID
-Aspect_TOL_DASH = Aspect_TypeOfLine.Aspect_TOL_DASH
-Aspect_TOL_DOT = Aspect_TypeOfLine.Aspect_TOL_DOT
-Aspect_TOL_DOTDASH = Aspect_TypeOfLine.Aspect_TOL_DOTDASH
-Aspect_TOL_USERDEFINED = Aspect_TypeOfLine.Aspect_TOL_USERDEFINED
+class Aspect_XAtom(IntEnum):
+	Aspect_XA_DELETE_WINDOW = 0
+Aspect_XA_DELETE_WINDOW = Aspect_XAtom.Aspect_XA_DELETE_WINDOW
 
-class Aspect_GradientFillMethod(IntEnum):
-	Aspect_GFM_NONE = 0
-	Aspect_GFM_HOR = 1
-	Aspect_GFM_VER = 2
-	Aspect_GFM_DIAG1 = 3
-	Aspect_GFM_DIAG2 = 4
-	Aspect_GFM_CORNER1 = 5
-	Aspect_GFM_CORNER2 = 6
-	Aspect_GFM_CORNER3 = 7
-	Aspect_GFM_CORNER4 = 8
-Aspect_GFM_NONE = Aspect_GradientFillMethod.Aspect_GFM_NONE
-Aspect_GFM_HOR = Aspect_GradientFillMethod.Aspect_GFM_HOR
-Aspect_GFM_VER = Aspect_GradientFillMethod.Aspect_GFM_VER
-Aspect_GFM_DIAG1 = Aspect_GradientFillMethod.Aspect_GFM_DIAG1
-Aspect_GFM_DIAG2 = Aspect_GradientFillMethod.Aspect_GFM_DIAG2
-Aspect_GFM_CORNER1 = Aspect_GradientFillMethod.Aspect_GFM_CORNER1
-Aspect_GFM_CORNER2 = Aspect_GradientFillMethod.Aspect_GFM_CORNER2
-Aspect_GFM_CORNER3 = Aspect_GradientFillMethod.Aspect_GFM_CORNER3
-Aspect_GFM_CORNER4 = Aspect_GradientFillMethod.Aspect_GFM_CORNER4
+class Aspect_XRActionType(IntEnum):
+	Aspect_XRActionType_InputDigital = 0
+	Aspect_XRActionType_InputAnalog = 1
+	Aspect_XRActionType_InputPose = 2
+	Aspect_XRActionType_InputSkeletal = 3
+	Aspect_XRActionType_OutputHaptic = 4
+Aspect_XRActionType_InputDigital = Aspect_XRActionType.Aspect_XRActionType_InputDigital
+Aspect_XRActionType_InputAnalog = Aspect_XRActionType.Aspect_XRActionType_InputAnalog
+Aspect_XRActionType_InputPose = Aspect_XRActionType.Aspect_XRActionType_InputPose
+Aspect_XRActionType_InputSkeletal = Aspect_XRActionType.Aspect_XRActionType_InputSkeletal
+Aspect_XRActionType_OutputHaptic = Aspect_XRActionType.Aspect_XRActionType_OutputHaptic
 
 class Aspect_XRGenericAction(IntEnum):
 	Aspect_XRGenericAction_IsHeadsetOn = 0
@@ -855,176 +1143,6 @@ Aspect_XRGenericAction_InputPoseHandGrip = Aspect_XRGenericAction.Aspect_XRGener
 Aspect_XRGenericAction_InputPoseFingerTip = Aspect_XRGenericAction.Aspect_XRGenericAction_InputPoseFingerTip
 Aspect_XRGenericAction_OutputHaptic = Aspect_XRGenericAction.Aspect_XRGenericAction_OutputHaptic
 
-class Aspect_TypeOfHighlightMethod(IntEnum):
-	Aspect_TOHM_COLOR = 0
-	Aspect_TOHM_BOUNDBOX = 1
-Aspect_TOHM_COLOR = Aspect_TypeOfHighlightMethod.Aspect_TOHM_COLOR
-Aspect_TOHM_BOUNDBOX = Aspect_TypeOfHighlightMethod.Aspect_TOHM_BOUNDBOX
-
-class Aspect_TypeOfResize(IntEnum):
-	Aspect_TOR_UNKNOWN = 0
-	Aspect_TOR_NO_BORDER = 1
-	Aspect_TOR_TOP_BORDER = 2
-	Aspect_TOR_RIGHT_BORDER = 3
-	Aspect_TOR_BOTTOM_BORDER = 4
-	Aspect_TOR_LEFT_BORDER = 5
-	Aspect_TOR_TOP_AND_RIGHT_BORDER = 6
-	Aspect_TOR_RIGHT_AND_BOTTOM_BORDER = 7
-	Aspect_TOR_BOTTOM_AND_LEFT_BORDER = 8
-	Aspect_TOR_LEFT_AND_TOP_BORDER = 9
-Aspect_TOR_UNKNOWN = Aspect_TypeOfResize.Aspect_TOR_UNKNOWN
-Aspect_TOR_NO_BORDER = Aspect_TypeOfResize.Aspect_TOR_NO_BORDER
-Aspect_TOR_TOP_BORDER = Aspect_TypeOfResize.Aspect_TOR_TOP_BORDER
-Aspect_TOR_RIGHT_BORDER = Aspect_TypeOfResize.Aspect_TOR_RIGHT_BORDER
-Aspect_TOR_BOTTOM_BORDER = Aspect_TypeOfResize.Aspect_TOR_BOTTOM_BORDER
-Aspect_TOR_LEFT_BORDER = Aspect_TypeOfResize.Aspect_TOR_LEFT_BORDER
-Aspect_TOR_TOP_AND_RIGHT_BORDER = Aspect_TypeOfResize.Aspect_TOR_TOP_AND_RIGHT_BORDER
-Aspect_TOR_RIGHT_AND_BOTTOM_BORDER = Aspect_TypeOfResize.Aspect_TOR_RIGHT_AND_BOTTOM_BORDER
-Aspect_TOR_BOTTOM_AND_LEFT_BORDER = Aspect_TypeOfResize.Aspect_TOR_BOTTOM_AND_LEFT_BORDER
-Aspect_TOR_LEFT_AND_TOP_BORDER = Aspect_TypeOfResize.Aspect_TOR_LEFT_AND_TOP_BORDER
-
-class Aspect_GridType(IntEnum):
-	Aspect_GT_Rectangular = 0
-	Aspect_GT_Circular = 1
-Aspect_GT_Rectangular = Aspect_GridType.Aspect_GT_Rectangular
-Aspect_GT_Circular = Aspect_GridType.Aspect_GT_Circular
-
-class Aspect_TypeOfColorScaleData(IntEnum):
-	Aspect_TOCSD_AUTO = 0
-	Aspect_TOCSD_USER = 1
-Aspect_TOCSD_AUTO = Aspect_TypeOfColorScaleData.Aspect_TOCSD_AUTO
-Aspect_TOCSD_USER = Aspect_TypeOfColorScaleData.Aspect_TOCSD_USER
-
-class Aspect_TypeOfStyleText(IntEnum):
-	Aspect_TOST_NORMAL = 0
-	Aspect_TOST_ANNOTATION = 1
-Aspect_TOST_NORMAL = Aspect_TypeOfStyleText.Aspect_TOST_NORMAL
-Aspect_TOST_ANNOTATION = Aspect_TypeOfStyleText.Aspect_TOST_ANNOTATION
-
-class Aspect_TypeOfMarker(IntEnum):
-	Aspect_TOM_EMPTY = - 1
-	Aspect_TOM_POINT = 0
-	Aspect_TOM_PLUS = 1
-	Aspect_TOM_STAR = 2
-	Aspect_TOM_X = 3
-	Aspect_TOM_O = 4
-	Aspect_TOM_O_POINT = 5
-	Aspect_TOM_O_PLUS = 6
-	Aspect_TOM_O_STAR = 7
-	Aspect_TOM_O_X = 8
-	Aspect_TOM_RING1 = 9
-	Aspect_TOM_RING2 = 10
-	Aspect_TOM_RING3 = 11
-	Aspect_TOM_BALL = 12
-	Aspect_TOM_USERDEFINED = 13
-Aspect_TOM_EMPTY = Aspect_TypeOfMarker.Aspect_TOM_EMPTY
-Aspect_TOM_POINT = Aspect_TypeOfMarker.Aspect_TOM_POINT
-Aspect_TOM_PLUS = Aspect_TypeOfMarker.Aspect_TOM_PLUS
-Aspect_TOM_STAR = Aspect_TypeOfMarker.Aspect_TOM_STAR
-Aspect_TOM_X = Aspect_TypeOfMarker.Aspect_TOM_X
-Aspect_TOM_O = Aspect_TypeOfMarker.Aspect_TOM_O
-Aspect_TOM_O_POINT = Aspect_TypeOfMarker.Aspect_TOM_O_POINT
-Aspect_TOM_O_PLUS = Aspect_TypeOfMarker.Aspect_TOM_O_PLUS
-Aspect_TOM_O_STAR = Aspect_TypeOfMarker.Aspect_TOM_O_STAR
-Aspect_TOM_O_X = Aspect_TypeOfMarker.Aspect_TOM_O_X
-Aspect_TOM_RING1 = Aspect_TypeOfMarker.Aspect_TOM_RING1
-Aspect_TOM_RING2 = Aspect_TypeOfMarker.Aspect_TOM_RING2
-Aspect_TOM_RING3 = Aspect_TypeOfMarker.Aspect_TOM_RING3
-Aspect_TOM_BALL = Aspect_TypeOfMarker.Aspect_TOM_BALL
-Aspect_TOM_USERDEFINED = Aspect_TypeOfMarker.Aspect_TOM_USERDEFINED
-
-class Aspect_TypeOfColorScaleOrientation(IntEnum):
-	Aspect_TOCSO_NONE = 0
-	Aspect_TOCSO_LEFT = 1
-	Aspect_TOCSO_RIGHT = 2
-	Aspect_TOCSO_CENTER = 3
-Aspect_TOCSO_NONE = Aspect_TypeOfColorScaleOrientation.Aspect_TOCSO_NONE
-Aspect_TOCSO_LEFT = Aspect_TypeOfColorScaleOrientation.Aspect_TOCSO_LEFT
-Aspect_TOCSO_RIGHT = Aspect_TypeOfColorScaleOrientation.Aspect_TOCSO_RIGHT
-Aspect_TOCSO_CENTER = Aspect_TypeOfColorScaleOrientation.Aspect_TOCSO_CENTER
-
-class Aspect_TypeOfFacingModel(IntEnum):
-	Aspect_TOFM_BOTH_SIDE = 0
-	Aspect_TOFM_BACK_SIDE = 1
-	Aspect_TOFM_FRONT_SIDE = 2
-Aspect_TOFM_BOTH_SIDE = Aspect_TypeOfFacingModel.Aspect_TOFM_BOTH_SIDE
-Aspect_TOFM_BACK_SIDE = Aspect_TypeOfFacingModel.Aspect_TOFM_BACK_SIDE
-Aspect_TOFM_FRONT_SIDE = Aspect_TypeOfFacingModel.Aspect_TOFM_FRONT_SIDE
-
-class Aspect_FillMethod(IntEnum):
-	Aspect_FM_NONE = 0
-	Aspect_FM_CENTERED = 1
-	Aspect_FM_TILED = 2
-	Aspect_FM_STRETCH = 3
-Aspect_FM_NONE = Aspect_FillMethod.Aspect_FM_NONE
-Aspect_FM_CENTERED = Aspect_FillMethod.Aspect_FM_CENTERED
-Aspect_FM_TILED = Aspect_FillMethod.Aspect_FM_TILED
-Aspect_FM_STRETCH = Aspect_FillMethod.Aspect_FM_STRETCH
-
-class Aspect_ColorSpace(IntEnum):
-	Aspect_ColorSpace_sRGB = 0
-	Aspect_ColorSpace_Linear = 1
-Aspect_ColorSpace_sRGB = Aspect_ColorSpace.Aspect_ColorSpace_sRGB
-Aspect_ColorSpace_Linear = Aspect_ColorSpace.Aspect_ColorSpace_Linear
-
-class Aspect_HatchStyle(IntEnum):
-	Aspect_HS_SOLID = 0
-	Aspect_HS_HORIZONTAL = 7
-	Aspect_HS_HORIZONTAL_WIDE = 11
-	Aspect_HS_VERTICAL = 8
-	Aspect_HS_VERTICAL_WIDE = 12
-	Aspect_HS_DIAGONAL_45 = 5
-	Aspect_HS_DIAGONAL_45_WIDE = 9
-	Aspect_HS_DIAGONAL_135 = 6
-	Aspect_HS_DIAGONAL_135_WIDE = 10
-	Aspect_HS_GRID = 3
-	Aspect_HS_GRID_WIDE = 4
-	Aspect_HS_GRID_DIAGONAL = 1
-	Aspect_HS_GRID_DIAGONAL_WIDE = 2
-	Aspect_HS_NB = 13
-Aspect_HS_SOLID = Aspect_HatchStyle.Aspect_HS_SOLID
-Aspect_HS_HORIZONTAL = Aspect_HatchStyle.Aspect_HS_HORIZONTAL
-Aspect_HS_HORIZONTAL_WIDE = Aspect_HatchStyle.Aspect_HS_HORIZONTAL_WIDE
-Aspect_HS_VERTICAL = Aspect_HatchStyle.Aspect_HS_VERTICAL
-Aspect_HS_VERTICAL_WIDE = Aspect_HatchStyle.Aspect_HS_VERTICAL_WIDE
-Aspect_HS_DIAGONAL_45 = Aspect_HatchStyle.Aspect_HS_DIAGONAL_45
-Aspect_HS_DIAGONAL_45_WIDE = Aspect_HatchStyle.Aspect_HS_DIAGONAL_45_WIDE
-Aspect_HS_DIAGONAL_135 = Aspect_HatchStyle.Aspect_HS_DIAGONAL_135
-Aspect_HS_DIAGONAL_135_WIDE = Aspect_HatchStyle.Aspect_HS_DIAGONAL_135_WIDE
-Aspect_HS_GRID = Aspect_HatchStyle.Aspect_HS_GRID
-Aspect_HS_GRID_WIDE = Aspect_HatchStyle.Aspect_HS_GRID_WIDE
-Aspect_HS_GRID_DIAGONAL = Aspect_HatchStyle.Aspect_HS_GRID_DIAGONAL
-Aspect_HS_GRID_DIAGONAL_WIDE = Aspect_HatchStyle.Aspect_HS_GRID_DIAGONAL_WIDE
-Aspect_HS_NB = Aspect_HatchStyle.Aspect_HS_NB
-
-class Aspect_XRActionType(IntEnum):
-	Aspect_XRActionType_InputDigital = 0
-	Aspect_XRActionType_InputAnalog = 1
-	Aspect_XRActionType_InputPose = 2
-	Aspect_XRActionType_InputSkeletal = 3
-	Aspect_XRActionType_OutputHaptic = 4
-Aspect_XRActionType_InputDigital = Aspect_XRActionType.Aspect_XRActionType_InputDigital
-Aspect_XRActionType_InputAnalog = Aspect_XRActionType.Aspect_XRActionType_InputAnalog
-Aspect_XRActionType_InputPose = Aspect_XRActionType.Aspect_XRActionType_InputPose
-Aspect_XRActionType_InputSkeletal = Aspect_XRActionType.Aspect_XRActionType_InputSkeletal
-Aspect_XRActionType_OutputHaptic = Aspect_XRActionType.Aspect_XRActionType_OutputHaptic
-
-class Aspect_PolygonOffsetMode(IntEnum):
-	Aspect_POM_Off = 0
-	Aspect_POM_Fill = 1
-	Aspect_POM_Line = 2
-	Aspect_POM_Point = 4
-	Aspect_POM_All = Aspect_POM_Fill | Aspect_POM_Line | Aspect_POM_Point
-	Aspect_POM_None = 8
-	Aspect_POM_Mask = Aspect_POM_All | Aspect_POM_None
-Aspect_POM_Off = Aspect_PolygonOffsetMode.Aspect_POM_Off
-Aspect_POM_Fill = Aspect_PolygonOffsetMode.Aspect_POM_Fill
-Aspect_POM_Line = Aspect_PolygonOffsetMode.Aspect_POM_Line
-Aspect_POM_Point = Aspect_PolygonOffsetMode.Aspect_POM_Point
-Aspect_POM_All = Aspect_PolygonOffsetMode.Aspect_POM_All
-Aspect_POM_None = Aspect_PolygonOffsetMode.Aspect_POM_None
-Aspect_POM_Mask = Aspect_PolygonOffsetMode.Aspect_POM_Mask
-
 class Aspect_XRTrackedDeviceRole(IntEnum):
 	Aspect_XRTrackedDeviceRole_Head = 0
 	Aspect_XRTrackedDeviceRole_LeftHand = 1
@@ -1034,94 +1152,6 @@ Aspect_XRTrackedDeviceRole_Head = Aspect_XRTrackedDeviceRole.Aspect_XRTrackedDev
 Aspect_XRTrackedDeviceRole_LeftHand = Aspect_XRTrackedDeviceRole.Aspect_XRTrackedDeviceRole_LeftHand
 Aspect_XRTrackedDeviceRole_RightHand = Aspect_XRTrackedDeviceRole.Aspect_XRTrackedDeviceRole_RightHand
 Aspect_XRTrackedDeviceRole_Other = Aspect_XRTrackedDeviceRole.Aspect_XRTrackedDeviceRole_Other
-
-class Aspect_TypeOfColorScalePosition(IntEnum):
-	Aspect_TOCSP_NONE = 0
-	Aspect_TOCSP_LEFT = 1
-	Aspect_TOCSP_RIGHT = 2
-	Aspect_TOCSP_CENTER = 3
-Aspect_TOCSP_NONE = Aspect_TypeOfColorScalePosition.Aspect_TOCSP_NONE
-Aspect_TOCSP_LEFT = Aspect_TypeOfColorScalePosition.Aspect_TOCSP_LEFT
-Aspect_TOCSP_RIGHT = Aspect_TypeOfColorScalePosition.Aspect_TOCSP_RIGHT
-Aspect_TOCSP_CENTER = Aspect_TypeOfColorScalePosition.Aspect_TOCSP_CENTER
-
-class Aspect_GraphicsLibrary(IntEnum):
-	Aspect_GraphicsLibrary_OpenGL = 0
-	Aspect_GraphicsLibrary_OpenGLES = 1
-Aspect_GraphicsLibrary_OpenGL = Aspect_GraphicsLibrary.Aspect_GraphicsLibrary_OpenGL
-Aspect_GraphicsLibrary_OpenGLES = Aspect_GraphicsLibrary.Aspect_GraphicsLibrary_OpenGLES
-
-class Aspect_XAtom(IntEnum):
-	Aspect_XA_DELETE_WINDOW = 0
-Aspect_XA_DELETE_WINDOW = Aspect_XAtom.Aspect_XA_DELETE_WINDOW
-
-class Aspect_TypeOfTriedronPosition(IntEnum):
-	Aspect_TOTP_CENTER = 0
-	Aspect_TOTP_TOP = 1
-	Aspect_TOTP_BOTTOM = 2
-	Aspect_TOTP_LEFT = 4
-	Aspect_TOTP_RIGHT = 8
-	Aspect_TOTP_LEFT_LOWER = Aspect_TOTP_BOTTOM | Aspect_TOTP_LEFT
-	Aspect_TOTP_LEFT_UPPER = Aspect_TOTP_TOP | Aspect_TOTP_LEFT
-	Aspect_TOTP_RIGHT_LOWER = Aspect_TOTP_BOTTOM | Aspect_TOTP_RIGHT
-	Aspect_TOTP_RIGHT_UPPER = Aspect_TOTP_TOP | Aspect_TOTP_RIGHT
-Aspect_TOTP_CENTER = Aspect_TypeOfTriedronPosition.Aspect_TOTP_CENTER
-Aspect_TOTP_TOP = Aspect_TypeOfTriedronPosition.Aspect_TOTP_TOP
-Aspect_TOTP_BOTTOM = Aspect_TypeOfTriedronPosition.Aspect_TOTP_BOTTOM
-Aspect_TOTP_LEFT = Aspect_TypeOfTriedronPosition.Aspect_TOTP_LEFT
-Aspect_TOTP_RIGHT = Aspect_TypeOfTriedronPosition.Aspect_TOTP_RIGHT
-Aspect_TOTP_LEFT_LOWER = Aspect_TypeOfTriedronPosition.Aspect_TOTP_LEFT_LOWER
-Aspect_TOTP_LEFT_UPPER = Aspect_TypeOfTriedronPosition.Aspect_TOTP_LEFT_UPPER
-Aspect_TOTP_RIGHT_LOWER = Aspect_TypeOfTriedronPosition.Aspect_TOTP_RIGHT_LOWER
-Aspect_TOTP_RIGHT_UPPER = Aspect_TypeOfTriedronPosition.Aspect_TOTP_RIGHT_UPPER
-
-class Aspect_GridDrawMode(IntEnum):
-	Aspect_GDM_Lines = 0
-	Aspect_GDM_Points = 1
-	Aspect_GDM_None = 2
-Aspect_GDM_Lines = Aspect_GridDrawMode.Aspect_GDM_Lines
-Aspect_GDM_Points = Aspect_GridDrawMode.Aspect_GDM_Points
-Aspect_GDM_None = Aspect_GridDrawMode.Aspect_GDM_None
-
-class Aspect_WidthOfLine(IntEnum):
-	Aspect_WOL_THIN = 0
-	Aspect_WOL_MEDIUM = 1
-	Aspect_WOL_THICK = 2
-	Aspect_WOL_VERYTHICK = 3
-	Aspect_WOL_USERDEFINED = 4
-Aspect_WOL_THIN = Aspect_WidthOfLine.Aspect_WOL_THIN
-Aspect_WOL_MEDIUM = Aspect_WidthOfLine.Aspect_WOL_MEDIUM
-Aspect_WOL_THICK = Aspect_WidthOfLine.Aspect_WOL_THICK
-Aspect_WOL_VERYTHICK = Aspect_WidthOfLine.Aspect_WOL_VERYTHICK
-Aspect_WOL_USERDEFINED = Aspect_WidthOfLine.Aspect_WOL_USERDEFINED
-
-class Aspect_TypeOfDisplayText(IntEnum):
-	Aspect_TODT_NORMAL = 0
-	Aspect_TODT_SUBTITLE = 1
-	Aspect_TODT_DEKALE = 2
-	Aspect_TODT_BLEND = 3
-	Aspect_TODT_DIMENSION = 4
-	Aspect_TODT_SHADOW = 5
-Aspect_TODT_NORMAL = Aspect_TypeOfDisplayText.Aspect_TODT_NORMAL
-Aspect_TODT_SUBTITLE = Aspect_TypeOfDisplayText.Aspect_TODT_SUBTITLE
-Aspect_TODT_DEKALE = Aspect_TypeOfDisplayText.Aspect_TODT_DEKALE
-Aspect_TODT_BLEND = Aspect_TypeOfDisplayText.Aspect_TODT_BLEND
-Aspect_TODT_DIMENSION = Aspect_TypeOfDisplayText.Aspect_TODT_DIMENSION
-Aspect_TODT_SHADOW = Aspect_TypeOfDisplayText.Aspect_TODT_SHADOW
-
-class Aspect_InteriorStyle(IntEnum):
-	Aspect_IS_EMPTY = - 1
-	Aspect_IS_SOLID = 0
-	Aspect_IS_HATCH = 1
-	Aspect_IS_HIDDENLINE = 2
-	Aspect_IS_POINT = 3
-	Aspect_IS_HOLLOW = Aspect_IS_EMPTY
-Aspect_IS_EMPTY = Aspect_InteriorStyle.Aspect_IS_EMPTY
-Aspect_IS_SOLID = Aspect_InteriorStyle.Aspect_IS_SOLID
-Aspect_IS_HATCH = Aspect_InteriorStyle.Aspect_IS_HATCH
-Aspect_IS_HIDDENLINE = Aspect_InteriorStyle.Aspect_IS_HIDDENLINE
-Aspect_IS_POINT = Aspect_InteriorStyle.Aspect_IS_POINT
-Aspect_IS_HOLLOW = Aspect_InteriorStyle.Aspect_IS_HOLLOW
 };
 /* end python proxy for enums */
 
@@ -1187,7 +1217,7 @@ Aspect_IS_HOLLOW = Aspect_InteriorStyle.Aspect_IS_HOLLOW
 /* typedefs */
 typedef void * Aspect_Display;
 typedef unsigned long Aspect_Drawable;
-typedef void * Aspect_FBConfig;
+typedef GLXFBConfig Aspect_FBConfig;
 typedef unsigned long Aspect_Handle;
 typedef void * Aspect_RenderingContext;
 typedef NCollection_Sequence<Quantity_Color> Aspect_SequenceOfColor;
@@ -1281,6 +1311,97 @@ None
 *********************************/
 class Aspect_DisplayConnection : public Standard_Transient {
 	public:
+		/****************** GetAtomX ******************/
+		/**** md5 signature: 88701767771c6813652add2353d013b5 ****/
+		%feature("compactdefaultargs") GetAtomX;
+		%feature("autodoc", "Returns identifier(atom) for custom named property associated with windows that use current connection to x server.
+
+Parameters
+----------
+theAtom: Aspect_XAtom
+
+Returns
+-------
+Atom
+") GetAtomX;
+		Atom GetAtomX(const Aspect_XAtom theAtom);
+
+		/****************** GetDefaultFBConfig ******************/
+		/**** md5 signature: 622b64beb2b73c32aace98cc90ab7793 ****/
+		%feature("compactdefaultargs") GetDefaultFBConfig;
+		%feature("autodoc", "Returns native window fb config (glxfbconfig on xlib).
+
+Returns
+-------
+Aspect_FBConfig
+") GetDefaultFBConfig;
+		Aspect_FBConfig GetDefaultFBConfig();
+
+		/****************** GetDefaultVisualInfo ******************/
+		/**** md5 signature: dde27c64c5cbb24e80531c18197370c1 ****/
+		%feature("compactdefaultargs") GetDefaultVisualInfo;
+		%feature("autodoc", "Return default window visual or null when undefined.
+
+Returns
+-------
+Aspect_XVisualInfo *
+") GetDefaultVisualInfo;
+		Aspect_XVisualInfo * GetDefaultVisualInfo();
+
+		/****************** GetDefaultVisualInfoX ******************/
+		/**** md5 signature: 1f300d560bba874fc61df782e69c5a74 ****/
+		%feature("compactdefaultargs") GetDefaultVisualInfoX;
+		%feature("autodoc", "Return default window visual or null when undefined.
+
+Returns
+-------
+XVisualInfo *
+") GetDefaultVisualInfoX;
+		XVisualInfo * GetDefaultVisualInfoX();
+
+		/****************** GetDisplayAspect ******************/
+		/**** md5 signature: b7c859e60cde1d6a2d363b0c0841abb9 ****/
+		%feature("compactdefaultargs") GetDisplayAspect;
+		%feature("autodoc", "Returns pointer to display structure that serves as the connection to the x server.
+
+Returns
+-------
+Aspect_XDisplay *
+") GetDisplayAspect;
+		Aspect_XDisplay * GetDisplayAspect();
+
+		/****************** SetDefaultVisualInfo ******************/
+		/**** md5 signature: 556c283e32abf1be17f5aa24d1e49f17 ****/
+		%feature("compactdefaultargs") SetDefaultVisualInfo;
+		%feature("autodoc", "Set default window visual; the visual will be deallocated using xfree().
+
+Parameters
+----------
+theVisual: Aspect_XVisualInfo *
+theFBConfig: Aspect_FBConfig
+
+Returns
+-------
+None
+") SetDefaultVisualInfo;
+		void SetDefaultVisualInfo(Aspect_XVisualInfo * theVisual, Aspect_FBConfig theFBConfig);
+
+		/****************** SetDefaultVisualInfo ******************/
+		/**** md5 signature: cc04b00153967434d93a028a423fd6c9 ****/
+		%feature("compactdefaultargs") SetDefaultVisualInfo;
+		%feature("autodoc", "Set default window visual; the visual will be deallocated using xfree().
+
+Parameters
+----------
+theVisual: XVisualInfo *
+theFBConfig: Aspect_FBConfig
+
+Returns
+-------
+None
+") SetDefaultVisualInfo;
+		void SetDefaultVisualInfo(XVisualInfo * theVisual, Aspect_FBConfig theFBConfig);
+
 };
 
 
@@ -1978,6 +2099,58 @@ Aspect_FillMethod
 ") BackgroundFillMethod;
 		Aspect_FillMethod BackgroundFillMethod();
 
+		/****************** ConvertPointFromBacking ******************/
+		/**** md5 signature: 621f59446c2c34234eba0b43cd724552 ****/
+		%feature("compactdefaultargs") ConvertPointFromBacking;
+		%feature("autodoc", "Convert point from backing store units to logical units.
+
+Parameters
+----------
+thePnt: Graphic3d_Vec2d
+
+Returns
+-------
+Graphic3d_Vec2d
+") ConvertPointFromBacking;
+		virtual Graphic3d_Vec2d ConvertPointFromBacking(const Graphic3d_Vec2d & thePnt);
+
+		/****************** ConvertPointToBacking ******************/
+		/**** md5 signature: 37a4876c01cca0dee435e17d82ae73d5 ****/
+		%feature("compactdefaultargs") ConvertPointToBacking;
+		%feature("autodoc", "Convert point from logical units into backing store units.
+
+Parameters
+----------
+thePnt: Graphic3d_Vec2d
+
+Returns
+-------
+Graphic3d_Vec2d
+") ConvertPointToBacking;
+		virtual Graphic3d_Vec2d ConvertPointToBacking(const Graphic3d_Vec2d & thePnt);
+
+		/****************** DevicePixelRatio ******************/
+		/**** md5 signature: 6492ff955dcc6243b26fa4c3bdea7bf0 ****/
+		%feature("compactdefaultargs") DevicePixelRatio;
+		%feature("autodoc", "Return device pixel ratio (logical to backing store scale factor).
+
+Returns
+-------
+float
+") DevicePixelRatio;
+		virtual Standard_Real DevicePixelRatio();
+
+		/****************** DisplayConnection ******************/
+		/**** md5 signature: 411dcd7f318927d5a5c6c027eda3726a ****/
+		%feature("compactdefaultargs") DisplayConnection;
+		%feature("autodoc", "Returns connection to display or null.
+
+Returns
+-------
+opencascade::handle<Aspect_DisplayConnection>
+") DisplayConnection;
+		const opencascade::handle<Aspect_DisplayConnection> & DisplayConnection();
+
 		/****************** DoMapping ******************/
 		/**** md5 signature: bccedbb13c087bbcb0fdc2dc4be5fafa ****/
 		%feature("compactdefaultargs") DoMapping;
@@ -2240,6 +2413,544 @@ None
 	@methodnotwrapped
 	def NativeParentHandle(self):
 		pass
+	}
+};
+
+/***********************************
+* class Aspect_WindowInputListener *
+***********************************/
+%nodefaultctor Aspect_WindowInputListener;
+class Aspect_WindowInputListener {
+	public:
+		/****************** AddTouchPoint ******************/
+		/**** md5 signature: 93b82d6d34eb813c208bc4163ef671c4 ****/
+		%feature("compactdefaultargs") AddTouchPoint;
+		%feature("autodoc", "Add touch point with the given id. this method is expected to be called from ui thread. @param theid touch unique identifier @param thepnt touch coordinates @param theclearbefore if true previously registered touches will be removed.
+
+Parameters
+----------
+theId: Standard_Size
+thePnt: Graphic3d_Vec2d
+theClearBefore: bool,optional
+	default value is false
+
+Returns
+-------
+None
+") AddTouchPoint;
+		virtual void AddTouchPoint(Standard_Size theId, const Graphic3d_Vec2d & thePnt, Standard_Boolean theClearBefore = false);
+
+		/****************** Change3dMouseIsNoRotate ******************/
+		/**** md5 signature: b2ff1af628a01e66606ed582c146ef69 ****/
+		%feature("compactdefaultargs") Change3dMouseIsNoRotate;
+		%feature("autodoc", "Return 3d mouse rotation axes (tilt/roll/spin) ignore flag; (false, false, false) by default.
+
+Returns
+-------
+NCollection_Vec3<bool>
+") Change3dMouseIsNoRotate;
+		NCollection_Vec3<bool> & Change3dMouseIsNoRotate();
+
+		/****************** Change3dMouseToReverse ******************/
+		/**** md5 signature: 74994d53f8199fd2049bc1854acbcdb2 ****/
+		%feature("compactdefaultargs") Change3dMouseToReverse;
+		%feature("autodoc", "Return 3d mouse rotation axes (tilt/roll/spin) reverse flag; (true, false, false) by default.
+
+Returns
+-------
+NCollection_Vec3<bool>
+") Change3dMouseToReverse;
+		NCollection_Vec3<bool> & Change3dMouseToReverse();
+
+		/****************** ChangeKeys ******************/
+		/**** md5 signature: 5ba331e57bcd00b6539ab5d9145324ac ****/
+		%feature("compactdefaultargs") ChangeKeys;
+		%feature("autodoc", "Return keyboard state.
+
+Returns
+-------
+Aspect_VKeySet
+") ChangeKeys;
+		Aspect_VKeySet & ChangeKeys();
+
+		/****************** EventTime ******************/
+		/**** md5 signature: 6bdc5b17561b5be0e9e4dbdd76a72ace ****/
+		%feature("compactdefaultargs") EventTime;
+		%feature("autodoc", "Return event time (e.g. current time).
+
+Returns
+-------
+double
+") EventTime;
+		double EventTime();
+
+		/****************** Get3dMouseIsNoRotate ******************/
+		/**** md5 signature: ae14b65261c4d2a6b12679cc1f5c5ed4 ****/
+		%feature("compactdefaultargs") Get3dMouseIsNoRotate;
+		%feature("autodoc", "Return 3d mouse rotation axes (tilt/roll/spin) ignore flag; (false, false, false) by default.
+
+Returns
+-------
+NCollection_Vec3<bool>
+") Get3dMouseIsNoRotate;
+		const NCollection_Vec3<bool> & Get3dMouseIsNoRotate();
+
+		/****************** Get3dMouseRotationScale ******************/
+		/**** md5 signature: 6e7927184907412546b0e3bf5c131f00 ****/
+		%feature("compactdefaultargs") Get3dMouseRotationScale;
+		%feature("autodoc", "Return acceleration ratio for rotation event; 4.0 by default.
+
+Returns
+-------
+float
+") Get3dMouseRotationScale;
+		float Get3dMouseRotationScale();
+
+		/****************** Get3dMouseToReverse ******************/
+		/**** md5 signature: a365f1e9e4397aece1eb44aa7383f6d5 ****/
+		%feature("compactdefaultargs") Get3dMouseToReverse;
+		%feature("autodoc", "Return 3d mouse rotation axes (tilt/roll/spin) reverse flag; (true, false, false) by default.
+
+Returns
+-------
+NCollection_Vec3<bool>
+") Get3dMouseToReverse;
+		const NCollection_Vec3<bool> & Get3dMouseToReverse();
+
+		/****************** Get3dMouseTranslationScale ******************/
+		/**** md5 signature: f426a4558b5227de61530d9d20b93e7e ****/
+		%feature("compactdefaultargs") Get3dMouseTranslationScale;
+		%feature("autodoc", "Return acceleration ratio for translation event; 2.0 by default.
+
+Returns
+-------
+float
+") Get3dMouseTranslationScale;
+		float Get3dMouseTranslationScale();
+
+		/****************** HasTouchPoints ******************/
+		/**** md5 signature: f6532233e79841283a6d00ea2e7477d5 ****/
+		%feature("compactdefaultargs") HasTouchPoints;
+		%feature("autodoc", "Return true if touches map is not empty.
+
+Returns
+-------
+bool
+") HasTouchPoints;
+		bool HasTouchPoints();
+
+		/****************** KeyDown ******************/
+		/**** md5 signature: 5192d78be0f66dc0b2cf998103ed19af ****/
+		%feature("compactdefaultargs") KeyDown;
+		%feature("autodoc", "Press key. default implementation updates internal cache. @param thekey key pressed @param thetime event timestamp.
+
+Parameters
+----------
+theKey: Aspect_VKey
+theTime: double
+thePressure: double,optional
+	default value is 1.0
+
+Returns
+-------
+None
+") KeyDown;
+		virtual void KeyDown(Aspect_VKey theKey, double theTime, double thePressure = 1.0);
+
+		/****************** KeyFromAxis ******************/
+		/**** md5 signature: a8592c856484d5ea635556005b4dbf66 ****/
+		%feature("compactdefaultargs") KeyFromAxis;
+		%feature("autodoc", "Simulate key up/down events from axis value. default implementation updates internal cache.
+
+Parameters
+----------
+theNegative: Aspect_VKey
+thePositive: Aspect_VKey
+theTime: double
+thePressure: double
+
+Returns
+-------
+None
+") KeyFromAxis;
+		virtual void KeyFromAxis(Aspect_VKey theNegative, Aspect_VKey thePositive, double theTime, double thePressure);
+
+		/****************** KeyUp ******************/
+		/**** md5 signature: facf026fe52d5d68e622d779a08b26c3 ****/
+		%feature("compactdefaultargs") KeyUp;
+		%feature("autodoc", "Release key. default implementation updates internal cache. @param thekey key pressed @param thetime event timestamp.
+
+Parameters
+----------
+theKey: Aspect_VKey
+theTime: double
+
+Returns
+-------
+None
+") KeyUp;
+		virtual void KeyUp(Aspect_VKey theKey, double theTime);
+
+		/****************** Keys ******************/
+		/**** md5 signature: 71088904ae13bced99cf6e1155c58478 ****/
+		%feature("compactdefaultargs") Keys;
+		%feature("autodoc", "Return keyboard state.
+
+Returns
+-------
+Aspect_VKeySet
+") Keys;
+		const Aspect_VKeySet & Keys();
+
+		/****************** LastMouseFlags ******************/
+		/**** md5 signature: 891e38e0b645d78e87ef09c802ac2d63 ****/
+		%feature("compactdefaultargs") LastMouseFlags;
+		%feature("autodoc", "Return active key modifiers passed with last mouse event.
+
+Returns
+-------
+Aspect_VKeyFlags
+") LastMouseFlags;
+		Aspect_VKeyFlags LastMouseFlags();
+
+		/****************** LastMousePosition ******************/
+		/**** md5 signature: 69040771a57339f922c8a0c6021122bb ****/
+		%feature("compactdefaultargs") LastMousePosition;
+		%feature("autodoc", "Return last mouse position.
+
+Returns
+-------
+Graphic3d_Vec2i
+") LastMousePosition;
+		const Graphic3d_Vec2i & LastMousePosition();
+
+		/****************** PressMouseButton ******************/
+		/**** md5 signature: 3011ceaa0add6213ae689425180a9aab ****/
+		%feature("compactdefaultargs") PressMouseButton;
+		%feature("autodoc", "Handle mouse button press event. this method is expected to be called from ui thread. default implementation redirects to updatemouseposition(). @param thepoint mouse cursor position @param thebutton pressed button @param themodifiers key modifiers @param theisemulated if true then mouse event comes not from real mouse  but emulated from non-precise input like touch on screen returns true if window content should be redrawn.
+
+Parameters
+----------
+thePoint: Graphic3d_Vec2i
+theButton: Aspect_VKeyMouse
+theModifiers: Aspect_VKeyFlags
+theIsEmulated: bool
+
+Returns
+-------
+bool
+") PressMouseButton;
+		bool PressMouseButton(const Graphic3d_Vec2i & thePoint, Aspect_VKeyMouse theButton, Aspect_VKeyFlags theModifiers, bool theIsEmulated);
+
+		/****************** PressedMouseButtons ******************/
+		/**** md5 signature: 28ea733557be0052235dc8a7fe3ed119 ****/
+		%feature("compactdefaultargs") PressedMouseButtons;
+		%feature("autodoc", "Return currently pressed mouse buttons.
+
+Returns
+-------
+Aspect_VKeyMouse
+") PressedMouseButtons;
+		Aspect_VKeyMouse PressedMouseButtons();
+
+		/****************** ProcessClose ******************/
+		/**** md5 signature: 59654ad0d3a6816d4daa90e13a580cde ****/
+		%feature("compactdefaultargs") ProcessClose;
+		%feature("autodoc", "Handle window close event.
+
+Returns
+-------
+None
+") ProcessClose;
+		virtual void ProcessClose();
+
+		/****************** ProcessConfigure ******************/
+		/**** md5 signature: ca30e387334b4284a619ea054d2c8c75 ****/
+		%feature("compactdefaultargs") ProcessConfigure;
+		%feature("autodoc", "Handle window resize event.
+
+Parameters
+----------
+theIsResized: bool
+
+Returns
+-------
+None
+") ProcessConfigure;
+		virtual void ProcessConfigure(bool theIsResized);
+
+		/****************** ProcessExpose ******************/
+		/**** md5 signature: f597030918979508d41a1535a55a52da ****/
+		%feature("compactdefaultargs") ProcessExpose;
+		%feature("autodoc", "Handle expose event (window content has been invalidation and should be redrawn).
+
+Returns
+-------
+None
+") ProcessExpose;
+		virtual void ProcessExpose();
+
+		/****************** ProcessFocus ******************/
+		/**** md5 signature: 62ed591bdb7901b7386a340b9d7b2f9b ****/
+		%feature("compactdefaultargs") ProcessFocus;
+		%feature("autodoc", "Handle focus event.
+
+Parameters
+----------
+theIsActivated: bool
+
+Returns
+-------
+None
+") ProcessFocus;
+		virtual void ProcessFocus(bool theIsActivated);
+
+		/****************** ProcessInput ******************/
+		/**** md5 signature: 25eccaa30cc27b2a88e167899d319730 ****/
+		%feature("compactdefaultargs") ProcessInput;
+		%feature("autodoc", "Handle window input event immediately (flush input buffer or ignore).
+
+Returns
+-------
+None
+") ProcessInput;
+		virtual void ProcessInput();
+
+		/****************** ReleaseMouseButton ******************/
+		/**** md5 signature: a9b43da8768564266828a78fde53802f ****/
+		%feature("compactdefaultargs") ReleaseMouseButton;
+		%feature("autodoc", "Handle mouse button release event. this method is expected to be called from ui thread. default implementation redirects to updatemouseposition(). @param thepoint mouse cursor position @param thebutton released button @param themodifiers key modifiers @param theisemulated if true then mouse event comes not from real mouse  but emulated from non-precise input like touch on screen returns true if window content should be redrawn.
+
+Parameters
+----------
+thePoint: Graphic3d_Vec2i
+theButton: Aspect_VKeyMouse
+theModifiers: Aspect_VKeyFlags
+theIsEmulated: bool
+
+Returns
+-------
+bool
+") ReleaseMouseButton;
+		bool ReleaseMouseButton(const Graphic3d_Vec2i & thePoint, Aspect_VKeyMouse theButton, Aspect_VKeyFlags theModifiers, bool theIsEmulated);
+
+		/****************** RemoveTouchPoint ******************/
+		/**** md5 signature: 45c3401339716ca58b815f7e44a3d196 ****/
+		%feature("compactdefaultargs") RemoveTouchPoint;
+		%feature("autodoc", "Remove touch point with the given id. this method is expected to be called from ui thread. @param theid touch unique identifier @param theclearselectpnts if true will initiate clearing of selection points returns true if point has been removed.
+
+Parameters
+----------
+theId: Standard_Size
+theClearSelectPnts: bool,optional
+	default value is false
+
+Returns
+-------
+bool
+") RemoveTouchPoint;
+		virtual bool RemoveTouchPoint(Standard_Size theId, Standard_Boolean theClearSelectPnts = false);
+
+		/****************** Set3dMousePreciseInput ******************/
+		/**** md5 signature: 0ff4172c7dce21c124fb3941d21634cd ****/
+		%feature("compactdefaultargs") Set3dMousePreciseInput;
+		%feature("autodoc", "Set quadric acceleration flag.
+
+Parameters
+----------
+theIsQuadric: bool
+
+Returns
+-------
+None
+") Set3dMousePreciseInput;
+		void Set3dMousePreciseInput(bool theIsQuadric);
+
+		/****************** Set3dMouseRotationScale ******************/
+		/**** md5 signature: 26cc1d3413bc1ed0806210cb74503bf8 ****/
+		%feature("compactdefaultargs") Set3dMouseRotationScale;
+		%feature("autodoc", "Set acceleration ratio for rotation event.
+
+Parameters
+----------
+theScale: float
+
+Returns
+-------
+None
+") Set3dMouseRotationScale;
+		void Set3dMouseRotationScale(float theScale);
+
+		/****************** Set3dMouseTranslationScale ******************/
+		/**** md5 signature: d66cf6c87510f4cf28118e77235f6dc1 ****/
+		%feature("compactdefaultargs") Set3dMouseTranslationScale;
+		%feature("autodoc", "Set acceleration ratio for translation event.
+
+Parameters
+----------
+theScale: float
+
+Returns
+-------
+None
+") Set3dMouseTranslationScale;
+		void Set3dMouseTranslationScale(float theScale);
+
+		/****************** To3dMousePreciseInput ******************/
+		/**** md5 signature: e7d1cbbce6f739652fb2dcffebfdc574 ****/
+		%feature("compactdefaultargs") To3dMousePreciseInput;
+		%feature("autodoc", "Return quadric acceleration flag; true by default.
+
+Returns
+-------
+bool
+") To3dMousePreciseInput;
+		bool To3dMousePreciseInput();
+
+		/****************** TouchPoints ******************/
+		/**** md5 signature: aae5a0777c45c41be0cc42d98cb8d6a5 ****/
+		%feature("compactdefaultargs") TouchPoints;
+		%feature("autodoc", "Return map of active touches.
+
+Returns
+-------
+Aspect_TouchMap
+") TouchPoints;
+		const Aspect_TouchMap & TouchPoints();
+
+		/****************** Update3dMouse ******************/
+		/**** md5 signature: 989c941c2b66167e2e5fa84999e81fe3 ****/
+		%feature("compactdefaultargs") Update3dMouse;
+		%feature("autodoc", "Process 3d mouse input event (redirects to translation, rotation and keys).
+
+Parameters
+----------
+theEvent: WNT_HIDSpaceMouse
+
+Returns
+-------
+bool
+") Update3dMouse;
+		virtual bool Update3dMouse(const WNT_HIDSpaceMouse & theEvent);
+
+		/****************** UpdateMouseButtons ******************/
+		/**** md5 signature: 344a32c08e48df63d66f82e75f14f4ac ****/
+		%feature("compactdefaultargs") UpdateMouseButtons;
+		%feature("autodoc", "Handle mouse button press/release event. this method is expected to be called from ui thread. @param thepoint mouse cursor position @param thebuttons pressed buttons @param themodifiers key modifiers @param theisemulated if true then mouse event comes not from real mouse  but emulated from non-precise input like touch on screen returns true if window content should be redrawn.
+
+Parameters
+----------
+thePoint: Graphic3d_Vec2i
+theButtons: Aspect_VKeyMouse
+theModifiers: Aspect_VKeyFlags
+theIsEmulated: bool
+
+Returns
+-------
+bool
+") UpdateMouseButtons;
+		virtual bool UpdateMouseButtons(const Graphic3d_Vec2i & thePoint, Aspect_VKeyMouse theButtons, Aspect_VKeyFlags theModifiers, bool theIsEmulated);
+
+		/****************** UpdateMousePosition ******************/
+		/**** md5 signature: 217f410d7de77f6f79b905cc2f67eaf4 ****/
+		%feature("compactdefaultargs") UpdateMousePosition;
+		%feature("autodoc", "Handle mouse cursor movement event. this method is expected to be called from ui thread. default implementation does nothing. @param thepoint mouse cursor position @param thebuttons pressed buttons @param themodifiers key modifiers @param theisemulated if true then mouse event comes not from real mouse  but emulated from non-precise input like touch on screen returns true if window content should be redrawn.
+
+Parameters
+----------
+thePoint: Graphic3d_Vec2i
+theButtons: Aspect_VKeyMouse
+theModifiers: Aspect_VKeyFlags
+theIsEmulated: bool
+
+Returns
+-------
+bool
+") UpdateMousePosition;
+		virtual bool UpdateMousePosition(const Graphic3d_Vec2i & thePoint, Aspect_VKeyMouse theButtons, Aspect_VKeyFlags theModifiers, bool theIsEmulated);
+
+		/****************** UpdateMouseScroll ******************/
+		/**** md5 signature: 33a1d2af16e7dcdaa2ec2c0ec68a7748 ****/
+		%feature("compactdefaultargs") UpdateMouseScroll;
+		%feature("autodoc", "Update mouse scroll event. this method is expected to be called from ui thread. @param thedelta mouse cursor position and delta returns true if new event has been created or false if existing one has been updated.
+
+Parameters
+----------
+theDelta: Aspect_ScrollDelta
+
+Returns
+-------
+bool
+") UpdateMouseScroll;
+		virtual bool UpdateMouseScroll(const Aspect_ScrollDelta & theDelta);
+
+		/****************** UpdateTouchPoint ******************/
+		/**** md5 signature: 32b5b3a5782487b44b49157cf52c6e04 ****/
+		%feature("compactdefaultargs") UpdateTouchPoint;
+		%feature("autodoc", "Update touch point with the given id. if point with specified id was not registered before, it will be added. this method is expected to be called from ui thread. @param theid touch unique identifier @param thepnt touch coordinates.
+
+Parameters
+----------
+theId: Standard_Size
+thePnt: Graphic3d_Vec2d
+
+Returns
+-------
+None
+") UpdateTouchPoint;
+		virtual void UpdateTouchPoint(Standard_Size theId, const Graphic3d_Vec2d & thePnt);
+
+		/****************** update3dMouseKeys ******************/
+		/**** md5 signature: 7068d4e0858b2659de00f111094ecc7f ****/
+		%feature("compactdefaultargs") update3dMouseKeys;
+		%feature("autodoc", "Process 3d mouse input keys event.
+
+Parameters
+----------
+theEvent: WNT_HIDSpaceMouse
+
+Returns
+-------
+bool
+") update3dMouseKeys;
+		virtual bool update3dMouseKeys(const WNT_HIDSpaceMouse & theEvent);
+
+		/****************** update3dMouseRotation ******************/
+		/**** md5 signature: 0e88dd09859b6f02e48c9b73ec73f69b ****/
+		%feature("compactdefaultargs") update3dMouseRotation;
+		%feature("autodoc", "Process 3d mouse input rotation event.
+
+Parameters
+----------
+theEvent: WNT_HIDSpaceMouse
+
+Returns
+-------
+bool
+") update3dMouseRotation;
+		virtual bool update3dMouseRotation(const WNT_HIDSpaceMouse & theEvent);
+
+		/****************** update3dMouseTranslation ******************/
+		/**** md5 signature: c826319c70a567fbe2c3401c0a5c2471 ****/
+		%feature("compactdefaultargs") update3dMouseTranslation;
+		%feature("autodoc", "Process 3d mouse input translation event.
+
+Parameters
+----------
+theEvent: WNT_HIDSpaceMouse
+
+Returns
+-------
+bool
+") update3dMouseTranslation;
+		virtual bool update3dMouseTranslation(const WNT_HIDSpaceMouse & theEvent);
+
+};
+
+
+%extend Aspect_WindowInputListener {
+	%pythoncode {
+	__repr__ = _dumps_object
 	}
 };
 
@@ -3098,7 +3809,7 @@ class Aspect_GradientBackground : public Aspect_Background {
 		/****************** Aspect_GradientBackground ******************/
 		/**** md5 signature: 2a3b12e3984621a36868307403d00696 ****/
 		%feature("compactdefaultargs") Aspect_GradientBackground;
-		%feature("autodoc", "Creates a window gradient background. default colors : quantity_noc_black. default fill method : aspect_gfm_none.
+		%feature("autodoc", "Creates a window gradient background. default color is quantity_noc_black. default fill method is aspect_gradientfillmethod_none.
 
 Returns
 -------
@@ -3107,22 +3818,22 @@ None
 		 Aspect_GradientBackground();
 
 		/****************** Aspect_GradientBackground ******************/
-		/**** md5 signature: a6f68c9f1a0e9cb605f0a1cfca9bada3 ****/
+		/**** md5 signature: 85f06b5f3ce72c2ed98cd0a1aa2d2a99 ****/
 		%feature("compactdefaultargs") Aspect_GradientBackground;
-		%feature("autodoc", "Creates a window gradient background with colours <acolor1, acolor2>.
+		%feature("autodoc", "Creates a window gradient background with two colours.
 
 Parameters
 ----------
-AColor1: Quantity_Color
-AColor2: Quantity_Color
-AMethod: Aspect_GradientFillMethod,optional
-	default value is Aspect_GFM_HOR
+theColor1: Quantity_Color
+theColor2: Quantity_Color
+theMethod: Aspect_GradientFillMethod,optional
+	default value is Aspect_GradientFillMethod_Horizontal
 
 Returns
 -------
 None
 ") Aspect_GradientBackground;
-		 Aspect_GradientBackground(const Quantity_Color & AColor1, const Quantity_Color & AColor2, const Aspect_GradientFillMethod AMethod = Aspect_GFM_HOR);
+		 Aspect_GradientBackground(const Quantity_Color & theColor1, const Quantity_Color & theColor2, const Aspect_GradientFillMethod theMethod = Aspect_GradientFillMethod_Horizontal);
 
 		/****************** BgGradientFillMethod ******************/
 		/**** md5 signature: 7ed50907542306114d5e90acbea724cc ****/
@@ -3136,20 +3847,20 @@ Aspect_GradientFillMethod
 		Aspect_GradientFillMethod BgGradientFillMethod();
 
 		/****************** Colors ******************/
-		/**** md5 signature: 1f444dae8ef6192a952d97253320da63 ****/
+		/**** md5 signature: 2e3f4d55b92b83e682d47f9e5901fc34 ****/
 		%feature("compactdefaultargs") Colors;
-		%feature("autodoc", "Returns colours of the window gradient background <self>.
+		%feature("autodoc", "Returns colours of the window gradient background.
 
 Parameters
 ----------
-AColor1: Quantity_Color
-AColor2: Quantity_Color
+theColor1: Quantity_Color
+theColor2: Quantity_Color
 
 Returns
 -------
 None
 ") Colors;
-		void Colors(Quantity_Color & AColor1, Quantity_Color & AColor2);
+		void Colors(Quantity_Color & theColor1, Quantity_Color & theColor2);
 
 
             %feature("autodoc", "1");
@@ -3160,22 +3871,22 @@ None
                 return s.str();}
             };
 		/****************** SetColors ******************/
-		/**** md5 signature: e9d1a160fb9ca8b15bcaf9ca8e97b5f0 ****/
+		/**** md5 signature: ca78c9c4d4c2f941b5264058f8f3157f ****/
 		%feature("compactdefaultargs") SetColors;
-		%feature("autodoc", "Modifies the colours of the window gradient background <self>.
+		%feature("autodoc", "Modifies the colours of the window gradient background.
 
 Parameters
 ----------
-AColor1: Quantity_Color
-AColor2: Quantity_Color
-AMethod: Aspect_GradientFillMethod,optional
-	default value is Aspect_GFM_HOR
+theColor1: Quantity_Color
+theColor2: Quantity_Color
+theMethod: Aspect_GradientFillMethod,optional
+	default value is Aspect_GradientFillMethod_Horizontal
 
 Returns
 -------
 None
 ") SetColors;
-		void SetColors(const Quantity_Color & AColor1, const Quantity_Color & AColor2, const Aspect_GradientFillMethod AMethod = Aspect_GFM_HOR);
+		void SetColors(const Quantity_Color & theColor1, const Quantity_Color & theColor2, const Aspect_GradientFillMethod theMethod = Aspect_GradientFillMethod_Horizontal);
 
 };
 

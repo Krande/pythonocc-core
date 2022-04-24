@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define IMESHDATADOCSTRING
 "IMeshData module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_imeshdata.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_imeshdata.html"
 %enddef
 %module (package="OCC.Core", docstring=IMESHDATADOCSTRING) IMeshData
 
@@ -751,7 +751,7 @@ class IMeshData_Edge : public IMeshData_TessellatedShape, public IMeshData_Statu
 		/****************** AddPCurve ******************/
 		/**** md5 signature: 758b136331ab322e1c5c1f2790107535 ****/
 		%feature("compactdefaultargs") AddPCurve;
-		%feature("autodoc", "Adds discrete pcurve for the specifed discrete face.
+		%feature("autodoc", "Adds discrete pcurve for the specified discrete face.
 
 Parameters
 ----------
@@ -1019,15 +1019,15 @@ TopoDS_Face
 		const TopoDS_Face GetFace();
 
 		/****************** GetSurface ******************/
-		/**** md5 signature: c1511498460aa0f7fc4d090a4c735561 ****/
+		/**** md5 signature: 6aa03522ab6b1d17fd10abc283bef0d7 ****/
 		%feature("compactdefaultargs") GetSurface;
 		%feature("autodoc", "Returns face's surface.
 
 Returns
 -------
-opencascade::handle<BRepAdaptor_HSurface>
+opencascade::handle<BRepAdaptor_Surface>
 ") GetSurface;
-		const opencascade::handle<BRepAdaptor_HSurface> & GetSurface();
+		const opencascade::handle<BRepAdaptor_Surface> & GetSurface();
 
 		/****************** GetWire ******************/
 		/**** md5 signature: 8966cf070b277a5ac868ac689054052e ****/

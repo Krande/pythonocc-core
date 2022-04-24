@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define BINOBJMGTDOCSTRING
 "BinObjMgt module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_binobjmgt.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_binobjmgt.html"
 %enddef
 %module (package="OCC.Core", docstring=BINOBJMGTDOCSTRING) BinObjMgt
 
@@ -72,6 +72,7 @@ from OCC.Core.Exception import *
 /* end python proxy for enums */
 
 /* handles */
+%wrap_handle(BinObjMgt_Position)
 /* end handles declaration */
 
 /* templates */
@@ -266,6 +267,17 @@ BinObjMgt_Persistent
 ") GetGUID;
 		const BinObjMgt_Persistent & GetGUID(Standard_GUID & theValue);
 
+		/****************** GetIStream ******************/
+		/**** md5 signature: b503fd0336753bf795bdd5b274984db6 ****/
+		%feature("compactdefaultargs") GetIStream;
+		%feature("autodoc", "Gets the stream for and enables direct reading.
+
+Returns
+-------
+Standard_IStream *
+") GetIStream;
+		Standard_IStream * GetIStream();
+
 		/****************** GetIntArray ******************/
 		/**** md5 signature: 7c90fd62cbabd6cccece0887a773ce65 ****/
 		%feature("compactdefaultargs") GetIntArray;
@@ -311,6 +323,17 @@ Returns
 BinObjMgt_Persistent
 ") GetLabel;
 		const BinObjMgt_Persistent & GetLabel(const opencascade::handle<TDF_Data> & theDS, TDF_Label & theValue);
+
+		/****************** GetOStream ******************/
+		/**** md5 signature: f315d3540d9d32727fa0b4bd7ff6fca0 ****/
+		%feature("compactdefaultargs") GetOStream;
+		%feature("autodoc", "Gets the stream for and enables direct writing.
+
+Returns
+-------
+Standard_OStream *
+") GetOStream;
+		Standard_OStream * GetOStream();
 
 		/****************** GetReal ******************/
 		/**** md5 signature: 65cbf27e92c882f039241743224d67d7 ****/
@@ -394,6 +417,17 @@ Returns
 None
 ") Init;
 		void Init();
+
+		/****************** IsDirect ******************/
+		/**** md5 signature: b04590ab3394fe8ab96053fa1809efb5 ****/
+		%feature("compactdefaultargs") IsDirect;
+		%feature("autodoc", "Returns true if after this record a direct writing to the stream is performed.
+
+Returns
+-------
+bool
+") IsDirect;
+		Standard_Boolean IsDirect();
 
 		/****************** IsError ******************/
 		/**** md5 signature: c52b85ee17e423925f2cd97bf6879614 ****/
@@ -722,6 +756,13 @@ BinObjMgt_Persistent
                 std::stringstream s(src);
                 self->Read(s);}
             };
+
+            %feature("autodoc", "1");
+            %extend{
+                void SetIStreamFromString(std::string src) {
+                std::stringstream s(src);
+                self->SetIStream(s);}
+            };
 		/****************** SetId ******************/
 		/**** md5 signature: 3131e8337f46d2a085b133db913d7e12 ****/
 		%feature("compactdefaultargs") SetId;
@@ -737,6 +778,14 @@ None
 ") SetId;
 		void SetId(const Standard_Integer theId);
 
+
+        %feature("autodoc", "1");
+        %extend{
+            std::string SetOStreamToString() {
+            std::stringstream s;
+            self->SetOStream(s);
+            return s.str();}
+        };
 		/****************** SetPosition ******************/
 		/**** md5 signature: 734a09cc1c2f91af755a362f6ac9dbb1 ****/
 		%feature("compactdefaultargs") SetPosition;
@@ -767,6 +816,17 @@ None
 ") SetTypeId;
 		void SetTypeId(const Standard_Integer theId);
 
+		/****************** StreamStart ******************/
+		/**** md5 signature: e0cf8d7c6c5cab9a0df41cc72760de1f ****/
+		%feature("compactdefaultargs") StreamStart;
+		%feature("autodoc", "Returns the start position of the direct writing in the stream.
+
+Returns
+-------
+opencascade::handle<BinObjMgt_Position>
+") StreamStart;
+		opencascade::handle<BinObjMgt_Position> StreamStart();
+
 		/****************** Truncate ******************/
 		/**** md5 signature: 5d042d2aea73ae47c14d2c42d285a228 ****/
 		%feature("compactdefaultargs") Truncate;
@@ -789,18 +849,42 @@ int
 ") TypeId;
 		Standard_Integer TypeId();
 
+};
+
+
+%extend BinObjMgt_Persistent {
+	%pythoncode {
+	__repr__ = _dumps_object
+	}
+};
+
+/***************************
+* class BinObjMgt_Position *
+***************************/
+class BinObjMgt_Position : public Standard_Transient {
+	public:
 
         %feature("autodoc", "1");
         %extend{
-            std::string WriteToString() {
+            std::string BinObjMgt_PositionToString() {
             std::stringstream s;
-            self->Write(s);
+            self->BinObjMgt_Position(s);
+            return s.str();}
+        };
+
+        %feature("autodoc", "1");
+        %extend{
+            std::string StoreSizeToString() {
+            std::stringstream s;
+            self->StoreSize(s);
             return s.str();}
         };
 };
 
 
-%extend BinObjMgt_Persistent {
+%make_alias(BinObjMgt_Position)
+
+%extend BinObjMgt_Position {
 	%pythoncode {
 	__repr__ = _dumps_object
 	}

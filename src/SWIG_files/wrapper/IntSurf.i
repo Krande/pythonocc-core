@@ -17,7 +17,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define INTSURFDOCSTRING
 "IntSurf module, see official documentation at
-https://www.opencascade.com/doc/occt-7.4.0/refman/html/package_intsurf.html"
+https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_intsurf.html"
 %enddef
 %module (package="OCC.Core", docstring=INTSURFDOCSTRING) IntSurf
 
@@ -189,21 +189,21 @@ None
 		static void MakeTransition(const gp_Vec & TgFirst, const gp_Vec & TgSecond, const gp_Dir & Normal, IntSurf_Transition & TFirst, IntSurf_Transition & TSecond);
 
 		/****************** SetPeriod ******************/
-		/**** md5 signature: 16a7ae508b5887130ad1ba538c9ee0ff ****/
+		/**** md5 signature: 486891f66d1363af6895d7c681cba2a3 ****/
 		%feature("compactdefaultargs") SetPeriod;
 		%feature("autodoc", "Fills thearrofperiod array by the period values of thefirstsurf and thesecondsurf. [0] = u-period of thefirstsurf, [1] = v-period of thefirstsurf, [2] = u-period of thesecondsurf, [3] = v-period of thesecondsurf. //! if surface is not periodic in correspond direction then its period is considered to be equal to 0.
 
 Parameters
 ----------
-theFirstSurf: Adaptor3d_HSurface
-theSecondSurf: Adaptor3d_HSurface
+theFirstSurf: Adaptor3d_Surface
+theSecondSurf: Adaptor3d_Surface
 theArrOfPeriod: float
 
 Returns
 -------
 None
 ") SetPeriod;
-		static void SetPeriod(const opencascade::handle<Adaptor3d_HSurface> & theFirstSurf, const opencascade::handle<Adaptor3d_HSurface> & theSecondSurf, Standard_Real theArrOfPeriod[4]);
+		static void SetPeriod(const opencascade::handle<Adaptor3d_Surface> & theFirstSurf, const opencascade::handle<Adaptor3d_Surface> & theSecondSurf, Standard_Real theArrOfPeriod[4]);
 
 };
 
