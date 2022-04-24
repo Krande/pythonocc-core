@@ -7,8 +7,6 @@ on:
       - ci/**
       - .github/workflows/ci-daily-build.yml
       - CMakeLists.txt
-    branches:
-      - master
 jobs:
   activate:
     runs-on: ubuntu-latest
