@@ -41,7 +41,7 @@ jobs:
       - uses: seanmiddleditch/gha-setup-ninja@master
       - uses: conda-incubator/setup-miniconda@v2  # https://github.com/conda-incubator/setup-miniconda
         with:
-          activate-environment: conda-build
+          activate-environment: condabuild
           python-version: ${{ matrix.pyver.distver }}
           environment-file: ci/conda/environment.yml
       - name: build test and upload pythonocc-core
