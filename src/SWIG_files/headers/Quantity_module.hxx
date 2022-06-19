@@ -18,8 +18,9 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef QUANTITY_HXX
 #define QUANTITY_HXX
 
+#include <Standard_Real.hxx>
+typedef Standard_Real Quantity_AbsorbedDose;
 
-#include<Quantity_AbsorbedDose.hxx>
 #include<Quantity_Acceleration.hxx>
 #include<Quantity_AcousticIntensity.hxx>
 #include<Quantity_Activity.hxx>
