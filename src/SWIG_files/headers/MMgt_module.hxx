@@ -18,7 +18,11 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef MMGT_HXX
 #define MMGT_HXX
 
+// Note: MMgt_TShared class definition has been removed
+// Standard_Transienshould be used instead
+// https://dev.opencascade.org/doc/refman/html/class_standard___transient.html
+// #include<MMgt_TShared.hxx>
 
-#include<MMgt_TShared.hxx>
+#include <Standard_Transient.hxx>
 
 #endif // MMGT_HXX
