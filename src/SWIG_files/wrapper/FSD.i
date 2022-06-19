@@ -72,7 +72,7 @@ typedef std::fstream FSD_FStream;
 /* end typedefs declaration */
 
 /**************************
-* class FSD_Base64Decoder *
+* class FSD_Base64 *
 **************************/
 /***********************
 * class FSD_BinaryFile *
@@ -89,7 +89,7 @@ typedef std::fstream FSD_FStream;
 /* python proxy for excluded classes */
 %pythoncode {
 @classnotwrapped
-class FSD_Base64Decoder:
+class FSD_Base64:
 	pass
 
 @classnotwrapped

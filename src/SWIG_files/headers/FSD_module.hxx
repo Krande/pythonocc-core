@@ -20,7 +20,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #include<FSD_BStream.hxx>
-#include<FSD_Base64Decoder.hxx>
+#include<FSD_Base64.hxx>
 #include<FSD_BinaryFile.hxx>
 #include<FSD_CmpFile.hxx>
 #include<FSD_FStream.hxx>
