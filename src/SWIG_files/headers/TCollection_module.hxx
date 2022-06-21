@@ -21,16 +21,18 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 
 #include<TCollection.hxx>
 #include<TCollection_AsciiString.hxx>
-#include<TCollection_BaseSequence.hxx>
-#include<TCollection_BasicMap.hxx>
-#include<TCollection_BasicMapIterator.hxx>
 #include<TCollection_ExtendedString.hxx>
 #include<TCollection_HAsciiString.hxx>
 #include<TCollection_HExtendedString.hxx>
+
+/* https://github.com/tpaviot/pythonocc-core/issues/1111
+#include<TCollection_BaseSequence.hxx>
+#include<TCollection_BasicMap.hxx>
+#include<TCollection_BasicMapIterator.hxx>
 #include<TCollection_MapNode.hxx>
 #include<TCollection_MapNodePtr.hxx>
 #include<TCollection_SeqNode.hxx>
 #include<TCollection_SeqNodePtr.hxx>
-#include<TCollection_Side.hxx>
+#include<TCollection_Side.hxx> */
 
 #endif // TCOLLECTION_HXX

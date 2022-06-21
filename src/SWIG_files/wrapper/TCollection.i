@@ -55,7 +55,7 @@ from enum import IntEnum
 from OCC.Core.Exception import *
 };
 
-/* public enums */
+/* public enums 
 enum TCollection_Side {
 	TCollection_Left = 0,
 	TCollection_Right = 1,
@@ -63,7 +63,7 @@ enum TCollection_Side {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proy classes for enums 
 %pythoncode {
 
 class TCollection_Side(IntEnum):
@@ -77,17 +77,11 @@ TCollection_Right = TCollection_Side.TCollection_Right
 /* handles */
 %wrap_handle(TCollection_HAsciiString)
 %wrap_handle(TCollection_HExtendedString)
-%wrap_handle(TCollection_MapNode)
-%wrap_handle(TCollection_SeqNode)
 /* end handles declaration */
 
 /* templates */
 /* end templates declaration */
 
-/* typedefs */
-typedef TCollection_MapNode * TCollection_MapNodePtr;
-typedef TCollection_SeqNode * TCollection_SeqNodePtr;
-/* end typedefs declaration */
 
 /********************
 * class TCollection *
@@ -1582,174 +1576,6 @@ TCollection_AsciiString
 
 
 %extend TCollection_AsciiString {
-	%pythoncode {
-	__repr__ = _dumps_object
-	}
-};
-
-/*********************************
-* class TCollection_BaseSequence *
-*********************************/
-%nodefaultctor TCollection_BaseSequence;
-class TCollection_BaseSequence {
-	public:
-		/****************** Exchange ******************/
-		/**** md5 signature: 3faab1f487d68b5230cea955610b5349 ****/
-		%feature("compactdefaultargs") Exchange;
-		%feature("autodoc", "Swaps elements which are located at positions <i> and <j> in <self>. raises an exception if i or j is out of bound. example: before me = (a b c), i = 1, j = 3 after me = (c b a).
-
-Parameters
-----------
-I: int
-J: int
-
-Returns
--------
-None
-") Exchange;
-		void Exchange(const Standard_Integer I, const Standard_Integer J);
-
-		/****************** IsEmpty ******************/
-		/**** md5 signature: 6ab5e1ad63f93168856ab126dd374b81 ****/
-		%feature("compactdefaultargs") IsEmpty;
-		%feature("autodoc", "Returns true if the sequence <self> contains no elements.
-
-Returns
--------
-bool
-") IsEmpty;
-		Standard_Boolean IsEmpty();
-
-		/****************** Length ******************/
-		/**** md5 signature: 58bd40380acccb2733bfbd37bf3cbb11 ****/
-		%feature("compactdefaultargs") Length;
-		%feature("autodoc", "Returns the number of element(s) in the sequence. returns zero if the sequence is empty.
-
-Returns
--------
-int
-") Length;
-		Standard_Integer Length();
-
-		/****************** Reverse ******************/
-		/**** md5 signature: b751d6874fc026e19a7a6cb37e9ac1b4 ****/
-		%feature("compactdefaultargs") Reverse;
-		%feature("autodoc", "Reverses the order of items on <self>. example: before me = (a b c) after me = (c b a).
-
-Returns
--------
-None
-") Reverse;
-		void Reverse();
-
-};
-
-
-%extend TCollection_BaseSequence {
-	%pythoncode {
-	__repr__ = _dumps_object
-	}
-};
-
-/*****************************
-* class TCollection_BasicMap *
-*****************************/
-%nodefaultctor TCollection_BasicMap;
-class TCollection_BasicMap {
-	public:
-		/****************** Extent ******************/
-		/**** md5 signature: 8da0d7e03de513b08d57e17232ac7391 ****/
-		%feature("compactdefaultargs") Extent;
-		%feature("autodoc", "Returns the number of keys already stored in <self>.
-
-Returns
--------
-int
-") Extent;
-		Standard_Integer Extent();
-
-		/****************** IsEmpty ******************/
-		/**** md5 signature: 6ab5e1ad63f93168856ab126dd374b81 ****/
-		%feature("compactdefaultargs") IsEmpty;
-		%feature("autodoc", "Returns true when the map contains no keys. this is exactly extent() == 0.
-
-Returns
--------
-bool
-") IsEmpty;
-		Standard_Boolean IsEmpty();
-
-		/****************** NbBuckets ******************/
-		/**** md5 signature: 558ee01d25f82e9482b59df62eb99945 ****/
-		%feature("compactdefaultargs") NbBuckets;
-		%feature("autodoc", "Returns the number of buckets in <self>.
-
-Returns
--------
-int
-") NbBuckets;
-		Standard_Integer NbBuckets();
-
-
-        %feature("autodoc", "1");
-        %extend{
-            std::string StatisticsToString() {
-            std::stringstream s;
-            self->Statistics(s);
-            return s.str();}
-        };
-};
-
-
-%extend TCollection_BasicMap {
-	%pythoncode {
-	__repr__ = _dumps_object
-	}
-};
-
-/*************************************
-* class TCollection_BasicMapIterator *
-*************************************/
-%nodefaultctor TCollection_BasicMapIterator;
-class TCollection_BasicMapIterator {
-	public:
-		/****************** More ******************/
-		/**** md5 signature: 6f6e915c9a3dca758c059d9e8af02dff ****/
-		%feature("compactdefaultargs") More;
-		%feature("autodoc", "Returns true if there is a current entry for this iterator in the map. use the function next to set this iterator to the position of the next entry, if it exists.
-
-Returns
--------
-bool
-") More;
-		Standard_Boolean More();
-
-		/****************** Next ******************/
-		/**** md5 signature: f35c0df5f1d7c877986db18081404532 ****/
-		%feature("compactdefaultargs") Next;
-		%feature("autodoc", "Sets this iterator to the position of the next entry of the map. nothing is changed if there is no more entry to explore in the map: this iterator is always positioned on the last entry of the map but the function more returns false.
-
-Returns
--------
-None
-") Next;
-		void Next();
-
-		/****************** Reset ******************/
-		/**** md5 signature: 7beb446fe26b948f797f8de87e46c23d ****/
-		%feature("compactdefaultargs") Reset;
-		%feature("autodoc", "Resets the iterator to the first node.
-
-Returns
--------
-None
-") Reset;
-		void Reset();
-
-};
-
-
-%extend TCollection_BasicMapIterator {
 	%pythoncode {
 	__repr__ = _dumps_object
 	}
@@ -4020,106 +3846,3 @@ Standard_ExtCharacter
 	__repr__ = _dumps_object
 	}
 };
-
-/****************************
-* class TCollection_MapNode *
-****************************/
-class TCollection_MapNode : public Standard_Transient {
-	public:
-		/****************** TCollection_MapNode ******************/
-		/**** md5 signature: 8ef7c4db0c33b6cca1484b228821b316 ****/
-		%feature("compactdefaultargs") TCollection_MapNode;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-n: TCollection_MapNodePtr
-
-Returns
--------
-None
-") TCollection_MapNode;
-		 TCollection_MapNode(const TCollection_MapNodePtr & n);
-
-		/****************** Next ******************/
-		/**** md5 signature: 004eb29eeedb7cd2aa82c1dd61c2d193 ****/
-		%feature("compactdefaultargs") Next;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-TCollection_MapNodePtr
-") Next;
-		TCollection_MapNodePtr & Next();
-
-};
-
-
-%make_alias(TCollection_MapNode)
-
-%extend TCollection_MapNode {
-	%pythoncode {
-	__repr__ = _dumps_object
-	}
-};
-
-/****************************
-* class TCollection_SeqNode *
-****************************/
-class TCollection_SeqNode : public Standard_Transient {
-	public:
-		/****************** TCollection_SeqNode ******************/
-		/**** md5 signature: ca459acccb03ff254b9fad899af111e8 ****/
-		%feature("compactdefaultargs") TCollection_SeqNode;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-n: TCollection_SeqNodePtr
-p: TCollection_SeqNodePtr
-
-Returns
--------
-None
-") TCollection_SeqNode;
-		 TCollection_SeqNode(const TCollection_SeqNodePtr & n, const TCollection_SeqNodePtr & p);
-
-		/****************** Next ******************/
-		/**** md5 signature: 23248815da0e6934b1f8d60aecd98900 ****/
-		%feature("compactdefaultargs") Next;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-TCollection_SeqNodePtr
-") Next;
-		TCollection_SeqNodePtr & Next();
-
-		/****************** Previous ******************/
-		/**** md5 signature: 31e9b8d85f3792b214edbd0ecd1021c6 ****/
-		%feature("compactdefaultargs") Previous;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-TCollection_SeqNodePtr
-") Previous;
-		TCollection_SeqNodePtr & Previous();
-
-};
-
-
-%make_alias(TCollection_SeqNode)
-
-%extend TCollection_SeqNode {
-	%pythoncode {
-	__repr__ = _dumps_object
-	}
-};
-
-/* harray1 classes */
-/* harray2 classes */
-/* hsequence classes */
-/* class aliases */
-%pythoncode {
-}
