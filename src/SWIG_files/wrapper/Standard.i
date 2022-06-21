@@ -1176,7 +1176,7 @@ None
 		 Standard_Failure(const char * aString);
 
 		/****************** Caught ******************/
-		/**** md5 signature: e487ba4f8c916a476ce53b88d6e749b0 ****/
+		/**** md5 signature: e487ba4f8c916a476ce53b88d6e749b0 ***
 		%feature("compactdefaultargs") Caught;
 		%feature("autodoc", "Returns the last caught exception. needed when exceptions are emulated by c longjumps, in other cases is also provided for compatibility.
 
@@ -1184,7 +1184,7 @@ Returns
 -------
 opencascade::handle<Standard_Failure>
 ") Caught;
-		static opencascade::handle<Standard_Failure> Caught();
+		static opencascade::handle<Standard_Failure> Caught(); */
 
 		/****************** GetMessageString ******************/
 		/**** md5 signature: 6cf28bba781d197207e850c1ab1a1376 ****/
