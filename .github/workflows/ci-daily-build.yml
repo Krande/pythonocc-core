@@ -30,9 +30,9 @@ jobs:
           { name: py310, distver: '3.10'}
         ]
         platform: [
-          { name: Windows, distver: windows-latest, short: 'win-64' },
-          { name: Linux, distver: ubuntu-latest, short: 'linux-64' },
-          { name: macOS, distver: macos-latest, short: 'osx-64' }
+          { name: Windows, distver: windows-2022, short: 'win-64' },
+          { name: Linux, distver: ubuntu-20.04, short: 'linux-64' },
+          { name: macOS, distver: macos-11, short: 'osx-64' }
         ]
     steps:
       - uses: actions/checkout@v2
