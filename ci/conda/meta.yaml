@@ -5,11 +5,11 @@ package:
   version: {{ version }}
 
 source:
-  path: ../..
+  path: ../../
 
 
 build:
-  number: {{ GIT_DESCRIBE_NUMBER }}
+  number: 0
   binary_relocation: false [osx]
 
 requirements:
@@ -24,13 +24,13 @@ requirements:
     - swig >=3.0.11
 
   host:
-    - python {{ python }}
-    - occt ==7.6.2
+    - python
+    - occt =={{ version }}
     - numpy >=1.17
 
   run:
-    - occt ==7.6.2
     - python
+    - occt =={{ version }}
     - six
     - numpy >=1.17
 
@@ -39,11 +39,11 @@ test:
     - OCC
     - OCC.Core.BRepPrimAPI
   requires:
-    - pyqt >=5
+#    - pyqt >=5
     - mypy
     - svgwrite
-    - wxpython >=4
-    - pyside2 >=5
+#    - wxpython >=4
+#    - pyside2 >=5
 
 about:
   home: https://github.com/tpaviot/pythonocc-core
