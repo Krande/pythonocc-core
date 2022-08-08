@@ -1372,21 +1372,6 @@ bool
 ") IsDone;
 		Standard_Boolean IsDone();
 
-		/****************** ModifiedShape ******************/
-		/**** md5 signature: f801488c386de381875cd0fcc9cfc82f ****/
-		%feature("compactdefaultargs") ModifiedShape;
-		%feature("autodoc", "Returns modified shape obtained from initial shape.
-
-Parameters
-----------
-theInitShape: TopoDS_Shape
-
-Returns
--------
-TopoDS_Shape
-") ModifiedShape;
-		TopoDS_Shape ModifiedShape(const TopoDS_Shape & theInitShape);
-
 		/****************** Perform ******************/
 		/**** md5 signature: 786dd7c6d1fd4e873da2af6e25b6f283 ****/
 		%feature("compactdefaultargs") Perform;
@@ -1408,6 +1393,10 @@ bool
 %extend BRepTools_PurgeLocations {
 	%pythoncode {
 	__repr__ = _dumps_object
+
+	@methodnotwrapped
+	def ModifiedShape(self):
+		pass
 	}
 };
 

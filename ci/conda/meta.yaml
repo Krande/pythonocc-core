@@ -28,11 +28,13 @@ requirements:
     - python
     - occt =={{ version }}
     - numpy >=1.17
+    - rapidjson
 
   run:
     - python
     - occt =={{ version }}
     - six
+    - rapidjson
     - numpy >=1.17
 
 test:
