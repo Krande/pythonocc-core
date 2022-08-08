@@ -96,6 +96,8 @@ class breplib:
     def BuildPCurveForEdgeOnPlane(theE: TopoDS_Edge, theF: TopoDS_Face, aC2D: Geom2d_Curve) -> bool: ...
     @staticmethod
     def CheckSameRange(E: TopoDS_Edge, Confusion: Optional[float] = 1.0e-12) -> bool: ...
+    @staticmethod
+    def ContinuityOfFaces(theEdge: TopoDS_Edge, theFace1: TopoDS_Face, theFace2: TopoDS_Face, theAngleTol: float) -> GeomAbs_Shape: ...
     @overload
     @staticmethod
     def EncodeRegularity(S: TopoDS_Shape, TolAng: Optional[float] = 1.0e-10) -> None: ...
@@ -551,6 +553,7 @@ breplib_BuildCurves3d = breplib.BuildCurves3d
 breplib_BuildPCurveForEdgeOnPlane = breplib.BuildPCurveForEdgeOnPlane
 breplib_BuildPCurveForEdgeOnPlane = breplib.BuildPCurveForEdgeOnPlane
 breplib_CheckSameRange = breplib.CheckSameRange
+breplib_ContinuityOfFaces = breplib.ContinuityOfFaces
 breplib_EncodeRegularity = breplib.EncodeRegularity
 breplib_EncodeRegularity = breplib.EncodeRegularity
 breplib_EncodeRegularity = breplib.EncodeRegularity

@@ -19,10 +19,13 @@ cmake_minimum_required(VERSION 3.12)
 
 project(PYTHONOCC)
 
-# set pythonOCC version
-set(PYTHONOCC_VERSION_MAJOR 7)
-set(PYTHONOCC_VERSION_MINOR 6)
-set(PYTHONOCC_VERSION_PATCH 2)
+# Set OpenCascade version manually here if not passed as a variable
+if (NOT DEFINED PYTHONOCC_VERSION)
+    set(PYTHONOCC_VERSION_MAJOR 7)
+    set(PYTHONOCC_VERSION_MINOR 6)
+    set(PYTHONOCC_VERSION_PATCH 2)
+    set(PYTHONOCC_VERSION ${PYTHONOCC_VERSION_MAJOR}.${PYTHONOCC_VERSION_MINOR}.${PYTHONOCC_VERSION_PATCH})
+endif(NOT DEFINED PYTHONOCC_VERSION)
 
 #  Empty for official releases, set to -dev, -rc1, etc for development releases
 set(PYTHONOCC_VERSION_DEVEL )
@@ -130,6 +133,19 @@ if(SWIG_HIDE_WARNINGS)
 endif()
 
 ################################
+# RAPIDJSON include location #
+################################
+
+find_package(RAPIDJSON 1.1.0 REQUIRED)
+if(RAPIDJSON_FOUND)
+    message(STATUS "RapidJSON include directory: " ${RAPIDJSON_INCLUDE_DIRS})
+    include_directories(${RAPIDJSON_INCLUDE_DIRS})
+else(RAPIDJSON_FOUND)
+    message(STATUS "RapidJSON Not found")
+endif(RAPIDJSON_FOUND)
+
+
+################################
 # OCE include and lib location #
 ################################
 if(OCE_HIDE_DEPRECATED)
@@ -148,7 +164,7 @@ if(DEFINED OCE_INCLUDE_PATH)
 # if OCE_INCLUDE_PATH is not passed at command line,
 # find OCE automatically
 else(OCE_INCLUDE_PATH)
-  find_package(OpenCASCADE ${PYTHONOCC_VERSION_MAJOR}.${PYTHONOCC_VERSION_MINOR}.${PYTHONOCC_VERSION_PATCH} REQUIRED)
+  find_package(OpenCASCADE ${PYTHONOCC_VERSION} REQUIRED)
   if(OpenCASCADE_FOUND)
     message(STATUS "OpenCASCADE version found: " ${OpenCASCADE_MAJOR_VERSION} "." ${OpenCASCADE_MINOR_VERSION} "." ${OpenCASCADE_MAINTENANCE_VERSION})
     message(STATUS "OpenCASCADE include directory: " ${OpenCASCADE_INCLUDE_DIR})

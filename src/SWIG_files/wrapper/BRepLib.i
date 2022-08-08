@@ -329,6 +329,24 @@ bool
 ") CheckSameRange;
 		static Standard_Boolean CheckSameRange(const TopoDS_Edge & E, const Standard_Real Confusion = 1.0e-12);
 
+		/****************** ContinuityOfFaces ******************/
+		/**** md5 signature: 2405b9a750027ac7614f072b1358fffc ****/
+		%feature("compactdefaultargs") ContinuityOfFaces;
+		%feature("autodoc", "Returns the order of continuity between two faces connected by an edge.
+
+Parameters
+----------
+theEdge: TopoDS_Edge
+theFace1: TopoDS_Face
+theFace2: TopoDS_Face
+theAngleTol: float
+
+Returns
+-------
+GeomAbs_Shape
+") ContinuityOfFaces;
+		static GeomAbs_Shape ContinuityOfFaces(const TopoDS_Edge & theEdge, const TopoDS_Face & theFace1, const TopoDS_Face & theFace2, const Standard_Real theAngleTol);
+
 		/****************** EncodeRegularity ******************/
 		/**** md5 signature: 19c910eb7197237b12eb01c92eebe9e5 ****/
 		%feature("compactdefaultargs") EncodeRegularity;

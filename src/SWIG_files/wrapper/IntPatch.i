@@ -2096,6 +2096,41 @@ None
 ") IntPatch_Intersection;
 		 IntPatch_Intersection(const opencascade::handle<Adaptor3d_Surface> & S1, const opencascade::handle<Adaptor3d_TopolTool> & D1, const Standard_Real TolArc, const Standard_Real TolTang);
 
+		/****************** CheckSingularPoints ******************/
+		/**** md5 signature: 82524fc63e41c5bd324fc8781eba7164 ****/
+		%feature("compactdefaultargs") CheckSingularPoints;
+		%feature("autodoc", "Checks if surface thes1 has degenerated boundary (ds/du or ds/dv = 0) and calculates minimal distance between corresponding singular points and surface thes2 if singular point exists the method returns 'true' and stores minimal distance in thedist.
+
+Parameters
+----------
+theS1: Adaptor3d_Surface
+theD1: Adaptor3d_TopolTool
+theS2: Adaptor3d_Surface
+
+Returns
+-------
+theDist: float
+") CheckSingularPoints;
+		static Standard_Boolean CheckSingularPoints(const opencascade::handle<Adaptor3d_Surface> & theS1, const opencascade::handle<Adaptor3d_TopolTool> & theD1, const opencascade::handle<Adaptor3d_Surface> & theS2, Standard_Real &OutValue);
+
+		/****************** DefineUVMaxStep ******************/
+		/**** md5 signature: f6a4ba92c83b751825d3a7abc18a44cc ****/
+		%feature("compactdefaultargs") DefineUVMaxStep;
+		%feature("autodoc", "Calculates recommended value for myuvmaxstep depending on surfaces and their domains.
+
+Parameters
+----------
+theS1: Adaptor3d_Surface
+theD1: Adaptor3d_TopolTool
+theS2: Adaptor3d_Surface
+theD2: Adaptor3d_TopolTool
+
+Returns
+-------
+float
+") DefineUVMaxStep;
+		static Standard_Real DefineUVMaxStep(const opencascade::handle<Adaptor3d_Surface> & theS1, const opencascade::handle<Adaptor3d_TopolTool> & theD1, const opencascade::handle<Adaptor3d_Surface> & theS2, const opencascade::handle<Adaptor3d_TopolTool> & theD2);
+
 		/****************** Dump ******************/
 		/**** md5 signature: b8dcb65f3dda1a981da840cad536cd1b ****/
 		%feature("compactdefaultargs") Dump;

@@ -3,14 +3,18 @@ from typing import overload, NewType, Optional, Tuple
 
 from OCC.Core.Standard import *
 from OCC.Core.NCollection import *
-from OCC.Core.TColgp import *
 from OCC.Core.math import *
+from OCC.Core.TColStd import *
+from OCC.Core.TColgp import *
+from OCC.Core.IntPatch import *
+from OCC.Core.Approx import *
 from OCC.Core.gp import *
 from OCC.Core.IntSurf import *
 
 
 class ApproxInt_KnotTools:
-    pass
+    @staticmethod
+    def DefineParType(theWL: IntPatch_WLine, theFpar: int, theLpar: int, theApproxXYZ: bool, theApproxU1V1: bool, theApproxU2V2: bool) -> Approx_ParametrizationType: ...
 
 class ApproxInt_SvSurfaces:
     def Compute(self, Pt: gp_Pnt, Tg: gp_Vec, Tguv1: gp_Vec2d, Tguv2: gp_Vec2d) -> Tuple[bool, float, float, float, float]: ...
@@ -26,4 +30,6 @@ class ApproxInt_SvSurfaces:
 # harray2 classes
 # hsequence classes
 
+ApproxInt_KnotTools_BuildCurvature = ApproxInt_KnotTools.BuildCurvature
 ApproxInt_KnotTools_BuildKnots = ApproxInt_KnotTools.BuildKnots
+ApproxInt_KnotTools_DefineParType = ApproxInt_KnotTools.DefineParType

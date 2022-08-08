@@ -42,8 +42,11 @@ https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_approxint.html"
 //Dependencies
 #include<Standard_module.hxx>
 #include<NCollection_module.hxx>
-#include<TColgp_module.hxx>
 #include<math_module.hxx>
+#include<TColStd_module.hxx>
+#include<TColgp_module.hxx>
+#include<IntPatch_module.hxx>
+#include<Approx_module.hxx>
 #include<gp_module.hxx>
 #include<IntSurf_module.hxx>
 #include<Adaptor3d_module.hxx>
@@ -58,8 +61,11 @@ https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_approxint.html"
 %};
 %import Standard.i
 %import NCollection.i
-%import TColgp.i
 %import math.i
+%import TColStd.i
+%import TColgp.i
+%import IntPatch.i
+%import Approx.i
 %import gp.i
 %import IntSurf.i
 
@@ -90,6 +96,24 @@ from OCC.Core.Exception import *
 ****************************/
 class ApproxInt_KnotTools {
 	public:
+		/****************** BuildCurvature ******************/
+		/**** md5 signature: b62269124f28a23358303630ee8d4ebf ****/
+		%feature("compactdefaultargs") BuildCurvature;
+		%feature("autodoc", "Builds discrete curvature.
+
+Parameters
+----------
+theCoords: NCollection_LocalArray<float>
+theDim: int
+thePars: math_Vector
+theCurv: TColStd_Array1OfReal
+
+Returns
+-------
+theMaxCurv: float
+") BuildCurvature;
+		static void BuildCurvature(const NCollection_LocalArray<Standard_Real> & theCoords, const Standard_Integer theDim, const math_Vector & thePars, TColStd_Array1OfReal & theCurv, Standard_Real &OutValue);
+
 		/****************** BuildKnots ******************/
 		/**** md5 signature: 49c65485e14fc730360039ad6109a047 ****/
 		%feature("compactdefaultargs") BuildKnots;
@@ -112,6 +136,26 @@ Returns
 None
 ") BuildKnots;
 		static void BuildKnots(const TColgp_Array1OfPnt & thePntsXYZ, const TColgp_Array1OfPnt2d & thePntsU1V1, const TColgp_Array1OfPnt2d & thePntsU2V2, const math_Vector & thePars, const Standard_Boolean theApproxXYZ, const Standard_Boolean theApproxU1V1, const Standard_Boolean theApproxU2V2, const Standard_Integer theMinNbPnts, NCollection_Vector<Standard_Integer> & theKnots);
+
+		/****************** DefineParType ******************/
+		/**** md5 signature: e1d91690eade86173e6384cbb3ec9b53 ****/
+		%feature("compactdefaultargs") DefineParType;
+		%feature("autodoc", "Defines preferable parametrization type for thewl .
+
+Parameters
+----------
+theWL: IntPatch_WLine
+theFpar: int
+theLpar: int
+theApproxXYZ: bool
+theApproxU1V1: bool
+theApproxU2V2: bool
+
+Returns
+-------
+Approx_ParametrizationType
+") DefineParType;
+		static Approx_ParametrizationType DefineParType(const opencascade::handle<IntPatch_WLine> & theWL, const Standard_Integer theFpar, const Standard_Integer theLpar, const Standard_Boolean theApproxXYZ, const Standard_Boolean theApproxU1V1, const Standard_Boolean theApproxU2V2);
 
 };
 

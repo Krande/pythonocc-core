@@ -43,11 +43,11 @@ https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_brepapprox.html"
 #include<Standard_module.hxx>
 #include<NCollection_module.hxx>
 #include<Approx_module.hxx>
+#include<math_module.hxx>
 #include<AppParCurves_module.hxx>
 #include<Geom_module.hxx>
 #include<Geom2d_module.hxx>
 #include<IntSurf_module.hxx>
-#include<math_module.hxx>
 #include<TColStd_module.hxx>
 #include<BRepAdaptor_module.hxx>
 #include<IntImp_module.hxx>
@@ -70,11 +70,11 @@ https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_brepapprox.html"
 %import Standard.i
 %import NCollection.i
 %import Approx.i
+%import math.i
 %import AppParCurves.i
 %import Geom.i
 %import Geom2d.i
 %import IntSurf.i
-%import math.i
 %import TColStd.i
 %import BRepAdaptor.i
 %import IntImp.i
@@ -143,6 +143,25 @@ Returns
 int
 ") NbMultiCurves;
 		Standard_Integer NbMultiCurves();
+
+		/****************** Parameters ******************/
+		/**** md5 signature: 81d60914d3a71865160546b151d21f82 ****/
+		%feature("compactdefaultargs") Parameters;
+		%feature("autodoc", "No available documentation.
+
+Parameters
+----------
+Line: BRepApprox_TheMultiLineOfApprox
+firstP: int
+lastP: int
+Par: Approx_ParametrizationType
+TheParameters: math_Vector
+
+Returns
+-------
+None
+") Parameters;
+		static void Parameters(const BRepApprox_TheMultiLineOfApprox & Line, const Standard_Integer firstP, const Standard_Integer lastP, const Approx_ParametrizationType Par, math_Vector & TheParameters);
 
 		/****************** SetParameters ******************/
 		/**** md5 signature: 224b0c0bb8f1208adc055cd27769623b ****/

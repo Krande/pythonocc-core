@@ -23,10 +23,8 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<BinTools_Curve2dSet.hxx>
 #include<BinTools_CurveSet.hxx>
 #include<BinTools_FormatVersion.hxx>
-#include<BinTools_IStream.hxx>
 #include<BinTools_LocationSet.hxx>
 #include<BinTools_LocationSetPtr.hxx>
-#include<BinTools_OStream.hxx>
 #include<BinTools_ObjectType.hxx>
 #include<BinTools_ShapeReader.hxx>
 #include<BinTools_ShapeSet.hxx>

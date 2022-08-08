@@ -53,6 +53,7 @@ https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_brepadaptor.html"
 #include<TopLoc_module.hxx>
 #include<Geom2d_module.hxx>
 #include<Message_module.hxx>
+#include<Adaptor2d_module.hxx>
 #include<TColgp_module.hxx>
 #include<TColStd_module.hxx>
 #include<TCollection_module.hxx>

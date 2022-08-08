@@ -630,6 +630,22 @@ None
 ") Reverse;
 		void Reverse();
 
+		/****************** SetPoint ******************/
+		/**** md5 signature: 3f014f983e4959a8adc3802bc6e127de ****/
+		%feature("compactdefaultargs") SetPoint;
+		%feature("autodoc", "Sets the 3d point of the index-th pnton2s.
+
+Parameters
+----------
+Index: int
+thePnt: gp_Pnt
+
+Returns
+-------
+None
+") SetPoint;
+		void SetPoint(const Standard_Integer Index, const gp_Pnt & thePnt);
+
 		/****************** SetUV ******************/
 		/**** md5 signature: ace9005a01cb7b993999ab66ef8c0659 ****/
 		%feature("compactdefaultargs") SetUV;
