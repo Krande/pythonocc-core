@@ -171,6 +171,7 @@ else(OCE_INCLUDE_PATH)
     message(STATUS "OpenCASCADE binary directory: " ${OpenCASCADE_BINARY_DIR})
     include_directories(${OpenCASCADE_INCLUDE_DIR})
   else(OpenCASCADE_FOUND)  # set default paths
+    message(STATUS "Error! OpenCASCADE Not found")
     set(OCE_INCLUDE_PATH /usr/local/include/oce CACHE PATH "OCE include path")
     set(OCE_LIB_PATH /usr/local/lib CACHE PATH "OCE lib path")
     include_directories(${OCE_INCLUDE_PATH})

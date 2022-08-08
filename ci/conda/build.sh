@@ -19,6 +19,7 @@ cmake -G Ninja \
  -DPython3_FIND_STRATEGY=LOCATION \
  -DPython3_FIND_FRAMEWORK=NEVER \
  -DSWIG_HIDE_WARNINGS=ON \
+ -DPYTHONOCC_VERSION=7.6.2 \
  .
 
 # Build step

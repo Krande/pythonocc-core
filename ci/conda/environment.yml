@@ -5,7 +5,6 @@ dependencies:
   - conda-build
   - conda-verify
   - anaconda-client
-  - occt==7.6.2
   - ninja
   - doxygen
   - ripgrep
