@@ -5,9 +5,11 @@ dependencies:
   - conda-build
   - conda-verify
   - anaconda-client
+  - occt==7.6.2
   - ninja
   - doxygen
   - ripgrep
+  - rapidjson
   - pip
   - pip:
       - --extra-index-url https://lief.s3-website.fr-par.scw.cloud/latest
