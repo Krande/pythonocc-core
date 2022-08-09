@@ -36,7 +36,6 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 
 
 %{
-#include<Adaptor2d_Curve2d.hxx>
 #include<Adaptor3d_module.hxx>
 
 //Dependencies
