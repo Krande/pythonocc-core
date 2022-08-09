@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define BNDDOCSTRING
-"Bnd module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_bnd.html"
+"Bnd, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_bnd.html"
 %enddef
 %module (package="OCC.Core", docstring=BNDDOCSTRING) Bnd
 

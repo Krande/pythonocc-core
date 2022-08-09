@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define XMLMNAMINGDOCSTRING
-"XmlMNaming module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_xmlmnaming.html"
+"XmlMNaming, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_xmlmnaming.html"
 %enddef
 %module (package="OCC.Core", docstring=XMLMNAMINGDOCSTRING) XmlMNaming
 
@@ -53,6 +52,8 @@ https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_xmlmnaming.html"
 #include<Message_module.hxx>
 #include<Resource_module.hxx>
 #include<TopLoc_module.hxx>
+#include<CDF_module.hxx>
+#include<PCDM_module.hxx>
 #include<TColgp_module.hxx>
 #include<TColStd_module.hxx>
 #include<TCollection_module.hxx>

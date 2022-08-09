@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define GEOM2DAPIDOCSTRING
-"Geom2dAPI module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_geom2dapi.html"
+"Geom2dAPI, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_geom2dapi.html"
 %enddef
 %module (package="OCC.Core", docstring=GEOM2DAPIDOCSTRING) Geom2dAPI
 

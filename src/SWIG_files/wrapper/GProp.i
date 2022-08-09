@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define GPROPDOCSTRING
-"GProp module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_gprop.html"
+"GProp, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_gprop.html"
 %enddef
 %module (package="OCC.Core", docstring=GPROPDOCSTRING) GProp
 

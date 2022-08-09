@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define CONTAPDOCSTRING
-"Contap module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_contap.html"
+"Contap, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_contap.html"
 %enddef
 %module (package="OCC.Core", docstring=CONTAPDOCSTRING) Contap
 
@@ -37,24 +36,27 @@ https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_contap.html"
 
 
 %{
+#include<Adaptor2d_Curve2d.hxx>
 #include<Contap_module.hxx>
 
 //Dependencies
 #include<Standard_module.hxx>
 #include<NCollection_module.hxx>
-#include<math_module.hxx>
 #include<gp_module.hxx>
-#include<IntSurf_module.hxx>
+#include<GeomAbs_module.hxx>
 #include<Adaptor3d_module.hxx>
 #include<Adaptor2d_module.hxx>
-#include<GeomAbs_module.hxx>
 #include<Geom2d_module.hxx>
 #include<TColStd_module.hxx>
+#include<IntSurf_module.hxx>
+#include<math_module.hxx>
 #include<TColgp_module.hxx>
 #include<Geom_module.hxx>
 #include<NCollection_module.hxx>
 #include<Adaptor3d_module.hxx>
 #include<Message_module.hxx>
+#include<Adaptor2d_module.hxx>
+#include<Adaptor2d_Curve2d_module.hxx>
 #include<TColgp_module.hxx>
 #include<TColStd_module.hxx>
 #include<TCollection_module.hxx>
@@ -62,14 +64,14 @@ https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_contap.html"
 %};
 %import Standard.i
 %import NCollection.i
-%import math.i
 %import gp.i
-%import IntSurf.i
+%import GeomAbs.i
 %import Adaptor3d.i
 %import Adaptor2d.i
-%import GeomAbs.i
 %import Geom2d.i
 %import TColStd.i
+%import IntSurf.i
+%import math.i
 
 %pythoncode {
 from enum import IntEnum
@@ -177,236 +179,6 @@ typedef NCollection_Sequence<Contap_Point> Contap_TheSequenceOfPoint;
 /***************************
 * class Contap_ArcFunction *
 ***************************/
-class Contap_ArcFunction : public math_FunctionWithDerivative {
-	public:
-		/****************** Contap_ArcFunction ******************/
-		/**** md5 signature: cece6392d8a41c80644c929adb23fb57 ****/
-		%feature("compactdefaultargs") Contap_ArcFunction;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-None
-") Contap_ArcFunction;
-		 Contap_ArcFunction();
-
-		/****************** Derivative ******************/
-		/**** md5 signature: 99d758c6c475cdb086620552a67d08e7 ****/
-		%feature("compactdefaultargs") Derivative;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-X: float
-
-Returns
--------
-D: float
-") Derivative;
-		Standard_Boolean Derivative(const Standard_Real X, Standard_Real &OutValue);
-
-		/****************** GetStateNumber ******************/
-		/**** md5 signature: 49c44bd66dd4ec2381671c72ebd88158 ****/
-		%feature("compactdefaultargs") GetStateNumber;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-int
-") GetStateNumber;
-		virtual Standard_Integer GetStateNumber();
-
-		/****************** LastComputedPoint ******************/
-		/**** md5 signature: 151ab65e948ef31dff9bbbd66f058a30 ****/
-		%feature("compactdefaultargs") LastComputedPoint;
-		%feature("autodoc", "Returns the point, which has been computed while the last calling value() method.
-
-Returns
--------
-gp_Pnt
-") LastComputedPoint;
-		const gp_Pnt LastComputedPoint();
-
-		/****************** NbSamples ******************/
-		/**** md5 signature: 1e61299a12ab2ebed2590e1021ec4bae ****/
-		%feature("compactdefaultargs") NbSamples;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-int
-") NbSamples;
-		Standard_Integer NbSamples();
-
-		/****************** Quadric ******************/
-		/**** md5 signature: 412540fe449bd77bf89b8085f1fe1701 ****/
-		%feature("compactdefaultargs") Quadric;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-IntSurf_Quadric
-") Quadric;
-		const IntSurf_Quadric & Quadric();
-
-		/****************** Set ******************/
-		/**** md5 signature: fe1f4e54b6d838c88f545f7975616591 ****/
-		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-S: Adaptor3d_Surface
-
-Returns
--------
-None
-") Set;
-		void Set(const opencascade::handle<Adaptor3d_Surface> & S);
-
-		/****************** Set ******************/
-		/**** md5 signature: 7b60fb3b1252eb4013a37f792be86766 ****/
-		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-Direction: gp_Dir
-
-Returns
--------
-None
-") Set;
-		void Set(const gp_Dir & Direction);
-
-		/****************** Set ******************/
-		/**** md5 signature: 9cf83fdf904bc30ff499b59d9a3cd4a0 ****/
-		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-Direction: gp_Dir
-Angle: float
-
-Returns
--------
-None
-") Set;
-		void Set(const gp_Dir & Direction, const Standard_Real Angle);
-
-		/****************** Set ******************/
-		/**** md5 signature: 82e61fcbcd023e361c983ac9b10b051a ****/
-		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-Eye: gp_Pnt
-
-Returns
--------
-None
-") Set;
-		void Set(const gp_Pnt & Eye);
-
-		/****************** Set ******************/
-		/**** md5 signature: df4b9353625a35b43eacf0999ffe2b0e ****/
-		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-Eye: gp_Pnt
-Angle: float
-
-Returns
--------
-None
-") Set;
-		void Set(const gp_Pnt & Eye, const Standard_Real Angle);
-
-		/****************** Set ******************/
-		/**** md5 signature: 70ab888f546bf04b92c8032f862436af ****/
-		%feature("compactdefaultargs") Set;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-A: Adaptor2d_Curve2d
-
-Returns
--------
-None
-") Set;
-		void Set(const opencascade::handle<Adaptor2d_Curve2d> & A);
-
-		/****************** Surface ******************/
-		/**** md5 signature: d36dc8d293d03901e5a1cace2e167115 ****/
-		%feature("compactdefaultargs") Surface;
-		%feature("autodoc", "Returns mysurf field.
-
-Returns
--------
-opencascade::handle<Adaptor3d_Surface>
-") Surface;
-		const opencascade::handle<Adaptor3d_Surface> & Surface();
-
-		/****************** Valpoint ******************/
-		/**** md5 signature: 3a2ceb97db1e39a13d0a9061e49cb920 ****/
-		%feature("compactdefaultargs") Valpoint;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-Index: int
-
-Returns
--------
-gp_Pnt
-") Valpoint;
-		const gp_Pnt Valpoint(const Standard_Integer Index);
-
-		/****************** Value ******************/
-		/**** md5 signature: af675141386b20e819be1017ca5afac2 ****/
-		%feature("compactdefaultargs") Value;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-X: float
-
-Returns
--------
-F: float
-") Value;
-		Standard_Boolean Value(const Standard_Real X, Standard_Real &OutValue);
-
-		/****************** Values ******************/
-		/**** md5 signature: 3835d085291235e285cceabd6d1dd2b9 ****/
-		%feature("compactdefaultargs") Values;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-X: float
-
-Returns
--------
-F: float
-D: float
-") Values;
-		Standard_Boolean Values(const Standard_Real X, Standard_Real &OutValue, Standard_Real &OutValue);
-
-};
-
-
-%extend Contap_ArcFunction {
-	%pythoncode {
-	__repr__ = _dumps_object
-	}
-};
-
 /***********************
 * class Contap_ContAna *
 ***********************/
@@ -1907,268 +1679,6 @@ Contap_Point
 /*********************
 * class Contap_Point *
 *********************/
-class Contap_Point {
-	public:
-		/****************** Contap_Point ******************/
-		/**** md5 signature: 7f542237bdf60ef9ad56bb116a72608a ****/
-		%feature("compactdefaultargs") Contap_Point;
-		%feature("autodoc", "Empty constructor.
-
-Returns
--------
-None
-") Contap_Point;
-		 Contap_Point();
-
-		/****************** Contap_Point ******************/
-		/**** md5 signature: e63a495e15d3f926ffe70feb26e98122 ****/
-		%feature("compactdefaultargs") Contap_Point;
-		%feature("autodoc", "Creates a point.
-
-Parameters
-----------
-Pt: gp_Pnt
-U: float
-V: float
-
-Returns
--------
-None
-") Contap_Point;
-		 Contap_Point(const gp_Pnt & Pt, const Standard_Real U, const Standard_Real V);
-
-		/****************** Arc ******************/
-		/**** md5 signature: de8e47510fc50811ee5a3e0bc98029e6 ****/
-		%feature("compactdefaultargs") Arc;
-		%feature("autodoc", "Returns the arc of restriction containing the vertex.
-
-Returns
--------
-opencascade::handle<Adaptor2d_Curve2d>
-") Arc;
-		const opencascade::handle<Adaptor2d_Curve2d> & Arc();
-
-		/****************** IsInternal ******************/
-		/**** md5 signature: d02f8c187f927a9ba16cc17de3466e18 ****/
-		%feature("compactdefaultargs") IsInternal;
-		%feature("autodoc", "Returns true if the point is an internal one, i.e if the tangent to the line on the point and the eye direction are parallel.
-
-Returns
--------
-bool
-") IsInternal;
-		Standard_Boolean IsInternal();
-
-		/****************** IsMultiple ******************/
-		/**** md5 signature: d5ff9ea3f75ee3e6e0efda5814b9e44e ****/
-		%feature("compactdefaultargs") IsMultiple;
-		%feature("autodoc", "Returns true if the point belongs to several lines.
-
-Returns
--------
-bool
-") IsMultiple;
-		Standard_Boolean IsMultiple();
-
-		/****************** IsOnArc ******************/
-		/**** md5 signature: f74dbf32a42236bf36dcd24dd76a342c ****/
-		%feature("compactdefaultargs") IsOnArc;
-		%feature("autodoc", "Returns true when the point is an intersection between the contour and a restriction.
-
-Returns
--------
-bool
-") IsOnArc;
-		Standard_Boolean IsOnArc();
-
-		/****************** IsVertex ******************/
-		/**** md5 signature: 7dbb6189450b7f2ae76146c6d5d6e875 ****/
-		%feature("compactdefaultargs") IsVertex;
-		%feature("autodoc", "Returns true if the point is a vertex on the initial restriction facet of the surface.
-
-Returns
--------
-bool
-") IsVertex;
-		Standard_Boolean IsVertex();
-
-		/****************** ParameterOnArc ******************/
-		/**** md5 signature: 53d2051734836b1f3c7d9edd7c3c1884 ****/
-		%feature("compactdefaultargs") ParameterOnArc;
-		%feature("autodoc", "Returns the parameter of the point on the arc returned by the method arc().
-
-Returns
--------
-float
-") ParameterOnArc;
-		Standard_Real ParameterOnArc();
-
-		/****************** ParameterOnLine ******************/
-		/**** md5 signature: 737a2a57e32e63a1ba587dea488e9583 ****/
-		%feature("compactdefaultargs") ParameterOnLine;
-		%feature("autodoc", "This method returns the parameter of the point on the intersection line. if the points does not belong to an intersection line, the value returned does not have any sens.
-
-Returns
--------
-float
-") ParameterOnLine;
-		Standard_Real ParameterOnLine();
-
-		/****************** Parameters ******************/
-		/**** md5 signature: 27c7f851c77cf6105be13a7890f1f0e0 ****/
-		%feature("compactdefaultargs") Parameters;
-		%feature("autodoc", "Returns the parameters on the surface of the point.
-
-Parameters
-----------
-
-Returns
--------
-U1: float
-V1: float
-") Parameters;
-		void Parameters(Standard_Real &OutValue, Standard_Real &OutValue);
-
-		/****************** SetArc ******************/
-		/**** md5 signature: ceabf78102f113c25de4b4f678682f05 ****/
-		%feature("compactdefaultargs") SetArc;
-		%feature("autodoc", "Sets the value of the arc and of the parameter on this arc of the point.
-
-Parameters
-----------
-A: Adaptor2d_Curve2d
-Param: float
-TLine: IntSurf_Transition
-TArc: IntSurf_Transition
-
-Returns
--------
-None
-") SetArc;
-		void SetArc(const opencascade::handle<Adaptor2d_Curve2d> & A, const Standard_Real Param, const IntSurf_Transition & TLine, const IntSurf_Transition & TArc);
-
-		/****************** SetInternal ******************/
-		/**** md5 signature: f29227e746cced65920ee7fe48924495 ****/
-		%feature("compactdefaultargs") SetInternal;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-None
-") SetInternal;
-		void SetInternal();
-
-		/****************** SetMultiple ******************/
-		/**** md5 signature: 1ac6220c2c8c7b2e4c947976b7d1c954 ****/
-		%feature("compactdefaultargs") SetMultiple;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-None
-") SetMultiple;
-		void SetMultiple();
-
-		/****************** SetParameter ******************/
-		/**** md5 signature: 9c20628bfb58eb45593287ce353000c6 ****/
-		%feature("compactdefaultargs") SetParameter;
-		%feature("autodoc", "Set the value of the parameter on the intersection line.
-
-Parameters
-----------
-Para: float
-
-Returns
--------
-None
-") SetParameter;
-		void SetParameter(const Standard_Real Para);
-
-		/****************** SetValue ******************/
-		/**** md5 signature: c88313e81258115c4934b9fff4b38a78 ****/
-		%feature("compactdefaultargs") SetValue;
-		%feature("autodoc", "Sets the values for a point.
-
-Parameters
-----------
-Pt: gp_Pnt
-U: float
-V: float
-
-Returns
--------
-None
-") SetValue;
-		void SetValue(const gp_Pnt & Pt, const Standard_Real U, const Standard_Real V);
-
-		/****************** SetVertex ******************/
-		/**** md5 signature: 1c2d847f9895dadcabe6f5a142550e35 ****/
-		%feature("compactdefaultargs") SetVertex;
-		%feature("autodoc", "Sets the values of a point which is a vertex on the initial facet of restriction of one of the surface.
-
-Parameters
-----------
-V: Adaptor3d_HVertex
-
-Returns
--------
-None
-") SetVertex;
-		void SetVertex(const opencascade::handle<Adaptor3d_HVertex> & V);
-
-		/****************** TransitionOnArc ******************/
-		/**** md5 signature: adc9ee508ec8cbe59ce8b05248cd454a ****/
-		%feature("compactdefaultargs") TransitionOnArc;
-		%feature("autodoc", "Returns the transition of the point on the arc.
-
-Returns
--------
-IntSurf_Transition
-") TransitionOnArc;
-		const IntSurf_Transition & TransitionOnArc();
-
-		/****************** TransitionOnLine ******************/
-		/**** md5 signature: 1ffbcf064eb110daaac7ceebff0fcde5 ****/
-		%feature("compactdefaultargs") TransitionOnLine;
-		%feature("autodoc", "Returns the transition of the point on the contour.
-
-Returns
--------
-IntSurf_Transition
-") TransitionOnLine;
-		const IntSurf_Transition & TransitionOnLine();
-
-		/****************** Value ******************/
-		/**** md5 signature: eddd2908948849b73f6d8aacab318652 ****/
-		%feature("compactdefaultargs") Value;
-		%feature("autodoc", "Returns the intersection point (geometric information).
-
-Returns
--------
-gp_Pnt
-") Value;
-		const gp_Pnt Value();
-
-		/****************** Vertex ******************/
-		/**** md5 signature: 7213fb18dc3be1f48818ab739bb98dfa ****/
-		%feature("compactdefaultargs") Vertex;
-		%feature("autodoc", "Returns the information about the point when it is on the domain of the patch, i-e when the function isvertex returns true. otherwise, an exception is raised.
-
-Returns
--------
-opencascade::handle<Adaptor3d_HVertex>
-") Vertex;
-		const opencascade::handle<Adaptor3d_HVertex> & Vertex();
-
-};
-
-
-%extend Contap_Point {
-	%pythoncode {
-	__repr__ = _dumps_object
-	}
-};
-
 /****************************
 * class Contap_SurfFunction *
 ****************************/
@@ -3621,6 +3131,18 @@ None
 	}
 };
 
+/* python proxy for excluded classes */
+%pythoncode {
+@classnotwrapped
+class Contap_ArcFunction:
+	pass
+
+@classnotwrapped
+class Contap_Point:
+	pass
+
+}
+/* end python proxy for excluded classes */
 /* harray1 classes */
 /* harray2 classes */
 /* hsequence classes */

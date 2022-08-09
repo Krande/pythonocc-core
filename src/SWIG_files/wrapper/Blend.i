@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define BLENDDOCSTRING
-"Blend module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_blend.html"
+"Blend, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_blend.html"
 %enddef
 %module (package="OCC.Core", docstring=BLENDDOCSTRING) Blend
 
@@ -37,6 +36,7 @@ https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_blend.html"
 
 
 %{
+#include<Adaptor2d_Curve2d.hxx>
 #include<Blend_module.hxx>
 
 //Dependencies

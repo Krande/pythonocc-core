@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define PRS3DDOCSTRING
-"Prs3d module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_prs3d.html"
+"Prs3d, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_prs3d.html"
 %enddef
 %module (package="OCC.Core", docstring=PRS3DDOCSTRING) Prs3d
 

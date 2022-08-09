@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define GCPNTSDOCSTRING
-"GCPnts module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_gcpnts.html"
+"GCPnts, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_gcpnts.html"
 %enddef
 %module (package="OCC.Core", docstring=GCPNTSDOCSTRING) GCPnts
 
@@ -988,58 +987,6 @@ gp_Pnt
 
 
 %extend GCPnts_QuasiUniformDeflection {
-	%pythoncode {
-	__repr__ = _dumps_object
-	}
-};
-
-/***************************
-* class GCPnts_TCurveTypes *
-***************************/
-class GCPnts_TCurveTypes {
-	public:
-};
-
-
-%extend GCPnts_TCurveTypes {
-	%pythoncode {
-	__repr__ = _dumps_object
-	}
-};
-
-/**********************************************
-* class GCPnts_TCurveTypes<Adaptor2d_Curve2d> *
-**********************************************/
-class GCPnts_TCurveTypes<Adaptor2d_Curve2d> {
-	public:
-typedef gp_Pnt2d Point;
-typedef Geom2d_BezierCurve BezierCurve;
-typedef Geom2d_BSplineCurve BSplineCurve;
-typedef GCPnts_DistFunction2d DistFunction;
-typedef GCPnts_DistFunction2dMV DistFunctionMV;
-};
-
-
-%extend GCPnts_TCurveTypes<Adaptor2d_Curve2d> {
-	%pythoncode {
-	__repr__ = _dumps_object
-	}
-};
-
-/********************************************
-* class GCPnts_TCurveTypes<Adaptor3d_Curve> *
-********************************************/
-class GCPnts_TCurveTypes<Adaptor3d_Curve> {
-	public:
-typedef gp_Pnt Point;
-typedef Geom_BezierCurve BezierCurve;
-typedef Geom_BSplineCurve BSplineCurve;
-typedef GCPnts_DistFunction DistFunction;
-typedef GCPnts_DistFunctionMV DistFunctionMV;
-};
-
-
-%extend GCPnts_TCurveTypes<Adaptor3d_Curve> {
 	%pythoncode {
 	__repr__ = _dumps_object
 	}

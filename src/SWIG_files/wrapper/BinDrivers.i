@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define BINDRIVERSDOCSTRING
-"BinDrivers module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_bindrivers.html"
+"BinDrivers, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_bindrivers.html"
 %enddef
 %module (package="OCC.Core", docstring=BINDRIVERSDOCSTRING) BinDrivers
 

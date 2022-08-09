@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define RWSTEPAP214DOCSTRING
-"RWStepAP214 module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_rwstepap214.html"
+"RWStepAP214, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_rwstepap214.html"
 %enddef
 %module (package="OCC.Core", docstring=RWSTEPAP214DOCSTRING) RWStepAP214
 

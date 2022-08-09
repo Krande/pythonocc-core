@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define GRAPHIC3DDOCSTRING
-"Graphic3d module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_graphic3d.html"
+"Graphic3d, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_graphic3d.html"
 %enddef
 %module (package="OCC.Core", docstring=GRAPHIC3DDOCSTRING) Graphic3d
 

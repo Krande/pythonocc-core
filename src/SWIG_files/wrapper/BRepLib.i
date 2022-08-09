@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define BREPLIBDOCSTRING
-"BRepLib module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_breplib.html"
+"BRepLib, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_breplib.html"
 %enddef
 %module (package="OCC.Core", docstring=BREPLIBDOCSTRING) BRepLib
 

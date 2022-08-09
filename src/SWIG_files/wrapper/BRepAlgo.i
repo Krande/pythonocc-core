@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define BREPALGODOCSTRING
-"BRepAlgo module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_brepalgo.html"
+"BRepAlgo, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_brepalgo.html"
 %enddef
 %module (package="OCC.Core", docstring=BREPALGODOCSTRING) BRepAlgo
 
@@ -66,6 +65,7 @@ https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_brepalgo.html"
 #include<BRepAdaptor_module.hxx>
 #include<GeomAdaptor_module.hxx>
 #include<Adaptor2d_module.hxx>
+#include<Geom_module.hxx>
 #include<TColgp_module.hxx>
 #include<TColStd_module.hxx>
 #include<TCollection_module.hxx>

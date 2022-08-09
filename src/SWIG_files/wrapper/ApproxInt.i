@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define APPROXINTDOCSTRING
-"ApproxInt module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_approxint.html"
+"ApproxInt, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_approxint.html"
 %enddef
 %module (package="OCC.Core", docstring=APPROXINTDOCSTRING) ApproxInt
 
@@ -54,6 +53,8 @@ https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_approxint.html"
 #include<Adaptor2d_module.hxx>
 #include<Geom2d_module.hxx>
 #include<Message_module.hxx>
+#include<AppParCurves_module.hxx>
+#include<Bnd_module.hxx>
 #include<TColgp_module.hxx>
 #include<TColStd_module.hxx>
 #include<TCollection_module.hxx>

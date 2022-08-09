@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define BREPTOPADAPTORDOCSTRING
-"BRepTopAdaptor module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_breptopadaptor.html"
+"BRepTopAdaptor, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_breptopadaptor.html"
 %enddef
 %module (package="OCC.Core", docstring=BREPTOPADAPTORDOCSTRING) BRepTopAdaptor
 
@@ -55,6 +54,7 @@ https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_breptopadaptor.ht
 #include<TopLoc_module.hxx>
 #include<Geom2dAdaptor_module.hxx>
 #include<Message_module.hxx>
+#include<BRepAdaptor_module.hxx>
 #include<TColgp_module.hxx>
 #include<TColStd_module.hxx>
 #include<TCollection_module.hxx>

@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define BOPALGODOCSTRING
-"BOPAlgo module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_bopalgo.html"
+"BOPAlgo, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_bopalgo.html"
 %enddef
 %module (package="OCC.Core", docstring=BOPALGODOCSTRING) BOPAlgo
 
@@ -2609,17 +2608,6 @@ TopoDS_Shape
 %nodefaultctor BOPAlgo_ParallelAlgo;
 class BOPAlgo_ParallelAlgo : public BOPAlgo_Algo {
 	public:
-		/****************** Perform ******************/
-		/**** md5 signature: e23b98e5ba6fc1b2692a5d6fc76fd990 ****/
-		%feature("compactdefaultargs") Perform;
-		%feature("autodoc", "The main method to implement the operation.
-
-Returns
--------
-None
-") Perform;
-		virtual void Perform();
-
 		/****************** SetProgressRange ******************/
 		/**** md5 signature: e46fe49a703ffe9531bdc8614884d302 ****/
 		%feature("compactdefaultargs") SetProgressRange;
@@ -2641,6 +2629,10 @@ None
 %extend BOPAlgo_ParallelAlgo {
 	%pythoncode {
 	__repr__ = _dumps_object
+
+	@methodnotwrapped
+	def Perform(self):
+		pass
 	}
 };
 

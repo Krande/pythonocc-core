@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define ADAPTOR3DDOCSTRING
-"Adaptor3d module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_adaptor3d.html"
+"Adaptor3d, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_adaptor3d.html"
 %enddef
 %module (package="OCC.Core", docstring=ADAPTOR3DDOCSTRING) Adaptor3d
 
@@ -37,7 +36,7 @@ https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_adaptor3d.html"
 
 
 %{
-#include<Adaptor2d_HCurve2d.hxx>
+#include<Adaptor2d_Curve2d.hxx>
 #include<Adaptor3d_module.hxx>
 
 //Dependencies
@@ -52,7 +51,6 @@ https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_adaptor3d.html"
 #include<math_module.hxx>
 #include<Geom2d_module.hxx>
 #include<Message_module.hxx>
-#include<Adaptor2d_HCurve2d_module.hxx>
 #include<TColgp_module.hxx>
 #include<TColStd_module.hxx>
 #include<TCollection_module.hxx>

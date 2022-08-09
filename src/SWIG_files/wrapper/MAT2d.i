@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define MAT2DDOCSTRING
-"MAT2d module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_mat2d.html"
+"MAT2d, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_mat2d.html"
 %enddef
 %module (package="OCC.Core", docstring=MAT2DDOCSTRING) MAT2d
 

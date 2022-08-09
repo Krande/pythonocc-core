@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define TDFDOCSTRING
-"TDF module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_tdf.html"
+"TDF, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_tdf.html"
 %enddef
 %module (package="OCC.Core", docstring=TDFDOCSTRING) TDF
 

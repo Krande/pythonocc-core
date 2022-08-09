@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define SELECT3DDOCSTRING
-"Select3D module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_select3d.html"
+"Select3D, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_select3d.html"
 %enddef
 %module (package="OCC.Core", docstring=SELECT3DDOCSTRING) Select3D
 

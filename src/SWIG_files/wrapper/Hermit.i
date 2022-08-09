@@ -16,8 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 */
 %define HERMITDOCSTRING
-"Hermit module, see official documentation at
-https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_hermit.html"
+"Hermit, see official documentation at https://www.opencascade.com/doc/occt-7.6.0/refman/html/package_hermit.html"
 %enddef
 %module (package="OCC.Core", docstring=HERMITDOCSTRING) Hermit
 

@@ -134,15 +134,6 @@ class GCPnts_QuasiUniformDeflection:
     def Parameter(self, Index: int) -> float: ...
     def Value(self, Index: int) -> gp_Pnt: ...
 
-class GCPnts_TCurveTypes:
-    pass
-
-class GCPnts_TCurveTypes:
-    pass
-
-class GCPnts_TCurveTypes:
-    pass
-
 class GCPnts_TangentialDeflection:
     @overload
     def __init__(self) -> None: ...
