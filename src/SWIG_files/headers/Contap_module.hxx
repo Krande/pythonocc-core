@@ -19,14 +19,11 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #define CONTAP_HXX
 
 
-#include<Contap_ArcFunction.hxx>
 #include<Contap_ContAna.hxx>
 #include<Contap_Contour.hxx>
 #include<Contap_HContTool.hxx>
 #include<Contap_HCurve2dTool.hxx>
 #include<Contap_IType.hxx>
-#include<Contap_Line.hxx>
-#include<Contap_Point.hxx>
 #include<Contap_SequenceOfIWLineOfTheIWalking.hxx>
 #include<Contap_SequenceOfPathPointOfTheSearch.hxx>
 #include<Contap_SequenceOfSegmentOfTheSearch.hxx>

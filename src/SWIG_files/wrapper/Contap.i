@@ -48,8 +48,8 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<Adaptor2d_module.hxx>
 #include<Geom2d_module.hxx>
 #include<TColStd_module.hxx>
-#include<IntSurf_module.hxx>
 #include<math_module.hxx>
+#include<IntSurf_module.hxx>
 #include<TColgp_module.hxx>
 #include<Geom_module.hxx>
 #include<NCollection_module.hxx>
@@ -70,8 +70,8 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 %import Adaptor2d.i
 %import Geom2d.i
 %import TColStd.i
-%import IntSurf.i
 %import math.i
+%import IntSurf.i
 
 %pythoncode {
 from enum import IntEnum
@@ -176,9 +176,6 @@ typedef NCollection_Sequence<Contap_Line> Contap_TheSequenceOfLine;
 typedef NCollection_Sequence<Contap_Point> Contap_TheSequenceOfPoint;
 /* end typedefs declaration */
 
-/***************************
-* class Contap_ArcFunction *
-***************************/
 /***********************
 * class Contap_ContAna *
 ***********************/
@@ -1406,279 +1403,6 @@ gp_Pnt2d
 	}
 };
 
-/********************
-* class Contap_Line *
-********************/
-class Contap_Line {
-	public:
-		/****************** Contap_Line ******************/
-		/**** md5 signature: 31a4005b50852e1945ca19d1e047ab86 ****/
-		%feature("compactdefaultargs") Contap_Line;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-None
-") Contap_Line;
-		 Contap_Line();
-
-		/****************** Add ******************/
-		/**** md5 signature: 01be3efa9c74c4d8432a102f97f9361d ****/
-		%feature("compactdefaultargs") Add;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-P: IntSurf_PntOn2S
-
-Returns
--------
-None
-") Add;
-		void Add(const IntSurf_PntOn2S & P);
-
-		/****************** Add ******************/
-		/**** md5 signature: 056936562dcf77b940ba3130c47afdae ****/
-		%feature("compactdefaultargs") Add;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-P: Contap_Point
-
-Returns
--------
-None
-") Add;
-		void Add(const Contap_Point & P);
-
-		/****************** Arc ******************/
-		/**** md5 signature: de8e47510fc50811ee5a3e0bc98029e6 ****/
-		%feature("compactdefaultargs") Arc;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-opencascade::handle<Adaptor2d_Curve2d>
-") Arc;
-		const opencascade::handle<Adaptor2d_Curve2d> & Arc();
-
-		/****************** Circle ******************/
-		/**** md5 signature: cab8b08988d177bd7107adbbccc4ef89 ****/
-		%feature("compactdefaultargs") Circle;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-gp_Circ
-") Circle;
-		gp_Circ Circle();
-
-		/****************** Clear ******************/
-		/**** md5 signature: ae54be580b423a6eadbe062e0bdb44c2 ****/
-		%feature("compactdefaultargs") Clear;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-None
-") Clear;
-		void Clear();
-
-		/****************** Line ******************/
-		/**** md5 signature: 63e1fa189ca3bcfdb401241217a93bfb ****/
-		%feature("compactdefaultargs") Line;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-gp_Lin
-") Line;
-		gp_Lin Line();
-
-		/****************** LineOn2S ******************/
-		/**** md5 signature: 31b349cb17d652cab4ad0cf52e88a2aa ****/
-		%feature("compactdefaultargs") LineOn2S;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-opencascade::handle<IntSurf_LineOn2S>
-") LineOn2S;
-		const opencascade::handle<IntSurf_LineOn2S> & LineOn2S();
-
-		/****************** NbPnts ******************/
-		/**** md5 signature: 11421df812eef5f47a644a70b75ab60a ****/
-		%feature("compactdefaultargs") NbPnts;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-int
-") NbPnts;
-		Standard_Integer NbPnts();
-
-		/****************** NbVertex ******************/
-		/**** md5 signature: b2d226bac64a106c7941ef45ff4e07f1 ****/
-		%feature("compactdefaultargs") NbVertex;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-int
-") NbVertex;
-		Standard_Integer NbVertex();
-
-		/****************** Point ******************/
-		/**** md5 signature: f91b2c05b43dfb8aaadba8068bf4b32a ****/
-		%feature("compactdefaultargs") Point;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-Index: int
-
-Returns
--------
-IntSurf_PntOn2S
-") Point;
-		const IntSurf_PntOn2S & Point(const Standard_Integer Index);
-
-		/****************** ResetSeqOfVertex ******************/
-		/**** md5 signature: a6c5afb6e069ea40eab99b45a50ab6bd ****/
-		%feature("compactdefaultargs") ResetSeqOfVertex;
-		%feature("autodoc", "No available documentation.
-
-Returns
--------
-None
-") ResetSeqOfVertex;
-		void ResetSeqOfVertex();
-
-		/****************** SetLineOn2S ******************/
-		/**** md5 signature: 10da8691bc4dbff6817878acc12fd279 ****/
-		%feature("compactdefaultargs") SetLineOn2S;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-L: IntSurf_LineOn2S
-
-Returns
--------
-None
-") SetLineOn2S;
-		void SetLineOn2S(const opencascade::handle<IntSurf_LineOn2S> & L);
-
-		/****************** SetTransitionOnS ******************/
-		/**** md5 signature: 3e11bbe314ad3435d0d0c939af6c7e0c ****/
-		%feature("compactdefaultargs") SetTransitionOnS;
-		%feature("autodoc", "Set the tansition of the line.
-
-Parameters
-----------
-T: IntSurf_TypeTrans
-
-Returns
--------
-None
-") SetTransitionOnS;
-		void SetTransitionOnS(const IntSurf_TypeTrans T);
-
-		/****************** SetValue ******************/
-		/**** md5 signature: 1ae32c88ce581ccde7cd37fbe879a748 ****/
-		%feature("compactdefaultargs") SetValue;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-L: gp_Lin
-
-Returns
--------
-None
-") SetValue;
-		void SetValue(const gp_Lin & L);
-
-		/****************** SetValue ******************/
-		/**** md5 signature: df8c025f756bd837345d152a2edc2a47 ****/
-		%feature("compactdefaultargs") SetValue;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-C: gp_Circ
-
-Returns
--------
-None
-") SetValue;
-		void SetValue(const gp_Circ & C);
-
-		/****************** SetValue ******************/
-		/**** md5 signature: 53ce9238106071febf6db57a0ff8a99c ****/
-		%feature("compactdefaultargs") SetValue;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-A: Adaptor2d_Curve2d
-
-Returns
--------
-None
-") SetValue;
-		void SetValue(const opencascade::handle<Adaptor2d_Curve2d> & A);
-
-		/****************** TransitionOnS ******************/
-		/**** md5 signature: ac2f27afdd16ab93ea1f959cb2bf6e33 ****/
-		%feature("compactdefaultargs") TransitionOnS;
-		%feature("autodoc", "Returns in if at the 'left' of the line, the normale of the surface is oriented to the observator.
-
-Returns
--------
-IntSurf_TypeTrans
-") TransitionOnS;
-		IntSurf_TypeTrans TransitionOnS();
-
-		/****************** TypeContour ******************/
-		/**** md5 signature: ccb9b7428ffec80adf355a2d32ee6f36 ****/
-		%feature("compactdefaultargs") TypeContour;
-		%feature("autodoc", "Returns contap_lin for a line, contap_circle for a circle, and contap_walking for a walking line, contap_restriction for a part of boundarie.
-
-Returns
--------
-Contap_IType
-") TypeContour;
-		Contap_IType TypeContour();
-
-		/****************** Vertex ******************/
-		/**** md5 signature: a9752a4d0f1a95aac4c22e2cbc715081 ****/
-		%feature("compactdefaultargs") Vertex;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-Index: int
-
-Returns
--------
-Contap_Point
-") Vertex;
-		Contap_Point & Vertex(const Standard_Integer Index);
-
-};
-
-
-%extend Contap_Line {
-	%pythoncode {
-	__repr__ = _dumps_object
-	}
-};
-
-/*********************
-* class Contap_Point *
-*********************/
 /****************************
 * class Contap_SurfFunction *
 ****************************/
