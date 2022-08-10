@@ -36,6 +36,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 
 
 %{
+#include<BRepAdaptor_Curve2d.hxx>
 #include<BRepTopAdaptor_module.hxx>
 
 //Dependencies
@@ -54,7 +55,6 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<TopLoc_module.hxx>
 #include<Geom2dAdaptor_module.hxx>
 #include<Message_module.hxx>
-#include<BRepAdaptor_module.hxx>
 #include<TColgp_module.hxx>
 #include<TColStd_module.hxx>
 #include<TCollection_module.hxx>

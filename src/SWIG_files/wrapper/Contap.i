@@ -36,6 +36,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 
 
 %{
+#include<Adaptor2d_Curve2d.hxx>
 #include<Contap_module.hxx>
 
 //Dependencies
