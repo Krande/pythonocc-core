@@ -50,6 +50,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<Message_module.hxx>
 #include<Poly_module.hxx>
 #include<TShort_module.hxx>
+#include<Bnd_module.hxx>
 #include<TColgp_module.hxx>
 #include<TColStd_module.hxx>
 #include<TCollection_module.hxx>

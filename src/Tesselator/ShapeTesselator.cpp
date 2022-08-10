@@ -107,8 +107,8 @@ void ShapeTesselator::Tesselate(bool compute_edges, float mesh_quality, bool par
 
         const TopoDS_Face& myFace = TopoDS::Face(ExpFace.Current());
         Handle(Poly_Triangulation) myT = BRep_Tool::Triangulation(myFace, aLocation);
-        
-        
+
+
         if (myT.IsNull()) {
             invalidFaceTriCount++;
             continue;
@@ -117,7 +117,7 @@ void ShapeTesselator::Tesselate(bool compute_edges, float mesh_quality, bool par
         aface *this_face = new aface;
 
         //write vertex buffer
-        const TColgp_Array1OfPnt& Nodes = myT->Nodes();
+        const TColgp_Array1OfPnt& Nodes = myT->MapNodeArray()->Array1();
         this_face->vertex_coord = new double[Nodes.Length() * 3];
         this_face->number_of_coords = Nodes.Length();
         for (Standard_Integer i = Nodes.Lower(); i <= Nodes.Upper(); i++) {
@@ -131,7 +131,7 @@ void ShapeTesselator::Tesselate(bool compute_edges, float mesh_quality, bool par
         if (myT->HasUVNodes()) {
             BRepGProp_Face prop(myFace);
             
-            const TColgp_Array1OfPnt2d& uvnodes = myT->UVNodes();
+            const TColgp_Array1OfPnt2d& uvnodes = myT->MapUVNodeArray()->Array1();
             Standard_Integer ilower = uvnodes.Lower();
             Standard_Integer iBufferSize = uvnodes.Upper()-uvnodes.Lower()+1;
             this_face->normal_coord = new Standard_Real[iBufferSize * 3];
@@ -282,7 +282,7 @@ void ShapeTesselator::ComputeEdges()
         theEdge->vertex_coord = new Standard_Real[nbNodesInFace * 3 * sizeof(Standard_Real)];
 
         const TColStd_Array1OfInteger& indices = aPoly->Nodes();
-        const TColgp_Array1OfPnt& Nodes = aPolyTria->Nodes();
+        const TColgp_Array1OfPnt& Nodes = aPolyTria->MapNodeArray()->Array1();
 
         // go through the index array
         for (Standard_Integer i=indices.Lower();i <= indices.Upper();i++) {

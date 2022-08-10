@@ -36,6 +36,8 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 
 
 %{
+#include<BRepAdaptor_Curve2d.hxx>
+#include<Adaptor2d_Curve2d.hxx>
 #include<HLRTopoBRep_module.hxx>
 
 //Dependencies

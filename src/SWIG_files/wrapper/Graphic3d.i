@@ -9072,21 +9072,6 @@ None
 ") SetArrowsLength;
 		void SetArrowsLength(const Standard_ShortReal theValue);
 
-		/****************** SetCubicAxesCallback ******************/
-		/**** md5 signature: a47aecdc1dcee52c062797d9fccb2aab ****/
-		%feature("compactdefaultargs") SetCubicAxesCallback;
-		%feature("autodoc", "No available documentation.
-
-Parameters
-----------
-theCallback: MinMaxValuesCallback
-
-Returns
--------
-None
-") SetCubicAxesCallback;
-		void SetCubicAxesCallback(const MinMaxValuesCallback theCallback);
-
 		/****************** SetDrawAxes ******************/
 		/**** md5 signature: 8cf33b2c06e2ff3c55144a9ba910b0bc ****/
 		%feature("compactdefaultargs") SetDrawAxes;
@@ -9316,6 +9301,10 @@ Graphic3d_GraduatedTrihedron::AxisAspect
 %extend Graphic3d_GraduatedTrihedron {
 	%pythoncode {
 	__repr__ = _dumps_object
+
+	@methodnotwrapped
+	def SetCubicAxesCallback(self):
+		pass
 	}
 };
 
@@ -12946,62 +12935,6 @@ class Graphic3d_ShaderObject : public Standard_Transient {
 	public:
 typedef NCollection_Sequence<ShaderVariable> ShaderVariableList;
 		class ShaderVariable {};
-		/****************** CreateFromFile ******************/
-		/**** md5 signature: 0e4d93f61abfea2d28122dfc98e7db35 ****/
-		%feature("compactdefaultargs") CreateFromFile;
-		%feature("autodoc", "Creates new shader object from specified file.
-
-Parameters
-----------
-theType: Graphic3d_TypeOfShaderObject
-thePath: TCollection_AsciiString
-
-Returns
--------
-opencascade::handle<Graphic3d_ShaderObject>
-") CreateFromFile;
-		static opencascade::handle<Graphic3d_ShaderObject> CreateFromFile(const Graphic3d_TypeOfShaderObject theType, const TCollection_AsciiString & thePath);
-
-		/****************** CreateFromSource ******************/
-		/**** md5 signature: 89c8327f0382cb4ddac7df3854e7859f ****/
-		%feature("compactdefaultargs") CreateFromSource;
-		%feature("autodoc", "Creates new shader object from specified source.
-
-Parameters
-----------
-theType: Graphic3d_TypeOfShaderObject
-theSource: TCollection_AsciiString
-
-Returns
--------
-opencascade::handle<Graphic3d_ShaderObject>
-") CreateFromSource;
-		static opencascade::handle<Graphic3d_ShaderObject> CreateFromSource(const Graphic3d_TypeOfShaderObject theType, const TCollection_AsciiString & theSource);
-
-		/****************** CreateFromSource ******************/
-		/**** md5 signature: e558d4a90914c3a4f724c61a93250117 ****/
-		%feature("compactdefaultargs") CreateFromSource;
-		%feature("autodoc", "This is a preprocessor for graphic3d_shaderobject::createfromsource() function. creates a new shader object from specified source according to list of uniforms and in/out variables. @param thesource shader object source code to modify @param thetype shader object type to create @param theuniforms list of uniform variables @param thestageinouts list of stage in/out variables @param theinname name of input variables block;  can be empty for accessing each variable without block prefix  (mandatory for stages accessing both inputs and outputs) @param theoutname name of output variables block;  can be empty for accessing each variable without block prefix  (mandatory for stages accessing both inputs and outputs) @param thenbgeominputverts number of geometry shader input vertexes.
-
-Parameters
-----------
-theSource: TCollection_AsciiString
-theType: Graphic3d_TypeOfShaderObject
-theUniforms: ShaderVariableList
-theStageInOuts: ShaderVariableList
-theInName: TCollection_AsciiString,optional
-	default value is TCollection_AsciiString()
-theOutName: TCollection_AsciiString,optional
-	default value is TCollection_AsciiString()
-theNbGeomInputVerts: int,optional
-	default value is 0
-
-Returns
--------
-opencascade::handle<Graphic3d_ShaderObject>
-") CreateFromSource;
-		static opencascade::handle<Graphic3d_ShaderObject> CreateFromSource(TCollection_AsciiString & theSource, Graphic3d_TypeOfShaderObject theType, const ShaderVariableList & theUniforms, const ShaderVariableList & theStageInOuts, const TCollection_AsciiString & theInName = TCollection_AsciiString(), const TCollection_AsciiString & theOutName = TCollection_AsciiString(), Standard_Integer theNbGeomInputVerts = 0);
-
 		/****************** GetId ******************/
 		/**** md5 signature: 1df69bdce80fc1a96745f12b83255cb1 ****/
 		%feature("compactdefaultargs") GetId;
@@ -13065,6 +12998,14 @@ Graphic3d_TypeOfShaderObject
 %extend Graphic3d_ShaderObject {
 	%pythoncode {
 	__repr__ = _dumps_object
+
+	@methodnotwrapped
+	def CreateFromFile(self):
+		pass
+
+	@methodnotwrapped
+	def CreateFromSource(self):
+		pass
 	}
 };
 

@@ -352,7 +352,7 @@ RWGltf_WriterTrsfFormat_TRS = RWGltf_WriterTrsfFormat.RWGltf_WriterTrsfFormat_TR
 %wrap_handle(RWGltf_GltfLatePrimitiveArray)
 %wrap_handle(RWGltf_MaterialCommon)
 %wrap_handle(RWGltf_MaterialMetallicRoughness)
-%wrap_handle(RWGltf_PrimitiveArrayReader)
+
 %wrap_handle(RWGltf_TriangulationReader)
 /* end handles declaration */
 

@@ -36,6 +36,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 
 
 %{
+#include<Standard_Atomic.hxx>
 #include<Aspect_module.hxx>
 
 //Dependencies
@@ -1310,21 +1311,6 @@ None
 *********************************/
 class Aspect_DisplayConnection : public Standard_Transient {
 	public:
-		/****************** GetAtomX ******************/
-		/**** md5 signature: 88701767771c6813652add2353d013b5 ****/
-		%feature("compactdefaultargs") GetAtomX;
-		%feature("autodoc", "Returns identifier(atom) for custom named property associated with windows that use current connection to x server.
-
-Parameters
-----------
-theAtom: Aspect_XAtom
-
-Returns
--------
-Atom
-") GetAtomX;
-		Atom GetAtomX(const Aspect_XAtom theAtom);
-
 		/****************** GetDefaultFBConfig ******************/
 		/**** md5 signature: 622b64beb2b73c32aace98cc90ab7793 ****/
 		%feature("compactdefaultargs") GetDefaultFBConfig;
@@ -1347,17 +1333,6 @@ Aspect_XVisualInfo *
 ") GetDefaultVisualInfo;
 		Aspect_XVisualInfo * GetDefaultVisualInfo();
 
-		/****************** GetDefaultVisualInfoX ******************/
-		/**** md5 signature: 1f300d560bba874fc61df782e69c5a74 ****/
-		%feature("compactdefaultargs") GetDefaultVisualInfoX;
-		%feature("autodoc", "Return default window visual or null when undefined.
-
-Returns
--------
-XVisualInfo *
-") GetDefaultVisualInfoX;
-		XVisualInfo * GetDefaultVisualInfoX();
-
 		/****************** GetDisplayAspect ******************/
 		/**** md5 signature: b7c859e60cde1d6a2d363b0c0841abb9 ****/
 		%feature("compactdefaultargs") GetDisplayAspect;
@@ -1368,38 +1343,6 @@ Returns
 Aspect_XDisplay *
 ") GetDisplayAspect;
 		Aspect_XDisplay * GetDisplayAspect();
-
-		/****************** SetDefaultVisualInfo ******************/
-		/**** md5 signature: 556c283e32abf1be17f5aa24d1e49f17 ****/
-		%feature("compactdefaultargs") SetDefaultVisualInfo;
-		%feature("autodoc", "Set default window visual; the visual will be deallocated using xfree().
-
-Parameters
-----------
-theVisual: Aspect_XVisualInfo *
-theFBConfig: Aspect_FBConfig
-
-Returns
--------
-None
-") SetDefaultVisualInfo;
-		void SetDefaultVisualInfo(Aspect_XVisualInfo * theVisual, Aspect_FBConfig theFBConfig);
-
-		/****************** SetDefaultVisualInfo ******************/
-		/**** md5 signature: cc04b00153967434d93a028a423fd6c9 ****/
-		%feature("compactdefaultargs") SetDefaultVisualInfo;
-		%feature("autodoc", "Set default window visual; the visual will be deallocated using xfree().
-
-Parameters
-----------
-theVisual: XVisualInfo *
-theFBConfig: Aspect_FBConfig
-
-Returns
--------
-None
-") SetDefaultVisualInfo;
-		void SetDefaultVisualInfo(XVisualInfo * theVisual, Aspect_FBConfig theFBConfig);
 
 };
 
@@ -1432,6 +1375,18 @@ None
 
 	@methodnotwrapped
 	def IsOwnDisplay(self):
+		pass
+
+	@methodnotwrapped
+	def GetAtomX(self):
+		pass
+
+	@methodnotwrapped
+	def GetDefaultVisualInfoX(self):
+		pass
+
+	@methodnotwrapped
+	def SetDefaultVisualInfo(self):
 		pass
 	}
 };

@@ -2049,11 +2049,6 @@ class Graphic3d_ShaderManager(Standard_Transient):
     def UseRedAlpha(self) -> False: ...
 
 class Graphic3d_ShaderObject(Standard_Transient):
-    @staticmethod
-    def CreateFromFile(theType: Graphic3d_TypeOfShaderObject, thePath: TCollection_AsciiString) -> Graphic3d_ShaderObject: ...
-    @overload
-    @staticmethod
-    def CreateFromSource(theType: Graphic3d_TypeOfShaderObject, theSource: TCollection_AsciiString) -> Graphic3d_ShaderObject: ...
     def GetId(self) -> TCollection_AsciiString: ...
     def IsDone(self) -> bool: ...
     def Path(self) -> OSD_Path: ...
@@ -2887,9 +2882,6 @@ Graphic3d_PBRMaterial_MinRoughness = Graphic3d_PBRMaterial.MinRoughness
 Graphic3d_PBRMaterial_Roughness = Graphic3d_PBRMaterial.Roughness
 Graphic3d_PBRMaterial_RoughnessFromSpecular = Graphic3d_PBRMaterial.RoughnessFromSpecular
 Graphic3d_PBRMaterial_SpecIBLMapSamplesFactor = Graphic3d_PBRMaterial.SpecIBLMapSamplesFactor
-Graphic3d_ShaderObject_CreateFromFile = Graphic3d_ShaderObject.CreateFromFile
-Graphic3d_ShaderObject_CreateFromSource = Graphic3d_ShaderObject.CreateFromSource
-Graphic3d_ShaderObject_CreateFromSource = Graphic3d_ShaderObject.CreateFromSource
 Graphic3d_ShaderProgram_ShadersFolder = Graphic3d_ShaderProgram.ShadersFolder
 Graphic3d_Structure_AcceptConnection = Graphic3d_Structure.AcceptConnection
 Graphic3d_Structure_Network = Graphic3d_Structure.Network
