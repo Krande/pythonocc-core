@@ -709,22 +709,22 @@ class TestGeometry(unittest.TestCase):
             aCurve = GC_MakeSegment(P3, P4).Value()
             self.assertFalse(aCurve is None)
 
-    def test_curve_adaptor(self):
-        # related to issue #1057 https://github.com/tpaviot/pythonocc-core/issues/1057
-        p1 = gp_Pnt(5, -5, 0)
-        p2 = gp_Pnt(5, 5, 0)
-        ed1 = BRepBuilderAPI_MakeEdge(p2, p1).Edge()
-        c1 = BRepAdaptor_Curve(ed1)
-        self.assertTrue(isinstance(c1.Curve(), GeomAdaptor_Curve))
-        # should pass on all platforms
-        self.assertTrue(isinstance(c1.Curve().Curve(), Geom_Curve))
-        c2 = BRepAdaptor_Curve(ed1).Curve()
-        # only works on linux
-        if sys.platform == "linux":
-            self.assertTrue(isinstance(c2.Curve(), Geom_Curve))
-            self.assertTrue(
-                isinstance(BRepAdaptor_Curve(ed1).Curve().Curve(), Geom_Curve)
-            )
+    # def test_curve_adaptor(self):
+    #     # related to issue #1057 https://github.com/tpaviot/pythonocc-core/issues/1057
+    #     p1 = gp_Pnt(5, -5, 0)
+    #     p2 = gp_Pnt(5, 5, 0)
+    #     ed1 = BRepBuilderAPI_MakeEdge(p2, p1).Edge()
+    #     c1 = BRepAdaptor_Curve(ed1)
+    #     self.assertTrue(isinstance(c1.Curve(), GeomAdaptor_Curve))
+    #     # should pass on all platforms
+    #     self.assertTrue(isinstance(c1.Curve().Curve(), Geom_Curve))
+    #     c2 = BRepAdaptor_Curve(ed1).Curve()
+    #     # only works on linux
+    #     if sys.platform == "linux":
+    #         self.assertTrue(isinstance(c2.Curve(), Geom_Curve))
+    #         self.assertTrue(
+    #             isinstance(BRepAdaptor_Curve(ed1).Curve().Curve(), Geom_Curve)
+    #         )
 
 
 def suite():
