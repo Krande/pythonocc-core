@@ -101,7 +101,7 @@ else(OPENGL_FOUND)
 endif(OPENGL_FOUND)
 option_with_default(PYTHONOCC_WRAP_DATAEXCHANGE "Compile DataExchange wrapper" ON)
 option_with_default(PYTHONOCC_WRAP_OCAF "Compile OCE Application Framework wrapper" ON)
-option_with_default(SWIG_HIDE_WARNINGS "Check this option if you want a less verbose swig output." OFF)
+option_with_default(SWIG_HIDE_WARNINGS "Check this option if you want a less verbose swig output." ON)
 option_with_default(OCE_HIDE_DEPRECATED "Check this option if you want a less verbose swig output." ON)
 option_with_default(PYTHONOCC_MESHDS_NUMPY "Enable using numpy to speed up mesh data source arrays." OFF)
 

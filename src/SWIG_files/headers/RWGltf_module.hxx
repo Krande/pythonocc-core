@@ -28,8 +28,8 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<RWGltf_GltfArrayType.hxx>
 #include<RWGltf_GltfBufferView.hxx>
 #include<RWGltf_GltfBufferViewTarget.hxx>
-#include<RWGltf_GltfJsonParser.hxx>
 #include<RWGltf_GltfFace.hxx>
+#include<RWGltf_GltfJsonParser.hxx>
 #include<RWGltf_GltfLatePrimitiveArray.hxx>
 #include<RWGltf_GltfMaterialMap.hxx>
 #include<RWGltf_GltfOStreamWriter.hxx>
