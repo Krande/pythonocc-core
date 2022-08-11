@@ -11,6 +11,8 @@ source:
 build:
   number: 0
   binary_relocation: false [osx]
+  script_env:
+    - OCCT_VERSION={{ version }}
 
 requirements:
   build:
