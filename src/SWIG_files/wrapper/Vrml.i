@@ -149,7 +149,7 @@ enum Vrml_WWWAnchorMap {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class Vrml_AsciiTextJustification(IntEnum):

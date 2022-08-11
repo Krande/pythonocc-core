@@ -129,7 +129,7 @@ enum RWMesh_NameFormat {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class RWMesh_CafReaderStatusEx(IntEnum):

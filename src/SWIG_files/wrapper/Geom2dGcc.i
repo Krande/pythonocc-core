@@ -101,7 +101,7 @@ enum Geom2dGcc_Type3 {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class Geom2dGcc_Type1(IntEnum):

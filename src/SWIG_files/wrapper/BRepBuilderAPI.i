@@ -132,7 +132,7 @@ enum BRepBuilderAPI_WireError {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class BRepBuilderAPI_EdgeError(IntEnum):
@@ -469,7 +469,7 @@ enum FS_Statuses {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class FS_Statuses(IntEnum):

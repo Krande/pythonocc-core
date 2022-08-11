@@ -113,7 +113,7 @@ enum PCDM_TypeOfFileDriver {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class PCDM_ReaderStatus(IntEnum):
@@ -566,7 +566,7 @@ enum AppendMode {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class AppendMode(IntEnum):

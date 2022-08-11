@@ -114,7 +114,7 @@ enum PrsMgr_TypeOfPresentation3d {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class PrsMgr_DisplayStatus(IntEnum):

@@ -61,7 +61,7 @@ enum Standard_HandlerStatus {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class Standard_HandlerStatus(IntEnum):

@@ -66,7 +66,7 @@ enum IntImp_ConstIsoparametric {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class IntImp_ConstIsoparametric(IntEnum):

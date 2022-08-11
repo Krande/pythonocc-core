@@ -81,7 +81,7 @@ enum ChFi2d_ConstructionError {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class ChFi2d_ConstructionError(IntEnum):

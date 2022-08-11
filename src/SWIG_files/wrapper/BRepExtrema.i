@@ -82,7 +82,7 @@ enum BRepExtrema_SupportType {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class BRepExtrema_SupportType(IntEnum):
@@ -670,7 +670,7 @@ enum FilterResult {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class FilterResult(IntEnum):

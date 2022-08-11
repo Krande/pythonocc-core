@@ -110,7 +110,7 @@ enum TopOpeBRepTool_OutCurveType {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class TopOpeBRepTool_OutCurveType(IntEnum):

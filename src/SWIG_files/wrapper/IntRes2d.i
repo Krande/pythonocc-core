@@ -78,7 +78,7 @@ enum IntRes2d_TypeTrans {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class IntRes2d_Position(IntEnum):

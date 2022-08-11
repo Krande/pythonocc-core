@@ -155,7 +155,7 @@ enum StepDimTol_SimpleDatumReferenceModifier {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class StepDimTol_AreaUnitType(IntEnum):

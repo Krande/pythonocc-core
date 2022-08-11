@@ -67,7 +67,7 @@ enum XCAFView_ProjectionType {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class XCAFView_ProjectionType(IntEnum):

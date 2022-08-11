@@ -492,7 +492,7 @@ enum  {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class Aspect_ColorSpace(IntEnum):
@@ -3253,7 +3253,7 @@ enum InfoString {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class TrackingUniverseOrigin(IntEnum):

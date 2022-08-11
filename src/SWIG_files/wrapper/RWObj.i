@@ -111,7 +111,7 @@ enum RWObj_SubMeshReason {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class RWObj_SubMeshReason(IntEnum):

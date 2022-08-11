@@ -88,7 +88,7 @@ enum Storage_SolveMode {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class Storage_Error(IntEnum):

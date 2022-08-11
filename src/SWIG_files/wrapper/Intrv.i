@@ -73,7 +73,7 @@ enum Intrv_Position {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class Intrv_Position(IntEnum):

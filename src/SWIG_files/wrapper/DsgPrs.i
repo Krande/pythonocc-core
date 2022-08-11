@@ -69,7 +69,7 @@ enum DsgPrs_ArrowSide {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class DsgPrs_ArrowSide(IntEnum):

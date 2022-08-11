@@ -100,7 +100,7 @@ enum gp_TrsfForm {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class gp_EulerSequence(IntEnum):

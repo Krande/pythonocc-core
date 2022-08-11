@@ -117,7 +117,7 @@ enum TopoDSToStep_MakeWireError {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class TopoDSToStep_BuilderError(IntEnum):

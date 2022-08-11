@@ -77,7 +77,7 @@ enum TObj_DeletingMode {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class TObj_DeletingMode(IntEnum):
@@ -1083,7 +1083,7 @@ enum ObjectState {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class TypeFlags(IntEnum):

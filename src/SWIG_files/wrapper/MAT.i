@@ -62,7 +62,7 @@ enum MAT_Side {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class MAT_Side(IntEnum):

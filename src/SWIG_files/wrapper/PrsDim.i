@@ -163,7 +163,7 @@ enum PrsDim_TypeOfDist {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class PrsDim_DimensionSelectionMode(IntEnum):
@@ -833,7 +833,7 @@ enum ComputeMode {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class ComputeMode(IntEnum):

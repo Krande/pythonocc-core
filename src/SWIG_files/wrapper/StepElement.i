@@ -136,7 +136,7 @@ enum StepElement_Volume3dElementShape {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class StepElement_CurveEdge(IntEnum):

@@ -160,12 +160,6 @@ enum RWGltf_GltfBufferViewTarget {
 	RWGltf_GltfBufferViewTarget_ELEMENT_ARRAY_BUFFER = 34963,
 };
 
-enum ShapeMapGroup {
-	ShapeMapGroup_Nodes = 0,
-	ShapeMapGroup_Meshes = 1,
-	ShapeMapGroup_PrimArray = 2,
-};
-
 enum RWGltf_GltfPrimitiveMode {
 	RWGltf_GltfPrimitiveMode_UNKNOWN = - 1,
 	RWGltf_GltfPrimitiveMode_Points = 0,
@@ -214,7 +208,7 @@ enum  {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class RWGltf_GltfAccessorCompType(IntEnum):
@@ -286,14 +280,6 @@ class RWGltf_GltfBufferViewTarget(IntEnum):
 RWGltf_GltfBufferViewTarget_UNKNOWN = RWGltf_GltfBufferViewTarget.RWGltf_GltfBufferViewTarget_UNKNOWN
 RWGltf_GltfBufferViewTarget_ARRAY_BUFFER = RWGltf_GltfBufferViewTarget.RWGltf_GltfBufferViewTarget_ARRAY_BUFFER
 RWGltf_GltfBufferViewTarget_ELEMENT_ARRAY_BUFFER = RWGltf_GltfBufferViewTarget.RWGltf_GltfBufferViewTarget_ELEMENT_ARRAY_BUFFER
-
-class ShapeMapGroup(IntEnum):
-	ShapeMapGroup_Nodes = 0
-	ShapeMapGroup_Meshes = 1
-	ShapeMapGroup_PrimArray = 2
-ShapeMapGroup_Nodes = ShapeMapGroup.ShapeMapGroup_Nodes
-ShapeMapGroup_Meshes = ShapeMapGroup.ShapeMapGroup_Meshes
-ShapeMapGroup_PrimArray = ShapeMapGroup.ShapeMapGroup_PrimArray
 
 class RWGltf_GltfPrimitiveMode(IntEnum):
 	RWGltf_GltfPrimitiveMode_UNKNOWN = - 1

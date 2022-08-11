@@ -94,7 +94,7 @@ enum Resource_FormatType {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class Resource_FormatType(IntEnum):

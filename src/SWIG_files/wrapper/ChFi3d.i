@@ -115,7 +115,7 @@ enum ChFi3d_FilletShape {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class ChFi3d_FilletShape(IntEnum):

@@ -69,7 +69,7 @@ enum TFunction_ExecutionStatus {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class TFunction_ExecutionStatus(IntEnum):

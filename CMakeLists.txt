@@ -136,14 +136,14 @@ endif()
 # RAPIDJSON include location #
 ################################
 
-find_package(RAPIDJSON REQUIRED)
-if(RAPIDJSON_FOUND)
+find_package(RapidJSON REQUIRED)
+if(RapidJSON_FOUND)
     message(STATUS "RapidJSON include directory: " ${RAPIDJSON_INCLUDE_DIRS})
     message(STATUS "RapidJSON Version: " ${RAPIDJSON_VERSION})
     include_directories(${RAPIDJSON_INCLUDE_DIRS})
-else(RAPIDJSON_FOUND)
+else(RapidJSON_FOUND)
     message(STATUS "RapidJSON Not found")
-endif(RAPIDJSON_FOUND)
+endif(RapidJSON_FOUND)
 
 
 ################################

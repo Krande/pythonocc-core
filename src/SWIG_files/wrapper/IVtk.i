@@ -92,7 +92,7 @@ enum IVtk_DisplayMode {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class IVtk_SelectionMode(IntEnum):

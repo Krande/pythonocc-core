@@ -86,7 +86,7 @@ enum StepShape_BooleanOperator {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class StepShape_AngleRelator(IntEnum):

@@ -153,7 +153,7 @@ enum SelectMgr_TypeOfUpdate {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class SelectMgr_FilterType(IntEnum):
@@ -1813,7 +1813,7 @@ enum BVHSubset {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class BVHSubset(IntEnum):

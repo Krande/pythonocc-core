@@ -85,7 +85,7 @@ enum BiTgte_ContactType {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class BiTgte_ContactType(IntEnum):

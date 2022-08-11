@@ -109,7 +109,7 @@ enum BRepCheck_Status {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class BRepCheck_Status(IntEnum):

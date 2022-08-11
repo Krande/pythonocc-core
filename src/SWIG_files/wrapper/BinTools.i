@@ -110,7 +110,7 @@ enum BinTools_ObjectType {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class BinTools_FormatVersion(IntEnum):

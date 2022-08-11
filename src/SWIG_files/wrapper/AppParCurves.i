@@ -73,7 +73,7 @@ enum AppParCurves_Constraint {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class AppParCurves_Constraint(IntEnum):

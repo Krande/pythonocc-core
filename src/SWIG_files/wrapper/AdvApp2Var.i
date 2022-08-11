@@ -84,7 +84,7 @@ enum AdvApp2Var_CriterionType {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class AdvApp2Var_CriterionRepartition(IntEnum):

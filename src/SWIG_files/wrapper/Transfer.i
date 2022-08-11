@@ -86,7 +86,7 @@ enum Transfer_UndefMode {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class Transfer_StatusExec(IntEnum):

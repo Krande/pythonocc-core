@@ -53,6 +53,7 @@ along with pythonOCC.  If not, see <http://www.gnu.org/licenses/>.
 #include<Message_module.hxx>
 #include<TopLoc_module.hxx>
 #include<TShort_module.hxx>
+#include<Bnd_module.hxx>
 #include<TColgp_module.hxx>
 #include<TColStd_module.hxx>
 #include<TCollection_module.hxx>
@@ -116,7 +117,7 @@ enum TDataXtd_GeometryEnum {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class TDataXtd_ConstraintEnum(IntEnum):

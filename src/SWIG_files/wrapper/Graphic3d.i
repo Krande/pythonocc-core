@@ -676,7 +676,7 @@ enum  {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class Graphic3d_AlphaMode(IntEnum):
@@ -5990,7 +5990,7 @@ enum  {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class Projection(IntEnum):
@@ -10683,7 +10683,7 @@ enum IterationFilter {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class IterationFilter(IntEnum):
@@ -12353,7 +12353,7 @@ enum FrustumCulling {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class Anaglyph(IntEnum):

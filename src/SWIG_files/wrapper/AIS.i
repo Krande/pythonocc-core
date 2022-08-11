@@ -310,7 +310,7 @@ enum AIS_WalkRotation {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class AIS_ClearMode(IntEnum):
@@ -8882,7 +8882,7 @@ enum SelectionMode {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class SelectionMode(IntEnum):
@@ -12735,7 +12735,7 @@ enum SelectionMode {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class DisplayMode(IntEnum):

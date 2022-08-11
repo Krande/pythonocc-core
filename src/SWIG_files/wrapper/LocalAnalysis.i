@@ -74,7 +74,7 @@ enum LocalAnalysis_StatusErrorType {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class LocalAnalysis_StatusErrorType(IntEnum):

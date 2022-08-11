@@ -112,7 +112,7 @@ enum GeomAbs_SurfaceType {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class GeomAbs_BSplKnotDistribution(IntEnum):

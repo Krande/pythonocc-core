@@ -116,7 +116,7 @@ enum TopOpeBRepDS_Kind {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class TopOpeBRepDS_CheckStatus(IntEnum):

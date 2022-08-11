@@ -80,7 +80,7 @@ enum IntSurf_TypeTrans {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class IntSurf_Situation(IntEnum):

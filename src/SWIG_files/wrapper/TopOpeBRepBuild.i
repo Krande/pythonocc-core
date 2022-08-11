@@ -94,7 +94,7 @@ enum TopOpeBRepBuild_LoopEnum {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class TopOpeBRepBuild_LoopEnum(IntEnum):

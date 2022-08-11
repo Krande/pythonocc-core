@@ -65,7 +65,7 @@ enum Hatch_LineForm {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class Hatch_LineForm(IntEnum):

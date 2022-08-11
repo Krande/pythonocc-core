@@ -219,7 +219,7 @@ enum Prs3d_VertexDrawMode {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class Prs3d_DatumAttribute(IntEnum):

@@ -104,7 +104,7 @@ enum Select3D_TypeOfSensitivity {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class Select3D_TypeOfSensitivity(IntEnum):

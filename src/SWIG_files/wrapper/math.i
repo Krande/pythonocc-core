@@ -73,7 +73,7 @@ enum math_Status {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class math_Status(IntEnum):

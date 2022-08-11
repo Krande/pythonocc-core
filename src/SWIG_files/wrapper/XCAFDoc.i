@@ -102,7 +102,7 @@ enum XCAFDoc_ColorType {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class XCAFDoc_ColorType(IntEnum):

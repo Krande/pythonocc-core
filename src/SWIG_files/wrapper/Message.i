@@ -238,7 +238,7 @@ enum Message_StatusType {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class Message_ConsoleColor(IntEnum):
@@ -1447,7 +1447,7 @@ enum StatusRange {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class StatusRange(IntEnum):

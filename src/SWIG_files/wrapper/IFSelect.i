@@ -108,7 +108,7 @@ enum IFSelect_ReturnStatus {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class IFSelect_EditValue(IntEnum):

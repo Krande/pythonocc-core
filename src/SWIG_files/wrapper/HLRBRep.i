@@ -117,7 +117,7 @@ enum HLRBRep_TypeOfResultingEdge {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class HLRBRep_TypeOfResultingEdge(IntEnum):

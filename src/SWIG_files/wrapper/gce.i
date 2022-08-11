@@ -76,7 +76,7 @@ enum gce_ErrorType {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class gce_ErrorType(IntEnum):

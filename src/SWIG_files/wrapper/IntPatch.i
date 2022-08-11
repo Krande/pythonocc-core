@@ -102,7 +102,7 @@ enum IntPatch_SpecPntType {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class IntPatch_IType(IntEnum):
@@ -1618,7 +1618,7 @@ enum IntStatus {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class IntStatus(IntEnum):
@@ -7133,7 +7133,7 @@ enum IntPatch_WLType {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class IntPatch_WLType(IntEnum):

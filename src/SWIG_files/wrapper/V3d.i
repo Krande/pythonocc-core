@@ -155,7 +155,7 @@ enum V3d_TypeOfVisualization {
 
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 
 class V3d_StereoDumpOptions(IntEnum):

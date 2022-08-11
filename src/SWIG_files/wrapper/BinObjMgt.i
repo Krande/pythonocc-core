@@ -65,13 +65,12 @@ from OCC.Core.Exception import *
 /* public enums */
 /* end public enums declaration */
 
-/* python proy classes for enums */
+/* python proxy classes for enums */
 %pythoncode {
 };
 /* end python proxy for enums */
 
 /* handles */
-%wrap_handle(BinObjMgt_Position)
 /* end handles declaration */
 
 /* templates */
@@ -860,35 +859,6 @@ int
 /***************************
 * class BinObjMgt_Position *
 ***************************/
-class BinObjMgt_Position : public Standard_Transient {
-	public:
-
-        %feature("autodoc", "1");
-        %extend{
-            std::string BinObjMgt_PositionToString() {
-            std::stringstream s;
-            self->BinObjMgt_Position(s);
-            return s.str();}
-        };
-
-        %feature("autodoc", "1");
-        %extend{
-            std::string StoreSizeToString() {
-            std::stringstream s;
-            self->StoreSize(s);
-            return s.str();}
-        };
-};
-
-
-%make_alias(BinObjMgt_Position)
-
-%extend BinObjMgt_Position {
-	%pythoncode {
-	__repr__ = _dumps_object
-	}
-};
-
 /***********************************
 * class BinObjMgt_RRelocationTable *
 ***********************************/
@@ -945,6 +915,14 @@ None
 	}
 };
 
+/* python proxy for excluded classes */
+%pythoncode {
+@classnotwrapped
+class BinObjMgt_Position:
+	pass
+
+}
+/* end python proxy for excluded classes */
 /* harray1 classes */
 /* harray2 classes */
 /* hsequence classes */
