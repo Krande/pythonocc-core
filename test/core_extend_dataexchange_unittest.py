@@ -19,6 +19,7 @@
 
 import os
 import unittest
+import pathlib
 
 from OCC.Core.BRepPrimAPI import BRepPrimAPI_MakeTorus
 from OCC.Core.TopoDS import TopoDS_Compound
@@ -39,7 +40,7 @@ SAMPLES_DIRECTORY = os.path.join(".", "test_io")
 
 
 def get_test_fullname(filename):
-    return os.path.join(SAMPLES_DIRECTORY, filename)
+    return str((pathlib.Path(SAMPLES_DIRECTORY) / filename).resolve().absolute())
 
 
 # the sample files
