@@ -1,0 +1,64 @@
+schema_version: 1
+
+context:
+  version: 7.9.1
+
+package:
+  name: pythonocc-core
+  version: ${{ version }}
+
+source:
+  path: ../..
+
+build:
+  number: ${{ GIT_DESCRIBE_NUMBER }}
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib("c") }}
+    - ${{ compiler('cxx') }}
+    - if: linux
+      then:
+        - ${{ cdt('libx11-devel') }}
+        - ${{ cdt('xorg-x11-proto-devel') }}
+        - ${{ cdt('mesa-libgl-devel') }}
+        - ${{ cdt('libxi-devel') }}
+    - ninja
+    - cmake
+    - swig ==4.3.1
+  host:
+    - python ${{ python }}
+    - occt ==7.9.1
+    - numpy >=1.17
+  run:
+    - occt ==7.9.1
+    - numpy >=1.17
+
+tests:
+  - python:
+      imports:
+        - OCC
+        - OCC.Core.BRepPrimAPI
+        - OCC.Core.Tesselator
+      pip_check: false
+
+  - script:
+      - pytest test
+    files:
+      source:
+        - test
+    requirements:
+      run:
+        - pyqt >=5
+        - mypy
+        - pytest
+        - svgwrite
+        - wxpython >=4
+        - pyside6
+
+about:
+  license: LGPLLR
+  summary: Python package for 3D geometry CAD/BIM/CAM
+  homepage: https://github.com/tpaviot/pythonocc-core
+

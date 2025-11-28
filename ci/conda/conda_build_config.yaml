@@ -1,0 +1,6 @@
+c_compiler:
+- vs2022  # [win]
+c_stdlib:
+- vs  # [win]
+cxx_compiler:
+- vs2022  # [win]
